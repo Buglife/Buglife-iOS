@@ -38,6 +38,11 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
 @property (nonatomic) LIFEInvocationOptions invocationOptions;
 
 /**
+ *  Returns the SDK version.
+ */
+@property (nonatomic, readonly, nonnull) NSString *version;
+
+/**
  *  Default shared initializer that returns the Buglife singleton.
  *
  *  @return The shared Buglife singleton
