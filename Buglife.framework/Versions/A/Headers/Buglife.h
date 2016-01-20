@@ -68,6 +68,22 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
 - (void)presentReporter;
 
 /**
+ *  Specifies a user identifier that will be visible in the Buglife report viewer UI.
+ * 
+ *  @param identifier An arbitrary string that identifies a user for your app.
+ */
+- (void)setUserIdentifier:(nullable NSString *)identifier;
+
+/**
+ *  Specifies an email address that will be visible in the Buglife report viewer UI.
+ *
+ *  @see setUserIdentifier:
+ *
+ *  @param email The current user's email address
+ */
+- (void)setUserEmail:(nullable NSString *)email;
+
+/**
  *  Sorry, Buglife is a singleton 😁
  *  Please use the shared initializer +[Buglife sharedBuglife]
  */
