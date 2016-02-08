@@ -5,7 +5,7 @@
 //  Copyright (c) 2016 Buglife, Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
     LIFEInvocationOptionsNone             = 0,
@@ -61,7 +61,7 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
 - (void)startWithAPIKey:(nonnull NSString *)apiKey;
 
 /**
- *  Immediately takes a screenshot & presents the Buglife bug reporter view controller.
+ *  Immediately presents the Buglife bug reporter view controller.
  *  This is useful for apps that wish to supplement or replace the default invocation
  *  options, i.e. by placing a custom bug report button in their app settings.
  */
@@ -88,5 +88,24 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
  *  Please use the shared initializer +[Buglife sharedBuglife]
  */
 - (nullable instancetype)init NS_UNAVAILABLE;
+
+@end
+
+/**
+ *  UIView subclasses that contain potentially sensitive information may
+ *  adopt this protocol so that their contents are automatically blurred
+ *  whenever Buglife captures a screenshot.
+ *
+ *  For example, a UIView subclass for credit card entry should adopt this
+ *  protocol so that a user's credit card is obscured prior to screenshot capturing.
+ */
+@protocol LIFEBlurrableView <UICoordinateSpace>
+
+@required
+
+/**
+ *  Return YES if your view contains potentially sensitive information.
+ */
+- (BOOL)buglifeShouldBlurForScreenCapture;
 
 @end
