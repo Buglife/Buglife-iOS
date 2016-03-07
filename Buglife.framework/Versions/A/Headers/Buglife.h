@@ -56,9 +56,23 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
  *  in your app delegate's -application:didFinishLaunchingWithOptions: method.
  *  Don't worry, it won't impact your app's launch performance. 😉
  *
- *  @param apiKey The Buglife API Key for this app
+ *  @param apiKey The Buglife API Key for your organization
  */
 - (void)startWithAPIKey:(nonnull NSString *)apiKey;
+
+/**
+ *  Enables Buglife bug reporting within your app.
+ *
+ *  Call this method with your own email address if you'd like to try out Buglife without signing
+ *  up for an account. Bug reports will be sent directly to the provided email.
+ *
+ *  This method should be called from within your app delegate's
+ *  -application:didFinishLaunchingWithOptions: method.
+ *
+ *  @param email The email address to which bug reports should be sent. This email address should
+ *               belong to you or someone on your team.
+ */
+- (void)startWithEmail:(nonnull NSString *)email;
 
 /**
  *  Immediately presents the Buglife bug reporter view controller.
@@ -76,6 +90,10 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
 
 /**
  *  Specifies an email address that will be visible in the Buglife report viewer UI.
+ *
+ *  This should be set to the email address of the current user, if any. For example, if your
+ *  app requires users to sign in, then you may wish to use the signed in user's email address
+ *  here to identify them when they submit bug reports.
  *
  *  @see setUserIdentifier:
  *
