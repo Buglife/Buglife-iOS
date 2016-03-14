@@ -4,7 +4,10 @@
 ![Platform](https://img.shields.io/cocoapods/p/Buglife.svg)
 ![Twitter](https://img.shields.io/badge/twitter-@BuglifeApp-blue.svg)
 
-Buglife is an awesome bug reporting SDK & web platform for iOS apps. For more info, visit [Buglife.com](https://www.buglife.com).
+Buglife is an awesome bug reporting SDK & web platform for iOS apps.
+For more info, visit [Buglife.com](https://www.buglife.com).
+
+In a hurry? Try out our [iOS Demo project](https://github.com/Buglife/Buglife-iOS-Demo)!
 
 ## Installation
 
