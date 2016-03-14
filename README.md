@@ -62,4 +62,4 @@ $ pod install
 
 Build & run your app; you should see a floating Buglife button. Tap this button to report a bug; bug reports will be sent directly to your email address!
 
-Don't like the floating Buglife button? You can configure Buglife to invoke the bug reporter via manual screenshots or shaking the device. See the header docs in [Buglife.h](Buglife.framework/Versions/A/Headers/Buglife.h) for more info!
+Don't like the floating Buglife button? You can configure Buglife to invoke the bug reporter via manual screenshots or shaking the device. See the header docs in [Buglife.h](Buglife.framework/Versions/A/Headers/Buglife.h) for more info! 
