@@ -14,6 +14,8 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
     LIFEInvocationOptionsFloatingButton   = 1 << 2
 };
 
+@protocol BuglifeDelegate;
+
 /**
  *  Buglife. Handles initialization and configuration of Buglife.
  */
@@ -41,6 +43,11 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
  *  Returns the SDK version.
  */
 @property (nonatomic, readonly, nonnull) NSString *version;
+
+/**
+ * The delegate can be used to configure various aspects of the Buglife reporter.
+ */
+@property (nonatomic, weak, nullable) id<BuglifeDelegate> delegate;
 
 /**
  *  Default shared initializer that returns the Buglife singleton.
@@ -106,6 +113,27 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
  *  Please use the shared initializer +[Buglife sharedBuglife]
  */
 - (nullable instancetype)init NS_UNAVAILABLE;
+
+@end
+
+/**
+ *  The BuglifeDelegate protocol provides a mechanism for your application to configure
+ *  certain aspects of the Buglife reporter UI.
+ */
+@protocol BuglifeDelegate <NSObject>
+@optional
+
+/**
+ *  Called when a user attempts to invoke the bug reporter UI.
+ *  To prevent accidental invocations, the user is presented with a prompt before showing the full bug reporter UI.
+ *  If this method is implemented by your application, the returned result is used as the title
+ *  for the prompt. If the returned result is nil, the prompt does not display a title. If this method is not
+ *  implemented, a default title is used.
+ *
+ *  @param buglife The Buglife instance requesting the title.
+ *  @param invocation The invocation type used to present the bug reporter UI.
+ */
+- (nullable NSString *)buglife:(nonnull Buglife *)buglife titleForPromptWithInvocation:(LIFEInvocationOptions)invocation;
 
 @end
 
