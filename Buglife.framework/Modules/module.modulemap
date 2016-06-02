@@ -1,5 +1,0 @@
-framework module Buglife {  umbrella header "Buglife.h"
-  
-  export *
-  module * { export * }
-}

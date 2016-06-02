@@ -1,4 +1,4 @@
-![Buglife: Awesome Bug Reporting](https://d19rwogc3unx97.cloudfront.net/assets/logo/logotype_navy_on_transparent_776x256-a8018f3eb096b0f4e270ec0b63d8ff9dfafcdb242855f09e20f249ef7d3c0367.png)
+![Buglife: Awesome Bug Reporting](https://ds9bjnn93rsnp.cloudfront.net/assets/logo/logotype_black_on_transparent_782x256-7256a7ab03e9652908f43be94681bc4ebeff6d729c36c946c346a80a4f8ca245.png)
 
 ![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Buglife.svg)
 ![Platform](https://img.shields.io/cocoapods/p/Buglife.svg)
