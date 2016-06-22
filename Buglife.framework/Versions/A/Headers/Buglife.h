@@ -14,6 +14,12 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
     LIFEInvocationOptionsFloatingButton   = 1 << 2
 };
 
+typedef NSString LIFEAttachmentType;
+
+extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierText;
+extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierJSON;
+extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierSqlite;
+
 @protocol BuglifeDelegate;
 
 /**
@@ -109,6 +115,24 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
 - (void)setUserEmail:(nullable NSString *)email;
 
 /**
+ *  Adds an attachment to be uploaded along with the next bug report.
+ *
+ *  Although you can add an attachment at any time, it is best to do so within buglife:handleAttachmentRequestWithCompletionHandler:.
+ *  This ensures that your attachment is added once & only once for every submitted bug report.
+ *
+ *  You may attach up to 10 files, the total size of which may be up to 3 MB.
+ *  Attempting to attach more than this will result in an error
+ *  (via throw in Swift, or the error out parameter in Objective-C).
+ *
+ *  This method is thread-safe.
+ *
+ *  @param attachmentData The attachment data.
+ *  @param attachmentType The type of attachment. This must be one of the Buglife-provided LIFEAttachmentType constants.
+ *  @param filename The filename.
+ */
+- (BOOL)addAttachmentWithData:(nonnull NSData *)attachmentData type:(nonnull LIFEAttachmentType *)attachmentType filename:(nonnull NSString *)filename error:(NSError * _Nullable * _Nullable)error;
+
+/**
  *  Sorry, Buglife is a singleton 😁
  *  Please use the shared initializer +[Buglife sharedBuglife]
  */
@@ -122,6 +146,20 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
  */
 @protocol BuglifeDelegate <NSObject>
 @optional
+
+/**
+ *  Buglife calls this method when the bug reporter is ready to accept attachments.
+ *
+ *  You should use this method to add attachments. Within your method implementation,
+ *  use Buglife.addAttachmentWithData(_:type:filename:) to add attachments, then
+ *  call the completionHandler. You may both add attachments & call the completionHandler
+ *  on any thread.
+ *
+ *  @warning You only have a few seconds to add attachments & call the completionHandler.
+ *           If the completionHandler isn't called, the bug report submission process
+ *           will continue regardless.
+ */
+- (void)buglife:(nonnull Buglife *)buglife handleAttachmentRequestWithCompletionHandler:(nonnull void (^)())completionHandler;
 
 /**
  *  Called when a user attempts to invoke the bug reporter UI.
@@ -155,3 +193,5 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
 - (BOOL)buglifeShouldBlurForScreenCapture;
 
 @end
+
+
