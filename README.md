@@ -63,6 +63,15 @@ $ pod install
 	
 ## Usage
 
-Build & run your app; you should see a floating Buglife button. Tap this button to report a bug; bug reports will be sent directly to your email address!
+Build & run your app. Once your app is running, shake your device (\^⌘Z in the simulator) to report a bug! Bug reports are sent directly to your email address.
 
-Don't like the floating Buglife button? You can configure Buglife to invoke the bug reporter via manual screenshots or shaking the device. See the header docs in [Buglife.h](Buglife.framework/Versions/A/Headers/Buglife.h) for more info! 
+Buglife offers numerous customizations & advanced features, including:
+
+* Different invocation methods (i.e. hook into device screenshots to report a bug)
+* Custom attachments
+* Programmatic view blurring
+* QA Mode
+* String customization
+* Automatic + manual user email collection
+
+And more. Check out the Buglife [documentation page](https://www.buglife.com/docs) for more info!
