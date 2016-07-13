@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LIFEInputField.h"
 
 typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
     LIFEInvocationOptionsNone             = 0,
@@ -33,15 +34,9 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierSqlite;
  *
  *  You may choose to support multiple invocation options, e.g.:
  *
- *    [Buglife sharedBuglife].invocationOptions = LIFEInvocationOptionsShake | LIFEInvocationOptionsFloatingButton;
+ *    [Buglife sharedBuglife].invocationOptions = LIFEInvocationOptionsShake | LIFEInvocationOptionsScreenshot;
  *
- *  This returns LIFEInvocationOptionsFloatingButton by default. We recommend the default
- *  option as-is for internal / dogfood builds, as it unobtrusively encourages users to
- *  report bugs, and does not interrupt common flows such as screenshot capturing.
- *
- *  However for App Store builds, we recommend LIFEInvocationOptionsNone. Instead,
- *  we recommend putting a button / selectable table row somewhere in your in-app settings/menu,
- *  and calling -presentReporter explicitly.
+ *  This returns LIFEInvocationOptionsShake by default.
  */
 @property (nonatomic) LIFEInvocationOptions invocationOptions;
 
@@ -108,11 +103,25 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierSqlite;
  *  app requires users to sign in, then you may wish to use the signed in user's email address
  *  here to identify them when they submit bug reports.
  *
- *  @see setUserIdentifier:
+ *  @see userEmailField
  *
  *  @param email The current user's email address
  */
 - (void)setUserEmail:(nullable NSString *)email;
+
+/**
+ *  Represents the email address input field in the bug reporter UI.
+ *
+ *  If your application code cannot programmatically set the user's email
+ *  address at runtime via the setUserEmail: method, then you may choose
+ *  to set this field to visible in order to ask the user for their
+ *  email address prior to submitting a bug report.
+ *
+ *  By default, this field is neither visible nor required.
+ *
+ *  @see setUserEmail:
+ */
+@property (nonatomic, readonly, nonnull) LIFEInputField *userEmailField;
 
 /**
  *  Adds an attachment to be uploaded along with the next bug report.
