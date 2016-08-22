@@ -20,6 +20,7 @@ typedef NSString LIFEAttachmentType;
 extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierText;
 extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierJSON;
 extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierSqlite;
+extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
 
 @protocol BuglifeDelegate;
 
@@ -140,6 +141,26 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierSqlite;
  *  @param filename The filename.
  */
 - (BOOL)addAttachmentWithData:(nonnull NSData *)attachmentData type:(nonnull LIFEAttachmentType *)attachmentType filename:(nonnull NSString *)filename error:(NSError * _Nullable * _Nullable)error;
+
+/**
+ *  Convenience method for adding an image attachment.
+ *
+ *  If necessary, images attached using this method may be automatically resized to fit within the 3 MB total limit for file attachments.
+ *
+ *  @see addAttachmentWithData:type:filename:error:
+ *
+ *  @param image The image object to attach.
+ *  @param filename The filename.
+ */
+- (void)addAttachmentWithImage:(nonnull UIImage *)image filename:(nonnull NSString *)filename;
+
+/**
+ *  Renders & returns a screenshot of your application.
+ *
+ *  This can be used to generate screenshots to manually attach when
+ *  invoking the bug reporter using the `presentReporter` method.
+ */
+- (nonnull UIImage *)screenshot;
 
 /**
  *  Sorry, Buglife is a singleton 😁
