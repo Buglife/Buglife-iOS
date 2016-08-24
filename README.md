@@ -1,8 +1,8 @@
 ![Buglife: Awesome Bug Reporting](https://ds9bjnn93rsnp.cloudfront.net/assets/logo/logotype_black_on_transparent_782x256-7256a7ab03e9652908f43be94681bc4ebeff6d729c36c946c346a80a4f8ca245.png)
 
-![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Buglife.svg)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Buglife.svg)](https://cocoapods.org/pods/Buglife)
 ![Platform](https://img.shields.io/cocoapods/p/Buglife.svg)
-![Twitter](https://img.shields.io/badge/twitter-@BuglifeApp-blue.svg)
+[![Twitter](https://img.shields.io/badge/twitter-@BuglifeApp-blue.svg)](https://twitter.com/buglifeapp)
 
 Buglife is an awesome bug reporting SDK & web platform for iOS apps.
 For more info, visit [Buglife.com](https://www.buglife.com).
