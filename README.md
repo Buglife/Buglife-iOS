@@ -49,7 +49,7 @@ $ pod install
     #import <Buglife/Buglife.h>
     ```
 
-2. Add the following to your app delegate's application:didFinishLaunchingWithOptions: method.
+2. Add the following to your app delegate's `application:didFinishLaunchingWithOptions:` method.
 	
 	```swift
 	// Swift
