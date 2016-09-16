@@ -8,7 +8,12 @@
 #import <Foundation/Foundation.h>
 
 /**
- * Represents an input field in the bug reporter form.
+ * Facilitates appearance & behavior configuration of input fields in the bug reporter form.
+ *
+ * Instances of this class should be accessed via the properties on the shared `Buglife` singleton.
+ * At the moment, the only input field supporting this is `userEmailField`.
+ *
+ * @see `Buglife.userEmailField`
  */
 @interface LIFEInputField : NSObject
 
