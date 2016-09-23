@@ -157,7 +157,7 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
  *  @param type The type of attachment. This must be one of the Buglife-provided LIFEAttachmentType constants.
  *  @param filename The filename.
  */
-- (BOOL)addAttachmentWithData:(nonnull NSData *)attachmentData type:(nonnull LIFEAttachmentType *)attachmentType filename:(nonnull NSString *)filename error:(NSError * _Nullable * _Nullable)error;
+- (BOOL)addAttachmentWithData:(nonnull NSData *)data type:(nonnull LIFEAttachmentType *)type filename:(nonnull NSString *)filename error:(NSError * _Nullable * _Nullable)error;
 
 /**
  *  Convenience method for adding an image attachment.
