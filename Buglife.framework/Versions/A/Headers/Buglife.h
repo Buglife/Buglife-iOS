@@ -183,7 +183,7 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
  *  Sorry, Buglife is a singleton 😁
  *  Please use the shared initializer `Buglife.sharedBuglife()`
  */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (null_unspecified instancetype)init NS_UNAVAILABLE;
 
 @end
 
