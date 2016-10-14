@@ -38,7 +38,7 @@ typedef NS_ENUM(NSUInteger, LIFEAwesomeLogType){
 #endif
 
 /**
- *  Represents the Buglife logging facility.
+ *  Refer to the AwesomeLogs usage guide at https://www.buglife.com/docs/ios/logging.html
  */
 @interface LIFEAwesomeLogger : NSObject
 
