@@ -44,6 +44,15 @@ typedef NS_ENUM(NSUInteger, LIFEAwesomeLogType){
 
 + (nonnull instancetype)sharedLogger;
 
+/**
+ A boolean value that determines whether AwesomeLogs outputs to the Xcode debugger console.
+ Setting the value of this property to `false` will disable console logging from AwesomeLogs,
+ however AwesomeLogs will still be included in submitted bug reports.
+ 
+ This property returns `true` by default.
+ */
+@property (nonatomic, getter=isConsoleLoggingEnabled) BOOL consoleLoggingEnabled;
+
 - (void)log:(BOOL)asynchronous
        type:(LIFEAwesomeLogType)type
        file:(nonnull const char *)file
