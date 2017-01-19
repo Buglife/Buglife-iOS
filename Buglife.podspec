@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "Buglife"
-  s.version               = "1.4.2"
+  s.version               = "1.5.0"
   s.summary               = "Awesome bug reporting 😎"
   s.description           = "Report bugs, annotate screenshots, and collect logs from within your iOS app!"
   s.homepage              = "http://www.buglife.com"

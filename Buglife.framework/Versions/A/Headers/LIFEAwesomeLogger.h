@@ -2,7 +2,7 @@
 //  LIFEAwesomeLogger.h
 //  Buglife
 //
-//  Copyright © 2016 Buglife, Inc. All rights reserved.
+//  Copyright © 2017 Buglife, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

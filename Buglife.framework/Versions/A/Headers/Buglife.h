@@ -2,10 +2,11 @@
 //  Buglife.h
 //  Buglife
 //
-//  Copyright (c) 2016 Buglife, Inc. All rights reserved.
+//  Copyright (c) 2017 Buglife, Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "LIFEAppearance.h"
 #import "LIFEAwesomeLogger.h"
 #import "LIFEInputField.h"
 
@@ -140,6 +141,12 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
  *  @see `setUserEmail(email:)`
  */
 @property (nonatomic, readonly, nonnull) LIFEInputField *userEmailField;
+
+/**
+ *  Returns an appearance proxy that can be used to configure visual aspects
+ *  of the bug reporter.
+ */
+@property (nonatomic, readonly, nonnull) id<LIFEAppearance> appearance;
 
 /**
  *  Adds an attachment to be uploaded along with the next bug report.
