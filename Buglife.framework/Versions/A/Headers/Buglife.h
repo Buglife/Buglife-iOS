@@ -227,6 +227,13 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
  */
 - (nullable NSString *)buglife:(nonnull Buglife *)buglife titleForPromptWithInvocation:(LIFEInvocationOptions)invocation;
 
+/**
+ *  Asks the delegate whether the "Thank you" dialog should be presented after a bug report is completed.
+ *  Returning YES from this method will result in the default dialog being presented after report completion.
+ *  Returning NO from this method will omit presenting any dialog. You can also use this to present your own custom completion dialog.
+ */
+- (BOOL)buglifeWillPresentReportCompletedDialog:(nonnull Buglife *)buglife;
+
 @end
 
 /**
