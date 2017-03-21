@@ -12,6 +12,7 @@
 
 /**
  Options for automatically invocating the bug reporter view.
+ This is an option set, and can be combined to simulatenously support multiple invocation types.
  */
 typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
     /// Does not automatically invoke the bug reporter view. Use this if you wish to only manually invoke the bug reporter.
