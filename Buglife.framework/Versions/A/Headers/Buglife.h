@@ -130,6 +130,12 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
 - (void)setUserEmail:(nullable NSString *)email;
 
 /**
+ *  Adds custom data to bug reports. Set a `nil` value for a given attribute to delete
+ *  its current value.
+ */
+- (void)setStringValue:(nullable NSString *)value forAttribute:(nonnull NSString *)attribute;
+
+/**
  *  Represents the email address input field in the bug reporter UI.
  *
  *  If your application code cannot programmatically set the user's email
