@@ -9,6 +9,8 @@
 #import "LIFEAppearance.h"
 #import "LIFEAwesomeLogger.h"
 #import "LIFEInputField.h"
+#import "LIFETextInputField.h"
+#import "LIFEPickerInputField.h"
 
 /**
  Options for automatically invocating the bug reporter view.
@@ -134,6 +136,18 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
  *  its current value.
  */
 - (void)setStringValue:(nullable NSString *)value forAttribute:(nonnull NSString *)attribute;
+
+/**
+ *  Set this property if you'd like to use custom input fields. The bug reporter UI
+ *  will display fields in this same order.
+ *
+ *  Setting this property will override the default fields (i.e. "What's happening").
+ *  If you'd like to use default system fields, you can use the corresponding LIFEInputField
+ *  constructors, and include them in your array of custom input fields.
+ *
+ *  Set this property to null if you'd like to simply use the default field(s).
+ */
+@property (nonatomic, nullable) NSArray<LIFEInputField *> *inputFields;
 
 /**
  *  Represents the email address input field in the bug reporter UI.
