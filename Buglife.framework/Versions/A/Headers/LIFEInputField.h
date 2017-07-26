@@ -7,27 +7,21 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, LIFEInputFieldType) {
-    /// Represents a text field
-    LIFEInputFieldTypeText = 1,
-    /// Represents a picker
-    LIFEInputFieldTypePicker = 2
-};
-
 /**
  * Facilitates appearance & behavior configuration of input fields in the bug reporter form.
  */
 @interface LIFEInputField : NSObject <NSCopying>
 
-- (nonnull instancetype)initWithAttributeName:(nonnull NSString *)attributeName NS_DESIGNATED_INITIALIZER;
-- (null_unspecified instancetype)init NS_UNAVAILABLE;
-
-+ (nonnull instancetype)inputFieldWithType:(LIFEInputFieldType)type attributeName:(nonnull NSString *)attributeName;
-
 /**
- *  Specifies the style of the input field.
+ * Default constructor
+ * @param attributeName The attribute name. If the given attributeName is equal to
+ *                      a custom attribute value set via `Buglife.setStringValue(_:forAttribute:)`, then
+ *                      that value will be the default value for this field in the bug
+ *                      reporter UI.
  */
-@property (nonatomic, readonly) LIFEInputFieldType type;
+- (nonnull instancetype)initWithAttributeName:(nonnull NSString *)attributeName NS_DESIGNATED_INITIALIZER;
+
+- (null_unspecified instancetype)init NS_UNAVAILABLE;
 
 /**
  *  The bug report attribute name for this input field.
@@ -40,6 +34,10 @@ typedef NS_ENUM(NSInteger, LIFEInputFieldType) {
  */
 @property (nonatomic, readonly, nonnull, copy) NSString *attributeName;
 
+/**
+ * The user-facing label for the input field.
+ * The default value returned is the attribute name.
+ */
 @property (nonatomic, null_resettable, copy) NSString *title;
 
 /**
