@@ -249,6 +249,18 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
 - (nullable NSString *)buglife:(nonnull Buglife *)buglife titleForPromptWithInvocation:(LIFEInvocationOptions)invocation;
 
 /**
+ *  Called when the bug report form has been completed by the user.
+ *
+ *  If your application uses custom input fields, then this method gives your app an opportunity
+ *  to examine values submitted for these fields by the user by inspecting the `attributes` parameter.
+ *
+ *  @param attributes A dictionary of attributes submitted for a bug report, where the key is an attribute name (i.e. specified
+ *                    by your custom input field), and the dictionary value is the attribute's corresponding value,
+ *                    as inputted by the user (or its `default` value).
+ */
+- (void)buglifeDidCompleteReportWithAttributes:(nonnull NSDictionary<NSString *, NSString *> *)attributes;
+
+/**
  *  Asks the delegate whether the "Thank you" dialog should be presented after a bug report is completed.
  *  Returning YES from this method will result in the default dialog being presented after report completion.
  *  Returning NO from this method will omit presenting any dialog. You can also use this to present your own custom completion dialog.
