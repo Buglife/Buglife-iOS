@@ -288,4 +288,4 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
 
 @end
 
-
+#import "Buglife+LocalizedStrings.h"
