@@ -53,7 +53,7 @@ $ pod install
 	
 	```swift
 	// Swift
-	Buglife.sharedBuglife().startWithEmail("you@yourdomain.com")
+	Buglife.shared().start(withEmail: "you@yourdomain.com")
 	```
 	```objective-c
 	// Objective-C
