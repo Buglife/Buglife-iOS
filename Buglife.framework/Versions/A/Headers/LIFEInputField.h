@@ -41,12 +41,9 @@
 @property (nonatomic, null_resettable, copy) NSString *title;
 
 /**
- * Returns YES if this is a required field.
- * The value of this property is ignored if the
- * `visible` property returns NO.
- *
- * @note This property currently does nothing when used with custom attributes.
- *       `Required` custom attributes will be supported in an upcoming release.
+ * Setting this property to YES specifies that this is a required field,
+ * i.e. users must enter a non-blank value before they can submit a bug reprot.
+ * The default value is NO.
  */
 @property (nonatomic, getter=isRequired) BOOL required;
 

@@ -76,9 +76,9 @@ LIFEStringKey LIFEStringKey_InvalidEmailAlertMessage = @"\"%@\" is not a valid e
  *  Set this property to `true` to show Buglife string keys in the 
  *  bug reporter flow that haven't been overridden by your application.
  *
- *  This property should only be used for debugging.
+ *  By default, this property returns `false`.
  *
- *  Default value returns `false`.
+ *  @warning This property should only be used for debugging.
  */
 @property (nonatomic) BOOL showStringKeys;
 
