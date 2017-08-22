@@ -51,6 +51,8 @@ LIFEStringKey LIFEStringKey_DiscardReportAlertCancel = @"Nevermind";
 
 LIFEStringKey LIFEStringKey_GenericAlertTitle = @"Oops!";
 LIFEStringKey LIFEStringKey_InvalidEmailAlertMessage = @"\"%@\" is not a valid email address.";
+LIFEStringKey LIFEStringKey_ReportSubmissionErrorAlertTitle = @"We were unable to submit your bug report.";
+LIFEStringKey LIFEStringKey_ReportSubmissionErrorAlertMessage = @"This may be caused by poor network connectivity. Please try again.";
 
 /**
  *  Strings used in the Buglife reporter UI are translated to 15+ languages,

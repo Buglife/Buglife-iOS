@@ -28,6 +28,19 @@ typedef NS_OPTIONS(NSUInteger, LIFEInvocationOptions) {
 };
 
 /**
+ The retry policy for submitting bug reports.
+ */
+typedef NS_ENUM(NSUInteger, LIFERetryPolicy) {
+    /// Automatically re-attempts to submit the bug report on the next cold application launch.
+    /// Resubmission is done a few seconds after launch, so that your app's own network requests are prioritized.
+    LIFERetryPolicyNextLaunch   = 0,
+    /// Specifies that report submission is a UI-blocking operation. Submitting a bug reporter will show a loading
+    /// indicator, and wait until the report has been successfully recieved by the Buglife API before dismissing
+    /// the bug report UI.
+    LIFERetryPolicyManualRetry
+};
+
+/**
  *  Represents a type of attachment.
  *
  *  @see `Buglife.addAttachmentWithData(_:type:filename:error:)`
@@ -61,6 +74,12 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
  *  This returns LIFEInvocationOptionsShake by default.
  */
 @property (nonatomic) LIFEInvocationOptions invocationOptions;
+
+/**
+ *  Specifies the retry policy for submitting bug reports.
+ *  This returns LIFERetryPolicyNextLaunch by default.
+ */
+@property (nonatomic) LIFERetryPolicy retryPolicy;
 
 /**
  *  Returns the SDK version.

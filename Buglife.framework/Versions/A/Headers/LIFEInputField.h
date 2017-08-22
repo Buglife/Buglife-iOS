@@ -42,7 +42,7 @@
 
 /**
  * Setting this property to YES specifies that this is a required field,
- * i.e. users must enter a non-blank value before they can submit a bug reprot.
+ * i.e. users must enter a non-blank value before they can submit a bug report.
  * The default value is NO.
  */
 @property (nonatomic, getter=isRequired) BOOL required;
