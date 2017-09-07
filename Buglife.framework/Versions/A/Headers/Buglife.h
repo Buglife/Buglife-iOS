@@ -253,7 +253,7 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
  *           If the `completionHandler` isn't called, the bug report submission process
  *           will continue regardless.
  */
-- (void)buglife:(nonnull Buglife *)buglife handleAttachmentRequestWithCompletionHandler:(nonnull void (^)())completionHandler;
+- (void)buglife:(nonnull Buglife *)buglife handleAttachmentRequestWithCompletionHandler:(nonnull void (^)(void))completionHandler;
 
 /**
  *  Called when a user attempts to invoke the bug reporter UI.
