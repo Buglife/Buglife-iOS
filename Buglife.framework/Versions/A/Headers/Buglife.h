@@ -59,6 +59,28 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
 @protocol BuglifeDelegate;
 
 /**
+ * Name of the notification sent when the reporter will be presented. 
+ * The Buglife object will be posted with the notification so registered objects do not need to be referenced by the Buglife delegate.
+ * Objects that receive the notification can add their own context to the report via setStringValue:forAttribute:
+ *
+ * View controllers interested in this notification should consider registering in viewWillAppear: and unregistering in viewDidDisappear:.
+ * This way the context of both is available during a screenshot during a transition or segue, but view controllers further up the stack do not report irrelevant context.
+ */
+extern NSString * __nonnull const LIFENotificationWillPresentReporter;
+
+/**
+ * Name of the notification sent when the user cancels a report.
+ * Objects that receive this notification may want to remove attributes previously set; they are not cleared by Buglife.
+ */
+extern NSString * __nonnull const LIFENotificationUserCanceledReport;
+
+/**
+ * Name of the notification sent when the user successfully submits a report
+ * Objects that receive this notification may want to remove attributes previously set; they are not cleared by Buglife.
+ */
+extern NSString * __nonnull const LIFENotificationUserSubmittedReport;
+
+/**
  *  Buglife! Handles initialization and configuration of Buglife.
  */
 @interface Buglife : NSObject
@@ -273,9 +295,9 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
  *  If your application uses custom input fields, then this method gives your app an opportunity
  *  to examine values submitted for these fields by the user by inspecting the `attributes` parameter.
  *
- *  @param attributes A dictionary of attributes submitted for a bug report, where the key is an attribute name (i.e. specified
+ *  @param attributes A dictionary of attributes submitted for a bug report, where the key is an attribute name (e.g. specified
  *                    by your custom input field), and the dictionary value is the attribute's corresponding value,
- *                    as inputted by the user (or its `default` value).
+ *                    as inputted by the user (or its `default` value). Custom attributes set programmatically may neeed to be cleared here.
  */
 - (void)buglifeDidCompleteReportWithAttributes:(nonnull NSDictionary<NSString *, NSString *> *)attributes;
 
@@ -285,6 +307,15 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierImage;
  *  Returning NO from this method will omit presenting any dialog. You can also use this to present your own custom completion dialog.
  */
 - (BOOL)buglifeWillPresentReportCompletedDialog:(nonnull Buglife *)buglife;
+
+/**
+ *  Alert the delegate that the report was dismissed without sending the report.
+ *  
+ *  @param attributes A dictionary of attributes that would have been submitted for a bug report, where the key is an attribute name
+ *                    (e.g. spcified by your custom input field), and the dictionary value is the attribute's corresponding value, as inputted
+ *                    by the user (or its `default` value). Custom attributes set programmatically may need to be cleared here.
+ */
+- (void)buglife:(nonnull Buglife *)buglife userCanceledReportWithAttributes:(nonnull NSDictionary<NSString *, NSString *> *)attributes;
 
 @end
 
