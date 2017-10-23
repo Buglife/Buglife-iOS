@@ -34,6 +34,7 @@ LIFEStringKey LIFEStringKey_HideUntilNextLaunch = @"Hide until next launch";
 LIFEStringKey LIFEStringKey_DontAskUntilNextLaunch = @"Don't ask until next launch";
 LIFEStringKey LIFEStringKey_HelpUsMakeXYZBetter = @"Help us make %@ better!";
 LIFEStringKey LIFEStringKey_HelpUsMakeThisAppBetter = @"Help us make this app better!";
+LIFEStringKey LIFEStringKey_ReportABugWithScreenRecording = @"Report a bug with that screen recording?";
 LIFEStringKey LIFEStringKey_ThanksForFilingABug = @"Thanks for filing a bug!";
 LIFEStringKey LIFEStringKey_Attachments = @"Attachments";
 LIFEStringKey LIFEStringKey_AttachPhoto = @"Attach Photo";
