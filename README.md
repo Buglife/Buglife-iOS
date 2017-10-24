@@ -31,10 +31,6 @@ $ pod install
 
 2. Unzip it & pull `Buglife.framework` into the Frameworks group in your project. In the following dialog box, make sure you have "Copy items if needed" checked.
 
-3. Make sure your project links to the following system frameworks. You can add these under your project's Build Phases tab, under Link Binary With Libraries.
-	* CoreTelephony.framework
-	* SystemConfiguration.framework
-
 ## Code
 
 1. Import the Buglife framework header into your app delegate.
