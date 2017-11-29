@@ -1,0 +1,1158 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B7EAF97F1FC8DBA900196024 /* Buglife+UIStuff.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8B51FC8DBA900196024 /* Buglife+UIStuff.h */; };
+		B7EAF9801FC8DBA900196024 /* Buglife+UIStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8B61FC8DBA900196024 /* Buglife+UIStuff.m */; };
+		B7EAF9811FC8DBA900196024 /* LIFECategories.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8B71FC8DBA900196024 /* LIFECategories.h */; };
+		B7EAF9821FC8DBA900196024 /* LIFECategories.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8B81FC8DBA900196024 /* LIFECategories.m */; };
+		B7EAF9831FC8DBA900196024 /* LIFECompatibilityUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8B91FC8DBA900196024 /* LIFECompatibilityUtils.h */; };
+		B7EAF9841FC8DBA900196024 /* LIFECompatibilityUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8BA1FC8DBA900196024 /* LIFECompatibilityUtils.m */; };
+		B7EAF9851FC8DBA900196024 /* LIFEGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8BB1FC8DBA900196024 /* LIFEGeometry.h */; };
+		B7EAF9861FC8DBA900196024 /* LIFEGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8BC1FC8DBA900196024 /* LIFEGeometry.m */; };
+		B7EAF9871FC8DBA900196024 /* LIFEMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8BD1FC8DBA900196024 /* LIFEMacros.h */; };
+		B7EAF9881FC8DBA900196024 /* NSArray+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8BE1FC8DBA900196024 /* NSArray+LIFEAdditions.h */; };
+		B7EAF9891FC8DBA900196024 /* NSArray+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8BF1FC8DBA900196024 /* NSArray+LIFEAdditions.m */; };
+		B7EAF98A1FC8DBA900196024 /* NSError+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8C01FC8DBA900196024 /* NSError+LIFEAdditions.h */; };
+		B7EAF98B1FC8DBA900196024 /* NSError+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8C11FC8DBA900196024 /* NSError+LIFEAdditions.m */; };
+		B7EAF98C1FC8DBA900196024 /* NSLayoutConstraint+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8C21FC8DBA900196024 /* NSLayoutConstraint+LIFEAdditions.h */; };
+		B7EAF98D1FC8DBA900196024 /* NSLayoutConstraint+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8C31FC8DBA900196024 /* NSLayoutConstraint+LIFEAdditions.m */; };
+		B7EAF98E1FC8DBA900196024 /* NSMutableDictionary+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8C41FC8DBA900196024 /* NSMutableDictionary+LIFEAdditions.h */; };
+		B7EAF98F1FC8DBA900196024 /* NSMutableDictionary+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8C51FC8DBA900196024 /* NSMutableDictionary+LIFEAdditions.m */; };
+		B7EAF9901FC8DBA900196024 /* NSString+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8C61FC8DBA900196024 /* NSString+LIFEAdditions.h */; };
+		B7EAF9911FC8DBA900196024 /* NSString+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8C71FC8DBA900196024 /* NSString+LIFEAdditions.m */; };
+		B7EAF9921FC8DBA900196024 /* UIApplication+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8C81FC8DBA900196024 /* UIApplication+LIFEAdditions.h */; };
+		B7EAF9931FC8DBA900196024 /* UIApplication+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8C91FC8DBA900196024 /* UIApplication+LIFEAdditions.m */; };
+		B7EAF9941FC8DBA900196024 /* UIBezierPath+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8CA1FC8DBA900196024 /* UIBezierPath+LIFEAdditions.h */; };
+		B7EAF9951FC8DBA900196024 /* UIBezierPath+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8CB1FC8DBA900196024 /* UIBezierPath+LIFEAdditions.m */; };
+		B7EAF9961FC8DBA900196024 /* UIColor+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8CC1FC8DBA900196024 /* UIColor+LIFEAdditions.h */; };
+		B7EAF9971FC8DBA900196024 /* UIColor+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8CD1FC8DBA900196024 /* UIColor+LIFEAdditions.m */; };
+		B7EAF9981FC8DBA900196024 /* UIDevice+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8CE1FC8DBA900196024 /* UIDevice+LIFEAdditions.h */; };
+		B7EAF9991FC8DBA900196024 /* UIDevice+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8CF1FC8DBA900196024 /* UIDevice+LIFEAdditions.m */; };
+		B7EAF99A1FC8DBA900196024 /* UIImage+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8D01FC8DBA900196024 /* UIImage+LIFEAdditions.h */; };
+		B7EAF99B1FC8DBA900196024 /* UIImage+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8D11FC8DBA900196024 /* UIImage+LIFEAdditions.m */; };
+		B7EAF99C1FC8DBA900196024 /* UITableView+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8D21FC8DBA900196024 /* UITableView+LIFEAdditions.h */; };
+		B7EAF99D1FC8DBA900196024 /* UITableView+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8D31FC8DBA900196024 /* UITableView+LIFEAdditions.m */; };
+		B7EAF99E1FC8DBA900196024 /* UITextView+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8D41FC8DBA900196024 /* UITextView+LIFEAdditions.h */; };
+		B7EAF99F1FC8DBA900196024 /* UITextView+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8D51FC8DBA900196024 /* UITextView+LIFEAdditions.m */; };
+		B7EAF9A01FC8DBA900196024 /* UIView+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8D61FC8DBA900196024 /* UIView+LIFEAdditions.h */; };
+		B7EAF9A11FC8DBA900196024 /* UIView+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8D71FC8DBA900196024 /* UIView+LIFEAdditions.m */; };
+		B7EAF9A21FC8DBA900196024 /* UIWindow+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8D81FC8DBA900196024 /* UIWindow+LIFEAdditions.h */; };
+		B7EAF9A31FC8DBA900196024 /* UIWindow+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8D91FC8DBA900196024 /* UIWindow+LIFEAdditions.m */; };
+		B7EAF9A41FC8DBA900196024 /* Buglife+LocalizedStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8DA1FC8DBA900196024 /* Buglife+LocalizedStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B7EAF9A51FC8DBA900196024 /* Buglife+LocalizedStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8DB1FC8DBA900196024 /* Buglife+LocalizedStrings.m */; };
+		B7EAF9A61FC8DBA900196024 /* Buglife.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8DC1FC8DBA900196024 /* Buglife.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B7EAF9A71FC8DBA900196024 /* Buglife.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8DD1FC8DBA900196024 /* Buglife.m */; };
+		B7EAF9A81FC8DBA900196024 /* LIFEAVPlayerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8DF1FC8DBA900196024 /* LIFEAVPlayerViewController.h */; };
+		B7EAF9A91FC8DBA900196024 /* LIFEAVPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8E01FC8DBA900196024 /* LIFEAVPlayerViewController.m */; };
+		B7EAF9AA1FC8DBA900196024 /* LIFEComponentPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8E11FC8DBA900196024 /* LIFEComponentPickerViewController.h */; };
+		B7EAF9AB1FC8DBA900196024 /* LIFEComponentPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8E21FC8DBA900196024 /* LIFEComponentPickerViewController.m */; };
+		B7EAF9AC1FC8DBA900196024 /* LIFELogViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8E31FC8DBA900196024 /* LIFELogViewController.h */; };
+		B7EAF9AD1FC8DBA900196024 /* LIFELogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8E41FC8DBA900196024 /* LIFELogViewController.m */; };
+		B7EAF9AE1FC8DBA900196024 /* LIFENavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8E51FC8DBA900196024 /* LIFENavigationController.h */; };
+		B7EAF9AF1FC8DBA900196024 /* LIFENavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8E61FC8DBA900196024 /* LIFENavigationController.m */; };
+		B7EAF9B01FC8DBA900196024 /* LIFEPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8E71FC8DBA900196024 /* LIFEPickerViewController.h */; };
+		B7EAF9B11FC8DBA900196024 /* LIFEPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8E81FC8DBA900196024 /* LIFEPickerViewController.m */; };
+		B7EAF9B21FC8DBA900196024 /* LIFEReportTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8E91FC8DBA900196024 /* LIFEReportTableViewController.h */; };
+		B7EAF9B31FC8DBA900196024 /* LIFEReportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8EA1FC8DBA900196024 /* LIFEReportTableViewController.m */; };
+		B7EAF9B41FC8DBA900196024 /* LIFEReportViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8EB1FC8DBA900196024 /* LIFEReportViewControllerDelegate.h */; };
+		B7EAF9B51FC8DBA900196024 /* LIFEScreenshotAnnotatorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8EC1FC8DBA900196024 /* LIFEScreenshotAnnotatorViewController.h */; };
+		B7EAF9B61FC8DBA900196024 /* LIFEScreenshotAnnotatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8ED1FC8DBA900196024 /* LIFEScreenshotAnnotatorViewController.m */; };
+		B7EAF9B71FC8DBA900196024 /* LIFEStepsToReproTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8EE1FC8DBA900196024 /* LIFEStepsToReproTableViewController.h */; };
+		B7EAF9B81FC8DBA900196024 /* LIFEStepsToReproTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8EF1FC8DBA900196024 /* LIFEStepsToReproTableViewController.m */; };
+		B7EAF9B91FC8DBA900196024 /* LIFETextInputViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8F01FC8DBA900196024 /* LIFETextInputViewController.h */; };
+		B7EAF9BA1FC8DBA900196024 /* LIFETextInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8F11FC8DBA900196024 /* LIFETextInputViewController.m */; };
+		B7EAF9BB1FC8DBA900196024 /* LIFEAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8F21FC8DBA900196024 /* LIFEAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B7EAF9BC1FC8DBA900196024 /* LIFEAwesomeLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8F31FC8DBA900196024 /* LIFEAwesomeLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B7EAF9BD1FC8DBA900196024 /* LIFEAwesomeLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8F41FC8DBA900196024 /* LIFEAwesomeLogger.m */; };
+		B7EAF9BE1FC8DBA900196024 /* LIFEInputField.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8F51FC8DBA900196024 /* LIFEInputField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B7EAF9BF1FC8DBA900196024 /* LIFEInputField.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8F61FC8DBA900196024 /* LIFEInputField.m */; };
+		B7EAF9C01FC8DBA900196024 /* LIFEPickerInputField.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8F71FC8DBA900196024 /* LIFEPickerInputField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B7EAF9C11FC8DBA900196024 /* LIFEPickerInputField.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8F81FC8DBA900196024 /* LIFEPickerInputField.m */; };
+		B7EAF9C21FC8DBA900196024 /* LIFETextInputField.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8F91FC8DBA900196024 /* LIFETextInputField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B7EAF9C31FC8DBA900196024 /* LIFETextInputField.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8FA1FC8DBA900196024 /* LIFETextInputField.m */; };
+		B7EAF9C41FC8DBA900196024 /* LIFEAnnotatedImage.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8FC1FC8DBA900196024 /* LIFEAnnotatedImage.h */; };
+		B7EAF9C51FC8DBA900196024 /* LIFEAnnotatedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8FD1FC8DBA900196024 /* LIFEAnnotatedImage.m */; };
+		B7EAF9C61FC8DBA900196024 /* LIFEAnnotation.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF8FE1FC8DBA900196024 /* LIFEAnnotation.h */; };
+		B7EAF9C71FC8DBA900196024 /* LIFEAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF8FF1FC8DBA900196024 /* LIFEAnnotation.m */; };
+		B7EAF9C81FC8DBA900196024 /* LIFEAppInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9001FC8DBA900196024 /* LIFEAppInfo.h */; };
+		B7EAF9C91FC8DBA900196024 /* LIFEAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9011FC8DBA900196024 /* LIFEAppInfo.m */; };
+		B7EAF9CA1FC8DBA900196024 /* LIFEAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9021FC8DBA900196024 /* LIFEAttribute.h */; };
+		B7EAF9CB1FC8DBA900196024 /* LIFEAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9031FC8DBA900196024 /* LIFEAttribute.m */; };
+		B7EAF9CC1FC8DBA900196024 /* LIFEDeviceBatteryState.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9041FC8DBA900196024 /* LIFEDeviceBatteryState.h */; };
+		B7EAF9CD1FC8DBA900196024 /* LIFEDeviceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9051FC8DBA900196024 /* LIFEDeviceInfo.h */; };
+		B7EAF9CE1FC8DBA900196024 /* LIFEDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9061FC8DBA900196024 /* LIFEDeviceInfo.m */; };
+		B7EAF9CF1FC8DBA900196024 /* LIFEImageFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9071FC8DBA900196024 /* LIFEImageFormat.h */; };
+		B7EAF9D01FC8DBA900196024 /* LIFEImageFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9081FC8DBA900196024 /* LIFEImageFormat.m */; };
+		B7EAF9D11FC8DBA900196024 /* LIFEReport.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9091FC8DBA900196024 /* LIFEReport.h */; };
+		B7EAF9D21FC8DBA900196024 /* LIFEReport.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF90A1FC8DBA900196024 /* LIFEReport.m */; };
+		B7EAF9D31FC8DBA900196024 /* LIFEReportAttachmentImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF90B1FC8DBA900196024 /* LIFEReportAttachmentImpl.h */; };
+		B7EAF9D41FC8DBA900196024 /* LIFEReportAttachmentImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF90C1FC8DBA900196024 /* LIFEReportAttachmentImpl.m */; };
+		B7EAF9D51FC8DBA900196024 /* LIFEReportOwner.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF90D1FC8DBA900196024 /* LIFEReportOwner.h */; };
+		B7EAF9D61FC8DBA900196024 /* LIFEReportOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF90E1FC8DBA900196024 /* LIFEReportOwner.m */; };
+		B7EAF9D71FC8DBA900196024 /* LIFEReproStep.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF90F1FC8DBA900196024 /* LIFEReproStep.h */; };
+		B7EAF9D81FC8DBA900196024 /* LIFEReproStep.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9101FC8DBA900196024 /* LIFEReproStep.m */; };
+		B7EAF9D91FC8DBA900196024 /* LIFEScreenshotContext.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9111FC8DBA900196024 /* LIFEScreenshotContext.h */; };
+		B7EAF9DA1FC8DBA900196024 /* LIFEScreenshotContext.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9121FC8DBA900196024 /* LIFEScreenshotContext.m */; };
+		B7EAF9DB1FC8DBA900196024 /* LIFEUserFacingAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9131FC8DBA900196024 /* LIFEUserFacingAttachment.h */; };
+		B7EAF9DC1FC8DBA900196024 /* LIFEVideoAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9141FC8DBA900196024 /* LIFEVideoAttachment.h */; };
+		B7EAF9DD1FC8DBA900196024 /* LIFEVideoAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9151FC8DBA900196024 /* LIFEVideoAttachment.m */; };
+		B7EAF9DE1FC8DBA900196024 /* Buglife+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9171FC8DBA900196024 /* Buglife+Protected.h */; };
+		B7EAF9DF1FC8DBA900196024 /* LIFEAwesomeLogger+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9181FC8DBA900196024 /* LIFEAwesomeLogger+Protected.h */; };
+		B7EAF9E01FC8DBA900196024 /* LIFEInputField+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9191FC8DBA900196024 /* LIFEInputField+Protected.h */; };
+		B7EAF9E11FC8DBA900196024 /* LIFEPickerInputField+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF91A1FC8DBA900196024 /* LIFEPickerInputField+Protected.h */; };
+		B7EAF9E21FC8DBA900196024 /* LIFEAppInfoProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF91C1FC8DBA900196024 /* LIFEAppInfoProvider.h */; };
+		B7EAF9E31FC8DBA900196024 /* LIFEAppInfoProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF91D1FC8DBA900196024 /* LIFEAppInfoProvider.m */; };
+		B7EAF9E41FC8DBA900196024 /* LIFEAttachmentManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF91E1FC8DBA900196024 /* LIFEAttachmentManager.h */; };
+		B7EAF9E51FC8DBA900196024 /* LIFEAttachmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF91F1FC8DBA900196024 /* LIFEAttachmentManager.m */; };
+		B7EAF9E61FC8DBA900196024 /* LIFEAVFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9201FC8DBA900196024 /* LIFEAVFoundation.h */; };
+		B7EAF9E71FC8DBA900196024 /* LIFEAVFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9211FC8DBA900196024 /* LIFEAVFoundation.m */; };
+		B7EAF9E81FC8DBA900196024 /* LIFEDataProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9221FC8DBA900196024 /* LIFEDataProvider.h */; };
+		B7EAF9E91FC8DBA900196024 /* LIFEDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9231FC8DBA900196024 /* LIFEDataProvider.m */; };
+		B7EAF9EA1FC8DBA900196024 /* LIFEDependencyLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9241FC8DBA900196024 /* LIFEDependencyLoader.h */; };
+		B7EAF9EB1FC8DBA900196024 /* LIFEDependencyLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9251FC8DBA900196024 /* LIFEDependencyLoader.m */; };
+		B7EAF9EC1FC8DBA900196024 /* LIFEDeviceInfoProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9261FC8DBA900196024 /* LIFEDeviceInfoProvider.h */; };
+		B7EAF9ED1FC8DBA900196024 /* LIFEDeviceInfoProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9271FC8DBA900196024 /* LIFEDeviceInfoProvider.m */; };
+		B7EAF9EE1FC8DBA900196024 /* LIFEImagePickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9281FC8DBA900196024 /* LIFEImagePickerController.h */; };
+		B7EAF9EF1FC8DBA900196024 /* LIFEImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9291FC8DBA900196024 /* LIFEImagePickerController.m */; };
+		B7EAF9F01FC8DBA900196024 /* LIFEImageProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF92A1FC8DBA900196024 /* LIFEImageProcessor.h */; };
+		B7EAF9F11FC8DBA900196024 /* LIFEImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF92B1FC8DBA900196024 /* LIFEImageProcessor.m */; };
+		B7EAF9F21FC8DBA900196024 /* LIFELogFacility.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF92C1FC8DBA900196024 /* LIFELogFacility.h */; };
+		B7EAF9F31FC8DBA900196024 /* LIFELogFacility.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF92D1FC8DBA900196024 /* LIFELogFacility.m */; };
+		B7EAF9F41FC8DBA900196024 /* LIFENetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF92E1FC8DBA900196024 /* LIFENetworkManager.h */; };
+		B7EAF9F51FC8DBA900196024 /* LIFENetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF92F1FC8DBA900196024 /* LIFENetworkManager.m */; };
+		B7EAF9F61FC8DBA900196024 /* LIFEReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9301FC8DBA900196024 /* LIFEReachability.h */; };
+		B7EAF9F71FC8DBA900196024 /* LIFEReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9311FC8DBA900196024 /* LIFEReachability.m */; };
+		B7EAF9F81FC8DBA900196024 /* LIFERecordingShrinker.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9321FC8DBA900196024 /* LIFERecordingShrinker.h */; };
+		B7EAF9F91FC8DBA900196024 /* LIFERecordingShrinker.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9331FC8DBA900196024 /* LIFERecordingShrinker.m */; };
+		B7EAF9FA1FC8DBA900196024 /* LIFEReportBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9341FC8DBA900196024 /* LIFEReportBuilder.h */; };
+		B7EAF9FB1FC8DBA900196024 /* LIFEReportBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9351FC8DBA900196024 /* LIFEReportBuilder.m */; };
+		B7EAF9FC1FC8DBA900196024 /* LIFESwizzler.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9361FC8DBA900196024 /* LIFESwizzler.h */; };
+		B7EAF9FD1FC8DBA900196024 /* LIFESwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9371FC8DBA900196024 /* LIFESwizzler.m */; };
+		B7EAF9FE1FC8DBA900196024 /* LIFETelephonyNetworkInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9381FC8DBA900196024 /* LIFETelephonyNetworkInfo.h */; };
+		B7EAF9FF1FC8DBA900196024 /* LIFETelephonyNetworkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9391FC8DBA900196024 /* LIFETelephonyNetworkInfo.m */; };
+		B7EAFA001FC8DBA900196024 /* LIFEUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF93A1FC8DBA900196024 /* LIFEUserDefaults.h */; };
+		B7EAFA011FC8DBA900196024 /* LIFEUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF93B1FC8DBA900196024 /* LIFEUserDefaults.m */; };
+		B7EAFA021FC8DBA900196024 /* LIFEASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF93D1FC8DBA900196024 /* LIFEASLLogger.h */; };
+		B7EAFA031FC8DBA900196024 /* LIFEASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF93E1FC8DBA900196024 /* LIFEASLLogger.m */; };
+		B7EAFA041FC8DBA900196024 /* LIFEContextAwareLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF93F1FC8DBA900196024 /* LIFEContextAwareLogFormatter.h */; };
+		B7EAFA051FC8DBA900196024 /* LIFEContextAwareLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9401FC8DBA900196024 /* LIFEContextAwareLogFormatter.m */; };
+		B7EAFA061FC8DBA900196024 /* LIFEFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9411FC8DBA900196024 /* LIFEFileLogger.h */; };
+		B7EAFA071FC8DBA900196024 /* LIFEFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9421FC8DBA900196024 /* LIFEFileLogger.m */; };
+		B7EAFA081FC8DBA900196024 /* LIFEJSONLogFileFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9431FC8DBA900196024 /* LIFEJSONLogFileFormatter.h */; };
+		B7EAFA091FC8DBA900196024 /* LIFEJSONLogFileFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9441FC8DBA900196024 /* LIFEJSONLogFileFormatter.m */; };
+		B7EAFA0A1FC8DBA900196024 /* LIFELog.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9451FC8DBA900196024 /* LIFELog.h */; };
+		B7EAFA0B1FC8DBA900196024 /* LIFELog.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9461FC8DBA900196024 /* LIFELog.m */; };
+		B7EAFA0C1FC8DBA900196024 /* LIFELogger.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9471FC8DBA900196024 /* LIFELogger.h */; };
+		B7EAFA0D1FC8DBA900196024 /* LIFELogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9481FC8DBA900196024 /* LIFELogger.m */; };
+		B7EAFA0E1FC8DBA900196024 /* LIFELogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9491FC8DBA900196024 /* LIFELogMacros.h */; };
+		B7EAFA0F1FC8DBA900196024 /* LIFENotificationLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF94A1FC8DBA900196024 /* LIFENotificationLogger.h */; };
+		B7EAFA101FC8DBA900196024 /* LIFENotificationLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF94B1FC8DBA900196024 /* LIFENotificationLogger.m */; };
+		B7EAFA111FC8DBA900196024 /* LIFETTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF94C1FC8DBA900196024 /* LIFETTYLogger.h */; };
+		B7EAFA121FC8DBA900196024 /* LIFETTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF94D1FC8DBA900196024 /* LIFETTYLogger.m */; };
+		B7EAFA131FC8DBA900196024 /* LIFEAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9501FC8DBA900196024 /* LIFEAnnotationView.h */; };
+		B7EAFA141FC8DBA900196024 /* LIFEAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9511FC8DBA900196024 /* LIFEAnnotationView.m */; };
+		B7EAFA151FC8DBA900196024 /* LIFEArrowAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9521FC8DBA900196024 /* LIFEArrowAnnotationView.h */; };
+		B7EAFA161FC8DBA900196024 /* LIFEArrowAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9531FC8DBA900196024 /* LIFEArrowAnnotationView.m */; };
+		B7EAFA171FC8DBA900196024 /* LIFEBlurAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9541FC8DBA900196024 /* LIFEBlurAnnotationView.h */; };
+		B7EAFA181FC8DBA900196024 /* LIFEBlurAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9551FC8DBA900196024 /* LIFEBlurAnnotationView.m */; };
+		B7EAFA191FC8DBA900196024 /* LIFELoupeAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9561FC8DBA900196024 /* LIFELoupeAnnotationView.h */; };
+		B7EAFA1A1FC8DBA900196024 /* LIFELoupeAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9571FC8DBA900196024 /* LIFELoupeAnnotationView.m */; };
+		B7EAFA1B1FC8DBA900196024 /* LIFEContinuousForceTouchGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9591FC8DBA900196024 /* LIFEContinuousForceTouchGestureRecognizer.h */; };
+		B7EAFA1C1FC8DBA900196024 /* LIFEContinuousForceTouchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF95A1FC8DBA900196024 /* LIFEContinuousForceTouchGestureRecognizer.m */; };
+		B7EAFA1D1FC8DBA900196024 /* LIFEPanGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF95B1FC8DBA900196024 /* LIFEPanGestureRecognizer.h */; };
+		B7EAFA1E1FC8DBA900196024 /* LIFEPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF95C1FC8DBA900196024 /* LIFEPanGestureRecognizer.m */; };
+		B7EAFA1F1FC8DBA900196024 /* LIFEAnnotatedImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF95D1FC8DBA900196024 /* LIFEAnnotatedImageView.h */; };
+		B7EAFA201FC8DBA900196024 /* LIFEAnnotatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF95E1FC8DBA900196024 /* LIFEAnnotatedImageView.m */; };
+		B7EAFA211FC8DBA900196024 /* LIFEAppearanceImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF95F1FC8DBA900196024 /* LIFEAppearanceImpl.h */; };
+		B7EAFA221FC8DBA900196024 /* LIFEAppearanceImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9601FC8DBA900196024 /* LIFEAppearanceImpl.m */; };
+		B7EAFA231FC8DBA900196024 /* LIFEAttachmentView.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9611FC8DBA900196024 /* LIFEAttachmentView.h */; };
+		B7EAFA241FC8DBA900196024 /* LIFEAttachmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9621FC8DBA900196024 /* LIFEAttachmentView.m */; };
+		B7EAFA251FC8DBA900196024 /* LIFEBugButtonWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9631FC8DBA900196024 /* LIFEBugButtonWindow.h */; };
+		B7EAFA261FC8DBA900196024 /* LIFEBugButtonWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9641FC8DBA900196024 /* LIFEBugButtonWindow.m */; };
+		B7EAFA271FC8DBA900196024 /* LIFEComponentPickerCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9651FC8DBA900196024 /* LIFEComponentPickerCell.h */; };
+		B7EAFA281FC8DBA900196024 /* LIFEComponentPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9661FC8DBA900196024 /* LIFEComponentPickerCell.m */; };
+		B7EAFA291FC8DBA900196024 /* LIFEFloatingButton.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9671FC8DBA900196024 /* LIFEFloatingButton.h */; };
+		B7EAFA2A1FC8DBA900196024 /* LIFEFloatingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9681FC8DBA900196024 /* LIFEFloatingButton.m */; };
+		B7EAFA2B1FC8DBA900196024 /* LIFELocalizedStringProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9691FC8DBA900196024 /* LIFELocalizedStringProvider.h */; };
+		B7EAFA2C1FC8DBA900196024 /* LIFELocalizedStringProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF96A1FC8DBA900196024 /* LIFELocalizedStringProvider.m */; };
+		B7EAFA2D1FC8DBA900196024 /* LIFEMenuPopoverView.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF96B1FC8DBA900196024 /* LIFEMenuPopoverView.h */; };
+		B7EAFA2E1FC8DBA900196024 /* LIFEMenuPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF96C1FC8DBA900196024 /* LIFEMenuPopoverView.m */; };
+		B7EAFA2F1FC8DBA900196024 /* LIFEOverlayWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF96D1FC8DBA900196024 /* LIFEOverlayWindow.h */; };
+		B7EAFA301FC8DBA900196024 /* LIFEOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF96E1FC8DBA900196024 /* LIFEOverlayWindow.m */; };
+		B7EAFA311FC8DBA900196024 /* LIFEPoweredByBuglifeView.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF96F1FC8DBA900196024 /* LIFEPoweredByBuglifeView.h */; };
+		B7EAFA321FC8DBA900196024 /* LIFEPoweredByBuglifeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9701FC8DBA900196024 /* LIFEPoweredByBuglifeView.m */; };
+		B7EAFA331FC8DBA900196024 /* LIFEReportView.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9711FC8DBA900196024 /* LIFEReportView.h */; };
+		B7EAFA341FC8DBA900196024 /* LIFEReportView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9721FC8DBA900196024 /* LIFEReportView.m */; };
+		B7EAFA351FC8DBA900196024 /* LIFEReportWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9731FC8DBA900196024 /* LIFEReportWindow.h */; };
+		B7EAFA361FC8DBA900196024 /* LIFEReportWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9741FC8DBA900196024 /* LIFEReportWindow.m */; };
+		B7EAFA371FC8DBA900196024 /* LIFEScreenshotAnnotatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9751FC8DBA900196024 /* LIFEScreenshotAnnotatorView.h */; };
+		B7EAFA381FC8DBA900196024 /* LIFEScreenshotAnnotatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9761FC8DBA900196024 /* LIFEScreenshotAnnotatorView.m */; };
+		B7EAFA391FC8DBA900196024 /* LIFEStepsToReproduceCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9771FC8DBA900196024 /* LIFEStepsToReproduceCell.h */; };
+		B7EAFA3A1FC8DBA900196024 /* LIFEStepsToReproduceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF9781FC8DBA900196024 /* LIFEStepsToReproduceCell.m */; };
+		B7EAFA3B1FC8DBA900196024 /* LIFETextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF9791FC8DBA900196024 /* LIFETextFieldCell.h */; };
+		B7EAFA3C1FC8DBA900196024 /* LIFETextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF97A1FC8DBA900196024 /* LIFETextFieldCell.m */; };
+		B7EAFA3D1FC8DBA900196024 /* LIFETitleCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF97B1FC8DBA900196024 /* LIFETitleCell.h */; };
+		B7EAFA3E1FC8DBA900196024 /* LIFETitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF97C1FC8DBA900196024 /* LIFETitleCell.m */; };
+		B7EAFA3F1FC8DBA900196024 /* LIFEWhatHappenedTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF97D1FC8DBA900196024 /* LIFEWhatHappenedTextView.h */; };
+		B7EAFA401FC8DBA900196024 /* LIFEWhatHappenedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF97E1FC8DBA900196024 /* LIFEWhatHappenedTextView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B7EAF7181FC8DAB000196024 /* Buglife.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Buglife.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7EAF8B11FC8DB9F00196024 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Buglife/Info.plist; sourceTree = "<group>"; };
+		B7EAF8B51FC8DBA900196024 /* Buglife+UIStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Buglife+UIStuff.h"; sourceTree = "<group>"; };
+		B7EAF8B61FC8DBA900196024 /* Buglife+UIStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Buglife+UIStuff.m"; sourceTree = "<group>"; };
+		B7EAF8B71FC8DBA900196024 /* LIFECategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFECategories.h; sourceTree = "<group>"; };
+		B7EAF8B81FC8DBA900196024 /* LIFECategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFECategories.m; sourceTree = "<group>"; };
+		B7EAF8B91FC8DBA900196024 /* LIFECompatibilityUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFECompatibilityUtils.h; sourceTree = "<group>"; };
+		B7EAF8BA1FC8DBA900196024 /* LIFECompatibilityUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFECompatibilityUtils.m; sourceTree = "<group>"; };
+		B7EAF8BB1FC8DBA900196024 /* LIFEGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEGeometry.h; sourceTree = "<group>"; };
+		B7EAF8BC1FC8DBA900196024 /* LIFEGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEGeometry.m; sourceTree = "<group>"; };
+		B7EAF8BD1FC8DBA900196024 /* LIFEMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEMacros.h; sourceTree = "<group>"; };
+		B7EAF8BE1FC8DBA900196024 /* NSArray+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8BF1FC8DBA900196024 /* NSArray+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8C01FC8DBA900196024 /* NSError+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8C11FC8DBA900196024 /* NSError+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8C21FC8DBA900196024 /* NSLayoutConstraint+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8C31FC8DBA900196024 /* NSLayoutConstraint+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8C41FC8DBA900196024 /* NSMutableDictionary+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8C51FC8DBA900196024 /* NSMutableDictionary+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8C61FC8DBA900196024 /* NSString+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8C71FC8DBA900196024 /* NSString+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8C81FC8DBA900196024 /* UIApplication+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8C91FC8DBA900196024 /* UIApplication+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8CA1FC8DBA900196024 /* UIBezierPath+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8CB1FC8DBA900196024 /* UIBezierPath+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8CC1FC8DBA900196024 /* UIColor+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8CD1FC8DBA900196024 /* UIColor+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8CE1FC8DBA900196024 /* UIDevice+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8CF1FC8DBA900196024 /* UIDevice+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8D01FC8DBA900196024 /* UIImage+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8D11FC8DBA900196024 /* UIImage+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8D21FC8DBA900196024 /* UITableView+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8D31FC8DBA900196024 /* UITableView+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8D41FC8DBA900196024 /* UITextView+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8D51FC8DBA900196024 /* UITextView+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8D61FC8DBA900196024 /* UIView+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8D71FC8DBA900196024 /* UIView+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8D81FC8DBA900196024 /* UIWindow+LIFEAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+LIFEAdditions.h"; sourceTree = "<group>"; };
+		B7EAF8D91FC8DBA900196024 /* UIWindow+LIFEAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+LIFEAdditions.m"; sourceTree = "<group>"; };
+		B7EAF8DA1FC8DBA900196024 /* Buglife+LocalizedStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Buglife+LocalizedStrings.h"; sourceTree = "<group>"; };
+		B7EAF8DB1FC8DBA900196024 /* Buglife+LocalizedStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Buglife+LocalizedStrings.m"; sourceTree = "<group>"; };
+		B7EAF8DC1FC8DBA900196024 /* Buglife.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Buglife.h; sourceTree = "<group>"; };
+		B7EAF8DD1FC8DBA900196024 /* Buglife.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Buglife.m; sourceTree = "<group>"; };
+		B7EAF8DF1FC8DBA900196024 /* LIFEAVPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAVPlayerViewController.h; sourceTree = "<group>"; };
+		B7EAF8E01FC8DBA900196024 /* LIFEAVPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEAVPlayerViewController.m; sourceTree = "<group>"; };
+		B7EAF8E11FC8DBA900196024 /* LIFEComponentPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEComponentPickerViewController.h; sourceTree = "<group>"; };
+		B7EAF8E21FC8DBA900196024 /* LIFEComponentPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEComponentPickerViewController.m; sourceTree = "<group>"; };
+		B7EAF8E31FC8DBA900196024 /* LIFELogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFELogViewController.h; sourceTree = "<group>"; };
+		B7EAF8E41FC8DBA900196024 /* LIFELogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFELogViewController.m; sourceTree = "<group>"; };
+		B7EAF8E51FC8DBA900196024 /* LIFENavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFENavigationController.h; sourceTree = "<group>"; };
+		B7EAF8E61FC8DBA900196024 /* LIFENavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFENavigationController.m; sourceTree = "<group>"; };
+		B7EAF8E71FC8DBA900196024 /* LIFEPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEPickerViewController.h; sourceTree = "<group>"; };
+		B7EAF8E81FC8DBA900196024 /* LIFEPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEPickerViewController.m; sourceTree = "<group>"; };
+		B7EAF8E91FC8DBA900196024 /* LIFEReportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEReportTableViewController.h; sourceTree = "<group>"; };
+		B7EAF8EA1FC8DBA900196024 /* LIFEReportTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEReportTableViewController.m; sourceTree = "<group>"; };
+		B7EAF8EB1FC8DBA900196024 /* LIFEReportViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEReportViewControllerDelegate.h; sourceTree = "<group>"; };
+		B7EAF8EC1FC8DBA900196024 /* LIFEScreenshotAnnotatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEScreenshotAnnotatorViewController.h; sourceTree = "<group>"; };
+		B7EAF8ED1FC8DBA900196024 /* LIFEScreenshotAnnotatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEScreenshotAnnotatorViewController.m; sourceTree = "<group>"; };
+		B7EAF8EE1FC8DBA900196024 /* LIFEStepsToReproTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEStepsToReproTableViewController.h; sourceTree = "<group>"; };
+		B7EAF8EF1FC8DBA900196024 /* LIFEStepsToReproTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEStepsToReproTableViewController.m; sourceTree = "<group>"; };
+		B7EAF8F01FC8DBA900196024 /* LIFETextInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFETextInputViewController.h; sourceTree = "<group>"; };
+		B7EAF8F11FC8DBA900196024 /* LIFETextInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFETextInputViewController.m; sourceTree = "<group>"; };
+		B7EAF8F21FC8DBA900196024 /* LIFEAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAppearance.h; sourceTree = "<group>"; };
+		B7EAF8F31FC8DBA900196024 /* LIFEAwesomeLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAwesomeLogger.h; sourceTree = "<group>"; };
+		B7EAF8F41FC8DBA900196024 /* LIFEAwesomeLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEAwesomeLogger.m; sourceTree = "<group>"; };
+		B7EAF8F51FC8DBA900196024 /* LIFEInputField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEInputField.h; sourceTree = "<group>"; };
+		B7EAF8F61FC8DBA900196024 /* LIFEInputField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEInputField.m; sourceTree = "<group>"; };
+		B7EAF8F71FC8DBA900196024 /* LIFEPickerInputField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEPickerInputField.h; sourceTree = "<group>"; };
+		B7EAF8F81FC8DBA900196024 /* LIFEPickerInputField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEPickerInputField.m; sourceTree = "<group>"; };
+		B7EAF8F91FC8DBA900196024 /* LIFETextInputField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFETextInputField.h; sourceTree = "<group>"; };
+		B7EAF8FA1FC8DBA900196024 /* LIFETextInputField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFETextInputField.m; sourceTree = "<group>"; };
+		B7EAF8FC1FC8DBA900196024 /* LIFEAnnotatedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAnnotatedImage.h; sourceTree = "<group>"; };
+		B7EAF8FD1FC8DBA900196024 /* LIFEAnnotatedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEAnnotatedImage.m; sourceTree = "<group>"; };
+		B7EAF8FE1FC8DBA900196024 /* LIFEAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAnnotation.h; sourceTree = "<group>"; };
+		B7EAF8FF1FC8DBA900196024 /* LIFEAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEAnnotation.m; sourceTree = "<group>"; };
+		B7EAF9001FC8DBA900196024 /* LIFEAppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAppInfo.h; sourceTree = "<group>"; };
+		B7EAF9011FC8DBA900196024 /* LIFEAppInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEAppInfo.m; sourceTree = "<group>"; };
+		B7EAF9021FC8DBA900196024 /* LIFEAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAttribute.h; sourceTree = "<group>"; };
+		B7EAF9031FC8DBA900196024 /* LIFEAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEAttribute.m; sourceTree = "<group>"; };
+		B7EAF9041FC8DBA900196024 /* LIFEDeviceBatteryState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEDeviceBatteryState.h; sourceTree = "<group>"; };
+		B7EAF9051FC8DBA900196024 /* LIFEDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEDeviceInfo.h; sourceTree = "<group>"; };
+		B7EAF9061FC8DBA900196024 /* LIFEDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEDeviceInfo.m; sourceTree = "<group>"; };
+		B7EAF9071FC8DBA900196024 /* LIFEImageFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEImageFormat.h; sourceTree = "<group>"; };
+		B7EAF9081FC8DBA900196024 /* LIFEImageFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEImageFormat.m; sourceTree = "<group>"; };
+		B7EAF9091FC8DBA900196024 /* LIFEReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEReport.h; sourceTree = "<group>"; };
+		B7EAF90A1FC8DBA900196024 /* LIFEReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEReport.m; sourceTree = "<group>"; };
+		B7EAF90B1FC8DBA900196024 /* LIFEReportAttachmentImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEReportAttachmentImpl.h; sourceTree = "<group>"; };
+		B7EAF90C1FC8DBA900196024 /* LIFEReportAttachmentImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEReportAttachmentImpl.m; sourceTree = "<group>"; };
+		B7EAF90D1FC8DBA900196024 /* LIFEReportOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEReportOwner.h; sourceTree = "<group>"; };
+		B7EAF90E1FC8DBA900196024 /* LIFEReportOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEReportOwner.m; sourceTree = "<group>"; };
+		B7EAF90F1FC8DBA900196024 /* LIFEReproStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEReproStep.h; sourceTree = "<group>"; };
+		B7EAF9101FC8DBA900196024 /* LIFEReproStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEReproStep.m; sourceTree = "<group>"; };
+		B7EAF9111FC8DBA900196024 /* LIFEScreenshotContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEScreenshotContext.h; sourceTree = "<group>"; };
+		B7EAF9121FC8DBA900196024 /* LIFEScreenshotContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEScreenshotContext.m; sourceTree = "<group>"; };
+		B7EAF9131FC8DBA900196024 /* LIFEUserFacingAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEUserFacingAttachment.h; sourceTree = "<group>"; };
+		B7EAF9141FC8DBA900196024 /* LIFEVideoAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEVideoAttachment.h; sourceTree = "<group>"; };
+		B7EAF9151FC8DBA900196024 /* LIFEVideoAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEVideoAttachment.m; sourceTree = "<group>"; };
+		B7EAF9171FC8DBA900196024 /* Buglife+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Buglife+Protected.h"; sourceTree = "<group>"; };
+		B7EAF9181FC8DBA900196024 /* LIFEAwesomeLogger+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LIFEAwesomeLogger+Protected.h"; sourceTree = "<group>"; };
+		B7EAF9191FC8DBA900196024 /* LIFEInputField+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LIFEInputField+Protected.h"; sourceTree = "<group>"; };
+		B7EAF91A1FC8DBA900196024 /* LIFEPickerInputField+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LIFEPickerInputField+Protected.h"; sourceTree = "<group>"; };
+		B7EAF91C1FC8DBA900196024 /* LIFEAppInfoProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAppInfoProvider.h; sourceTree = "<group>"; };
+		B7EAF91D1FC8DBA900196024 /* LIFEAppInfoProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEAppInfoProvider.m; sourceTree = "<group>"; };
+		B7EAF91E1FC8DBA900196024 /* LIFEAttachmentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAttachmentManager.h; sourceTree = "<group>"; };
+		B7EAF91F1FC8DBA900196024 /* LIFEAttachmentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEAttachmentManager.m; sourceTree = "<group>"; };
+		B7EAF9201FC8DBA900196024 /* LIFEAVFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAVFoundation.h; sourceTree = "<group>"; };
+		B7EAF9211FC8DBA900196024 /* LIFEAVFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEAVFoundation.m; sourceTree = "<group>"; };
+		B7EAF9221FC8DBA900196024 /* LIFEDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEDataProvider.h; sourceTree = "<group>"; };
+		B7EAF9231FC8DBA900196024 /* LIFEDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEDataProvider.m; sourceTree = "<group>"; };
+		B7EAF9241FC8DBA900196024 /* LIFEDependencyLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEDependencyLoader.h; sourceTree = "<group>"; };
+		B7EAF9251FC8DBA900196024 /* LIFEDependencyLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEDependencyLoader.m; sourceTree = "<group>"; };
+		B7EAF9261FC8DBA900196024 /* LIFEDeviceInfoProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEDeviceInfoProvider.h; sourceTree = "<group>"; };
+		B7EAF9271FC8DBA900196024 /* LIFEDeviceInfoProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEDeviceInfoProvider.m; sourceTree = "<group>"; };
+		B7EAF9281FC8DBA900196024 /* LIFEImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEImagePickerController.h; sourceTree = "<group>"; };
+		B7EAF9291FC8DBA900196024 /* LIFEImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEImagePickerController.m; sourceTree = "<group>"; };
+		B7EAF92A1FC8DBA900196024 /* LIFEImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEImageProcessor.h; sourceTree = "<group>"; };
+		B7EAF92B1FC8DBA900196024 /* LIFEImageProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEImageProcessor.m; sourceTree = "<group>"; };
+		B7EAF92C1FC8DBA900196024 /* LIFELogFacility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFELogFacility.h; sourceTree = "<group>"; };
+		B7EAF92D1FC8DBA900196024 /* LIFELogFacility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFELogFacility.m; sourceTree = "<group>"; };
+		B7EAF92E1FC8DBA900196024 /* LIFENetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFENetworkManager.h; sourceTree = "<group>"; };
+		B7EAF92F1FC8DBA900196024 /* LIFENetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFENetworkManager.m; sourceTree = "<group>"; };
+		B7EAF9301FC8DBA900196024 /* LIFEReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEReachability.h; sourceTree = "<group>"; };
+		B7EAF9311FC8DBA900196024 /* LIFEReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEReachability.m; sourceTree = "<group>"; };
+		B7EAF9321FC8DBA900196024 /* LIFERecordingShrinker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFERecordingShrinker.h; sourceTree = "<group>"; };
+		B7EAF9331FC8DBA900196024 /* LIFERecordingShrinker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFERecordingShrinker.m; sourceTree = "<group>"; };
+		B7EAF9341FC8DBA900196024 /* LIFEReportBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEReportBuilder.h; sourceTree = "<group>"; };
+		B7EAF9351FC8DBA900196024 /* LIFEReportBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEReportBuilder.m; sourceTree = "<group>"; };
+		B7EAF9361FC8DBA900196024 /* LIFESwizzler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFESwizzler.h; sourceTree = "<group>"; };
+		B7EAF9371FC8DBA900196024 /* LIFESwizzler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFESwizzler.m; sourceTree = "<group>"; };
+		B7EAF9381FC8DBA900196024 /* LIFETelephonyNetworkInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFETelephonyNetworkInfo.h; sourceTree = "<group>"; };
+		B7EAF9391FC8DBA900196024 /* LIFETelephonyNetworkInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFETelephonyNetworkInfo.m; sourceTree = "<group>"; };
+		B7EAF93A1FC8DBA900196024 /* LIFEUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEUserDefaults.h; sourceTree = "<group>"; };
+		B7EAF93B1FC8DBA900196024 /* LIFEUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEUserDefaults.m; sourceTree = "<group>"; };
+		B7EAF93D1FC8DBA900196024 /* LIFEASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEASLLogger.h; sourceTree = "<group>"; };
+		B7EAF93E1FC8DBA900196024 /* LIFEASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEASLLogger.m; sourceTree = "<group>"; };
+		B7EAF93F1FC8DBA900196024 /* LIFEContextAwareLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEContextAwareLogFormatter.h; sourceTree = "<group>"; };
+		B7EAF9401FC8DBA900196024 /* LIFEContextAwareLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEContextAwareLogFormatter.m; sourceTree = "<group>"; };
+		B7EAF9411FC8DBA900196024 /* LIFEFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEFileLogger.h; sourceTree = "<group>"; };
+		B7EAF9421FC8DBA900196024 /* LIFEFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEFileLogger.m; sourceTree = "<group>"; };
+		B7EAF9431FC8DBA900196024 /* LIFEJSONLogFileFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEJSONLogFileFormatter.h; sourceTree = "<group>"; };
+		B7EAF9441FC8DBA900196024 /* LIFEJSONLogFileFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEJSONLogFileFormatter.m; sourceTree = "<group>"; };
+		B7EAF9451FC8DBA900196024 /* LIFELog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFELog.h; sourceTree = "<group>"; };
+		B7EAF9461FC8DBA900196024 /* LIFELog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFELog.m; sourceTree = "<group>"; };
+		B7EAF9471FC8DBA900196024 /* LIFELogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFELogger.h; sourceTree = "<group>"; };
+		B7EAF9481FC8DBA900196024 /* LIFELogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFELogger.m; sourceTree = "<group>"; };
+		B7EAF9491FC8DBA900196024 /* LIFELogMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFELogMacros.h; sourceTree = "<group>"; };
+		B7EAF94A1FC8DBA900196024 /* LIFENotificationLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFENotificationLogger.h; sourceTree = "<group>"; };
+		B7EAF94B1FC8DBA900196024 /* LIFENotificationLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFENotificationLogger.m; sourceTree = "<group>"; };
+		B7EAF94C1FC8DBA900196024 /* LIFETTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFETTYLogger.h; sourceTree = "<group>"; };
+		B7EAF94D1FC8DBA900196024 /* LIFETTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFETTYLogger.m; sourceTree = "<group>"; };
+		B7EAF9501FC8DBA900196024 /* LIFEAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAnnotationView.h; sourceTree = "<group>"; };
+		B7EAF9511FC8DBA900196024 /* LIFEAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEAnnotationView.m; sourceTree = "<group>"; };
+		B7EAF9521FC8DBA900196024 /* LIFEArrowAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEArrowAnnotationView.h; sourceTree = "<group>"; };
+		B7EAF9531FC8DBA900196024 /* LIFEArrowAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEArrowAnnotationView.m; sourceTree = "<group>"; };
+		B7EAF9541FC8DBA900196024 /* LIFEBlurAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEBlurAnnotationView.h; sourceTree = "<group>"; };
+		B7EAF9551FC8DBA900196024 /* LIFEBlurAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEBlurAnnotationView.m; sourceTree = "<group>"; };
+		B7EAF9561FC8DBA900196024 /* LIFELoupeAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFELoupeAnnotationView.h; sourceTree = "<group>"; };
+		B7EAF9571FC8DBA900196024 /* LIFELoupeAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFELoupeAnnotationView.m; sourceTree = "<group>"; };
+		B7EAF9591FC8DBA900196024 /* LIFEContinuousForceTouchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEContinuousForceTouchGestureRecognizer.h; sourceTree = "<group>"; };
+		B7EAF95A1FC8DBA900196024 /* LIFEContinuousForceTouchGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEContinuousForceTouchGestureRecognizer.m; sourceTree = "<group>"; };
+		B7EAF95B1FC8DBA900196024 /* LIFEPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEPanGestureRecognizer.h; sourceTree = "<group>"; };
+		B7EAF95C1FC8DBA900196024 /* LIFEPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEPanGestureRecognizer.m; sourceTree = "<group>"; };
+		B7EAF95D1FC8DBA900196024 /* LIFEAnnotatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAnnotatedImageView.h; sourceTree = "<group>"; };
+		B7EAF95E1FC8DBA900196024 /* LIFEAnnotatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEAnnotatedImageView.m; sourceTree = "<group>"; };
+		B7EAF95F1FC8DBA900196024 /* LIFEAppearanceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAppearanceImpl.h; sourceTree = "<group>"; };
+		B7EAF9601FC8DBA900196024 /* LIFEAppearanceImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEAppearanceImpl.m; sourceTree = "<group>"; };
+		B7EAF9611FC8DBA900196024 /* LIFEAttachmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEAttachmentView.h; sourceTree = "<group>"; };
+		B7EAF9621FC8DBA900196024 /* LIFEAttachmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEAttachmentView.m; sourceTree = "<group>"; };
+		B7EAF9631FC8DBA900196024 /* LIFEBugButtonWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEBugButtonWindow.h; sourceTree = "<group>"; };
+		B7EAF9641FC8DBA900196024 /* LIFEBugButtonWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEBugButtonWindow.m; sourceTree = "<group>"; };
+		B7EAF9651FC8DBA900196024 /* LIFEComponentPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEComponentPickerCell.h; sourceTree = "<group>"; };
+		B7EAF9661FC8DBA900196024 /* LIFEComponentPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEComponentPickerCell.m; sourceTree = "<group>"; };
+		B7EAF9671FC8DBA900196024 /* LIFEFloatingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEFloatingButton.h; sourceTree = "<group>"; };
+		B7EAF9681FC8DBA900196024 /* LIFEFloatingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEFloatingButton.m; sourceTree = "<group>"; };
+		B7EAF9691FC8DBA900196024 /* LIFELocalizedStringProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFELocalizedStringProvider.h; sourceTree = "<group>"; };
+		B7EAF96A1FC8DBA900196024 /* LIFELocalizedStringProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFELocalizedStringProvider.m; sourceTree = "<group>"; };
+		B7EAF96B1FC8DBA900196024 /* LIFEMenuPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEMenuPopoverView.h; sourceTree = "<group>"; };
+		B7EAF96C1FC8DBA900196024 /* LIFEMenuPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEMenuPopoverView.m; sourceTree = "<group>"; };
+		B7EAF96D1FC8DBA900196024 /* LIFEOverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEOverlayWindow.h; sourceTree = "<group>"; };
+		B7EAF96E1FC8DBA900196024 /* LIFEOverlayWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEOverlayWindow.m; sourceTree = "<group>"; };
+		B7EAF96F1FC8DBA900196024 /* LIFEPoweredByBuglifeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEPoweredByBuglifeView.h; sourceTree = "<group>"; };
+		B7EAF9701FC8DBA900196024 /* LIFEPoweredByBuglifeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEPoweredByBuglifeView.m; sourceTree = "<group>"; };
+		B7EAF9711FC8DBA900196024 /* LIFEReportView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEReportView.h; sourceTree = "<group>"; };
+		B7EAF9721FC8DBA900196024 /* LIFEReportView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEReportView.m; sourceTree = "<group>"; };
+		B7EAF9731FC8DBA900196024 /* LIFEReportWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEReportWindow.h; sourceTree = "<group>"; };
+		B7EAF9741FC8DBA900196024 /* LIFEReportWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEReportWindow.m; sourceTree = "<group>"; };
+		B7EAF9751FC8DBA900196024 /* LIFEScreenshotAnnotatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEScreenshotAnnotatorView.h; sourceTree = "<group>"; };
+		B7EAF9761FC8DBA900196024 /* LIFEScreenshotAnnotatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEScreenshotAnnotatorView.m; sourceTree = "<group>"; };
+		B7EAF9771FC8DBA900196024 /* LIFEStepsToReproduceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEStepsToReproduceCell.h; sourceTree = "<group>"; };
+		B7EAF9781FC8DBA900196024 /* LIFEStepsToReproduceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEStepsToReproduceCell.m; sourceTree = "<group>"; };
+		B7EAF9791FC8DBA900196024 /* LIFETextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFETextFieldCell.h; sourceTree = "<group>"; };
+		B7EAF97A1FC8DBA900196024 /* LIFETextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFETextFieldCell.m; sourceTree = "<group>"; };
+		B7EAF97B1FC8DBA900196024 /* LIFETitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFETitleCell.h; sourceTree = "<group>"; };
+		B7EAF97C1FC8DBA900196024 /* LIFETitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFETitleCell.m; sourceTree = "<group>"; };
+		B7EAF97D1FC8DBA900196024 /* LIFEWhatHappenedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEWhatHappenedTextView.h; sourceTree = "<group>"; };
+		B7EAF97E1FC8DBA900196024 /* LIFEWhatHappenedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEWhatHappenedTextView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B7EAF7141FC8DAB000196024 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B7EAF70E1FC8DAB000196024 = {
+			isa = PBXGroup;
+			children = (
+				B7EAF8B11FC8DB9F00196024 /* Info.plist */,
+				B7EAF8B31FC8DBA900196024 /* Source */,
+				B7EAF7191FC8DAB000196024 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B7EAF7191FC8DAB000196024 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAF7181FC8DAB000196024 /* Buglife.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B7EAF8B31FC8DBA900196024 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAF8B41FC8DBA900196024 /* Additions */,
+				B7EAF8DA1FC8DBA900196024 /* Buglife+LocalizedStrings.h */,
+				B7EAF8DB1FC8DBA900196024 /* Buglife+LocalizedStrings.m */,
+				B7EAF8DC1FC8DBA900196024 /* Buglife.h */,
+				B7EAF8DD1FC8DBA900196024 /* Buglife.m */,
+				B7EAF8DE1FC8DBA900196024 /* Controllers */,
+				B7EAF8F21FC8DBA900196024 /* LIFEAppearance.h */,
+				B7EAF8F31FC8DBA900196024 /* LIFEAwesomeLogger.h */,
+				B7EAF8F41FC8DBA900196024 /* LIFEAwesomeLogger.m */,
+				B7EAF8F51FC8DBA900196024 /* LIFEInputField.h */,
+				B7EAF8F61FC8DBA900196024 /* LIFEInputField.m */,
+				B7EAF8F71FC8DBA900196024 /* LIFEPickerInputField.h */,
+				B7EAF8F81FC8DBA900196024 /* LIFEPickerInputField.m */,
+				B7EAF8F91FC8DBA900196024 /* LIFETextInputField.h */,
+				B7EAF8FA1FC8DBA900196024 /* LIFETextInputField.m */,
+				B7EAF8FB1FC8DBA900196024 /* Models */,
+				B7EAF9161FC8DBA900196024 /* Protected */,
+				B7EAF91B1FC8DBA900196024 /* Services */,
+				B7EAF94E1FC8DBA900196024 /* Views */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		B7EAF8B41FC8DBA900196024 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAF8B51FC8DBA900196024 /* Buglife+UIStuff.h */,
+				B7EAF8B61FC8DBA900196024 /* Buglife+UIStuff.m */,
+				B7EAF8B71FC8DBA900196024 /* LIFECategories.h */,
+				B7EAF8B81FC8DBA900196024 /* LIFECategories.m */,
+				B7EAF8B91FC8DBA900196024 /* LIFECompatibilityUtils.h */,
+				B7EAF8BA1FC8DBA900196024 /* LIFECompatibilityUtils.m */,
+				B7EAF8BB1FC8DBA900196024 /* LIFEGeometry.h */,
+				B7EAF8BC1FC8DBA900196024 /* LIFEGeometry.m */,
+				B7EAF8BD1FC8DBA900196024 /* LIFEMacros.h */,
+				B7EAF8BE1FC8DBA900196024 /* NSArray+LIFEAdditions.h */,
+				B7EAF8BF1FC8DBA900196024 /* NSArray+LIFEAdditions.m */,
+				B7EAF8C01FC8DBA900196024 /* NSError+LIFEAdditions.h */,
+				B7EAF8C11FC8DBA900196024 /* NSError+LIFEAdditions.m */,
+				B7EAF8C21FC8DBA900196024 /* NSLayoutConstraint+LIFEAdditions.h */,
+				B7EAF8C31FC8DBA900196024 /* NSLayoutConstraint+LIFEAdditions.m */,
+				B7EAF8C41FC8DBA900196024 /* NSMutableDictionary+LIFEAdditions.h */,
+				B7EAF8C51FC8DBA900196024 /* NSMutableDictionary+LIFEAdditions.m */,
+				B7EAF8C61FC8DBA900196024 /* NSString+LIFEAdditions.h */,
+				B7EAF8C71FC8DBA900196024 /* NSString+LIFEAdditions.m */,
+				B7EAF8C81FC8DBA900196024 /* UIApplication+LIFEAdditions.h */,
+				B7EAF8C91FC8DBA900196024 /* UIApplication+LIFEAdditions.m */,
+				B7EAF8CA1FC8DBA900196024 /* UIBezierPath+LIFEAdditions.h */,
+				B7EAF8CB1FC8DBA900196024 /* UIBezierPath+LIFEAdditions.m */,
+				B7EAF8CC1FC8DBA900196024 /* UIColor+LIFEAdditions.h */,
+				B7EAF8CD1FC8DBA900196024 /* UIColor+LIFEAdditions.m */,
+				B7EAF8CE1FC8DBA900196024 /* UIDevice+LIFEAdditions.h */,
+				B7EAF8CF1FC8DBA900196024 /* UIDevice+LIFEAdditions.m */,
+				B7EAF8D01FC8DBA900196024 /* UIImage+LIFEAdditions.h */,
+				B7EAF8D11FC8DBA900196024 /* UIImage+LIFEAdditions.m */,
+				B7EAF8D21FC8DBA900196024 /* UITableView+LIFEAdditions.h */,
+				B7EAF8D31FC8DBA900196024 /* UITableView+LIFEAdditions.m */,
+				B7EAF8D41FC8DBA900196024 /* UITextView+LIFEAdditions.h */,
+				B7EAF8D51FC8DBA900196024 /* UITextView+LIFEAdditions.m */,
+				B7EAF8D61FC8DBA900196024 /* UIView+LIFEAdditions.h */,
+				B7EAF8D71FC8DBA900196024 /* UIView+LIFEAdditions.m */,
+				B7EAF8D81FC8DBA900196024 /* UIWindow+LIFEAdditions.h */,
+				B7EAF8D91FC8DBA900196024 /* UIWindow+LIFEAdditions.m */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		B7EAF8DE1FC8DBA900196024 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAF8DF1FC8DBA900196024 /* LIFEAVPlayerViewController.h */,
+				B7EAF8E01FC8DBA900196024 /* LIFEAVPlayerViewController.m */,
+				B7EAF8E11FC8DBA900196024 /* LIFEComponentPickerViewController.h */,
+				B7EAF8E21FC8DBA900196024 /* LIFEComponentPickerViewController.m */,
+				B7EAF8E31FC8DBA900196024 /* LIFELogViewController.h */,
+				B7EAF8E41FC8DBA900196024 /* LIFELogViewController.m */,
+				B7EAF8E51FC8DBA900196024 /* LIFENavigationController.h */,
+				B7EAF8E61FC8DBA900196024 /* LIFENavigationController.m */,
+				B7EAF8E71FC8DBA900196024 /* LIFEPickerViewController.h */,
+				B7EAF8E81FC8DBA900196024 /* LIFEPickerViewController.m */,
+				B7EAF8E91FC8DBA900196024 /* LIFEReportTableViewController.h */,
+				B7EAF8EA1FC8DBA900196024 /* LIFEReportTableViewController.m */,
+				B7EAF8EB1FC8DBA900196024 /* LIFEReportViewControllerDelegate.h */,
+				B7EAF8EC1FC8DBA900196024 /* LIFEScreenshotAnnotatorViewController.h */,
+				B7EAF8ED1FC8DBA900196024 /* LIFEScreenshotAnnotatorViewController.m */,
+				B7EAF8EE1FC8DBA900196024 /* LIFEStepsToReproTableViewController.h */,
+				B7EAF8EF1FC8DBA900196024 /* LIFEStepsToReproTableViewController.m */,
+				B7EAF8F01FC8DBA900196024 /* LIFETextInputViewController.h */,
+				B7EAF8F11FC8DBA900196024 /* LIFETextInputViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B7EAF8FB1FC8DBA900196024 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAF8FC1FC8DBA900196024 /* LIFEAnnotatedImage.h */,
+				B7EAF8FD1FC8DBA900196024 /* LIFEAnnotatedImage.m */,
+				B7EAF8FE1FC8DBA900196024 /* LIFEAnnotation.h */,
+				B7EAF8FF1FC8DBA900196024 /* LIFEAnnotation.m */,
+				B7EAF9001FC8DBA900196024 /* LIFEAppInfo.h */,
+				B7EAF9011FC8DBA900196024 /* LIFEAppInfo.m */,
+				B7EAF9021FC8DBA900196024 /* LIFEAttribute.h */,
+				B7EAF9031FC8DBA900196024 /* LIFEAttribute.m */,
+				B7EAF9041FC8DBA900196024 /* LIFEDeviceBatteryState.h */,
+				B7EAF9051FC8DBA900196024 /* LIFEDeviceInfo.h */,
+				B7EAF9061FC8DBA900196024 /* LIFEDeviceInfo.m */,
+				B7EAF9071FC8DBA900196024 /* LIFEImageFormat.h */,
+				B7EAF9081FC8DBA900196024 /* LIFEImageFormat.m */,
+				B7EAF9091FC8DBA900196024 /* LIFEReport.h */,
+				B7EAF90A1FC8DBA900196024 /* LIFEReport.m */,
+				B7EAF90B1FC8DBA900196024 /* LIFEReportAttachmentImpl.h */,
+				B7EAF90C1FC8DBA900196024 /* LIFEReportAttachmentImpl.m */,
+				B7EAF90D1FC8DBA900196024 /* LIFEReportOwner.h */,
+				B7EAF90E1FC8DBA900196024 /* LIFEReportOwner.m */,
+				B7EAF90F1FC8DBA900196024 /* LIFEReproStep.h */,
+				B7EAF9101FC8DBA900196024 /* LIFEReproStep.m */,
+				B7EAF9111FC8DBA900196024 /* LIFEScreenshotContext.h */,
+				B7EAF9121FC8DBA900196024 /* LIFEScreenshotContext.m */,
+				B7EAF9131FC8DBA900196024 /* LIFEUserFacingAttachment.h */,
+				B7EAF9141FC8DBA900196024 /* LIFEVideoAttachment.h */,
+				B7EAF9151FC8DBA900196024 /* LIFEVideoAttachment.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B7EAF9161FC8DBA900196024 /* Protected */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAF9171FC8DBA900196024 /* Buglife+Protected.h */,
+				B7EAF9181FC8DBA900196024 /* LIFEAwesomeLogger+Protected.h */,
+				B7EAF9191FC8DBA900196024 /* LIFEInputField+Protected.h */,
+				B7EAF91A1FC8DBA900196024 /* LIFEPickerInputField+Protected.h */,
+			);
+			path = Protected;
+			sourceTree = "<group>";
+		};
+		B7EAF91B1FC8DBA900196024 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAF91C1FC8DBA900196024 /* LIFEAppInfoProvider.h */,
+				B7EAF91D1FC8DBA900196024 /* LIFEAppInfoProvider.m */,
+				B7EAF91E1FC8DBA900196024 /* LIFEAttachmentManager.h */,
+				B7EAF91F1FC8DBA900196024 /* LIFEAttachmentManager.m */,
+				B7EAF9201FC8DBA900196024 /* LIFEAVFoundation.h */,
+				B7EAF9211FC8DBA900196024 /* LIFEAVFoundation.m */,
+				B7EAF9221FC8DBA900196024 /* LIFEDataProvider.h */,
+				B7EAF9231FC8DBA900196024 /* LIFEDataProvider.m */,
+				B7EAF9241FC8DBA900196024 /* LIFEDependencyLoader.h */,
+				B7EAF9251FC8DBA900196024 /* LIFEDependencyLoader.m */,
+				B7EAF9261FC8DBA900196024 /* LIFEDeviceInfoProvider.h */,
+				B7EAF9271FC8DBA900196024 /* LIFEDeviceInfoProvider.m */,
+				B7EAF9281FC8DBA900196024 /* LIFEImagePickerController.h */,
+				B7EAF9291FC8DBA900196024 /* LIFEImagePickerController.m */,
+				B7EAF92A1FC8DBA900196024 /* LIFEImageProcessor.h */,
+				B7EAF92B1FC8DBA900196024 /* LIFEImageProcessor.m */,
+				B7EAF92C1FC8DBA900196024 /* LIFELogFacility.h */,
+				B7EAF92D1FC8DBA900196024 /* LIFELogFacility.m */,
+				B7EAF92E1FC8DBA900196024 /* LIFENetworkManager.h */,
+				B7EAF92F1FC8DBA900196024 /* LIFENetworkManager.m */,
+				B7EAF9301FC8DBA900196024 /* LIFEReachability.h */,
+				B7EAF9311FC8DBA900196024 /* LIFEReachability.m */,
+				B7EAF9321FC8DBA900196024 /* LIFERecordingShrinker.h */,
+				B7EAF9331FC8DBA900196024 /* LIFERecordingShrinker.m */,
+				B7EAF9341FC8DBA900196024 /* LIFEReportBuilder.h */,
+				B7EAF9351FC8DBA900196024 /* LIFEReportBuilder.m */,
+				B7EAF9361FC8DBA900196024 /* LIFESwizzler.h */,
+				B7EAF9371FC8DBA900196024 /* LIFESwizzler.m */,
+				B7EAF9381FC8DBA900196024 /* LIFETelephonyNetworkInfo.h */,
+				B7EAF9391FC8DBA900196024 /* LIFETelephonyNetworkInfo.m */,
+				B7EAF93A1FC8DBA900196024 /* LIFEUserDefaults.h */,
+				B7EAF93B1FC8DBA900196024 /* LIFEUserDefaults.m */,
+				B7EAF93C1FC8DBA900196024 /* Logging */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B7EAF93C1FC8DBA900196024 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAF93D1FC8DBA900196024 /* LIFEASLLogger.h */,
+				B7EAF93E1FC8DBA900196024 /* LIFEASLLogger.m */,
+				B7EAF93F1FC8DBA900196024 /* LIFEContextAwareLogFormatter.h */,
+				B7EAF9401FC8DBA900196024 /* LIFEContextAwareLogFormatter.m */,
+				B7EAF9411FC8DBA900196024 /* LIFEFileLogger.h */,
+				B7EAF9421FC8DBA900196024 /* LIFEFileLogger.m */,
+				B7EAF9431FC8DBA900196024 /* LIFEJSONLogFileFormatter.h */,
+				B7EAF9441FC8DBA900196024 /* LIFEJSONLogFileFormatter.m */,
+				B7EAF9451FC8DBA900196024 /* LIFELog.h */,
+				B7EAF9461FC8DBA900196024 /* LIFELog.m */,
+				B7EAF9471FC8DBA900196024 /* LIFELogger.h */,
+				B7EAF9481FC8DBA900196024 /* LIFELogger.m */,
+				B7EAF9491FC8DBA900196024 /* LIFELogMacros.h */,
+				B7EAF94A1FC8DBA900196024 /* LIFENotificationLogger.h */,
+				B7EAF94B1FC8DBA900196024 /* LIFENotificationLogger.m */,
+				B7EAF94C1FC8DBA900196024 /* LIFETTYLogger.h */,
+				B7EAF94D1FC8DBA900196024 /* LIFETTYLogger.m */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
+		B7EAF94E1FC8DBA900196024 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAF94F1FC8DBA900196024 /* AnnotationViews */,
+				B7EAF9581FC8DBA900196024 /* GestureRecognizers */,
+				B7EAF95D1FC8DBA900196024 /* LIFEAnnotatedImageView.h */,
+				B7EAF95E1FC8DBA900196024 /* LIFEAnnotatedImageView.m */,
+				B7EAF95F1FC8DBA900196024 /* LIFEAppearanceImpl.h */,
+				B7EAF9601FC8DBA900196024 /* LIFEAppearanceImpl.m */,
+				B7EAF9611FC8DBA900196024 /* LIFEAttachmentView.h */,
+				B7EAF9621FC8DBA900196024 /* LIFEAttachmentView.m */,
+				B7EAF9631FC8DBA900196024 /* LIFEBugButtonWindow.h */,
+				B7EAF9641FC8DBA900196024 /* LIFEBugButtonWindow.m */,
+				B7EAF9651FC8DBA900196024 /* LIFEComponentPickerCell.h */,
+				B7EAF9661FC8DBA900196024 /* LIFEComponentPickerCell.m */,
+				B7EAF9671FC8DBA900196024 /* LIFEFloatingButton.h */,
+				B7EAF9681FC8DBA900196024 /* LIFEFloatingButton.m */,
+				B7EAF9691FC8DBA900196024 /* LIFELocalizedStringProvider.h */,
+				B7EAF96A1FC8DBA900196024 /* LIFELocalizedStringProvider.m */,
+				B7EAF96B1FC8DBA900196024 /* LIFEMenuPopoverView.h */,
+				B7EAF96C1FC8DBA900196024 /* LIFEMenuPopoverView.m */,
+				B7EAF96D1FC8DBA900196024 /* LIFEOverlayWindow.h */,
+				B7EAF96E1FC8DBA900196024 /* LIFEOverlayWindow.m */,
+				B7EAF96F1FC8DBA900196024 /* LIFEPoweredByBuglifeView.h */,
+				B7EAF9701FC8DBA900196024 /* LIFEPoweredByBuglifeView.m */,
+				B7EAF9711FC8DBA900196024 /* LIFEReportView.h */,
+				B7EAF9721FC8DBA900196024 /* LIFEReportView.m */,
+				B7EAF9731FC8DBA900196024 /* LIFEReportWindow.h */,
+				B7EAF9741FC8DBA900196024 /* LIFEReportWindow.m */,
+				B7EAF9751FC8DBA900196024 /* LIFEScreenshotAnnotatorView.h */,
+				B7EAF9761FC8DBA900196024 /* LIFEScreenshotAnnotatorView.m */,
+				B7EAF9771FC8DBA900196024 /* LIFEStepsToReproduceCell.h */,
+				B7EAF9781FC8DBA900196024 /* LIFEStepsToReproduceCell.m */,
+				B7EAF9791FC8DBA900196024 /* LIFETextFieldCell.h */,
+				B7EAF97A1FC8DBA900196024 /* LIFETextFieldCell.m */,
+				B7EAF97B1FC8DBA900196024 /* LIFETitleCell.h */,
+				B7EAF97C1FC8DBA900196024 /* LIFETitleCell.m */,
+				B7EAF97D1FC8DBA900196024 /* LIFEWhatHappenedTextView.h */,
+				B7EAF97E1FC8DBA900196024 /* LIFEWhatHappenedTextView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B7EAF94F1FC8DBA900196024 /* AnnotationViews */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAF9501FC8DBA900196024 /* LIFEAnnotationView.h */,
+				B7EAF9511FC8DBA900196024 /* LIFEAnnotationView.m */,
+				B7EAF9521FC8DBA900196024 /* LIFEArrowAnnotationView.h */,
+				B7EAF9531FC8DBA900196024 /* LIFEArrowAnnotationView.m */,
+				B7EAF9541FC8DBA900196024 /* LIFEBlurAnnotationView.h */,
+				B7EAF9551FC8DBA900196024 /* LIFEBlurAnnotationView.m */,
+				B7EAF9561FC8DBA900196024 /* LIFELoupeAnnotationView.h */,
+				B7EAF9571FC8DBA900196024 /* LIFELoupeAnnotationView.m */,
+			);
+			path = AnnotationViews;
+			sourceTree = "<group>";
+		};
+		B7EAF9581FC8DBA900196024 /* GestureRecognizers */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAF9591FC8DBA900196024 /* LIFEContinuousForceTouchGestureRecognizer.h */,
+				B7EAF95A1FC8DBA900196024 /* LIFEContinuousForceTouchGestureRecognizer.m */,
+				B7EAF95B1FC8DBA900196024 /* LIFEPanGestureRecognizer.h */,
+				B7EAF95C1FC8DBA900196024 /* LIFEPanGestureRecognizer.m */,
+			);
+			path = GestureRecognizers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B7EAF7151FC8DAB000196024 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7EAFA251FC8DBA900196024 /* LIFEBugButtonWindow.h in Headers */,
+				B7EAF9871FC8DBA900196024 /* LIFEMacros.h in Headers */,
+				B7EAFA001FC8DBA900196024 /* LIFEUserDefaults.h in Headers */,
+				B7EAF9E41FC8DBA900196024 /* LIFEAttachmentManager.h in Headers */,
+				B7EAF9A81FC8DBA900196024 /* LIFEAVPlayerViewController.h in Headers */,
+				B7EAF9D51FC8DBA900196024 /* LIFEReportOwner.h in Headers */,
+				B7EAF98E1FC8DBA900196024 /* NSMutableDictionary+LIFEAdditions.h in Headers */,
+				B7EAFA1F1FC8DBA900196024 /* LIFEAnnotatedImageView.h in Headers */,
+				B7EAF9961FC8DBA900196024 /* UIColor+LIFEAdditions.h in Headers */,
+				B7EAF9E61FC8DBA900196024 /* LIFEAVFoundation.h in Headers */,
+				B7EAF9A61FC8DBA900196024 /* Buglife.h in Headers */,
+				B7EAFA1B1FC8DBA900196024 /* LIFEContinuousForceTouchGestureRecognizer.h in Headers */,
+				B7EAF9851FC8DBA900196024 /* LIFEGeometry.h in Headers */,
+				B7EAF9D11FC8DBA900196024 /* LIFEReport.h in Headers */,
+				B7EAF9FC1FC8DBA900196024 /* LIFESwizzler.h in Headers */,
+				B7EAF9AC1FC8DBA900196024 /* LIFELogViewController.h in Headers */,
+				B7EAF9DC1FC8DBA900196024 /* LIFEVideoAttachment.h in Headers */,
+				B7EAF99E1FC8DBA900196024 /* UITextView+LIFEAdditions.h in Headers */,
+				B7EAF9AE1FC8DBA900196024 /* LIFENavigationController.h in Headers */,
+				B7EAF9E01FC8DBA900196024 /* LIFEInputField+Protected.h in Headers */,
+				B7EAF9CA1FC8DBA900196024 /* LIFEAttribute.h in Headers */,
+				B7EAF9EA1FC8DBA900196024 /* LIFEDependencyLoader.h in Headers */,
+				B7EAF9DB1FC8DBA900196024 /* LIFEUserFacingAttachment.h in Headers */,
+				B7EAFA291FC8DBA900196024 /* LIFEFloatingButton.h in Headers */,
+				B7EAFA081FC8DBA900196024 /* LIFEJSONLogFileFormatter.h in Headers */,
+				B7EAFA0F1FC8DBA900196024 /* LIFENotificationLogger.h in Headers */,
+				B7EAF9C01FC8DBA900196024 /* LIFEPickerInputField.h in Headers */,
+				B7EAFA271FC8DBA900196024 /* LIFEComponentPickerCell.h in Headers */,
+				B7EAFA1D1FC8DBA900196024 /* LIFEPanGestureRecognizer.h in Headers */,
+				B7EAF9E11FC8DBA900196024 /* LIFEPickerInputField+Protected.h in Headers */,
+				B7EAF9D31FC8DBA900196024 /* LIFEReportAttachmentImpl.h in Headers */,
+				B7EAFA171FC8DBA900196024 /* LIFEBlurAnnotationView.h in Headers */,
+				B7EAFA041FC8DBA900196024 /* LIFEContextAwareLogFormatter.h in Headers */,
+				B7EAF9811FC8DBA900196024 /* LIFECategories.h in Headers */,
+				B7EAF9B71FC8DBA900196024 /* LIFEStepsToReproTableViewController.h in Headers */,
+				B7EAFA3D1FC8DBA900196024 /* LIFETitleCell.h in Headers */,
+				B7EAFA351FC8DBA900196024 /* LIFEReportWindow.h in Headers */,
+				B7EAF9D91FC8DBA900196024 /* LIFEScreenshotContext.h in Headers */,
+				B7EAF9A41FC8DBA900196024 /* Buglife+LocalizedStrings.h in Headers */,
+				B7EAFA3B1FC8DBA900196024 /* LIFETextFieldCell.h in Headers */,
+				B7EAFA021FC8DBA900196024 /* LIFEASLLogger.h in Headers */,
+				B7EAF99A1FC8DBA900196024 /* UIImage+LIFEAdditions.h in Headers */,
+				B7EAF9881FC8DBA900196024 /* NSArray+LIFEAdditions.h in Headers */,
+				B7EAFA151FC8DBA900196024 /* LIFEArrowAnnotationView.h in Headers */,
+				B7EAFA231FC8DBA900196024 /* LIFEAttachmentView.h in Headers */,
+				B7EAF97F1FC8DBA900196024 /* Buglife+UIStuff.h in Headers */,
+				B7EAFA2F1FC8DBA900196024 /* LIFEOverlayWindow.h in Headers */,
+				B7EAF9CF1FC8DBA900196024 /* LIFEImageFormat.h in Headers */,
+				B7EAFA0A1FC8DBA900196024 /* LIFELog.h in Headers */,
+				B7EAF9B41FC8DBA900196024 /* LIFEReportViewControllerDelegate.h in Headers */,
+				B7EAF9F81FC8DBA900196024 /* LIFERecordingShrinker.h in Headers */,
+				B7EAF9C61FC8DBA900196024 /* LIFEAnnotation.h in Headers */,
+				B7EAF9BE1FC8DBA900196024 /* LIFEInputField.h in Headers */,
+				B7EAF9CC1FC8DBA900196024 /* LIFEDeviceBatteryState.h in Headers */,
+				B7EAF9FA1FC8DBA900196024 /* LIFEReportBuilder.h in Headers */,
+				B7EAF98A1FC8DBA900196024 /* NSError+LIFEAdditions.h in Headers */,
+				B7EAF9C21FC8DBA900196024 /* LIFETextInputField.h in Headers */,
+				B7EAFA311FC8DBA900196024 /* LIFEPoweredByBuglifeView.h in Headers */,
+				B7EAF9B91FC8DBA900196024 /* LIFETextInputViewController.h in Headers */,
+				B7EAF9B01FC8DBA900196024 /* LIFEPickerViewController.h in Headers */,
+				B7EAF9FE1FC8DBA900196024 /* LIFETelephonyNetworkInfo.h in Headers */,
+				B7EAFA3F1FC8DBA900196024 /* LIFEWhatHappenedTextView.h in Headers */,
+				B7EAFA111FC8DBA900196024 /* LIFETTYLogger.h in Headers */,
+				B7EAFA0C1FC8DBA900196024 /* LIFELogger.h in Headers */,
+				B7EAF9F21FC8DBA900196024 /* LIFELogFacility.h in Headers */,
+				B7EAFA191FC8DBA900196024 /* LIFELoupeAnnotationView.h in Headers */,
+				B7EAF98C1FC8DBA900196024 /* NSLayoutConstraint+LIFEAdditions.h in Headers */,
+				B7EAF9E81FC8DBA900196024 /* LIFEDataProvider.h in Headers */,
+				B7EAF9DF1FC8DBA900196024 /* LIFEAwesomeLogger+Protected.h in Headers */,
+				B7EAF9EE1FC8DBA900196024 /* LIFEImagePickerController.h in Headers */,
+				B7EAF9D71FC8DBA900196024 /* LIFEReproStep.h in Headers */,
+				B7EAFA371FC8DBA900196024 /* LIFEScreenshotAnnotatorView.h in Headers */,
+				B7EAFA0E1FC8DBA900196024 /* LIFELogMacros.h in Headers */,
+				B7EAF9B21FC8DBA900196024 /* LIFEReportTableViewController.h in Headers */,
+				B7EAFA391FC8DBA900196024 /* LIFEStepsToReproduceCell.h in Headers */,
+				B7EAF9941FC8DBA900196024 /* UIBezierPath+LIFEAdditions.h in Headers */,
+				B7EAF9BB1FC8DBA900196024 /* LIFEAppearance.h in Headers */,
+				B7EAFA211FC8DBA900196024 /* LIFEAppearanceImpl.h in Headers */,
+				B7EAF9A21FC8DBA900196024 /* UIWindow+LIFEAdditions.h in Headers */,
+				B7EAF9F41FC8DBA900196024 /* LIFENetworkManager.h in Headers */,
+				B7EAFA2B1FC8DBA900196024 /* LIFELocalizedStringProvider.h in Headers */,
+				B7EAF9EC1FC8DBA900196024 /* LIFEDeviceInfoProvider.h in Headers */,
+				B7EAF9901FC8DBA900196024 /* NSString+LIFEAdditions.h in Headers */,
+				B7EAF9DE1FC8DBA900196024 /* Buglife+Protected.h in Headers */,
+				B7EAFA131FC8DBA900196024 /* LIFEAnnotationView.h in Headers */,
+				B7EAF99C1FC8DBA900196024 /* UITableView+LIFEAdditions.h in Headers */,
+				B7EAF9831FC8DBA900196024 /* LIFECompatibilityUtils.h in Headers */,
+				B7EAF9C81FC8DBA900196024 /* LIFEAppInfo.h in Headers */,
+				B7EAF9E21FC8DBA900196024 /* LIFEAppInfoProvider.h in Headers */,
+				B7EAF9CD1FC8DBA900196024 /* LIFEDeviceInfo.h in Headers */,
+				B7EAF9981FC8DBA900196024 /* UIDevice+LIFEAdditions.h in Headers */,
+				B7EAF9AA1FC8DBA900196024 /* LIFEComponentPickerViewController.h in Headers */,
+				B7EAFA2D1FC8DBA900196024 /* LIFEMenuPopoverView.h in Headers */,
+				B7EAFA061FC8DBA900196024 /* LIFEFileLogger.h in Headers */,
+				B7EAF9C41FC8DBA900196024 /* LIFEAnnotatedImage.h in Headers */,
+				B7EAF9921FC8DBA900196024 /* UIApplication+LIFEAdditions.h in Headers */,
+				B7EAF9B51FC8DBA900196024 /* LIFEScreenshotAnnotatorViewController.h in Headers */,
+				B7EAF9F01FC8DBA900196024 /* LIFEImageProcessor.h in Headers */,
+				B7EAF9A01FC8DBA900196024 /* UIView+LIFEAdditions.h in Headers */,
+				B7EAFA331FC8DBA900196024 /* LIFEReportView.h in Headers */,
+				B7EAF9F61FC8DBA900196024 /* LIFEReachability.h in Headers */,
+				B7EAF9BC1FC8DBA900196024 /* LIFEAwesomeLogger.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		B7EAF7171FC8DAB000196024 /* Buglife */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B7EAF7201FC8DAB000196024 /* Build configuration list for PBXNativeTarget "Buglife" */;
+			buildPhases = (
+				B7EAF7131FC8DAB000196024 /* Sources */,
+				B7EAF7141FC8DAB000196024 /* Frameworks */,
+				B7EAF7151FC8DAB000196024 /* Headers */,
+				B7EAF7161FC8DAB000196024 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Buglife;
+			productName = Buglife;
+			productReference = B7EAF7181FC8DAB000196024 /* Buglife.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B7EAF70F1FC8DAB000196024 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = "Buglife, Inc.";
+				TargetAttributes = {
+					B7EAF7171FC8DAB000196024 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = B7EAF7121FC8DAB000196024 /* Build configuration list for PBXProject "Buglife" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B7EAF70E1FC8DAB000196024;
+			productRefGroup = B7EAF7191FC8DAB000196024 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B7EAF7171FC8DAB000196024 /* Buglife */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B7EAF7161FC8DAB000196024 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B7EAF7131FC8DAB000196024 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7EAF9C51FC8DBA900196024 /* LIFEAnnotatedImage.m in Sources */,
+				B7EAF9EB1FC8DBA900196024 /* LIFEDependencyLoader.m in Sources */,
+				B7EAFA1C1FC8DBA900196024 /* LIFEContinuousForceTouchGestureRecognizer.m in Sources */,
+				B7EAFA161FC8DBA900196024 /* LIFEArrowAnnotationView.m in Sources */,
+				B7EAF98D1FC8DBA900196024 /* NSLayoutConstraint+LIFEAdditions.m in Sources */,
+				B7EAF9B61FC8DBA900196024 /* LIFEScreenshotAnnotatorViewController.m in Sources */,
+				B7EAF9B31FC8DBA900196024 /* LIFEReportTableViewController.m in Sources */,
+				B7EAFA241FC8DBA900196024 /* LIFEAttachmentView.m in Sources */,
+				B7EAF9C11FC8DBA900196024 /* LIFEPickerInputField.m in Sources */,
+				B7EAF98F1FC8DBA900196024 /* NSMutableDictionary+LIFEAdditions.m in Sources */,
+				B7EAF9841FC8DBA900196024 /* LIFECompatibilityUtils.m in Sources */,
+				B7EAF9CB1FC8DBA900196024 /* LIFEAttribute.m in Sources */,
+				B7EAF9B81FC8DBA900196024 /* LIFEStepsToReproTableViewController.m in Sources */,
+				B7EAF9CE1FC8DBA900196024 /* LIFEDeviceInfo.m in Sources */,
+				B7EAF98B1FC8DBA900196024 /* NSError+LIFEAdditions.m in Sources */,
+				B7EAF9AB1FC8DBA900196024 /* LIFEComponentPickerViewController.m in Sources */,
+				B7EAF9C71FC8DBA900196024 /* LIFEAnnotation.m in Sources */,
+				B7EAF9DA1FC8DBA900196024 /* LIFEScreenshotContext.m in Sources */,
+				B7EAF9991FC8DBA900196024 /* UIDevice+LIFEAdditions.m in Sources */,
+				B7EAF9AD1FC8DBA900196024 /* LIFELogViewController.m in Sources */,
+				B7EAFA2A1FC8DBA900196024 /* LIFEFloatingButton.m in Sources */,
+				B7EAF9C91FC8DBA900196024 /* LIFEAppInfo.m in Sources */,
+				B7EAFA281FC8DBA900196024 /* LIFEComponentPickerCell.m in Sources */,
+				B7EAF9F91FC8DBA900196024 /* LIFERecordingShrinker.m in Sources */,
+				B7EAF9F11FC8DBA900196024 /* LIFEImageProcessor.m in Sources */,
+				B7EAFA011FC8DBA900196024 /* LIFEUserDefaults.m in Sources */,
+				B7EAF9D81FC8DBA900196024 /* LIFEReproStep.m in Sources */,
+				B7EAF9E31FC8DBA900196024 /* LIFEAppInfoProvider.m in Sources */,
+				B7EAFA301FC8DBA900196024 /* LIFEOverlayWindow.m in Sources */,
+				B7EAF9891FC8DBA900196024 /* NSArray+LIFEAdditions.m in Sources */,
+				B7EAF9F71FC8DBA900196024 /* LIFEReachability.m in Sources */,
+				B7EAF9BF1FC8DBA900196024 /* LIFEInputField.m in Sources */,
+				B7EAF9FB1FC8DBA900196024 /* LIFEReportBuilder.m in Sources */,
+				B7EAFA091FC8DBA900196024 /* LIFEJSONLogFileFormatter.m in Sources */,
+				B7EAFA401FC8DBA900196024 /* LIFEWhatHappenedTextView.m in Sources */,
+				B7EAFA341FC8DBA900196024 /* LIFEReportView.m in Sources */,
+				B7EAFA0B1FC8DBA900196024 /* LIFELog.m in Sources */,
+				B7EAFA3A1FC8DBA900196024 /* LIFEStepsToReproduceCell.m in Sources */,
+				B7EAF9A71FC8DBA900196024 /* Buglife.m in Sources */,
+				B7EAF9D41FC8DBA900196024 /* LIFEReportAttachmentImpl.m in Sources */,
+				B7EAF9D01FC8DBA900196024 /* LIFEImageFormat.m in Sources */,
+				B7EAF9ED1FC8DBA900196024 /* LIFEDeviceInfoProvider.m in Sources */,
+				B7EAF99D1FC8DBA900196024 /* UITableView+LIFEAdditions.m in Sources */,
+				B7EAF9A91FC8DBA900196024 /* LIFEAVPlayerViewController.m in Sources */,
+				B7EAFA051FC8DBA900196024 /* LIFEContextAwareLogFormatter.m in Sources */,
+				B7EAFA2C1FC8DBA900196024 /* LIFELocalizedStringProvider.m in Sources */,
+				B7EAF9A31FC8DBA900196024 /* UIWindow+LIFEAdditions.m in Sources */,
+				B7EAFA031FC8DBA900196024 /* LIFEASLLogger.m in Sources */,
+				B7EAF9971FC8DBA900196024 /* UIColor+LIFEAdditions.m in Sources */,
+				B7EAFA381FC8DBA900196024 /* LIFEScreenshotAnnotatorView.m in Sources */,
+				B7EAF9F31FC8DBA900196024 /* LIFELogFacility.m in Sources */,
+				B7EAF9911FC8DBA900196024 /* NSString+LIFEAdditions.m in Sources */,
+				B7EAFA2E1FC8DBA900196024 /* LIFEMenuPopoverView.m in Sources */,
+				B7EAF9EF1FC8DBA900196024 /* LIFEImagePickerController.m in Sources */,
+				B7EAF9A11FC8DBA900196024 /* UIView+LIFEAdditions.m in Sources */,
+				B7EAF9BA1FC8DBA900196024 /* LIFETextInputViewController.m in Sources */,
+				B7EAFA221FC8DBA900196024 /* LIFEAppearanceImpl.m in Sources */,
+				B7EAF9E51FC8DBA900196024 /* LIFEAttachmentManager.m in Sources */,
+				B7EAFA071FC8DBA900196024 /* LIFEFileLogger.m in Sources */,
+				B7EAF9951FC8DBA900196024 /* UIBezierPath+LIFEAdditions.m in Sources */,
+				B7EAFA1A1FC8DBA900196024 /* LIFELoupeAnnotationView.m in Sources */,
+				B7EAF9931FC8DBA900196024 /* UIApplication+LIFEAdditions.m in Sources */,
+				B7EAF9B11FC8DBA900196024 /* LIFEPickerViewController.m in Sources */,
+				B7EAF9AF1FC8DBA900196024 /* LIFENavigationController.m in Sources */,
+				B7EAFA3C1FC8DBA900196024 /* LIFETextFieldCell.m in Sources */,
+				B7EAF9FD1FC8DBA900196024 /* LIFESwizzler.m in Sources */,
+				B7EAFA1E1FC8DBA900196024 /* LIFEPanGestureRecognizer.m in Sources */,
+				B7EAF9BD1FC8DBA900196024 /* LIFEAwesomeLogger.m in Sources */,
+				B7EAF9A51FC8DBA900196024 /* Buglife+LocalizedStrings.m in Sources */,
+				B7EAFA261FC8DBA900196024 /* LIFEBugButtonWindow.m in Sources */,
+				B7EAF9FF1FC8DBA900196024 /* LIFETelephonyNetworkInfo.m in Sources */,
+				B7EAFA101FC8DBA900196024 /* LIFENotificationLogger.m in Sources */,
+				B7EAF9861FC8DBA900196024 /* LIFEGeometry.m in Sources */,
+				B7EAFA0D1FC8DBA900196024 /* LIFELogger.m in Sources */,
+				B7EAFA321FC8DBA900196024 /* LIFEPoweredByBuglifeView.m in Sources */,
+				B7EAF9801FC8DBA900196024 /* Buglife+UIStuff.m in Sources */,
+				B7EAF9D21FC8DBA900196024 /* LIFEReport.m in Sources */,
+				B7EAFA201FC8DBA900196024 /* LIFEAnnotatedImageView.m in Sources */,
+				B7EAFA141FC8DBA900196024 /* LIFEAnnotationView.m in Sources */,
+				B7EAF99F1FC8DBA900196024 /* UITextView+LIFEAdditions.m in Sources */,
+				B7EAFA181FC8DBA900196024 /* LIFEBlurAnnotationView.m in Sources */,
+				B7EAFA121FC8DBA900196024 /* LIFETTYLogger.m in Sources */,
+				B7EAF9821FC8DBA900196024 /* LIFECategories.m in Sources */,
+				B7EAF9F51FC8DBA900196024 /* LIFENetworkManager.m in Sources */,
+				B7EAFA3E1FC8DBA900196024 /* LIFETitleCell.m in Sources */,
+				B7EAF9E91FC8DBA900196024 /* LIFEDataProvider.m in Sources */,
+				B7EAF9E71FC8DBA900196024 /* LIFEAVFoundation.m in Sources */,
+				B7EAF9D61FC8DBA900196024 /* LIFEReportOwner.m in Sources */,
+				B7EAF99B1FC8DBA900196024 /* UIImage+LIFEAdditions.m in Sources */,
+				B7EAF9C31FC8DBA900196024 /* LIFETextInputField.m in Sources */,
+				B7EAF9DD1FC8DBA900196024 /* LIFEVideoAttachment.m in Sources */,
+				B7EAFA361FC8DBA900196024 /* LIFEReportWindow.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B7EAF71E1FC8DAB000196024 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B7EAF71F1FC8DAB000196024 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B7EAF7211FC8DAB000196024 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 2.0.0;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Buglife/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.buglife.Buglife;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B7EAF7221FC8DAB000196024 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 2.0.0;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Buglife/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.buglife.Buglife;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B7EAF7121FC8DAB000196024 /* Build configuration list for PBXProject "Buglife" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7EAF71E1FC8DAB000196024 /* Debug */,
+				B7EAF71F1FC8DAB000196024 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B7EAF7201FC8DAB000196024 /* Build configuration list for PBXNativeTarget "Buglife" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7EAF7211FC8DAB000196024 /* Debug */,
+				B7EAF7221FC8DAB000196024 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B7EAF70F1FC8DAB000196024 /* Project object */;
+}

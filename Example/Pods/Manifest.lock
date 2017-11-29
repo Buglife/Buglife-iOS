@@ -1,0 +1,16 @@
+PODS:
+  - Buglife (2.0.0)
+
+DEPENDENCIES:
+  - Buglife (from `../`)
+
+EXTERNAL SOURCES:
+  Buglife:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Buglife: 5ebe006e4be666a43f67eb3f8b51c06c22060afa
+
+PODFILE CHECKSUM: 2dfca4a92358b7ba39eff2ba8d8ff5154b9c45d9
+
+COCOAPODS: 1.2.1

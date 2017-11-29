@@ -1,0 +1,6 @@
+framework module Pods_Buglife_Example {
+  umbrella header "Pods-Buglife Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
