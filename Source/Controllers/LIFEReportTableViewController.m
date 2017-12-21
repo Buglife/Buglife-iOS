@@ -342,17 +342,18 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
 
 - (void)_submitReport
 {
-    [self resignFirstResponder];
-    
     let incompleteInputFields = [self _incompleteInputFields];
-    
+
     if (incompleteInputFields.count > 0) {
         [self _highlightIncompleteInputFieldsAndShowErrorAlert:incompleteInputFields];
         return;
     }
     
+    // Hide keyboard
+    [self.view endEditing:YES];
+
     [[NSNotificationCenter defaultCenter] postNotificationName:LIFENotificationLoggerSendButtonTapped object:nil];
-    
+
     self.doneButton.enabled = NO;
     NSString *whatHappened = self._summaryInputFieldValue;
     LIFEReportBuilder *reportBuilder = self.reportBuilder;
@@ -360,14 +361,14 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
     reportBuilder.reproSteps = self.reproSteps;
     reportBuilder.expectedResults = self.expectedResults;
     reportBuilder.actualResults = self.actualResults;
-    
+
     // Get the email address, using either the email address field (if it's enabled),
     // or the programmatically configured email address
     LIFEInputField *userEmailInputField = [self _userEmailInputField];
-    
+
     if (userEmailInputField) {
         NSString *userInputtedEmailOrEmptyString = self._userEmailInputFieldValue;
-        
+
         if (userInputtedEmailOrEmptyString.length > 0) {
             reportBuilder.userEmail = userInputtedEmailOrEmptyString;
             [LIFEUserDefaults sharedDefaults].lastSubmittedUserEmailFieldValue = userInputtedEmailOrEmptyString;
@@ -375,43 +376,43 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
     } else {
         reportBuilder.userEmail = [Buglife sharedBuglife].userEmail;
     }
-    
+
     // Set custom attribute values w/ new values from custom fields
     {
         NSMutableDictionary<NSString *, LIFEAttribute *> *attributes = reportBuilder.attributes.mutableCopy;
-        
+
         for (LIFEInputField *inputField in self.inputFieldValues.allKeys) {
             if (inputField.isSystemAttribute) {
                 // Skip system attributes since they aren't custom attributes, and will
                 // get added to the report payload separately
                 continue;
             }
-            
+
             let attributeName = inputField.attributeName;
             let inputFieldValue = self.inputFieldValues[inputField];
-            
+
             if (inputFieldValue) {
                 let attribute = [[LIFEAttribute alloc] initWithValueType:LIFEAttributeValueTypeString value:inputFieldValue flags:LIFEAttributeFlagCustom];
                 attributes[attributeName] = attribute;
             }
         }
-        
+
         reportBuilder.attributes = attributes;
     }
-    
+
     void (^completionBlock)(BOOL) = nil;
     BOOL blockingSubmissionEnabled = [self.delegate reportViewControllerShouldSubmitSynchronously:self];
-    
+
     if (blockingSubmissionEnabled) {
         __weak typeof(self) weakSelf = self;
         UIView *loadingView = [self _showBlockingLoadingView];
-        
+
         completionBlock = ^(BOOL submitted) {
             if (!submitted) {
                 [loadingView removeFromSuperview];
-                
+
                 __strong LIFEReportTableViewController *strongSelf = weakSelf;
-                
+
                 if (strongSelf) {
                     strongSelf.doneButton.enabled = YES;
                     [self _showSubmissionErrorAlert];
@@ -419,7 +420,7 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
             }
         };
     }
-    
+
     [self.delegate reportViewController:self shouldCompleteReportBuilder:reportBuilder completion:completionBlock];
 }
 
