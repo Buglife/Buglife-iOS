@@ -21,18 +21,26 @@
 /**
  @warning These map to enums in the Buglife backend API!
  */
-typedef NS_OPTIONS(NSUInteger, LIFEAttributeValueType) {
+typedef NS_ENUM(NSUInteger, LIFEAttributeValueType) {
     LIFEAttributeValueTypeString = 0,
     LIFEAttributeValueTypeInt = 1,
     LIFEAttributeValueTypeFloat = 2,
     LIFEAttributeValueTypeBool = 3
 };
 
+typedef NS_OPTIONS(NSUInteger, LIFEAttributeFlags) {
+    LIFEAttributeFlagCustom   = 1 << 1, // The new default for dev-set attributes
+    LIFEAttributeFlagSystem   = 1 << 2, // The new default for Buglife-gathered attributes
+    LIFEAttributeFlagPublic   = 1 << 3, // Set this to show this attribute in public when not logged in (not supported yet)
+    LIFEAttributeFlagInternal = 1 << 4, // This is for Buglife metrics only. Do not use.
+};
+
 @interface LIFEAttribute : NSObject <NSCoding>
 
 @property (nonatomic, readonly) LIFEAttributeValueType valueType;
+@property (nonatomic, readonly) LIFEAttributeFlags flags;
 
-- (instancetype)initWithValueType:(LIFEAttributeValueType)valueType value:(NSObject *)value;
+- (instancetype)initWithValueType:(LIFEAttributeValueType)valueType value:(NSObject *)value flags:(LIFEAttributeFlags)flags;
 
 - (NSString *)stringValue;
 

@@ -764,30 +764,9 @@ static const NSTimeInterval kAttachmentRequestTimerDuration = 3;
     if (stringValue == nil) {
         [self removeAttribute:attributeKey];
     } else {
-        LIFEAttribute *attribute = [[LIFEAttribute alloc] initWithValueType:LIFEAttributeValueTypeString value:stringValue];
+        LIFEAttribute *attribute = [[LIFEAttribute alloc] initWithValueType:LIFEAttributeValueTypeString value:stringValue flags:LIFEAttributeFlagCustom];
         [self _setAttribute:attribute forKey:attributeKey];
     }
-}
-
-- (void)setIntValue:(int)intValue forAttribute:(NSString *)attributeKey
-{
-    NSNumber *value = [NSNumber numberWithInt:intValue];
-    LIFEAttribute *attribute = [[LIFEAttribute alloc] initWithValueType:LIFEAttributeValueTypeInt value:value];
-    [self _setAttribute:attribute forKey:attributeKey];
-}
-
-- (void)setFloatValue:(float)floatValue forAttribute:(NSString *)attributeKey
-{
-    NSNumber *value = [NSNumber numberWithFloat:floatValue];
-    LIFEAttribute *attribute = [[LIFEAttribute alloc] initWithValueType:LIFEAttributeValueTypeFloat value:value];
-    [self _setAttribute:attribute forKey:attributeKey];
-}
-
-- (void)setBoolValue:(BOOL)boolValue forAttribute:(NSString *)attributeKey
-{
-    NSNumber *value = [NSNumber numberWithBool:boolValue];
-    LIFEAttribute *attribute = [[LIFEAttribute alloc] initWithValueType:LIFEAttributeValueTypeBool value:value];
-    [self _setAttribute:attribute forKey:attributeKey];
 }
 
 - (void)removeAttribute:(NSString *)attributeKey

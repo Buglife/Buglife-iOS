@@ -391,7 +391,7 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
             let inputFieldValue = self.inputFieldValues[inputField];
             
             if (inputFieldValue) {
-                let attribute = [[LIFEAttribute alloc] initWithValueType:LIFEAttributeValueTypeString value:inputFieldValue];
+                let attribute = [[LIFEAttribute alloc] initWithValueType:LIFEAttributeValueTypeString value:inputFieldValue flags:LIFEAttributeFlagCustom];
                 attributes[attributeName] = attribute;
             }
         }
