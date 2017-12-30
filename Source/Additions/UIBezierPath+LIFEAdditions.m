@@ -30,15 +30,15 @@ static NSString * const kDragonflyBezierPathDataString = @"YnBsaXN0MDDUAQIDBAUGK
 + (UIBezierPath *)life_bezierPathWithArrowFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
 {
     CGFloat arrowLength = LIFECGPointDistance(startPoint, endPoint);
-    CGFloat tailWidth = LIFETailWidthForArrowLength(arrowLength);
     CGFloat headLength = LIFEHeadLengthForArrowLength(arrowLength);
     CGFloat headWidth = LIFEHeadWidthForArrowWithHeadLength(arrowLength);
+    CGFloat minTailWidth = LIFEMinTailWidthForArrowWithHeadWidth(headWidth);
+    CGFloat maxTailWidth = LIFEMaxTailWidthForArrowWithHeadWidth(headWidth);
     
-    return [self life_bezierPathWithArrowFromPoint:startPoint toPoint:endPoint tailWidth:tailWidth headWidth:headWidth headLength:headLength];
+    return [self life_bezierPathWithArrowFromPoint:startPoint toPoint:endPoint minTailWidth:minTailWidth maxTailWith:maxTailWidth headWidth:headWidth headLength:headLength];
 }
 
-// Compacted version of Rob Mayoff's original code from https://gist.github.com/mayoff/4146780
-+ (UIBezierPath *)life_bezierPathWithArrowFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint tailWidth:(CGFloat)tailWidth headWidth:(CGFloat)headWidth headLength:(CGFloat)headLength
++ (UIBezierPath *)life_bezierPathWithArrowFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint minTailWidth:(CGFloat)minTailWidth maxTailWith:(CGFloat)maxTailWidth headWidth:(CGFloat)headWidth headLength:(CGFloat)headLength
 {
     CGFloat length = hypotf((float)endPoint.x - (float)startPoint.x, (float)endPoint.y - (float)startPoint.y);
     
@@ -47,30 +47,37 @@ static NSString * const kDragonflyBezierPathDataString = @"YnBsaXN0MDDUAQIDBAUGK
     }
     
     CGFloat tailLength = length - headLength;
+    CGFloat tailCurve = (minTailWidth / 2);
+    CGFloat tailSqueeze = (tailCurve * 2);
+    CGFloat tailPunch = headLength * 0.1;
     
     CGPoint points[7] = {
-        CGPointMake(0, tailWidth / 2),
-        CGPointMake(tailLength, tailWidth / 2),
+        CGPointMake(0, minTailWidth / 2),
+        CGPointMake(tailLength + tailPunch, maxTailWidth / 2),
         CGPointMake(tailLength, headWidth / 2),
         CGPointMake(length, 0),
         CGPointMake(tailLength, -headWidth / 2),
-        CGPointMake(tailLength, -tailWidth / 2),
-        CGPointMake(0, -tailWidth / 2)
+        CGPointMake(tailLength + tailPunch, -maxTailWidth / 2),
+        CGPointMake(0, -minTailWidth / 2)
     };
-    
     CGFloat cosine = (endPoint.x - startPoint.x) / length;
     CGFloat sine = (endPoint.y - startPoint.y) / length;
     CGAffineTransform transform = (CGAffineTransform){ cosine, sine, -sine, cosine, startPoint.x, startPoint.y };
-    CGMutablePathRef cgPath = CGPathCreateMutable();
-    CGPathAddLines(cgPath, &transform, points, sizeof points / sizeof *points);
-    CGPathCloseSubpath(cgPath);
+
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:points[0]];
+    [path addCurveToPoint:points[1] controlPoint1:points[0] controlPoint2:CGPointMake(points[1].x, points[1].y - tailSqueeze)];
+    [path addLineToPoint:points[2]];
+    [path addLineToPoint:points[3]];
+    [path addLineToPoint:points[4]];
+    [path addLineToPoint:points[5]];
+    [path addCurveToPoint:points[6] controlPoint1:CGPointMake(points[5].x, points[5].y + tailSqueeze) controlPoint2:points[6]];   // Curves the butt of the tail
+    [path addCurveToPoint:points[0] controlPoint1:CGPointMake(-tailCurve, points[6].y) controlPoint2:CGPointMake(-tailCurve, points[0].y)]; // Curves the butt of the tail
+    [path closePath];
     
-    UIBezierPath *uiPath = [UIBezierPath bezierPathWithCGPath:cgPath];
-    uiPath.lineCapStyle = kCGLineCapRound;
-    uiPath.lineJoinStyle = kCGLineJoinRound;
-    CGPathRelease(cgPath);
+    [path applyTransform:transform];
     
-    return uiPath;
+    return path;
 }
 
 + (UIBezierPath *)life_bezierPathForDiscloserIndicator
@@ -149,10 +156,18 @@ inline CGFloat LIFETailWidthForArrowLength(CGFloat arrowLength) {
     return (MAX(4.0f, arrowLength * 0.07f));
 }
 
+inline CGFloat LIFEMaxTailWidthForArrowWithHeadWidth(CGFloat arrowHeadWidth) {
+    return arrowHeadWidth * 0.45;
+}
+
+inline CGFloat LIFEMinTailWidthForArrowWithHeadWidth(CGFloat arrowHeadWidth) {
+    return arrowHeadWidth * 0.1;
+}
+
 inline CGFloat LIFEHeadLengthForArrowLength(CGFloat arrowLength) {
     return (MAX(arrowLength / 3.0f, 10.0f));
 }
 
 inline CGFloat LIFEHeadWidthForArrowWithHeadLength(CGFloat headLength) {
-    return (headLength * 0.9f);
+    return (headLength * 0.35f);
 }

@@ -318,19 +318,10 @@ NSData * _LIFEUIImageRepresentationScaledForMaximumFilesize(LIFEImageFormat imag
     CGSize size = CGSizeMake(22, 22);
     UIColor *strokeColor = [UIColor blackColor];
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    CGPoint startPoint = CGPointMake(size.width - 2, 2);
+    CGPoint endPoint = CGPointMake(1, size.height - 1);
     
-    CGFloat rotation = 0.75;
-    CGFloat tailPadding = size.height * 0.05;
-    CGPoint startPoint = CGPointMake(tailPadding, (size.height * rotation));
-    CGPoint endPoint = CGPointMake(size.width, size.height - (size.height * rotation));
-    CGFloat arrowLength = LIFECGPointDistance(startPoint, endPoint);
-    CGFloat tailWidth = LIFETailWidthForArrowLength(arrowLength);
-    CGFloat headLength = LIFEHeadLengthForArrowLength(arrowLength);
-    CGFloat headWidth = LIFEHeadWidthForArrowWithHeadLength(headLength);
-    
-    tailWidth = tailWidth * 0.5;
-    
-    UIBezierPath *path = [LIFEUIBezierPath life_bezierPathWithArrowFromPoint:startPoint toPoint:endPoint tailWidth:tailWidth headWidth:headWidth headLength:headLength];
+    UIBezierPath *path = [LIFEUIBezierPath life_bezierPathWithArrowFromPoint:startPoint toPoint:endPoint];
     path.lineWidth = 1;
     [strokeColor setStroke];
     [path stroke];
@@ -340,7 +331,7 @@ NSData * _LIFEUIImageRepresentationScaledForMaximumFilesize(LIFEImageFormat imag
     
     result.accessibilityLabel = LIFELocalizedString(LIFEStringKey_Arrow);
     
-    return result;
+    return [result imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
 
 
@@ -396,7 +387,7 @@ NSData * _LIFEUIImageRepresentationScaledForMaximumFilesize(LIFEImageFormat imag
     
     result.accessibilityLabel = LIFELocalizedString(LIFEStringKey_Loupe);
     
-    return result;
+    return [result imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];;
 }
 
 + (UIImage *)life_pixelateIcon
@@ -434,7 +425,7 @@ NSData * _LIFEUIImageRepresentationScaledForMaximumFilesize(LIFEImageFormat imag
     
     result.accessibilityLabel = LIFELocalizedString(LIFEStringKey_Blur);
     
-    return result;
+    return [result imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];;
 }
 
 // trash can constants
@@ -749,6 +740,30 @@ static const CGFloat kLidSpacing = 1;
 //    
 //    return outputImage;
 //}
+
++ (nonnull UIImage *)life_resizableRoundedRectWithHorizontalInset:(CGFloat)insetX
+{
+    CGFloat strokeWidth = 1;
+    CGFloat cornerRadius = 5;
+    CGSize size = CGSizeMake(200, 200);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    rect = CGRectInset(rect, insetX, 0);
+    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRoundedRect: rect cornerRadius: cornerRadius];
+    [UIColor.whiteColor setFill];
+    [rectanglePath fill];
+    [UIColor.lightGrayColor setStroke];
+    rectanglePath.lineWidth = strokeWidth;
+    [rectanglePath stroke];
+    
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    CGFloat capInsetY = cornerRadius + strokeWidth;
+    CGFloat capInsetX = capInsetY + insetX;
+    UIEdgeInsets capInsets = UIEdgeInsetsMake(capInsetY, capInsetX, capInsetY, capInsetX);
+    return [outputImage resizableImageWithCapInsets:capInsets];
+}
 
 @end
 

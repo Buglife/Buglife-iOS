@@ -45,4 +45,8 @@ void LIFELoadCategoryFor_UIImageLIFEAdditions(void);
 
 + (nonnull UIImage *)image:(nonnull UIImage *)image pixelatedImageWithAmount:(CGFloat)amount;
 
+#pragma mark - Rounded rects
+
++ (nonnull UIImage *)life_resizableRoundedRectWithHorizontalInset:(CGFloat)insetX;
+
 @end

@@ -34,3 +34,6 @@ CGVector LIFEEndVectorAdjustedForMinimumDistance(CGVector startVector, CGVector 
 
 CGPoint LIFEPointFromVectorAndSize(CGVector vector, CGSize size);
 CGVector LIFEVectorFromPointAndSize(CGPoint point, CGSize size);
+
+CGPoint LIFECGPointApplyRotation(CGPoint pointToRotate, CGPoint anchor, CGFloat angleInRadians);
+CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scaleAmount);

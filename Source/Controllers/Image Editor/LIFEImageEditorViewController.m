@@ -1,72 +1,48 @@
 //
-//  LIFEScreenshotAnnotatorViewController.m
-//  Copyright (C) 2017 Buglife, Inc.
-//  
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//  
-//       http://www.apache.org/licenses/LICENSE-2.0
-//  
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
+//  LIFEImageEditorViewController.m
+//  Buglife
 //
+//  Created by David Schukin on 12/21/17.
 //
 
-#import "LIFEScreenshotAnnotatorViewController.h"
+#import "LIFEImageEditorViewController.h"
+#import "LIFEImageEditorView.h"
 #import "LIFEScreenshotAnnotatorView.h"
 #import "LIFEAnnotation.h"
-#import "LIFEAnnotationView.h"
-#import "LIFEArrowAnnotationView.h"
-#import "LIFEBlurAnnotationView.h"
-#import "LIFELoupeAnnotationView.h"
 #import "LIFEAnnotatedImage.h"
-#import "UIImage+LIFEAdditions.h"
-#import "NSArray+LIFEAdditions.h"
-#import "LIFECompatibilityUtils.h"
-#import "LIFEContinuousForceTouchGestureRecognizer.h"
-#import "LIFEPanGestureRecognizer.h"
-#import "LIFEMenuPopoverView.h"
-#import "LIFEMacros.h"
-#import "LIFEGeometry.h"
-#import "LIFEImageProcessor.h"
+#import "LIFEArrowAnnotationView.h"
+#import "LIFELoupeAnnotationView.h"
+#import "LIFEBlurAnnotationView.h"
 #import "LIFEScreenshotContext.h"
+#import "LIFEImageProcessor.h"
+#import "LIFEMenuPopoverView.h"
+#import "LIFEGeometry.h"
+#import "LIFEMacros.h"
 
-// These probably don't need to be constants, but they
-// are the "default" values for when annotations are created,
-// and after they are edited
 static const CGFloat kDefaultAnnotationRotationAmount = 0.0;
 static const CGFloat kDefaultAnnotationScaleAmount = 1.0;
 
-CGPoint LIFECGPointApplyRotation(CGPoint pointToRotate, CGPoint anchor, CGFloat angleInRadians);
-CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scaleAmount);
-
-@interface LIFEScreenshotAnnotatorViewController () <LIFEContinuousForceTouchDelegate, LIFEMenuPopoverViewDelegate, UIGestureRecognizerDelegate>
+@interface LIFEImageEditorViewController () <UIGestureRecognizerDelegate, LIFEMenuPopoverViewDelegate>
 
 @property (nonatomic) LIFEMutableAnnotatedImage *annotatedImage;
-@property (nonatomic) LIFEScreenshotAnnotatorView *screenshotAnnotatorView;
-@property (nonatomic) UIPanGestureRecognizer *panGestureRecognizer; // Used for drawing, not moving
-@property (nonatomic) NSMutableArray<UIGestureRecognizer *> *activeEditingGestureRecognizers; // Move, rotate, etc
+@property (nonatomic) LIFEImageProcessor *imageProcessor;
+@property (nonatomic, nullable) LIFEScreenshotContext *screenshotContext;
+@property (nonatomic) BOOL statusBarHidden;
+@property (null_resettable, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 @property (nonatomic) LIFEAnnotationView *annotationViewInProgress;
-@property (nonatomic, weak) LIFEAnnotationView *annotationSelectedWithPopover;
+@property (nonatomic) NSMutableArray<UIGestureRecognizer *> *activeEditingGestureRecognizers; // Move, rotate, etc
 @property (nonatomic) CGPoint previousStartPointForMovingAnnotation;
 @property (nonatomic) CGPoint previousEndPointForMovingAnnotation;
 @property (nonatomic) CGPoint translationForMovingAnnotation;
 @property (nonatomic) CGFloat angleForRotatingAnnotation;
 @property (nonatomic) CGFloat scaleForPinchingAnnotation;
-@property (nonatomic, readonly) LIFEChromeVisibility chromeVisibility;
-@property (nonatomic) UIBarButtonItem *cancelButton;
-@property (nonatomic) UIBarButtonItem *nextButton;
-@property (nonatomic) LIFEImageProcessor *imageProcessor;
-@property (nonatomic, nullable) LIFEScreenshotContext *screenshotContext;
-@property (nonatomic) BOOL statusBarHidden;
+@property (nonatomic, weak) LIFEAnnotationView *annotationSelectedWithPopover;
 
 @end
 
-@implementation LIFEScreenshotAnnotatorViewController
+@implementation LIFEImageEditorViewController
+
+#pragma mark - Initialization
 
 - (instancetype)initWithAnnotatedImage:(LIFEAnnotatedImage *)annotatedImage
 {
@@ -80,7 +56,7 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
     return self;
 }
 
-- (instancetype)initWithScreenshot:(UIImage *)screenshot context:(LIFEScreenshotContext *)context
+- (nonnull instancetype)initWithScreenshot:(nonnull UIImage *)screenshot context:(nullable LIFEScreenshotContext *)context
 {
     LIFEAnnotatedImage *annotatedImage = [[LIFEAnnotatedImage alloc] initWithScreenshot:screenshot];
     self = [self initWithAnnotatedImage:annotatedImage];
@@ -91,192 +67,37 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
     return self;
 }
 
+#pragma mark - UIViewController
+
 - (void)loadView
 {
-    _screenshotAnnotatorView = [[LIFEScreenshotAnnotatorView alloc] initWithAnnotatedImage:_annotatedImage];
-    self.view = _screenshotAnnotatorView;
+    self.view = [[LIFEImageEditorView alloc] initWithAnnotatedImage:_annotatedImage];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    if (self.isInitialViewController) {
-        self.title = LIFELocalizedString(LIFEStringKey_ReportABug);
-    } else {
-        self.title = self.annotatedImage.filename;
-    }
-    
     self.panGestureRecognizer.enabled = YES;
-    
-    if (self.isInitialViewController) {
-        self.navigationItem.leftBarButtonItem = self.cancelButton;
-        self.navigationItem.rightBarButtonItem = self.nextButton;
-        
-        [self setChromeVisibility:LIFEChromeVisibilityHiddenForViewControllerTransition animated:NO completion:NULL];
-    }
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
-    
-    // When we add annotation views for the first time, we need
-    // to first cache the various source images (i.e. blurs, loupes, etc)
-    CGSize targetSize = [self _targetSizeForAnnotationViewImages];
-    __weak typeof(self) weakSelf = self;
-    
-    [self.imageProcessor getLoupeSourceScaledImageForAnnotatedImage:self.annotatedImage targetSize:targetSize toQueue:dispatch_get_main_queue() completion:^(LIFEImageIdentifier *identifier, UIImage *result) {
-        __strong LIFEScreenshotAnnotatorViewController *strongSelf = weakSelf;
-        if (strongSelf) {
-            for (LIFEAnnotation *annotation in strongSelf.annotatedImage.annotations) {
-                LIFEAnnotationView *annotationView = [strongSelf _addAnnotationViewForAnnotation:annotation animated:animated];
-                [strongSelf _addGestureHandlersToAnnotationView:annotationView];
-            }
-        }
-    }];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    if (!self.isInitialViewController) {
-        [self _notifyDelegateOfCompletion];
-    }
-}
-
-- (void)dealloc
-{
-    [self.view removeGestureRecognizer:_panGestureRecognizer];
-    _panGestureRecognizer = nil;
-}
-
-#pragma mark - UIViewController status bar appearance
-
-- (BOOL)prefersStatusBarHidden
-{
-    // The status bar can be toggled on / off via setChromeVisibility.
-    // If the status bar is NOT hidden by setChromeVisibility,
-    // then use the screenshot context
-    if (_statusBarHidden) {
-        return YES;
-    }
-    
-    if (self.screenshotContext != nil) {
-        return self.screenshotContext.statusBarHidden;
-    } else {
-        return [super prefersStatusBarHidden];
-    }
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    if (self.screenshotContext != nil) {
-        return self.screenshotContext.statusBarStyle;
-    } else {
-        return [super preferredStatusBarStyle];
-    }
-}
-
-- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
-{
-    return UIStatusBarAnimationSlide;
-}
-
-#pragma mark - Next button
-
-- (UIBarButtonItem *)nextButton
-{
-    if (_nextButton == nil) {
-        _nextButton = [[UIBarButtonItem alloc] initWithTitle:LIFELocalizedString(LIFEStringKey_Next) style:UIBarButtonItemStyleDone target:self action:@selector(_nextButtonTapped:)];
-    }
-    
-    return _nextButton;
-}
-
-- (void)_nextButtonTapped:(id)sender
-{
-    self.cancelButton.enabled = NO;
-    self.nextButton.enabled = NO;
-    
-    [self _notifyDelegateOfCompletion];
-}
-
-#pragma mark - Cancel button
-
-- (UIBarButtonItem *)cancelButton
-{
-    if (_cancelButton == nil) {
-        _cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(_cancelButtonTapped:)];
-    }
-    
-    return _cancelButton;
-}
-
-- (void)_cancelButtonTapped:(id)sender
-{
-    self.cancelButton.enabled = NO;
-    self.nextButton.enabled = NO;
-    [self.delegate screenshotAnnotatorViewControllerDidCancel:self];
-}
-
-#pragma mark - Private methods
-
-- (void)_notifyDelegateOfCompletion
-{
-    NSParameterAssert(self.delegate);
-    LIFEAnnotatedImage *result = self.annotatedImage.copy;
-    [self.delegate screenshotAnnotatorViewController:self willCompleteWithAnnotatedImage:result];
-}
-
-- (void)setChromeVisibility:(LIFEChromeVisibility)chromeVisibility animated:(BOOL)animated completion:(void (^)(void))completion
-{
-    _chromeVisibility = chromeVisibility;
-    
-    BOOL chromeHidden =
-#if !LIFE_DEMO_MODE
-            // Chrome does not hide in demo mode
-            (_chromeVisibility & LIFEChromeVisibilityHiddenForDrawing) ||
-#endif
-            (_chromeVisibility & LIFEChromeVisibilityHiddenViaTap) ||
-            (_chromeVisibility & LIFEChromeVisibilityHiddenForViewControllerTransition);
-
-    [self.navigationController setNavigationBarHidden:chromeHidden animated:animated];
-    [_screenshotAnnotatorView setToolbarsHidden:chromeHidden animated:animated completion:completion];
-    
-    BOOL statusBarHidden = chromeHidden;
-    
-    if (_chromeVisibility == LIFEChromeVisibilityHiddenForViewControllerTransition) {
-        statusBarHidden = NO;
-    }
-    
-    _statusBarHidden = statusBarHidden;
-    
-    if (animated) {
-        NSTimeInterval duration = [LIFEScreenshotAnnotatorView toolbarTransitionDuration];
-        [UIView animateWithDuration:duration animations:^{
-            [self setNeedsStatusBarAppearanceUpdate];
-        }];
-    } else {
-        [self setNeedsStatusBarAppearanceUpdate];
-    }
-}
-
-- (void)_setChromeVisibilityHiddenForDrawing:(BOOL)hiddenForDrawing
-{
-    if (hiddenForDrawing) {
-        // flip on .HiddenForDrawing
-        LIFEChromeVisibility visibility = _chromeVisibility | LIFEChromeVisibilityHiddenForDrawing;
-        [self setChromeVisibility:visibility animated:YES completion:NULL];
-    } else {
-        // flip off .HiddenForDrawing
-        LIFEChromeVisibility visibility = _chromeVisibility & ~LIFEChromeVisibilityHiddenForDrawing;
-        [self setChromeVisibility:visibility animated:YES completion:NULL];
-    }
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 #pragma mark - Accessors
+
+- (LIFEImageEditorView *)imageEditorView
+{
+    return (LIFEImageEditorView *)self.view;
+}
+
+- (LIFEScreenshotAnnotatorView *)screenshotAnnotatorView
+{
+    return self.imageEditorView.screenshotAnnotatorView;
+}
 
 - (UIPanGestureRecognizer *)panGestureRecognizer
 {
@@ -288,44 +109,7 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
     return _panGestureRecognizer;
 }
 
-- (LIFEAnnotationView *)_addAnnotationViewForAnnotation:(LIFEAnnotation *)annotation animated:(BOOL)animated
-{
-    LIFEAnnotationView *annotationView;
-    CGSize targetSize = [self _targetSizeForAnnotationViewImages];
-    
-    switch (annotation.annotationType) {
-        case LIFEAnnotationTypeArrow: {
-            annotationView = [[LIFEArrowAnnotationView alloc] initWithAnnotation:annotation];
-            break;
-        }
-        case LIFEAnnotationTypeLoupe: {
-            LIFELoupeAnnotationView *loupeAnnotationView = [[LIFELoupeAnnotationView alloc] initWithAnnotation:annotation];
-            annotationView = loupeAnnotationView;
-            
-            [self.imageProcessor getLoupeSourceScaledImageForAnnotatedImage:self.annotatedImage targetSize:targetSize toQueue:dispatch_get_main_queue() completion:^(LIFEImageIdentifier *identifier, UIImage *result) {
-                loupeAnnotationView.scaledSourceImage = result;
-            }];
-            break;
-        }
-        case LIFEAnnotationTypeBlur: {
-            LIFEBlurAnnotationView *blurAnnotationView = [[LIFEBlurAnnotationView alloc] initWithAnnotation:annotation];
-            annotationView = blurAnnotationView;
-            
-            [self.imageProcessor getBlurredScaledImageForImageIdentifier:self.annotatedImage.identifier sourceImage:self.annotatedImage.sourceImage targetSize:targetSize toQueue:dispatch_get_main_queue() completion:^(LIFEImageIdentifier *identifier, UIImage *result) {
-                blurAnnotationView.scaledSourceImage = result;
-            }];
-            break;
-        }
-    }
-
-    [self.screenshotAnnotatorView addAnnotationView:annotationView];
-    
-    if (animated) {
-        [self.screenshotAnnotatorView animateAddedAnnotationView:annotationView];
-    }
-    
-    return annotationView;
-}
+#pragma mark - Gesture recognizer actions
 
 - (void)_drawGestureHandler:(UIGestureRecognizer *)gestureRecognizer
 {
@@ -337,8 +121,6 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
     switch (_panGestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:
         {
-            [self _setChromeVisibilityHiddenForDrawing:YES];
-            
             LIFEAnnotation *annotation = [[LIFEAnnotation alloc] initWithAnnotationType:annotationType startVector:gestureVector endVector:gestureVector];
             LIFEAnnotationView *annotationView = [self _addAnnotationViewForAnnotation:annotation animated:YES];
             
@@ -351,7 +133,7 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
             }
             
             NSParameterAssert(self.annotationViewInProgress == nil);
-
+            
             self.annotationViewInProgress = annotationView;
             [self.annotationViewInProgress setSelected:YES animated:YES];
             [self.annotatedImage addAnnotation:annotation];
@@ -377,8 +159,6 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
             [self _addGestureHandlersToAnnotationView:self.annotationViewInProgress];
             [self.annotationViewInProgress setSelected:NO animated:YES];
             self.annotationViewInProgress = nil;
-
-            [self _setChromeVisibilityHiddenForDrawing:NO];
             
             break;
         }
@@ -391,7 +171,7 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
 {
     // Set up edit gestures
     
-    LIFEPanGestureRecognizer *moveGestureRecognizer = [[LIFEPanGestureRecognizer alloc] initWithTarget:self action:@selector(_editAnnotationViewGestureHandler:)];
+    UIPanGestureRecognizer *moveGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(_editAnnotationViewGestureHandler:)];
     moveGestureRecognizer.delegate = self;
     [annotationView addGestureRecognizer:moveGestureRecognizer];
     
@@ -416,19 +196,7 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
     
     if (isBlur) {
         [self.screenshotAnnotatorView setDarkOverlayHidden:YES animated:YES];
-        
-        if ([LIFECompatibilityUtils isForceTouchAvailableForViewController:self]) {
-            LIFEContinuousForceTouchGestureRecognizer *forceTouchGestureRecognizer = [[LIFEContinuousForceTouchGestureRecognizer alloc] init];
-            forceTouchGestureRecognizer.forceTouchDelegate = self;
-            [self.annotationViewInProgress addGestureRecognizer:forceTouchGestureRecognizer];
-        }
     }
-}
-
-- (void)_tapAnnotationViewGestureHandler:(UITapGestureRecognizer *)gestureRecognizer
-{
-    LIFEAnnotationView *annotationView = (LIFEAnnotationView *)gestureRecognizer.view;
-    [self _presentPopoverForAnnotationView:annotationView];
 }
 
 - (void)_editAnnotationViewGestureHandler:(UIGestureRecognizer *)gestureRecognizer
@@ -438,7 +206,6 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
         {
             if (_activeEditingGestureRecognizers.count == 0) {
                 self.panGestureRecognizer.enabled = NO;
-                [self _setChromeVisibilityHiddenForDrawing:YES];
                 self.annotationViewInProgress = (LIFEAnnotationView *)gestureRecognizer.view;
                 [self.screenshotAnnotatorView setDarkOverlayHidden:NO animated:YES];
                 [self.annotationViewInProgress setSelected:YES animated:YES];
@@ -481,12 +248,14 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
             CGPoint startPoint = LIFECGPointAdd(self.previousStartPointForMovingAnnotation, translation);
             CGPoint endPoint = LIFECGPointAdd(self.previousEndPointForMovingAnnotation, translation);
             
+            NSLog(@"Moved %@", NSStringFromCGPoint(translation));
+            
             // Rotate
             CGFloat radians = self.angleForRotatingAnnotation;
             CGPoint anchor = CGPointMake((startPoint.x + endPoint.x) / 2.0, (startPoint.y + endPoint.y) / 2.0);
             startPoint = LIFECGPointApplyRotation(startPoint, anchor, radians);
             endPoint = LIFECGPointApplyRotation(endPoint, anchor, radians);
-            
+
             // Scale
             CGFloat scaleAmount = self.scaleForPinchingAnnotation;
             startPoint = LIFECGPointApplyScale(startPoint, anchor, scaleAmount);
@@ -518,7 +287,6 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
                 [self.screenshotAnnotatorView setDarkOverlayHidden:YES animated:YES];
                 [self.annotationViewInProgress setSelected:NO animated:YES];
                 self.annotationViewInProgress = nil;
-                [self _setChromeVisibilityHiddenForDrawing:NO];
             }
             
             if ([gestureRecognizer isKindOfClass:[UIRotationGestureRecognizer class]]) {
@@ -534,86 +302,51 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
     }
 }
 
-#pragma mark - DFContinuousForceTouchDelegate
-
-- (void)forceTouchRecognized:(LIFEContinuousForceTouchGestureRecognizer *)recognizer
+- (void)_tapAnnotationViewGestureHandler:(UITapGestureRecognizer *)gestureRecognizer
 {
-    [self.screenshotAnnotatorView setDarkOverlayHidden:NO animated:YES];
+    LIFEAnnotationView *annotationView = (LIFEAnnotationView *)gestureRecognizer.view;
+    [self _presentPopoverForAnnotationView:annotationView];
 }
 
-- (void)forceTouchRecognizer:(LIFEContinuousForceTouchGestureRecognizer *)recognizer didEndWithForce:(CGFloat)force maxForce:(CGFloat)maxForce
-{
-    [self.screenshotAnnotatorView setDarkOverlayHidden:YES animated:YES];
-}
+#pragma mark - Drawing
 
-- (void)forceTouchRecognizer:(LIFEContinuousForceTouchGestureRecognizer *)recognizer didMoveWithForce:(CGFloat)force maxForce:(CGFloat)maxForce
+- (LIFEAnnotationView *)_addAnnotationViewForAnnotation:(LIFEAnnotation *)annotation animated:(BOOL)animated
 {
-//    CGFloat amount = force / maxForce;
-//    amount = MAX(amount, 0.10);
-//    LIFEBlurAnnotationView *blurAnnotationView = (LIFEBlurAnnotationView *)recognizer.view;
-//    blurAnnotationView.blurAmount = amount;
-}
-
-#pragma mark - LIFEMenuPopoverViewDelegate
-
-- (void)_presentPopoverForAnnotationView:(LIFEAnnotationView *)annotationView
-{
-    LIFEMenuPopoverView *menu = [[LIFEMenuPopoverView alloc] init];
-    menu.delegate = self;
-    NSString *deleteString = LIFELocalizedString(LIFEStringKey_Delete);
+    LIFEAnnotationView *annotationView;
+    CGSize targetSize = [self _targetSizeForAnnotationViewImages];
     
-    if ([annotationView isKindOfClass:[LIFEArrowAnnotationView class]]) {
-        deleteString = LIFELocalizedString(LIFEStringKey_DeleteArrow);
-    } else if ([annotationView isKindOfClass:[LIFEBlurAnnotationView class]]) {
-        deleteString = LIFELocalizedString(LIFEStringKey_DeleteBlur);
-    } else if ([annotationView isKindOfClass:[LIFELoupeAnnotationView class]]) {
-        deleteString = LIFELocalizedString(LIFEStringKey_DeleteLoupe);
-    } else {
-        NSAssert(NO, @"Unhandled annotation");
+    switch (annotation.annotationType) {
+        case LIFEAnnotationTypeArrow: {
+            annotationView = [[LIFEArrowAnnotationView alloc] initWithAnnotation:annotation];
+            break;
+        }
+        case LIFEAnnotationTypeLoupe: {
+            LIFELoupeAnnotationView *loupeAnnotationView = [[LIFELoupeAnnotationView alloc] initWithAnnotation:annotation];
+            annotationView = loupeAnnotationView;
+            
+            [self.imageProcessor getLoupeSourceScaledImageForAnnotatedImage:self.annotatedImage targetSize:targetSize toQueue:dispatch_get_main_queue() completion:^(LIFEImageIdentifier *identifier, UIImage *result) {
+                loupeAnnotationView.scaledSourceImage = result;
+            }];
+            break;
+        }
+        case LIFEAnnotationTypeBlur: {
+            LIFEBlurAnnotationView *blurAnnotationView = [[LIFEBlurAnnotationView alloc] initWithAnnotation:annotation];
+            annotationView = blurAnnotationView;
+            
+            [self.imageProcessor getBlurredScaledImageForImageIdentifier:self.annotatedImage.identifier sourceImage:self.annotatedImage.sourceImage targetSize:targetSize toQueue:dispatch_get_main_queue() completion:^(LIFEImageIdentifier *identifier, UIImage *result) {
+                blurAnnotationView.scaledSourceImage = result;
+            }];
+            break;
+        }
     }
     
-    UIBezierPath *path = annotationView.pathForPopoverMenu;
-    [menu presentPopoverFromBezierPath:path inView:self.screenshotAnnotatorView.sourceImageView withStrings:@[deleteString]];
+    [self.screenshotAnnotatorView addAnnotationView:annotationView];
     
-    self.annotationSelectedWithPopover = annotationView;
-    [self.annotationSelectedWithPopover setSelected:YES animated:YES];
-}
-
-- (void)popoverView:(LIFEMenuPopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index
-{
-    CGPoint arrowPoint = popoverView.arrowPoint;
-    arrowPoint = [self.screenshotAnnotatorView.sourceImageView convertPoint:arrowPoint fromView:popoverView];
-    CGRect deletionRect = CGRectMake(arrowPoint.x, arrowPoint.y, 1, 1);
+    if (animated) {
+        [self.screenshotAnnotatorView animateAddedAnnotationView:annotationView];
+    }
     
-    LIFEScreenshotAnnotatorView *annotatorView = self.screenshotAnnotatorView;
-    LIFEAnnotationView *annotationInProgress = self.annotationSelectedWithPopover;
-    self.annotationSelectedWithPopover = nil;
-    
-    __weak typeof(self) weakSelf = self;
-    LIFEMutableAnnotatedImage *annotatedImage = self.annotatedImage;
-    [annotatedImage removeAnnotation:annotationInProgress.annotation];
-
-    [annotationInProgress animateToTrashCanRect:deletionRect completion:^{
-        [annotatorView removeAnnotationView:annotationInProgress];
-        
-        // Update layers above the blur
-        if ([annotationInProgress isKindOfClass:[LIFEBlurAnnotationView class]]) {
-            [weakSelf _updateLoupeAnnotationViews];
-        }
-    }];
-}
-
-- (void)popoverViewDidDismiss:(LIFEMenuPopoverView *)popoverView
-{
-    [self.annotationSelectedWithPopover setSelected:NO animated:YES];
-    self.annotationSelectedWithPopover = nil;
-}
-
-#pragma mark - Image processing
-
-- (CGSize)_targetSizeForAnnotationViewImages
-{
-    return self.screenshotAnnotatorView.sourceImageView.bounds.size;
+    return annotationView;
 }
 
 // Loupe annotation views must be updated whenever blurs (or anything
@@ -624,7 +357,7 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
     LIFEScreenshotAnnotatorView *screenshotAnnotatorView = self.screenshotAnnotatorView;
     
     [self.imageProcessor clearCachedLoupeSourceScaledImagesForAnnotatedImage:self.annotatedImage targetSize:size];
-
+    
     [self.imageProcessor getLoupeSourceScaledImageForAnnotatedImage:self.annotatedImage targetSize:size toQueue:dispatch_get_main_queue() completion:^(LIFEImageIdentifier *identifier, UIImage *result) {
         [screenshotAnnotatorView updateLoupeAnnotationViewsWithSourceImage:result];
     }];
@@ -694,6 +427,13 @@ static const CGFloat kMaximumLoupeRadius = 150;
     }
 }
 
+#pragma mark - Image processing
+
+- (CGSize)_targetSizeForAnnotationViewImages
+{
+    return self.screenshotAnnotatorView.sourceImageView.bounds.size;
+}
+
 // MARK: UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
@@ -716,6 +456,61 @@ static const CGFloat kMaximumLoupeRadius = 150;
     
     // Allow multiple editing gestures to be combined simultaenously
     return isPanAndRotate || isPanAndPinch || isPinchAndRotate;
+}
+
+#pragma mark - LIFEMenuPopoverViewDelegate
+
+- (void)_presentPopoverForAnnotationView:(LIFEAnnotationView *)annotationView
+{
+    LIFEMenuPopoverView *menu = [[LIFEMenuPopoverView alloc] init];
+    menu.delegate = self;
+    NSString *deleteString = LIFELocalizedString(LIFEStringKey_Delete);
+    
+    if ([annotationView isKindOfClass:[LIFEArrowAnnotationView class]]) {
+        deleteString = LIFELocalizedString(LIFEStringKey_DeleteArrow);
+    } else if ([annotationView isKindOfClass:[LIFEBlurAnnotationView class]]) {
+        deleteString = LIFELocalizedString(LIFEStringKey_DeleteBlur);
+    } else if ([annotationView isKindOfClass:[LIFELoupeAnnotationView class]]) {
+        deleteString = LIFELocalizedString(LIFEStringKey_DeleteLoupe);
+    } else {
+        NSAssert(NO, @"Unhandled annotation");
+    }
+    
+    UIBezierPath *path = annotationView.pathForPopoverMenu;
+    [menu presentPopoverFromBezierPath:path inView:self.screenshotAnnotatorView.sourceImageView withStrings:@[deleteString]];
+    
+    self.annotationSelectedWithPopover = annotationView;
+    [self.annotationSelectedWithPopover setSelected:YES animated:YES];
+}
+
+- (void)popoverView:(LIFEMenuPopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index
+{
+    CGPoint arrowPoint = popoverView.arrowPoint;
+    arrowPoint = [self.screenshotAnnotatorView.sourceImageView convertPoint:arrowPoint fromView:popoverView];
+    CGRect deletionRect = CGRectMake(arrowPoint.x, arrowPoint.y, 1, 1);
+    
+    LIFEScreenshotAnnotatorView *annotatorView = self.screenshotAnnotatorView;
+    LIFEAnnotationView *annotationInProgress = self.annotationSelectedWithPopover;
+    self.annotationSelectedWithPopover = nil;
+    
+    __weak typeof(self) weakSelf = self;
+    LIFEMutableAnnotatedImage *annotatedImage = self.annotatedImage;
+    [annotatedImage removeAnnotation:annotationInProgress.annotation];
+    
+    [annotationInProgress animateToTrashCanRect:deletionRect completion:^{
+        [annotatorView removeAnnotationView:annotationInProgress];
+        
+        // Update layers above the blur
+        if ([annotationInProgress isKindOfClass:[LIFEBlurAnnotationView class]]) {
+            [weakSelf _updateLoupeAnnotationViews];
+        }
+    }];
+}
+
+- (void)popoverViewDidDismiss:(LIFEMenuPopoverView *)popoverView
+{
+    [self.annotationSelectedWithPopover setSelected:NO animated:YES];
+    self.annotationSelectedWithPopover = nil;
 }
 
 @end

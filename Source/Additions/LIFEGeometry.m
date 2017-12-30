@@ -110,3 +110,21 @@ CGPoint LIFEPointFromVectorAndSize(CGVector vector, CGSize size) {
 CGVector LIFEVectorFromPointAndSize(CGPoint point, CGSize size) {
     return CGVectorMake(point.x / size.width, point.y / size.height);
 }
+
+CGPoint LIFECGPointApplyRotation(CGPoint pointToRotate, CGPoint anchor, CGFloat angleInRadians)
+{
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    transform = CGAffineTransformTranslate(transform, anchor.x, anchor.y);
+    transform = CGAffineTransformRotate(transform, angleInRadians);
+    transform = CGAffineTransformTranslate(transform, -anchor.x, -anchor.y); // Translate back
+    return CGPointApplyAffineTransform(pointToRotate, transform);
+}
+
+CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scaleAmount)
+{
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    transform = CGAffineTransformTranslate(transform, anchor.x, anchor.y);
+    transform = CGAffineTransformScale(transform, scaleAmount, scaleAmount);
+    transform = CGAffineTransformTranslate(transform, -anchor.x, -anchor.y);
+    return CGPointApplyAffineTransform(pointToScale, transform);
+}

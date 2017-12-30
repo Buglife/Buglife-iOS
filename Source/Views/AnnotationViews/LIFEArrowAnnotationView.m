@@ -107,13 +107,7 @@
 - (void)_updateArrowPath
 {
     _arrowLength = LIFECGPointDistance(self.startPoint, self.endPoint);
-
-    CGFloat arrowLength = LIFECGPointDistance(self.startPoint, self.endPoint);
-    CGFloat tailWidth = LIFETailWidthForArrowLength(arrowLength);
-    CGFloat headLength = LIFEHeadLengthForArrowLength(arrowLength);
-    CGFloat headWidth = LIFEHeadWidthForArrowWithHeadLength(headLength);
-    
-    _arrowPath = [LIFEUIBezierPath life_bezierPathWithArrowFromPoint:self.startPoint toPoint:self.endPoint tailWidth:tailWidth headWidth:headWidth headLength:headLength];
+    _arrowPath = [LIFEUIBezierPath life_bezierPathWithArrowFromPoint:self.startPoint toPoint:self.endPoint];
 }
 
 @end
@@ -153,8 +147,6 @@
     
     CGFloat arrowLength = LIFECGPointDistance(startPoint, endPoint);
     CGFloat tailWidth = LIFETailWidthForArrowLength(arrowLength);
-    CGFloat headLength = LIFEHeadLengthForArrowLength(arrowLength);
-    CGFloat headWidth = LIFEHeadWidthForArrowWithHeadLength(headLength);
     CGFloat strokeWidth = MAX(1.0f, tailWidth * 0.25f);
 
     NSShadow* shadow = [[NSShadow alloc] init];
@@ -162,7 +154,7 @@
     shadow.shadowOffset = CGSizeMake(0.1, -0.1);
     shadow.shadowBlurRadius = 8;
     
-    UIBezierPath *arrowPath = [LIFEUIBezierPath life_bezierPathWithArrowFromPoint:startPoint toPoint:endPoint tailWidth:tailWidth headWidth:headWidth headLength:headLength];
+    UIBezierPath *arrowPath = [LIFEUIBezierPath life_bezierPathWithArrowFromPoint:startPoint toPoint:endPoint];
     
     CGContextSaveGState(context);
     CGContextSetShadowWithColor(context, shadow.shadowOffset, shadow.shadowBlurRadius, [shadow.shadowColor CGColor]);

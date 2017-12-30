@@ -87,11 +87,22 @@
 
 - (void)life_makeEdgesEqualTo:(UIView *)view
 {
+    [self life_makeEdgesEqualTo:view withInset:0];
+}
+
+- (void)life_makeEdgesEqualTo:(UIView *)view withInset:(CGFloat)inset
+{
+    UIEdgeInsets insets = UIEdgeInsetsMake(inset, inset, inset, inset);
+    [self life_makeEdgesEqualTo:view withInsets:insets];
+}
+
+- (void)life_makeEdgesEqualTo:(UIView *)view withInsets:(UIEdgeInsets)insets
+{
     [NSLayoutConstraint activateConstraints:@[
-                                              [self.topAnchor constraintEqualToAnchor:view.topAnchor],
-                                              [self.rightAnchor constraintEqualToAnchor:view.rightAnchor],
-                                              [self.bottomAnchor constraintEqualToAnchor:view.bottomAnchor],
-                                              [self.leftAnchor constraintEqualToAnchor:view.leftAnchor]
+                                              [self.topAnchor constraintEqualToAnchor:view.topAnchor constant:insets.top],
+                                              [self.rightAnchor constraintEqualToAnchor:view.rightAnchor constant:-insets.right],
+                                              [self.bottomAnchor constraintEqualToAnchor:view.bottomAnchor constant:-insets.bottom],
+                                              [self.leftAnchor constraintEqualToAnchor:view.leftAnchor constant:insets.left]
                                               ]];
 }
 
