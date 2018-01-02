@@ -1,5 +1,5 @@
 //
-//  LIFEImageEditorView.h
+//  LIFEContainerAlertToImageEditorAnimator.h
 //  Copyright (C) 2018 Buglife, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,22 +16,10 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@class LIFEAnnotatedImage;
-@class LIFEScreenshotAnnotatorView;
+@interface LIFEContainerAlertToImageEditorAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 
-@interface LIFEImageEditorView : UIView
-
-- (nonnull instancetype)initWithAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage;
-
-- (nonnull LIFEScreenshotAnnotatorView *)screenshotAnnotatorView;
-- (nonnull UIImageView *)sourceImageView;
-- (void)prepareFirstPresentationTransition;
-- (void)prepareSecondPresentationTransition;
-- (void)performSecondPresentationTransition;
-- (void)completeFirstPresentationTransition;
-
-@property (nonnull, nonatomic, readonly) UIButton *cancelButton;
++ (BOOL)canAnimateFromViewController:(nonnull UIViewController *)fromVc toViewController:(nonnull UIViewController *)toVc;
 
 @end

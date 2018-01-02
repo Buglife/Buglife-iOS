@@ -1,5 +1,5 @@
 //
-//  LIFEImageEditorView.h
+//  LIFEContainerWindow.h
 //  Copyright (C) 2018 Buglife, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,20 +18,16 @@
 
 #import <UIKit/UIKit.h>
 
-@class LIFEAnnotatedImage;
-@class LIFEScreenshotAnnotatorView;
+@class LIFEContainerViewController;
 
-@interface LIFEImageEditorView : UIView
+/**
+ * Window that is placed above the host application's windows,
+ * that contains all Buglife-related view controllers.
+ * This class deprecates LIFEOverlayWindow & LIFEReportWindow.
+ */
+@interface LIFEContainerWindow : UIWindow
 
-- (nonnull instancetype)initWithAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage;
-
-- (nonnull LIFEScreenshotAnnotatorView *)screenshotAnnotatorView;
-- (nonnull UIImageView *)sourceImageView;
-- (void)prepareFirstPresentationTransition;
-- (void)prepareSecondPresentationTransition;
-- (void)performSecondPresentationTransition;
-- (void)completeFirstPresentationTransition;
-
-@property (nonnull, nonatomic, readonly) UIButton *cancelButton;
++ (nonnull instancetype)window;
+- (nonnull LIFEContainerViewController *)containerViewController;
 
 @end

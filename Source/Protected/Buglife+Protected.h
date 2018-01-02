@@ -13,6 +13,7 @@ extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierJPEG;
 extern const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished;
 
 @class LIFEBugButtonWindow;
+@class LIFEContainerWindow;
 @class LIFEReportOwner;
 @class LIFEAttribute;
 
@@ -33,6 +34,7 @@ extern const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished;
 @property (nullable, nonatomic, readonly) NSMutableDictionary<NSString *, LIFEAttribute *> *attributes;
 @property (nullable, nonatomic, readonly) LIFEReportOwner *reportOwner;
 @property (nonatomic, weak, null_unspecified) UIWindow *overlayWindow;
+@property (nonatomic, nullable) LIFEContainerWindow *containerWindow;
 @property (nonatomic) BOOL reportAlertOrWindowVisible;
 @property (nonatomic, getter=isScreenRecordingInvocationEnabled) BOOL screenRecordingInvocationEnabled;
 - (nullable instancetype)initInternal;

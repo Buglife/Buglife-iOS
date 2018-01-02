@@ -1,5 +1,5 @@
 //
-//  LIFEImageEditorView.h
+//  LIFEAlertActionView.h
 //  Copyright (C) 2018 Buglife, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,20 +18,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class LIFEAnnotatedImage;
-@class LIFEScreenshotAnnotatorView;
+typedef UIAlertActionStyle LIFEAlertActionStyle;
 
-@interface LIFEImageEditorView : UIView
+// This should probably renamed `LIFEAlertActionButton`.
+// Only reason I named it *View was because that's how UIKit
+// internally names their alert view buttons.
+@interface LIFEAlertActionView : UIControl
 
-- (nonnull instancetype)initWithAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage;
-
-- (nonnull LIFEScreenshotAnnotatorView *)screenshotAnnotatorView;
-- (nonnull UIImageView *)sourceImageView;
-- (void)prepareFirstPresentationTransition;
-- (void)prepareSecondPresentationTransition;
-- (void)performSecondPresentationTransition;
-- (void)completeFirstPresentationTransition;
-
-@property (nonnull, nonatomic, readonly) UIButton *cancelButton;
+- (nonnull instancetype)initWithTitle:(nonnull NSString *)title style:(LIFEAlertActionStyle)style;
 
 @end

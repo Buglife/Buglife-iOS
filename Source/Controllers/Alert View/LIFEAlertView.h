@@ -1,5 +1,5 @@
 //
-//  LIFEImageEditorView.h
+//  LIFEAlertView.h
 //  Copyright (C) 2018 Buglife, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,20 +18,24 @@
 
 #import <UIKit/UIKit.h>
 
-@class LIFEAnnotatedImage;
-@class LIFEScreenshotAnnotatorView;
+@class LIFEAlertAction;
 
-@interface LIFEImageEditorView : UIView
+@protocol LIFEAlertViewDelegate <NSObject>
 
-- (nonnull instancetype)initWithAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage;
+- (void)alertViewDidSelectAction:(nonnull LIFEAlertAction *)action;
 
-- (nonnull LIFEScreenshotAnnotatorView *)screenshotAnnotatorView;
-- (nonnull UIImageView *)sourceImageView;
-- (void)prepareFirstPresentationTransition;
-- (void)prepareSecondPresentationTransition;
-- (void)performSecondPresentationTransition;
-- (void)completeFirstPresentationTransition;
+@end
 
-@property (nonnull, nonatomic, readonly) UIButton *cancelButton;
+@interface LIFEAlertView : UIView
+
+- (nonnull instancetype)initWithTitle:(nonnull NSString *)title;
+- (void)setImage:(nullable UIImage *)image;
+- (void)addAction:(nonnull LIFEAlertAction *)action;
+
+@property (nullable, weak, nonatomic) id<LIFEAlertViewDelegate> delegate;
+@property (nonnull, nonatomic, readonly) UIImageView *imageView;
+
+// This should only be used by view controller animators
+- (void)performDismissTransition;
 
 @end

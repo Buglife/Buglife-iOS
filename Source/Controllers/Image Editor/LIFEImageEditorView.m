@@ -1,8 +1,19 @@
 //
 //  LIFEImageEditorView.m
-//  Buglife
+//  Copyright (C) 2018 Buglife, Inc.
 //
-//  Created by David Schukin on 12/28/17.
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
 //
 
 #import "LIFEImageEditorView.h"
@@ -16,8 +27,10 @@
 #import "LIFEAnnotatedImage.h"
 #import "LIFEMacros.h"
 
-let kImageBorderWidth = 2.0f;
+let kImageBorderWidth = 1.0f;
 let kNavBarButtonFontSize = 18.0f;
+let kToolbarHeight = 50.0f;
+let kNavButtonTopConstraintConstant = 26.0f;
 
 @interface LIFEImageEditorView ()
 
@@ -26,6 +39,9 @@ let kNavBarButtonFontSize = 18.0f;
 @property (nonatomic) UIButton *nextButton;
 @property (nonatomic) UIView *imageBorderView;
 @property (nonatomic) LIFEScreenshotAnnotatorView *screenshotAnnotatorView;
+@property (nonatomic) NSLayoutConstraint *toolbarBottomConstraint;
+@property (nonatomic) NSLayoutConstraint *cancelButtonTopConstraint;
+@property (nonatomic) NSLayoutConstraint *nextButtonTopConstraint;
 
 @end
 
@@ -35,8 +51,8 @@ let kNavBarButtonFontSize = 18.0f;
 {
     self = [super init];
     if (self) {
-        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-        _backgroundView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        _backgroundView = [[UIView alloc] init];
+        _backgroundView.backgroundColor = [UIColor whiteColor];
         
         UIColor *tintColor = [[self class] _buttonTintColor];
         _cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -54,7 +70,7 @@ let kNavBarButtonFontSize = 18.0f;
         _nextButton.tintColor = tintColor;
         
         _imageBorderView = [[UIView alloc] init];
-        _imageBorderView.backgroundColor = tintColor;
+        _imageBorderView.backgroundColor = [UIColor blackColor];
         
         _screenshotAnnotatorView = [[LIFEScreenshotAnnotatorView alloc] initWithAnnotatedImage:annotatedImage];
         [_screenshotAnnotatorView setToolbarsHidden:YES animated:NO completion:nil];
@@ -70,11 +86,14 @@ let kNavBarButtonFontSize = 18.0f;
         
         // Top button constraints
         
+        _cancelButtonTopConstraint = [_cancelButton.topAnchor constraintEqualToAnchor:self.topAnchor constant:kNavButtonTopConstraintConstant];
+        _nextButtonTopConstraint = [_nextButton.topAnchor constraintEqualToAnchor:self.topAnchor constant:kNavButtonTopConstraintConstant];
+        
         [NSLayoutConstraint activateConstraints:@[
                                                   [_cancelButton.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:20],
-                                                  [_cancelButton.topAnchor constraintEqualToAnchor:self.topAnchor constant:26],
+                                                  _cancelButtonTopConstraint,
                                                   [_nextButton.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-20],
-                                                  [_nextButton.topAnchor constraintEqualToAnchor:self.topAnchor constant:26]
+                                                  _nextButtonTopConstraint
                                                   ]];
         
         // Image constraints
@@ -82,11 +101,10 @@ let kNavBarButtonFontSize = 18.0f;
         // On iPhone 7 Plus, the image is 1545px high (out of 2208px high screen, in portrait mode)
 //        CGFloat multiplier = (1545.0f / 2208.0f);
         CGFloat aspectRatio = [LIFEUIImage life_aspectRatio:annotatedImage.sourceImage];
-        CGFloat toolbarHeight = 50;
         CGFloat navbarHeight = 44;
         CGFloat statusBarHeight = 20;
         CGFloat arbitraryMargin = 10;
-        CGFloat verticalMargin = (toolbarHeight + navbarHeight + statusBarHeight + arbitraryMargin); // Toolbar + nav + status bar
+        CGFloat verticalMargin = (kToolbarHeight + navbarHeight + statusBarHeight + arbitraryMargin); // Toolbar + nav + status bar
         
         [NSLayoutConstraint activateConstraints:@[
             [_screenshotAnnotatorView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
@@ -100,6 +118,7 @@ let kNavBarButtonFontSize = 18.0f;
         [_imageBorderView life_makeEdgesEqualTo:_screenshotAnnotatorView withInset:-kImageBorderWidth];
         
         
+        // TODO: Localize these strings!
         LIFEToolButton *arrowButton = [[LIFEToolButton alloc] init];
         arrowButton.imageView.image = [LIFEUIImage life_arrowToolbarIcon];
         arrowButton.titleView.text = @"Point";
@@ -130,14 +149,53 @@ let kNavBarButtonFontSize = 18.0f;
         toolButtons.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:toolButtons];
         
+        _toolbarBottomConstraint = [toolButtons.bottomAnchor constraintEqualToAnchor:self.bottomAnchor];
+        
         [NSLayoutConstraint activateConstraints:@[
-                                                  [toolButtons.bottomAnchor constraintEqualToAnchor:self.bottomAnchor],
-                                                  [toolButtons.widthAnchor constraintEqualToAnchor:self.widthAnchor multiplier:0.75],
-                                                  [toolButtons.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
-                                                  [toolButtons.heightAnchor constraintEqualToConstant:toolbarHeight]
-                                                  ]];
+            [toolButtons.heightAnchor constraintEqualToConstant:kToolbarHeight],
+            [toolButtons.widthAnchor constraintEqualToAnchor:self.widthAnchor multiplier:0.75],
+            [toolButtons.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
+            _toolbarBottomConstraint
+            ]];
     }
     return self;
+}
+
+- (nonnull UIImageView *)sourceImageView
+{
+    return _screenshotAnnotatorView.sourceImageView;
+}
+
+#pragma mark - Transitions
+
+- (void)prepareFirstPresentationTransition
+{
+    self.backgroundView.alpha = 0;
+    self.imageBorderView.alpha = 0;
+    self.screenshotAnnotatorView.alpha = 0;
+    _toolbarBottomConstraint.constant = kToolbarHeight;
+    _nextButtonTopConstraint.constant = -kNavButtonTopConstraintConstant;
+    _cancelButtonTopConstraint.constant = -kNavButtonTopConstraintConstant;
+    [self layoutIfNeeded];
+}
+
+- (void)prepareSecondPresentationTransition
+{
+    _toolbarBottomConstraint.constant = 0;
+    _nextButtonTopConstraint.constant = kNavButtonTopConstraintConstant;
+    _cancelButtonTopConstraint.constant = kNavButtonTopConstraintConstant;
+}
+
+- (void)performSecondPresentationTransition
+{
+    [self layoutIfNeeded];
+}
+
+- (void)completeFirstPresentationTransition
+{
+    self.backgroundView.alpha = 1;
+    self.screenshotAnnotatorView.alpha = 1;
+    self.imageBorderView.alpha = 1;
 }
 
 #pragma mark - Private methods

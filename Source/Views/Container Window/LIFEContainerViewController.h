@@ -1,5 +1,5 @@
 //
-//  LIFEImageEditorView.h
+//  LIFEContainerViewController.h
 //  Copyright (C) 2018 Buglife, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,20 +18,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class LIFEAnnotatedImage;
-@class LIFEScreenshotAnnotatorView;
+@interface LIFEContainerViewController : UIViewController
 
-@interface LIFEImageEditorView : UIView
+@property (nonatomic) UIStatusBarStyle statusBarStyle;
+@property (nonatomic) BOOL statusBarHidden;
 
-- (nonnull instancetype)initWithAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage;
-
-- (nonnull LIFEScreenshotAnnotatorView *)screenshotAnnotatorView;
-- (nonnull UIImageView *)sourceImageView;
-- (void)prepareFirstPresentationTransition;
-- (void)prepareSecondPresentationTransition;
-- (void)performSecondPresentationTransition;
-- (void)completeFirstPresentationTransition;
-
-@property (nonnull, nonatomic, readonly) UIButton *cancelButton;
+- (void)life_setChildViewController:(nonnull UIViewController *)childViewController animated:(BOOL)animated completion:(void (^_Nullable)(void))completion;
+- (void)life_dismissEverythingAnimated:(BOOL)flag completion:(void (^ __nullable)(void))completion;
 
 @end

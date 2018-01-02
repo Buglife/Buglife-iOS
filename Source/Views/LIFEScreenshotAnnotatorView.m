@@ -233,7 +233,7 @@ static const NSTimeInterval kToolbarTransitionDuration = 0.25;
     }];
 }
 
-- (UIView *)sourceImageView
+- (UIImageView *)sourceImageView
 {
     return self.annotatedImageView.sourceImageView;
 }

@@ -47,6 +47,9 @@
 #import "NSArray+LIFEAdditions.h"
 #import "LIFEVideoAttachment.h"
 #import "LIFEImagePickerController.h"
+#import "LIFEContainerWindow.h"
+#import "LIFEContainerViewController.h"
+#import "LIFEImageEditorViewController.h"
 
 static NSString * const kSDKVersion = @"2.1.0";
 void life_dispatch_async_to_main_queue(dispatch_block_t block);
@@ -73,7 +76,7 @@ static NSString * const LIFE_UIScreenCapturedDidChangeNotification = @"UIScreenC
 
 const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 6;
 
-@interface Buglife () <LIFEReporterDelegate, LIFEBugButtonWindowDelegate>
+@interface Buglife () <LIFEReporterDelegate, LIFEBugButtonWindowDelegate, LIFEImageEditorViewControllerDelegate>
 
 @property (nonatomic) LIFEReportOwner *reportOwner;
 @property (nonatomic) BOOL debugMode;
@@ -82,6 +85,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
 // Used to store weak refs to windows for UIAlertControllers, so
 // we can set the window to hidden after the alert is dismissed
 @property (nonatomic, weak) LIFEOverlayWindow *overlayWindow;
+@property (nonatomic) LIFEContainerWindow *containerWindow;
 @property (nonatomic) BOOL reportAlertOrWindowVisible;
 @property (nonatomic) LIFEDataProvider *dataProvider;
 @property (nonatomic) LIFEBugButtonWindow *bugButtonWindow;
@@ -340,17 +344,28 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     
     [self.bugButtonWindow setBugButtonHidden:YES animated:animated];
     
+#if !USE_NEW_CONTAINER_WINDOW
     LIFEReportWindow *reportWindow = [LIFEReportWindow reportWindow];
     reportWindow.reporterDelegate = self;
+#endif
     
     LIFEReportBuilder *reportBuilder = [[LIFEReportBuilder alloc] init];
     reportBuilder.attributes = self.attributes;
     reportBuilder.creationDate = [NSDate date];
     LIFEScreenshotContext *context = [LIFEScreenshotContext currentContext];
-    BOOL simulateScreenshotCapture = NO;
     
+#if USE_NEW_CONTAINER_WINDOW
     if (screenshot) {
-        simulateScreenshotCapture = (invocation != LIFEInvocationOptionsScreenshot);
+        LIFEImageEditorViewController *vc = [[LIFEImageEditorViewController alloc] initWithScreenshot:screenshot context:context];
+        vc.delegate = self;
+        [self.containerWindow.containerViewController life_setChildViewController:vc animated:animated completion:nil];
+    } else {
+        // TODO: THIS!!!!
+        NSParameterAssert(NO);
+    }
+#else
+    if (screenshot) {
+        BOOL simulateScreenshotCapture = (invocation != LIFEInvocationOptionsScreenshot);
         [reportWindow presentReporterWithReportBuilder:reportBuilder screenshot:screenshot context:context simulateScreenshotCapture:simulateScreenshotCapture animated:animated];
     } else {
         [reportWindow presentReporterWithReportBuilder:reportBuilder context:context animated:animated completion:^(LIFEReportTableViewController *reportTableViewController) {
@@ -359,10 +374,13 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
             }
         }];
     }
+#endif
     
     [self _requestAttachmentsForReportBuilder:reportBuilder];
     
+#if !USE_NEW_CONTAINER_WINDOW
     self.reportWindow = reportWindow;
+#endif
 }
 
 - (void)_dismissReporterAnimated:(BOOL)animated andShowThankYouDialog:(BOOL)shoudShowThankYouDialog
@@ -372,6 +390,22 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     }
     
     __weak typeof(self) weakSelf = self;
+    
+    [self.containerWindow.containerViewController life_dismissEverythingAnimated:animated completion:^{
+        __strong Buglife *strongSelf = weakSelf;
+        if (strongSelf) {
+            if (shoudShowThankYouDialog) {
+                [strongSelf _showThankYouDialogWithCancelActionHandler:^{
+                    __strong Buglife *strongSelf2 = weakSelf;
+                    if (strongSelf2) {
+                        [strongSelf2 _reporterAndThankYouDialogDidDismissAnimated:animated];
+                    }
+                }];
+            } else {
+                [strongSelf _reporterAndThankYouDialogDidDismissAnimated:animated];
+            }
+        }
+    }];
 
     [self.reportWindow dismissAnimated:animated completion:^{
         __strong Buglife *strongSelf = weakSelf;
@@ -399,6 +433,9 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     self.reportWindow.rootViewController = nil;
     self.reportWindow.hidden = YES;
     self.reportWindow = nil;
+    self.containerWindow.rootViewController = nil;
+    self.containerWindow.hidden = YES;
+    self.containerWindow = nil;
     self.reportAlertOrWindowVisible = NO;
     [self.bugButtonWindow setBugButtonHidden:NO animated:animated];
 }
@@ -476,6 +513,14 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
             }
 
             self.overlayWindow = nil;
+            
+            __strong LIFEContainerWindow *strongContainerWindow = self.containerWindow;
+            
+            if (strongContainerWindow) {
+                strongContainerWindow.hidden = YES;
+            }
+            
+            self.containerWindow = nil;
         }
         
         self.capturedOrientation = [UIApplication sharedApplication].statusBarOrientation;
@@ -523,6 +568,18 @@ void life_dispatch_async_to_main_queue(dispatch_block_t block) {
 - (UIWindow *)_applicationKeyWindow
 {
     return [[UIApplication sharedApplication] keyWindow];
+}
+
+#pragma mark - LIFEImageEditorViewControllerDelegate
+
+- (void)imageEditorViewControllerDidCancel:(nonnull LIFEImageEditorViewController *)controller
+{
+    [self _dismissReporterAnimated:YES andShowThankYouDialog:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LIFENotificationUserCanceledReport object:self];
+    if ([self.delegate respondsToSelector:@selector(buglife:userCanceledReportWithAttributes:)])
+    {
+        [self.delegate buglife:self userCanceledReportWithAttributes:[NSDictionary dictionaryWithDictionary:self.attributes]];
+    }
 }
 
 #pragma mark - LIFEReporterDelegate

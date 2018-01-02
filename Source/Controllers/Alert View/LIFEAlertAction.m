@@ -1,5 +1,5 @@
 //
-//  LIFEImageEditorView.h
+//  LIFEAlertAction.m
 //  Copyright (C) 2018 Buglife, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,22 +16,26 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+#import "LIFEAlertAction.h"
+#import "LIFEMacros.h"
 
-@class LIFEAnnotatedImage;
-@class LIFEScreenshotAnnotatorView;
+@interface LIFEAlertAction ()
 
-@interface LIFEImageEditorView : UIView
+@property (nonnull, nonatomic) NSString *title;
+@property (nonatomic) UIAlertActionStyle style;
+@property (nonnull, nonatomic) LIFEAlertActionHandler handler;
 
-- (nonnull instancetype)initWithAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage;
+@end
 
-- (nonnull LIFEScreenshotAnnotatorView *)screenshotAnnotatorView;
-- (nonnull UIImageView *)sourceImageView;
-- (void)prepareFirstPresentationTransition;
-- (void)prepareSecondPresentationTransition;
-- (void)performSecondPresentationTransition;
-- (void)completeFirstPresentationTransition;
+@implementation LIFEAlertAction
 
-@property (nonnull, nonatomic, readonly) UIButton *cancelButton;
++ (nonnull instancetype)actionWithTitle:(nonnull NSString *)title style:(UIAlertActionStyle)style handler:(nonnull LIFEAlertActionHandler)handler
+{
+    let action = [[LIFEAlertAction alloc] init];
+    action.title = title;
+    action.style = style;
+    action.handler = handler;
+    return action;
+}
 
 @end

@@ -13,6 +13,10 @@
 #import "LIFEOverlayWindow.h"
 #import "LIFENotificationLogger.h"
 #import "LIFECompatibilityUtils.h"
+#import "LIFEAlertController.h"
+#import "LIFEAlertAction.h"
+#import "LIFEContainerWindow.h"
+#import "LIFEContainerViewController.h"
 
 @implementation Buglife (UIStuff)
 
@@ -72,19 +76,12 @@
         style = UIAlertControllerStyleAlert;
     }
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:message message:nil preferredStyle:style];
+    let alert = [LIFEAlertControllerClass alertControllerWithTitle:message message:nil preferredStyle:style];
+#if USE_NEW_CONTAINER_WINDOW
+    [alert setImage:screenshot];
+#endif
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LIFELocalizedString(LIFEStringKey_Cancel) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        if (bugButtonIsEnabled) {
-            [self.bugButtonWindow setBugButtonHidden:NO animated:YES];
-        }
-        
-        [firstResponder becomeFirstResponder];
-        self.reportAlertOrWindowVisible = NO;
-    }];
-    [alert addAction:cancelAction];
-    
-    UIAlertAction *reportAction = [UIAlertAction actionWithTitle:LIFELocalizedString(LIFEStringKey_ReportABug) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    let reportAction = [LIFEAlertActionClass actionWithTitle:LIFELocalizedString(LIFEStringKey_ReportABug) style:UIAlertActionStyleDefault handler:^(LIFEAlertActionClass * _Nonnull action) {
         [self _presentReporterFromInvocation:invocation withScreenshot:screenshot animated:YES];
     }];
     [alert addAction:reportAction];
@@ -106,7 +103,7 @@
     }
     
     if (disableTitle) {
-        UIAlertAction *hideFloatingButtonAction = [UIAlertAction actionWithTitle:disableTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        let hideFloatingButtonAction = [LIFEAlertActionClass actionWithTitle:disableTitle style:UIAlertActionStyleDestructive handler:^(LIFEAlertActionClass * _Nonnull action) {
             if (bugButtonIsEnabled) {
                 [self.bugButtonWindow setBugButtonHidden:NO animated:YES];
             }
@@ -119,11 +116,29 @@
     #warning DEMO MODE ON
 #endif
     
+    let cancelAction = [LIFEAlertActionClass actionWithTitle:LIFELocalizedString(LIFEStringKey_Cancel) style:UIAlertActionStyleCancel handler:^(LIFEAlertActionClass * _Nonnull action) {
+        if (bugButtonIsEnabled) {
+            [self.bugButtonWindow setBugButtonHidden:NO animated:YES];
+        }
+        
+        [firstResponder becomeFirstResponder];
+        self.reportAlertOrWindowVisible = NO;
+    }];
+    [alert addAction:cancelAction];
+
+#if USE_NEW_CONTAINER_WINDOW
+    LIFEContainerWindow *window = [LIFEContainerWindow window];
+    window.hidden = NO;
+    [window.containerViewController life_setChildViewController:alert animated:YES completion:NULL];
+    
+    self.containerWindow = window;
+#else
     LIFEOverlayWindow *alertWindow = [LIFEOverlayWindow overlayWindow];
     alertWindow.hidden = NO;
     [alertWindow.rootViewController presentViewController:alert animated:YES completion:NULL];
     
     self.overlayWindow = alertWindow;
+#endif
     self.reportAlertOrWindowVisible = YES;
 }
 
