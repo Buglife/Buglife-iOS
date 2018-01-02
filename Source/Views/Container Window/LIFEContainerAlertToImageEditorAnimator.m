@@ -54,7 +54,7 @@ let kSecondAnimationDuration = 0.75f;
     imageView.frame = imageViewFrameStart;
     
     [toVc.imageEditorView prepareFirstPresentationTransition];
-    [fromVc animateAlertViewBackgroundOut];
+    [fromVc prepareExpandToDismissTransition];
     
     fromVc.alertView.imageView.hidden = YES;
     
@@ -63,13 +63,16 @@ let kSecondAnimationDuration = 0.75f;
     
     [UIView animateWithDuration:kInitialAnimationDuration delay:0 usingSpringWithDamping:damping initialSpringVelocity:initialSpringVelocity options:0 animations:^{
         [fromVc.alertView layoutIfNeeded];
-        [fromVc.alertView animateContentsOut];
+        [fromVc.alertView performDismissTransition];
         imageView.frame = imageViewFrameEnd;
     } completion:^(BOOL finished) {
         [toVc.imageEditorView completeFirstPresentationTransition];
         [imageView removeFromSuperview];
     }];
     
+    // We need to use a dispatch_after instead of the UIView delay
+    // block because we're changing constraints after a delay, *then*
+    // animating them
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kSecondAnimationDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [toVc.imageEditorView prepareSecondPresentationTransition];
         

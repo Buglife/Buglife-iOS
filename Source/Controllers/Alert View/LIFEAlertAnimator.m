@@ -21,16 +21,45 @@
 #import "LIFEAlertView.h"
 #import "LIFEMacros.h"
 
-let kInitialAlertViewScale = 0.5;
+let kInitialAlertViewScale = 1.2;
+let kFinalAlertViewScaleWhenAnimatingOut = 0.8;
+
+@interface LIFEAlertAnimator ()
+
+@property (nonatomic) BOOL animateIn;
+
+@end
 
 @implementation LIFEAlertAnimator
 
-+ (BOOL)canAnimateFromViewController:(nonnull UIViewController *)fromVc toViewController:(nonnull UIViewController *)toVc
++ (nonnull instancetype)presentationAnimator
 {
-    return [toVc isKindOfClass:[LIFEAlertController class]];
+    LIFEAlertAnimator *animator = [[LIFEAlertAnimator alloc] init];
+    animator.animateIn = YES;
+    return animator;
+}
+
++ (nonnull instancetype)dismissAnimator
+{
+    LIFEAlertAnimator *animator = [[LIFEAlertAnimator alloc] init];
+    animator.animateIn = NO;
+    return animator;
+}
+
++ (BOOL)canAnimateFromViewController:(nullable UIViewController *)fromVc toViewController:(nullable UIViewController *)toVc
+{
+    return [fromVc isKindOfClass:[LIFEAlertController class]] || [toVc isKindOfClass:[LIFEAlertController class]];
 }
 
 - (void)animateTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext {
+    if (_animateIn) {
+        [self _animateInTransition:transitionContext];
+    } else {
+        [self _animateOutTransition:transitionContext];
+    }
+}
+
+- (void)_animateInTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext {
     let toVc = (LIFEAlertController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     let containerView = transitionContext.containerView;
     let duration = [self transitionDuration:transitionContext];
@@ -52,8 +81,24 @@ let kInitialAlertViewScale = 0.5;
     }];
 }
 
+- (void)_animateOutTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext {
+    let fromVc = (LIFEAlertController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    let duration = [self transitionDuration:transitionContext];
+    [UIView animateWithDuration:duration animations:^{
+        [fromVc setDarkOverlayHidden:YES];
+        fromVc.alertView.alpha = 0;
+        fromVc.alertView.transform = CGAffineTransformMakeScale(kFinalAlertViewScaleWhenAnimatingOut, kFinalAlertViewScaleWhenAnimatingOut);;
+    } completion:^(BOOL finished) {
+        [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
+    }];
+}
+
 - (NSTimeInterval)transitionDuration:(nullable id<UIViewControllerContextTransitioning>)transitionContext {
-    return 0.5;
+    if (_animateIn) {
+        return 0.5;
+    } else {
+        return 0.2;
+    }
 }
 
 @end

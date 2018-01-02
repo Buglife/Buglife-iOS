@@ -9,6 +9,8 @@
 #import "LIFEAlertAnimator.h"
 #import "LIFEAlertView.h"
 #import "LIFEAlertAction.h"
+#import "LIFEContainerViewController.h"
+#import "LIFEMacros.h"
 
 @interface LIFEAlertController () <LIFEAlertViewDelegate>
 
@@ -83,11 +85,23 @@
 - (void)alertViewDidSelectAction:(nonnull LIFEAlertAction *)action
 {
     if (action.style == UIAlertActionStyleCancel) {
-        [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        [self _dismissSelfAnimated:YES completion:^{
             action.handler(action);
         }];
     } else {
         action.handler(action);
+    }
+}
+
+#pragma mark - Private methods
+
+- (void)_dismissSelfAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion
+{
+    if ([self.parentViewController isKindOfClass:[LIFEContainerViewController class]]) {
+        let container = (LIFEContainerViewController *)self.parentViewController;
+        [container life_dismissEverythingAnimated:kCAAnimationCubic completion:completion];
+    } else {
+        [self.parentViewController dismissViewControllerAnimated:kCAAnimationCubic completion:completion];
     }
 }
 

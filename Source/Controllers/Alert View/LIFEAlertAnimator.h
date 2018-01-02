@@ -20,6 +20,9 @@
 
 @interface LIFEAlertAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 
-+ (BOOL)canAnimateFromViewController:(nonnull UIViewController *)fromVc toViewController:(nonnull UIViewController *)toVc;
++ (BOOL)canAnimateFromViewController:(nullable UIViewController *)fromVc toViewController:(nullable UIViewController *)toVc;
+
++ (nonnull instancetype)presentationAnimator;
++ (nonnull instancetype)dismissAnimator;
 
 @end

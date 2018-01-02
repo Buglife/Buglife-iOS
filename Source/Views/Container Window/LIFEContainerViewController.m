@@ -59,7 +59,7 @@
     if ([LIFEContainerAlertToImageEditorAnimator canAnimateFromViewController:visibleViewController toViewController:childViewController]) {
         animator = [[LIFEContainerAlertToImageEditorAnimator alloc] init];
     } else if ([LIFEAlertAnimator canAnimateFromViewController:visibleViewController toViewController:childViewController]) {
-        animator = [[LIFEAlertAnimator alloc] init];
+        animator = [LIFEAlertAnimator presentationAnimator];
     } else {
         [self.view addSubview:toView];
         [childViewController didMoveToParentViewController:self];
@@ -80,6 +80,10 @@
         if ([animator respondsToSelector:@selector(animationEnded:)]) {
             [animator animationEnded:didComplete];
         }
+        
+        if (completion) {
+            completion();
+        }
     };
     
     [animator animateTransition:transitionContext];
@@ -87,7 +91,33 @@
 
 - (void)life_dismissEverythingAnimated:(BOOL)flag completion:(void (^ __nullable)(void))completion
 {
-    completion();
+    UIViewController *visibleViewController = self.childViewControllers.lastObject;
+    
+    if ([LIFEAlertAnimator canAnimateFromViewController:visibleViewController toViewController:self]) {
+        LIFEAlertAnimator *animator = [LIFEAlertAnimator dismissAnimator];
+        LIFEContainerTransitionContext *transitionContext = [[LIFEContainerTransitionContext alloc] initWithFromViewController:visibleViewController toViewController:self containerView:self.view];
+        transitionContext.animated = YES;
+        transitionContext.interactive = NO;
+        transitionContext.completionBlock = ^(BOOL didComplete) {
+            [visibleViewController.view removeFromSuperview];
+            [visibleViewController removeFromParentViewController];
+            
+            if ([animator respondsToSelector:@selector(animationEnded:)]) {
+                [animator animationEnded:didComplete];
+            }
+            
+            if (completion) {
+                completion();
+            }
+        };
+        
+        [visibleViewController willMoveToParentViewController:nil];
+        [animator animateTransition:transitionContext];
+    } else {
+        if (completion) {
+            completion();
+        }
+    }
 }
 
 @end
