@@ -45,6 +45,7 @@ static NSString * const kPendingReportsDirectory = @"pending_reports";
 
 @property (nonatomic) LIFEReportOwner *reportOwner;
 @property (nonatomic) NSString *sdkVersion;
+@property (nonatomic) NSString *sdkName;
 @property (nonatomic) LIFEAppInfoProvider *appInfoProvider;
 @property (nonatomic) LIFENetworkManager *networkManager;
 @property (nonatomic) dispatch_queue_t workQueue;
@@ -61,6 +62,7 @@ static NSString * const kPendingReportsDirectory = @"pending_reports";
     if (self) {
         _reportOwner = reportOwner;
         _sdkVersion = sdkVersion;
+        _sdkName = NSClassFromString(@"RNBuglife") != Nil ? @"Buglife React Native iOS" : @"Buglife iOS";
         _appInfoProvider = [[LIFEAppInfoProvider alloc] init];
         _networkManager = [[LIFENetworkManager alloc] init];
         _workQueue = dispatch_queue_create("com.buglife.LIFEDataProvider.workQueue", DISPATCH_QUEUE_SERIAL);
@@ -103,6 +105,7 @@ static NSString * const kPendingReportsDirectory = @"pending_reports";
 
     NSMutableDictionary *reportDict = [report JSONDictionary].mutableCopy;
     [LIFENSMutableDictionaryify(reportDict) life_safeSetObject:self.sdkVersion forKey:@"sdk_version"];
+    [LIFENSMutableDictionaryify(reportDict) life_safeSetObject:self.sdkName forKey:@"sdk_name"];
     
     NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
     mutableParameters[@"report"] = reportDict;
