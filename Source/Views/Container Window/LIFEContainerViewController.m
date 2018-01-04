@@ -18,7 +18,10 @@
 
 #import "LIFEContainerViewController.h"
 #import "LIFEAlertAnimator.h"
+#import "LIFEAlertController.h"
 #import "LIFEContainerAlertToImageEditorAnimator.h"
+#import "LIFEImageEditorCancelAnimator.h"
+#import "LIFEImageEditorViewController.h"
 #import "LIFEContainerTransitionContext.h"
 
 @interface LIFEContainerViewController ()
@@ -93,8 +96,9 @@
 {
     UIViewController *visibleViewController = self.childViewControllers.lastObject;
     
-    if ([LIFEAlertAnimator canAnimateFromViewController:visibleViewController toViewController:self]) {
-        LIFEAlertAnimator *animator = [LIFEAlertAnimator dismissAnimator];
+    id<UIViewControllerAnimatedTransitioning> animator = [self _animatorToDismissViewController:visibleViewController];
+    
+    if (animator) {
         LIFEContainerTransitionContext *transitionContext = [[LIFEContainerTransitionContext alloc] initWithFromViewController:visibleViewController toViewController:self containerView:self.view];
         transitionContext.animated = YES;
         transitionContext.interactive = NO;
@@ -118,6 +122,17 @@
             completion();
         }
     }
+}
+
+- (nullable id<UIViewControllerAnimatedTransitioning>)_animatorToDismissViewController:(UIViewController *)viewController
+{
+    if ([viewController isKindOfClass:[LIFEAlertController class]]) {
+        return [LIFEAlertAnimator dismissAnimator];
+    } else if ([viewController isKindOfClass:[LIFEImageEditorViewController class]]) {
+        return [[LIFEImageEditorCancelAnimator alloc] init];
+    }
+    
+    return nil;
 }
 
 @end
