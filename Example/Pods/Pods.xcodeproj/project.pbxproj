@@ -184,6 +184,8 @@
 		B7EE929B1FFB7366003C44E7 /* LIFEImageEditorCancelAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EE92991FFB7366003C44E7 /* LIFEImageEditorCancelAnimator.m */; };
 		B7EE92E71FFDF8FF003C44E7 /* LIFEContainerModalDismissAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EE92E51FFDF8FF003C44E7 /* LIFEContainerModalDismissAnimator.h */; };
 		B7EE92E81FFDF8FF003C44E7 /* LIFEContainerModalDismissAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EE92E61FFDF8FF003C44E7 /* LIFEContainerModalDismissAnimator.m */; };
+		B7EE92EC1FFDFC19003C44E7 /* LIFEClearNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EE92EA1FFDFC19003C44E7 /* LIFEClearNavigationController.h */; };
+		B7EE92ED1FFDFC19003C44E7 /* LIFEClearNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EE92EB1FFDFC19003C44E7 /* LIFEClearNavigationController.m */; };
 		B878F62969AAAD129BF17BD68FC46EF1 /* LIFEAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 37F35F68104435B9E57CA58134DFBEB7 /* LIFEAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B88515B892DF6EF91E2782A8236B95FF /* LIFEDeviceBatteryState.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E862ABA3CA67A6F9486CC57EF3B86EE /* LIFEDeviceBatteryState.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		B88CF73F9E6EFE317775F65777200727 /* LIFEContextAwareLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ECAC1A8A9D0C2CB03FB775C1F7ED492 /* LIFEContextAwareLogFormatter.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -419,6 +421,8 @@
 		B7EE92991FFB7366003C44E7 /* LIFEImageEditorCancelAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LIFEImageEditorCancelAnimator.m; sourceTree = "<group>"; };
 		B7EE92E51FFDF8FF003C44E7 /* LIFEContainerModalDismissAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LIFEContainerModalDismissAnimator.h; sourceTree = "<group>"; };
 		B7EE92E61FFDF8FF003C44E7 /* LIFEContainerModalDismissAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LIFEContainerModalDismissAnimator.m; sourceTree = "<group>"; };
+		B7EE92EA1FFDFC19003C44E7 /* LIFEClearNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LIFEClearNavigationController.h; sourceTree = "<group>"; };
+		B7EE92EB1FFDFC19003C44E7 /* LIFEClearNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LIFEClearNavigationController.m; sourceTree = "<group>"; };
 		B918A4A2CC44F708BFE016F5BD9600A7 /* LIFEContextAwareLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LIFEContextAwareLogFormatter.m; sourceTree = "<group>"; };
 		B952B1A8173FFD525BA404D2F4B7E557 /* LIFEAVFoundation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LIFEAVFoundation.m; sourceTree = "<group>"; };
 		BA40D873A2C1C1A24ED723132A85496C /* LIFEAnnotationView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LIFEAnnotationView.h; sourceTree = "<group>"; };
@@ -559,6 +563,7 @@
 		15CA03A25E384B9C7CA1516A91FBBB71 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B7EE92E91FFDFBC4003C44E7 /* Navigation Controller */,
 				B767C1421FF9A2FB00923DAB /* Container Window */,
 				ACF709CF9CF9518D2DA7C42F093CF2A8 /* LIFEAnnotatedImageView.h */,
 				A902EEA33614B23A1BEF9A4D4BF96BA6 /* LIFEAnnotatedImageView.m */,
@@ -811,6 +816,15 @@
 			path = "Container Window";
 			sourceTree = "<group>";
 		};
+		B7EE92E91FFDFBC4003C44E7 /* Navigation Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B7EE92EA1FFDFC19003C44E7 /* LIFEClearNavigationController.h */,
+				B7EE92EB1FFDFC19003C44E7 /* LIFEClearNavigationController.m */,
+			);
+			path = "Navigation Controller";
+			sourceTree = "<group>";
+		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -972,6 +986,7 @@
 				920F32AB99528C4416A64CCC4137A6B9 /* LIFEAVFoundation.h in Headers */,
 				1FB6082FED7A3197100B2EB15FE7E7EF /* LIFEAVPlayerViewController.h in Headers */,
 				EF3F07BB626530972B7BEE93E473F5AD /* LIFEAwesomeLogger+Protected.h in Headers */,
+				B7EE92EC1FFDFC19003C44E7 /* LIFEClearNavigationController.h in Headers */,
 				1A2F1E41B2850E778E3CEC411C04A6E2 /* LIFEAwesomeLogger.h in Headers */,
 				F71C85E4969ACE9A6DCAB6F948327DB1 /* LIFEBlurAnnotationView.h in Headers */,
 				6858A140F63291FCDEAAD4C2039CEB95 /* LIFEBugButtonWindow.h in Headers */,
@@ -1161,6 +1176,7 @@
 				DBB320896DF6CE89F3FF994121768CE6 /* LIFEAwesomeLogger.m in Sources */,
 				8BC7B4C0C702BA0EAA2CBF0FC609C3EC /* LIFEBlurAnnotationView.m in Sources */,
 				B767C1351FF871DF00923DAB /* LIFEAlertAnimator.m in Sources */,
+				B7EE92ED1FFDFC19003C44E7 /* LIFEClearNavigationController.m in Sources */,
 				B5407A6F12251401CD99C96D9ECF7CA2 /* LIFEBugButtonWindow.m in Sources */,
 				F1DD2F9ABABFF13B8ADDA9C711D6E8E5 /* LIFECategories.m in Sources */,
 				3207ACF04B2B836A14408A7B24940B85 /* LIFECompatibilityUtils.m in Sources */,

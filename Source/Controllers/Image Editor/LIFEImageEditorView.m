@@ -35,8 +35,8 @@ let kNavButtonTopConstraintConstant = 26.0f;
 @interface LIFEImageEditorView ()
 
 @property (nonatomic) UIView *backgroundView;
-@property (nonatomic) UIButton *cancelButton;
-@property (nonatomic) UIButton *nextButton;
+@property (nonatomic) UIButton *cancelButton; // TODO: unused, remove
+@property (nonatomic) UIButton *nextButton; // TODO: unused, remove
 @property (nonatomic) UIView *imageBorderView;
 @property (nonatomic) LIFEScreenshotAnnotatorView *screenshotAnnotatorView;
 @property (nonatomic) NSLayoutConstraint *toolbarBottomConstraint;
@@ -157,6 +157,9 @@ let kNavButtonTopConstraintConstant = 26.0f;
             [toolButtons.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
             _toolbarBottomConstraint
             ]];
+        
+        self.cancelButton.hidden = YES; // hidden because we now use the navigation controller's nav bar items to show these buttons
+        self.nextButton.hidden = YES; // hidden because we now use the navigation controller's nav bar items to show these buttons
     }
     return self;
 }

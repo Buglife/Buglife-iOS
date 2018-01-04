@@ -22,6 +22,7 @@
 #define LIFE_THROW_UNAVAILABLE_EXCEPTION(useselector) @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:[NSString stringWithFormat:@"[%@ %@] is unavailable; please use [%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd), NSStringFromClass([self class]), NSStringFromSelector(@selector(useselector))] userInfo:nil]
 
 #define LIFEAssertMainThread NSParameterAssert([NSThread isMainThread])
+#define LIFEAssertIsKindOfClass(obj, clazz) NSParameterAssert([obj isKindOfClass:[clazz class]])
 
 #import "LIFELogger.h"
 #import "LIFELocalizedStringProvider.h"

@@ -20,6 +20,4 @@
 
 @interface LIFEContainerAlertToImageEditorAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 
-+ (BOOL)canAnimateFromViewController:(nonnull UIViewController *)fromVc toViewController:(nonnull UIViewController *)toVc;
-
 @end

@@ -24,9 +24,9 @@
 
 @protocol LIFEReporterDelegate <NSObject>
 
-- (BOOL)reporterShouldSubmitSynchronously:(nonnull LIFEReportWindow *)reporter;
-- (void)reporterDidCancel:(nonnull LIFEReportWindow *)reporter;
-- (void)reporter:(nonnull LIFEReportWindow *)reporter shouldCompleteReportBuilder:(nonnull LIFEReportBuilder *)reportBuilder completion:(void (^_Nullable)(BOOL))completion;
+- (BOOL)reporterShouldSubmitSynchronously:(nullable LIFEReportWindow *)reporter;
+- (void)reporterDidCancel:(nullable LIFEReportWindow *)reporter;
+- (void)reporter:(nullable LIFEReportWindow *)reporter shouldCompleteReportBuilder:(nonnull LIFEReportBuilder *)reportBuilder completion:(void (^_Nullable)(BOOL))completion;
 
 @end
 

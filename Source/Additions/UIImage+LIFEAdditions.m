@@ -744,7 +744,7 @@ static const CGFloat kLidSpacing = 1;
 + (nonnull UIImage *)life_resizableRoundedRectWithHorizontalInset:(CGFloat)insetX
 {
     CGFloat strokeWidth = 1;
-    CGFloat cornerRadius = 5;
+    CGFloat cornerRadius = 10;
     CGSize size = CGSizeMake(200, 200);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     CGRect rect = CGRectMake(0, 0, size.width, size.height);

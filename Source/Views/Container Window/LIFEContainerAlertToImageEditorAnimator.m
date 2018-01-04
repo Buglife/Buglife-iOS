@@ -22,6 +22,7 @@
 #import "LIFEImageEditorViewController.h"
 #import "LIFEImageEditorView.h"
 #import "LIFEScreenshotAnnotatorView.h"
+#import "LIFEClearNavigationController.h"
 #import "LIFEMacros.h"
 
 let kInitialAnimationDuration = 0.75f;
@@ -30,20 +31,22 @@ let kSecondAnimationDuration = 0.75f;
 
 @implementation LIFEContainerAlertToImageEditorAnimator
 
-+ (BOOL)canAnimateFromViewController:(nonnull UIViewController *)fromVc toViewController:(nonnull UIViewController *)toVc
-{
-    return [fromVc isKindOfClass:[LIFEAlertController class]] && [toVc isKindOfClass:[LIFEImageEditorViewController class]];
-}
-
 - (void)animateTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext
 {
     LIFEAlertController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    LIFEImageEditorViewController *toVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    LIFEClearNavigationController *toNavVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *containerView = transitionContext.containerView;
-    [containerView addSubview:toVc.view];
+    [containerView addSubview:toNavVc.view];
+    LIFEAssertIsKindOfClass(fromVc, LIFEAlertController);
+    LIFEAssertIsKindOfClass(toNavVc, LIFEClearNavigationController);
+    NSParameterAssert([toNavVc isKindOfClass:[LIFEClearNavigationController class]]);
+    
+    let toVc = (LIFEImageEditorViewController *)toNavVc.visibleViewController;
+    LIFEAssertIsKindOfClass(toVc, LIFEImageEditorViewController);
     
     CGRect imageViewFrameStart = [containerView convertRect:fromVc.alertView.imageView.frame fromView:fromVc.alertView.imageView.superview];
     LIFEImageEditorView *imageEditorView = toVc.imageEditorView;
+    [toNavVc.view layoutIfNeeded];
     [imageEditorView layoutIfNeeded];
     CGRect imageViewFrameEnd = [containerView convertRect:imageEditorView.sourceImageView.frame fromView:imageEditorView.sourceImageView.superview];
     
@@ -61,6 +64,9 @@ let kSecondAnimationDuration = 0.75f;
     let damping = 0.6f;
     let initialSpringVelocity = 0.0f;
     
+    let navBarTransform = CGAffineTransformMakeTranslation(0, -60);
+    toNavVc.navigationBar.transform = navBarTransform;
+    
     [UIView animateWithDuration:kInitialAnimationDuration delay:0 usingSpringWithDamping:damping initialSpringVelocity:initialSpringVelocity options:0 animations:^{
         [fromVc.alertView layoutIfNeeded];
         [fromVc.alertView performDismissTransition];
@@ -77,6 +83,7 @@ let kSecondAnimationDuration = 0.75f;
         [toVc.imageEditorView prepareSecondPresentationTransition];
         
         [UIView animateWithDuration:kSecondAnimationDuration delay:0 usingSpringWithDamping:damping initialSpringVelocity:initialSpringVelocity options:0 animations:^{
+            toNavVc.navigationBar.transform = CGAffineTransformIdentity;
             [toVc.imageEditorView performSecondPresentationTransition];
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];

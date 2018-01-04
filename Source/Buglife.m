@@ -50,6 +50,7 @@
 #import "LIFEContainerWindow.h"
 #import "LIFEContainerViewController.h"
 #import "LIFEImageEditorViewController.h"
+#import "LIFEClearNavigationController.h"
 
 static NSString * const kSDKVersion = @"2.1.0";
 void life_dispatch_async_to_main_queue(dispatch_block_t block);
@@ -76,7 +77,7 @@ static NSString * const LIFE_UIScreenCapturedDidChangeNotification = @"UIScreenC
 
 const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 6;
 
-@interface Buglife () <LIFEReporterDelegate, LIFEBugButtonWindowDelegate, LIFEImageEditorViewControllerDelegate>
+@interface Buglife () <LIFEReporterDelegate, LIFEBugButtonWindowDelegate, LIFEImageEditorViewControllerDelegate, LIFEReportViewControllerDelegate>
 
 @property (nonatomic) LIFEReportOwner *reportOwner;
 @property (nonatomic) BOOL debugMode;
@@ -99,6 +100,9 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
 
 @property (nonatomic) LIFEInputField *userEmailField;
 @property (nonatomic) NSMutableDictionary<NSString *, LIFEAttribute *> *attributes;
+// This should only be used when presenting the initial
+// image editor
+@property (nonatomic, nullable) LIFEReportBuilder *reportBuilder;
 
 /**
  These should be made public in an upcoming release.
@@ -356,9 +360,12 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     
 #if USE_NEW_CONTAINER_WINDOW
     if (screenshot) {
-        LIFEImageEditorViewController *vc = [[LIFEImageEditorViewController alloc] initWithScreenshot:screenshot context:context];
+        self.reportBuilder = reportBuilder;
+        let vc = [[LIFEImageEditorViewController alloc] initWithScreenshot:screenshot context:context];
+        vc.initialViewController = YES;
+        let nav = [[LIFEClearNavigationController alloc] initWithRootViewController:vc];
         vc.delegate = self;
-        [self.containerWindow.containerViewController life_setChildViewController:vc animated:animated completion:nil];
+        [self.containerWindow.containerViewController life_setChildViewController:nav animated:animated completion:nil];
     } else {
         // TODO: THIS!!!!
         NSParameterAssert(NO);
@@ -572,6 +579,14 @@ void life_dispatch_async_to_main_queue(dispatch_block_t block) {
 
 #pragma mark - LIFEImageEditorViewControllerDelegate
 
+- (void)imageEditorViewController:(LIFEImageEditorViewController *)controller willCompleteWithAnnotatedImage:(LIFEAnnotatedImage *)annotatedImage
+{
+    [self.reportBuilder addAnnotatedImage:annotatedImage];
+    let vc = [[LIFEReportTableViewController alloc] initWithReportBuilder:self.reportBuilder context:nil];
+    vc.delegate = self;
+    [self.containerWindow.containerViewController life_setChildViewController:vc animated:YES completion:nil];
+}
+
 - (void)imageEditorViewControllerDidCancel:(nonnull LIFEImageEditorViewController *)controller
 {
     [self _dismissReporterAnimated:YES andShowThankYouDialog:NO];
@@ -582,14 +597,31 @@ void life_dispatch_async_to_main_queue(dispatch_block_t block) {
     }
 }
 
+#pragma mark - LIFEReportViewControllerDelegate
+
+- (BOOL)reportViewControllerShouldSubmitSynchronously:(nonnull LIFEReportTableViewController *)reportViewController
+{
+    return [self reporterShouldSubmitSynchronously:nil];
+}
+
+- (void)reportViewControllerDidCancel:(nonnull LIFEReportTableViewController *)reportViewController
+{
+    [self reporterDidCancel:nil];
+}
+
+- (void)reportViewController:(nonnull LIFEReportTableViewController *)reportViewController shouldCompleteReportBuilder:(nonnull LIFEReportBuilder *)reportBuilder completion:(void (^_Nullable)(BOOL finished))completion
+{
+    [self reporter:nil shouldCompleteReportBuilder:reportBuilder completion:completion];
+}
+
 #pragma mark - LIFEReporterDelegate
 
-- (BOOL)reporterShouldSubmitSynchronously:(nonnull LIFEReportWindow *)reporter
+- (BOOL)reporterShouldSubmitSynchronously:(nullable LIFEReportWindow *)reporter
 {
     return self.retryPolicy == LIFERetryPolicyManualRetry;
 }
 
-- (void)reporterDidCancel:(nonnull LIFEReportWindow *)reporter
+- (void)reporterDidCancel:(nullable LIFEReportWindow *)reporter
 {
     [self _dismissReporterAnimated:YES andShowThankYouDialog:NO];
     [[NSNotificationCenter defaultCenter] postNotificationName:LIFENotificationUserCanceledReport object:self];

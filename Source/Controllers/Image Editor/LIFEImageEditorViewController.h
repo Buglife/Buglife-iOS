@@ -18,10 +18,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class LIFEAnnotatedImage;
 @class LIFEImageEditorViewController;
 
 @protocol LIFEImageEditorViewControllerDelegate <NSObject>
 
+- (void)imageEditorViewController:(nonnull LIFEImageEditorViewController *)controller willCompleteWithAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage;
 - (void)imageEditorViewControllerDidCancel:(nonnull LIFEImageEditorViewController *)controller;
 
 @end
@@ -42,5 +44,6 @@
 - (LIFEImageEditorView * _Null_unspecified)imageEditorView;
 
 @property (nullable, nonatomic, weak) id<LIFEImageEditorViewControllerDelegate> delegate;
+@property (nonatomic, getter=isInitialViewController) BOOL initialViewController;
 
 @end

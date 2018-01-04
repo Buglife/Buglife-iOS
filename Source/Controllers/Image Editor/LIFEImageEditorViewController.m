@@ -36,6 +36,8 @@ static const CGFloat kDefaultAnnotationScaleAmount = 1.0;
 @interface LIFEImageEditorViewController () <UIGestureRecognizerDelegate, LIFEMenuPopoverViewDelegate>
 
 @property (nonatomic) LIFEMutableAnnotatedImage *annotatedImage;
+@property (nonatomic, null_resettable) UIBarButtonItem *cancelButton;
+@property (nonatomic, null_resettable) UIBarButtonItem *nextButton;
 @property (nonatomic) LIFEImageProcessor *imageProcessor;
 @property (nonatomic, nullable) LIFEScreenshotContext *screenshotContext;
 @property (nonatomic) BOOL statusBarHidden;
@@ -90,13 +92,41 @@ static const CGFloat kDefaultAnnotationScaleAmount = 1.0;
     [super viewDidLoad];
     
     self.panGestureRecognizer.enabled = YES;
-    [self.imageEditorView.cancelButton addTarget:self action:@selector(_cancelButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (self.isInitialViewController) {
+        self.navigationItem.leftBarButtonItem = self.cancelButton;
+        self.navigationItem.rightBarButtonItem = self.nextButton;
+    }
 }
 
-- (void)viewWillAppear:(BOOL)animated
+#pragma mark - Next button
+
+- (UIBarButtonItem *)nextButton
 {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    if (_nextButton == nil) {
+        _nextButton = [[UIBarButtonItem alloc] initWithTitle:LIFELocalizedString(LIFEStringKey_Next) style:UIBarButtonItemStyleDone target:self action:@selector(_nextButtonTapped:)];
+    }
+    
+    return _nextButton;
+}
+
+- (void)_nextButtonTapped:(id)sender
+{
+    self.cancelButton.enabled = NO;
+    self.nextButton.enabled = NO;
+    
+    [self _notifyDelegateOfCompletion];
+}
+
+#pragma mark - Cancel button
+
+- (UIBarButtonItem *)cancelButton
+{
+    if (_cancelButton == nil) {
+        _cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(_cancelButtonTapped:)];
+    }
+    
+    return _cancelButton;
 }
 
 - (void)_cancelButtonTapped:(id)sender
@@ -528,6 +558,15 @@ static const CGFloat kMaximumLoupeRadius = 150;
 {
     [self.annotationSelectedWithPopover setSelected:NO animated:YES];
     self.annotationSelectedWithPopover = nil;
+}
+
+#pragma mark - Private methods
+
+- (void)_notifyDelegateOfCompletion
+{
+    NSParameterAssert(self.delegate);
+    LIFEAnnotatedImage *result = self.annotatedImage.copy;
+    [self.delegate imageEditorViewController:self willCompleteWithAnnotatedImage:result];
 }
 
 @end

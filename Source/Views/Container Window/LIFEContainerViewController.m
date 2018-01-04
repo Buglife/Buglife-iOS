@@ -23,6 +23,8 @@
 #import "LIFEImageEditorCancelAnimator.h"
 #import "LIFEImageEditorViewController.h"
 #import "LIFEContainerTransitionContext.h"
+#import "LIFEClearNavigationController.h"
+#import "LIFEMacros.h"
 
 @interface LIFEContainerViewController ()
 
@@ -47,6 +49,12 @@
 {
     UIViewController *visibleViewController = self.childViewControllers.lastObject;
     
+    if ([visibleViewController isKindOfClass:[LIFEClearNavigationController class]]) {
+        let navVC = (LIFEClearNavigationController *)visibleViewController;
+        [navVC setViewControllers:@[childViewController] animated:animated];
+        return;
+    }
+    
     if (visibleViewController == nil) {
         visibleViewController = self;
     }
@@ -56,19 +64,15 @@
     toView.frame = self.view.bounds;
     [self addChildViewController:childViewController];
     
-    id<UIViewControllerAnimatedTransitioning> animator;
-    UIView *containerView = self.view;
+    id<UIViewControllerAnimatedTransitioning> animator = [self _animatorFromViewController:visibleViewController toViewController:childViewController];
     
-    if ([LIFEContainerAlertToImageEditorAnimator canAnimateFromViewController:visibleViewController toViewController:childViewController]) {
-        animator = [[LIFEContainerAlertToImageEditorAnimator alloc] init];
-    } else if ([LIFEAlertAnimator canAnimateFromViewController:visibleViewController toViewController:childViewController]) {
-        animator = [LIFEAlertAnimator presentationAnimator];
-    } else {
+    if (animator == nil) {
         [self.view addSubview:toView];
         [childViewController didMoveToParentViewController:self];
         return;
     }
     
+    UIView *containerView = self.view;
     LIFEContainerTransitionContext *transitionContext = [[LIFEContainerTransitionContext alloc] initWithFromViewController:visibleViewController toViewController:childViewController containerView:containerView];
     transitionContext.animated = YES;
     transitionContext.interactive = NO;
@@ -122,6 +126,23 @@
             completion();
         }
     }
+}
+
+- (nullable id<UIViewControllerAnimatedTransitioning>)_animatorFromViewController:(nullable UIViewController *)fromVC toViewController:(nonnull UIViewController *)toVC
+{
+    if ([toVC isKindOfClass:[LIFEAlertController class]]) {
+        return [LIFEAlertAnimator presentationAnimator];
+    }
+    
+    if ([fromVC isKindOfClass:[LIFEAlertController class]] && [toVC isKindOfClass:[LIFEClearNavigationController class]]) {
+        let nav = (LIFEClearNavigationController *)toVC;
+        
+        if ([nav.visibleViewController isKindOfClass:[LIFEImageEditorViewController class]]) {
+            return [[LIFEContainerAlertToImageEditorAnimator alloc] init];
+        }
+    }
+    
+    return nil;
 }
 
 - (nullable id<UIViewControllerAnimatedTransitioning>)_animatorToDismissViewController:(UIViewController *)viewController

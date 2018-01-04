@@ -32,6 +32,4 @@
 - (void)performSecondPresentationTransition;
 - (void)completeFirstPresentationTransition;
 
-@property (nonnull, nonatomic, readonly) UIButton *cancelButton;
-
 @end
