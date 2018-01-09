@@ -25,16 +25,19 @@
 #import "LIFETelephonyNetworkInfo.h"
 #import "LIFEReachability.h"
 #import "LIFEDeviceInfo.h"
+#import "LIFEAttribute.h"
 
 NSNumber *life_mach_freeMemory(void);
 NSNumber *life_mach_usableMemory(void);
 static LIFEDeviceBatteryState LIFEDeviceBatteryStateFromUIDeviceBatteryState(UIDeviceBatteryState batteryState);
+static NSString *LIFEThermalStateStringFromThermalState(NSProcessInfoThermalState thermalState) API_AVAILABLE(ios(11.0));;
+static NSString *LIFEContentSizeCategoryFromUIContentSizeCategory(UIContentSizeCategory contentSizeCategory);
 
 @implementation LIFEDeviceInfoProvider
 
 #pragma mark - Public methods
 
-- (void)fetchDeviceInfoToQueue:(dispatch_queue_t)completionQueue completion:(void (^)(LIFEDeviceInfo *))completionHandler
+- (void)fetchDeviceInfoToQueue:(dispatch_queue_t)completionQueue completion:(void (^)(LIFEDeviceInfo *, LIFEAttributes *))completionHandler
 {
     LIFEDeviceInfo *deviceInfo = [[LIFEDeviceInfo alloc] init];
     
@@ -53,6 +56,17 @@ static LIFEDeviceBatteryState LIFEDeviceBatteryStateFromUIDeviceBatteryState(UID
     deviceInfo.wifiConnected = [reachability isReachableViaWiFi];
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        LIFEMutableAttributes *attributes = [[LIFEMutableAttributes alloc] init];
+        BOOL reduceMotionEnabled = UIAccessibilityIsReduceMotionEnabled();
+        attributes[@"Reduce motion enabled"] = [LIFEAttribute attributeWithBool:reduceMotionEnabled flags:LIFEAttributeFlagSystem];
+        
+        UIContentSizeCategory uiContentSizeCategory = [[UIApplication sharedApplication] preferredContentSizeCategory];
+        NSString *contentSizeCategory = LIFEContentSizeCategoryFromUIContentSizeCategory(uiContentSizeCategory);
+        
+        if (contentSizeCategory) {
+            attributes[@"Content size category"] = [LIFEAttribute attributeWithString:contentSizeCategory flags:LIFEAttributeFlagSystem];
+        }
+        
         // Probably shouldn't be accessing UIKit off the main thread.
         // (I'd almost consider UIDevice an exception, but let's play it safe)
         UIDevice *currentDevice = [UIDevice currentDevice];
@@ -75,12 +89,20 @@ static LIFEDeviceBatteryState LIFEDeviceBatteryStateFromUIDeviceBatteryState(UID
             if ([processInfo respondsToSelector:@selector(isLowPowerModeEnabled)]) {
                 deviceInfo.lowPowerMode = [[NSProcessInfo processInfo] isLowPowerModeEnabled];
             }
+            
+            if (@available(iOS 11.0, *)) {
+                NSString *thermalState = LIFEThermalStateStringFromThermalState(processInfo.thermalState);
+                
+                if (thermalState) {
+                    attributes[@"Thermal state"] = [LIFEAttribute attributeWithString:thermalState flags:LIFEAttributeFlagSystem];
+                }
+            }
         }
         
         currentDevice.batteryMonitoringEnabled = wasBatteryMonitoringEnabled;
         
         dispatch_async(completionQueue, ^{
-            completionHandler(deviceInfo);
+            completionHandler(deviceInfo, attributes.copy);
         });
     });
 }
@@ -190,4 +212,49 @@ static LIFEDeviceBatteryState LIFEDeviceBatteryStateFromUIDeviceBatteryState(UID
         default:
             break;
     }
+}
+
+static NSString *LIFEThermalStateStringFromThermalState(NSProcessInfoThermalState thermalState) {
+    switch (thermalState) {
+        case NSProcessInfoThermalStateCritical:
+            return @"critical";
+        case NSProcessInfoThermalStateFair:
+            return @"fair";
+        case NSProcessInfoThermalStateNominal:
+            return @"nominal";
+        case NSProcessInfoThermalStateSerious:
+            return @"serious";
+        default:
+            return nil;
+    }
+}
+
+static NSString *LIFEContentSizeCategoryFromUIContentSizeCategory(UIContentSizeCategory contentSizeCategory) {
+    if ([contentSizeCategory isEqualToString:UIContentSizeCategoryExtraSmall]) {
+        return @"extra small";
+    } else if ([contentSizeCategory isEqualToString:UIContentSizeCategorySmall]) {
+        return @"small";
+    } else if ([contentSizeCategory isEqualToString:UIContentSizeCategoryMedium]) {
+        return @"medium";
+    } else if ([contentSizeCategory isEqualToString:UIContentSizeCategoryLarge]) {
+        return @"large";
+    } else if ([contentSizeCategory isEqualToString:UIContentSizeCategoryExtraLarge]) {
+        return @"extra large";
+    } else if ([contentSizeCategory isEqualToString:UIContentSizeCategoryExtraExtraLarge]) {
+        return @"extra extra large";
+    } else if ([contentSizeCategory isEqualToString:UIContentSizeCategoryExtraExtraExtraLarge]) {
+        return @"extra extra extra large";
+    } else if ([contentSizeCategory isEqualToString:UIContentSizeCategoryAccessibilityMedium]) {
+        return @"accessibility medium";
+    } else if ([contentSizeCategory isEqualToString:UIContentSizeCategoryAccessibilityLarge]) {
+        return @"accessibility large";
+    } else if ([contentSizeCategory isEqualToString:UIContentSizeCategoryAccessibilityExtraLarge]) {
+        return @"accessibility extra large";
+    } else if ([contentSizeCategory isEqualToString:UIContentSizeCategoryAccessibilityExtraExtraLarge]) {
+        return @"accessibility extra extra large";
+    } else if ([contentSizeCategory isEqualToString:UIContentSizeCategoryAccessibilityExtraExtraExtraLarge]) {
+        return @"accessibility extra extra extra large";
+    }
+    
+    return nil;
 }

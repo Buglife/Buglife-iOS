@@ -118,6 +118,13 @@ static BOOL LIFEStatusCodeIsSuccess(NSInteger statusCode);
 
 + (NSURL *)_baseURL
 {
+    // The default API base URL can be overridden if, say, you're pointing to an internal Buglife instance
+    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+    NSString *overrideURL = environment[@"com.buglife.base_url"];
+    if (overrideURL) {
+        return [NSURL URLWithString:overrideURL];
+    }
+    
     return [NSURL URLWithString:kBaseURL];
 }
 

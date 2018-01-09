@@ -17,11 +17,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LIFEAttribute.h"
 
 @class LIFEDeviceInfo;
 
 @interface LIFEDeviceInfoProvider : NSObject
 
-- (void)fetchDeviceInfoToQueue:(dispatch_queue_t)completionQueue completion:(void (^)(LIFEDeviceInfo *deviceInfo))completionHandler;
+- (void)fetchDeviceInfoToQueue:(dispatch_queue_t)completionQueue completion:(void (^)(LIFEDeviceInfo *deviceInfo, LIFEAttributes *systemAttributes))completionHandler;
 
 @end

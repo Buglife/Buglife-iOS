@@ -40,6 +40,17 @@
     return self;
 }
 
++ (instancetype)attributeWithBool:(BOOL)value flags:(LIFEAttributeFlags)flags
+{
+    NSNumber *boxedValue = [NSNumber numberWithBool:value];
+    return [[self alloc] initWithValueType:LIFEAttributeValueTypeBool value:boxedValue flags:flags];
+}
+
++ (instancetype)attributeWithString:(NSString *)stringValue flags:(LIFEAttributeFlags)flags
+{
+    return [[self alloc] initWithValueType:LIFEAttributeValueTypeString value:stringValue flags:flags];
+}
+
 #pragma mark - NSCoding
 
 - (instancetype)initWithCoder:(NSCoder *)coder

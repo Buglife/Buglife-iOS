@@ -238,9 +238,13 @@ NSString * const LIFEReportBuilderAnnotatedImagesDidChangeNotification = @"com.b
                 
                 LIFEAppInfoProvider *appInfoProvider = self.appInfoProvider;
                 
-                [strongSelf.deviceInfoProvider fetchDeviceInfoToQueue:strongSelf.workQueue completion:^(LIFEDeviceInfo *deviceInfo) {
+                [strongSelf.deviceInfoProvider fetchDeviceInfoToQueue:strongSelf.workQueue completion:^(LIFEDeviceInfo *deviceInfo, LIFEAttributes *systemAttributes) {
                     report.appInfo = [appInfoProvider syncFetchAppInfo];
                     report.deviceInfo = deviceInfo;
+                    
+                    LIFEMutableAttributes *attributes = report.attributes.mutableCopy;
+                    [attributes addEntriesFromDictionary:systemAttributes];
+                    report.attributes = attributes.copy;
                     
                     dispatch_async(completionQueue, ^{
                         completionHandler(report);
