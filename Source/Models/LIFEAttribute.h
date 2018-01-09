@@ -35,10 +35,18 @@ typedef NS_OPTIONS(NSUInteger, LIFEAttributeFlags) {
     LIFEAttributeFlagInternal = 1 << 4, // This is for Buglife metrics only. Do not use.
 };
 
+@class LIFEAttribute;
+
+typedef NSDictionary<NSString *, LIFEAttribute *> LIFEAttributes;
+typedef NSMutableDictionary<NSString *, LIFEAttribute *> LIFEMutableAttributes;
+
 @interface LIFEAttribute : NSObject <NSCoding>
 
 @property (nonatomic, readonly) LIFEAttributeValueType valueType;
 @property (nonatomic, readonly) LIFEAttributeFlags flags;
+
++ (instancetype)attributeWithBool:(BOOL)boolValue flags:(LIFEAttributeFlags)flags;
++ (instancetype)attributeWithString:(NSString *)stringValue flags:(LIFEAttributeFlags)flags;
 
 - (instancetype)initWithValueType:(LIFEAttributeValueType)valueType value:(NSObject *)value flags:(LIFEAttributeFlags)flags;
 
