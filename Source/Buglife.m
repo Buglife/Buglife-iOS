@@ -48,7 +48,7 @@
 #import "LIFEVideoAttachment.h"
 #import "LIFEImagePickerController.h"
 
-static NSString * const kSDKVersion = @"2.0.3";
+static NSString * const kSDKVersion = @"2.1.0";
 void life_dispatch_async_to_main_queue(dispatch_block_t block);
 
 LIFEAttachmentType * const LIFEAttachmentTypeIdentifierText   = @"public.plain-text";
