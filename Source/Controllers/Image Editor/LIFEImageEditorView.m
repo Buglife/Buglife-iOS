@@ -38,14 +38,10 @@ let kNavButtonTopConstraintConstant = 26.0f;
 @interface LIFEImageEditorView ()
 
 @property (nonatomic) UIView *backgroundView;
-@property (nonatomic) UIButton *cancelButton; // TODO: unused, remove
-@property (nonatomic) UIButton *nextButton; // TODO: unused, remove
 @property (nonatomic) UIView *imageBorderView;
 @property (nonatomic) LIFEImageEditorSegmentedControl *segmentedControl;
 @property (nonatomic) LIFEScreenshotAnnotatorView *screenshotAnnotatorView;
 @property (nonatomic) NSLayoutConstraint *segmentedControlBottomConstraint;
-@property (nonatomic) NSLayoutConstraint *cancelButtonTopConstraint;
-@property (nonatomic) NSLayoutConstraint *nextButtonTopConstraint;
 
 @end
 
@@ -61,19 +57,6 @@ let kNavButtonTopConstraintConstant = 26.0f;
         _backgroundView.backgroundColor = appearance.barTintColor;
         
         UIColor *tintColor = appearance.tintColor;
-        _cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_cancelButton setTitle:LIFELocalizedString(LIFEStringKey_Cancel) forState:UIControlStateNormal];
-        UIFont *cancelbuttonFont = _cancelButton.titleLabel.font;
-        cancelbuttonFont = [cancelbuttonFont fontWithSize:kNavBarButtonFontSize];
-        _cancelButton.titleLabel.font = cancelbuttonFont;
-        _cancelButton.tintColor = tintColor;
-        
-        _nextButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_nextButton setTitle:LIFELocalizedString(LIFEStringKey_Next) forState:UIControlStateNormal];
-        UIFontDescriptor *nextButtonFontDescriptor = [[cancelbuttonFont fontDescriptor] fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
-        UIFont *nextButtonFont = [UIFont fontWithDescriptor:nextButtonFontDescriptor size:kNavBarButtonFontSize];
-        _nextButton.titleLabel.font = nextButtonFont;
-        _nextButton.tintColor = tintColor;
         
         _imageBorderView = [[UIView alloc] init];
         _imageBorderView.backgroundColor = [UIColor blackColor];
@@ -81,7 +64,7 @@ let kNavButtonTopConstraintConstant = 26.0f;
         _screenshotAnnotatorView = [[LIFEScreenshotAnnotatorView alloc] initWithAnnotatedImage:annotatedImage];
         [_screenshotAnnotatorView setToolbarsHidden:YES animated:NO completion:nil];
         
-        NSArray *customViews = @[_backgroundView, _cancelButton, _nextButton, _imageBorderView, _screenshotAnnotatorView];
+        NSArray *customViews = @[_backgroundView, _imageBorderView, _screenshotAnnotatorView];
         
         for (UIView *view in customViews) {
             [self addSubview:view];
@@ -89,18 +72,6 @@ let kNavButtonTopConstraintConstant = 26.0f;
         }
         
         [_backgroundView life_makeEdgesEqualTo:self];
-        
-        // Top button constraints
-        
-        _cancelButtonTopConstraint = [_cancelButton.topAnchor constraintEqualToAnchor:self.topAnchor constant:kNavButtonTopConstraintConstant];
-        _nextButtonTopConstraint = [_nextButton.topAnchor constraintEqualToAnchor:self.topAnchor constant:kNavButtonTopConstraintConstant];
-        
-        [NSLayoutConstraint activateConstraints:@[
-                                                  [_cancelButton.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:20],
-                                                  _cancelButtonTopConstraint,
-                                                  [_nextButton.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-20],
-                                                  _nextButtonTopConstraint
-                                                  ]];
         
         // Image constraints
         
@@ -110,13 +81,11 @@ let kNavButtonTopConstraintConstant = 26.0f;
         CGFloat navbarHeight = 44;
         CGFloat statusBarHeight = 20;
         CGFloat arbitraryMargin = 10;
-        CGFloat verticalMargin = (kSegmentedControlHeight + navbarHeight + statusBarHeight + arbitraryMargin); // Toolbar + nav + status bar
         
         [NSLayoutConstraint activateConstraints:@[
+            [_screenshotAnnotatorView.topAnchor constraintEqualToAnchor:self.topAnchor],
             [_screenshotAnnotatorView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
-            [_screenshotAnnotatorView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor constant:(statusBarHeight / 2.0f)],
-            [_screenshotAnnotatorView.widthAnchor constraintEqualToAnchor:_screenshotAnnotatorView.heightAnchor multiplier:aspectRatio],
-            [_screenshotAnnotatorView.heightAnchor constraintEqualToAnchor:self.heightAnchor constant:-verticalMargin]
+            [_screenshotAnnotatorView.widthAnchor constraintEqualToAnchor:_screenshotAnnotatorView.heightAnchor multiplier:aspectRatio]
             ]];
         
         // Make the image border view just a bit bigger than the image
@@ -131,14 +100,12 @@ let kNavButtonTopConstraintConstant = 26.0f;
         _segmentedControlBottomConstraint = [_segmentedControl.bottomAnchor constraintEqualToAnchor:self.bottomAnchor];
         
         [NSLayoutConstraint activateConstraints:@[
+            [_screenshotAnnotatorView.bottomAnchor constraintEqualToAnchor:_segmentedControl.topAnchor],
             [_segmentedControl.heightAnchor constraintEqualToConstant:kSegmentedControlHeight],
             [_segmentedControl.widthAnchor constraintEqualToAnchor:self.widthAnchor multiplier:0.75],
             [_segmentedControl.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
             _segmentedControlBottomConstraint
             ]];
-        
-        self.cancelButton.hidden = YES; // hidden because we now use the navigation controller's nav bar items to show these buttons
-        self.nextButton.hidden = YES; // hidden because we now use the navigation controller's nav bar items to show these buttons
     }
     return self;
 }
@@ -161,16 +128,12 @@ let kNavButtonTopConstraintConstant = 26.0f;
     self.imageBorderView.alpha = 0;
     self.screenshotAnnotatorView.alpha = 0;
     _segmentedControlBottomConstraint.constant = kSegmentedControlHeight;
-    _nextButtonTopConstraint.constant = -kNavButtonTopConstraintConstant;
-    _cancelButtonTopConstraint.constant = -kNavButtonTopConstraintConstant;
     [self layoutIfNeeded];
 }
 
 - (void)prepareSecondPresentationTransition
 {
     _segmentedControlBottomConstraint.constant = 0;
-    _nextButtonTopConstraint.constant = kNavButtonTopConstraintConstant;
-    _cancelButtonTopConstraint.constant = kNavButtonTopConstraintConstant;
 }
 
 - (void)performSecondPresentationTransition

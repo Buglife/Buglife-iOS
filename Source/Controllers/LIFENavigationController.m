@@ -52,19 +52,16 @@
     id<LIFEAppearance> appearance = [LIFEAppearanceImpl sharedAppearance];
     
     if (_navigationBarStyleClear) {
-        [self.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
         self.navigationBar.shadowImage = [[UIImage alloc] init];
-        self.navigationBar.translucent = YES;
-        self.view.backgroundColor = [UIColor clearColor];
     } else {
-        self.navigationBar.tintColor = appearance.tintColor;
-        self.navigationBar.barTintColor = appearance.barTintColor;
-        self.navigationBar.titleTextAttributes = appearance.titleTextAttributes;
-        self.navigationBar.translucent = YES;
-        [self.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-        [self.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsCompact];
-        self.view.backgroundColor = appearance.barTintColor;
+        self.navigationBar.shadowImage = nil;
     }
+
+    self.navigationBar.tintColor = appearance.tintColor;
+    self.navigationBar.barTintColor = appearance.barTintColor;
+    self.navigationBar.titleTextAttributes = appearance.titleTextAttributes;
+    self.navigationBar.translucent = NO;
+    [self.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     UIBarButtonItem *barButtonItemAppearance = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[LIFENavigationBar class]]];
     barButtonItemAppearance.tintColor = appearance.tintColor;

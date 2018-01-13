@@ -51,16 +51,18 @@
 #import "LIFEUserFacingAttachment.h"
 #import "LIFEAVPlayerViewController.h"
 #import "LIFENavigationController.h"
+#import "LIFEImageEditorViewController.h"
 
 typedef NSString LIFEInputFieldValue;
 
+static let kUseNewImageEditor = YES;
 static let kDefaultCellIdentifier = @"kDefaultCellIdentifier";
 static let kPickerCellIdentifier = @"kPickerCellIdentifier";
 static const CGFloat kDefaultRowHeight = 45;    // apparently this is 45 for grouped tableview style o_O
 static const NSInteger kAttachmentSectionNumber = 0;
 static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
 
-@interface LIFEReportTableViewController () <LIFEScreenshotAnnotatorViewControllerDelegate, LIFEWhatHappenedTextViewDelegate, LIFEStepsToReproTableViewControllerDelegate, LIFETextInputViewControllerDelegate, LIFETextFieldCellDelegate, LIFEPickerViewControllerDelegate>
+@interface LIFEReportTableViewController () <LIFEScreenshotAnnotatorViewControllerDelegate, LIFEWhatHappenedTextViewDelegate, LIFEStepsToReproTableViewControllerDelegate, LIFETextInputViewControllerDelegate, LIFETextFieldCellDelegate, LIFEPickerViewControllerDelegate, LIFEImageEditorViewControllerDelegate>
 
 @property (nonatomic, nonnull) LIFEScreenshotContext *screenshotContext;
 @property (nonatomic) LIFEImageProcessor *imageProcessor;
@@ -806,9 +808,16 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
             
             if ([userFacingAttachment isKindOfClass:[LIFEAnnotatedImage class]]) {
                 LIFEAnnotatedImage *annotatedImage = (LIFEAnnotatedImage *)userFacingAttachment;
-                LIFEScreenshotAnnotatorViewController *viewController = [[LIFEScreenshotAnnotatorViewController alloc] initWithAnnotatedImage:annotatedImage];
-                viewController.delegate = self;
-                [self.navigationController pushViewController:viewController animated:YES];
+                
+                if (kUseNewImageEditor) {
+                    let vc = [[LIFEImageEditorViewController alloc] initWithAnnotatedImage:annotatedImage];
+                    vc.delegate = self;
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else {
+                    let vc = [[LIFEScreenshotAnnotatorViewController alloc] initWithAnnotatedImage:annotatedImage];
+                    vc.delegate = self;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
             } else if ([userFacingAttachment isKindOfClass:[LIFEVideoAttachment class]]) {
                 LIFEVideoAttachment *videoAttachment = (LIFEVideoAttachment *)userFacingAttachment;
                 [self _presentVideoPlayerWithAttachment:videoAttachment];
@@ -854,6 +863,18 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
 
 - (void)screenshotAnnotatorViewController:(LIFEScreenshotAnnotatorViewController *)screenshotAnnotatorViewController willCompleteWithAnnotatedImage:(LIFEAnnotatedImage *)annotatedImage
 {
+    [self _willCompleteImageEditorWithAnnotatedImage:annotatedImage];
+}
+
+#pragma mark - LIFEImageEditorViewControllerDelegate
+
+- (void)imageEditorViewController:(nonnull LIFEImageEditorViewController *)controller willCompleteWithAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage
+{
+    [self _willCompleteImageEditorWithAnnotatedImage:annotatedImage];
+}
+
+- (void)_willCompleteImageEditorWithAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage
+{
     if (self.indexOfCurrentEditingAnnotatedImage == kNoCurrentEditingAnnotatedImage) {
         LIFELogIntError(@"Completed annotating image, but index is not found");
         NSParameterAssert(NO);
@@ -866,7 +887,7 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
     
     // Replace the stored annotated image
     [self.reportBuilder replaceAnnotatedImageAtIndex:self.indexOfCurrentEditingAnnotatedImage withAnnotatedImage:annotatedImage];
-
+    
     // Reload that row so that the thumbnail is updated
     NSIndexPath *indexPathToReload = [NSIndexPath indexPathForRow:self.indexOfCurrentEditingAnnotatedImage inSection:kAttachmentSectionNumber];
     [self.tableView reloadRowsAtIndexPaths:@[indexPathToReload] withRowAnimation:UITableViewRowAnimationAutomatic];

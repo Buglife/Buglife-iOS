@@ -30,6 +30,7 @@
 #import "LIFEGeometry.h"
 #import "LIFEMacros.h"
 #import "LIFEImageEditorSegmentedControl.h"
+#import "LIFENavigationController.h"
 
 static const CGFloat kDefaultAnnotationRotationAmount = 0.0;
 static const CGFloat kDefaultAnnotationScaleAmount = 1.0;
@@ -99,6 +100,16 @@ LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolB
     if (self.isInitialViewController) {
         self.navigationItem.leftBarButtonItem = self.cancelButton;
         self.navigationItem.rightBarButtonItem = self.nextButton;
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ([self.navigationController isKindOfClass:[LIFENavigationController class]]) {
+        let nav = (LIFENavigationController *)self.navigationController;
+        nav.navigationBarStyleClear = YES;
     }
 }
 
