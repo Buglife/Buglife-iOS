@@ -23,7 +23,7 @@
 #import "LIFEImageEditorCancelAnimator.h"
 #import "LIFEImageEditorViewController.h"
 #import "LIFEContainerTransitionContext.h"
-#import "LIFEClearNavigationController.h"
+#import "LIFENavigationController.h"
 #import "LIFEMacros.h"
 
 @interface LIFEContainerViewController ()
@@ -34,12 +34,25 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
+    if (self.visibleViewController) {
+        return [self.visibleViewController preferredStatusBarStyle];
+    }
+    
     return _statusBarStyle;
 }
 
 - (BOOL)prefersStatusBarHidden
 {
+    if (self.visibleViewController) {
+        return [self.visibleViewController prefersStatusBarHidden];
+    }
+    
     return _statusBarHidden;
+}
+
+- (nullable UIViewController *)visibleViewController
+{
+    return self.childViewControllers.lastObject;
 }
 
 // This will attempt to animate in the new child view controller,
@@ -47,10 +60,10 @@
 // controller (if any).
 - (void)life_setChildViewController:(UIViewController *)childViewController animated:(BOOL)animated completion:(void (^)(void))completion
 {
-    UIViewController *visibleViewController = self.childViewControllers.lastObject;
+    UIViewController *visibleViewController = self.visibleViewController;
     
-    if ([visibleViewController isKindOfClass:[LIFEClearNavigationController class]]) {
-        let navVC = (LIFEClearNavigationController *)visibleViewController;
+    if ([visibleViewController isKindOfClass:[LIFENavigationController class]]) {
+        let navVC = (LIFENavigationController *)visibleViewController;
         [navVC setViewControllers:@[childViewController] animated:animated];
         return;
     }
@@ -134,8 +147,8 @@
         return [LIFEAlertAnimator presentationAnimator];
     }
     
-    if ([fromVC isKindOfClass:[LIFEAlertController class]] && [toVC isKindOfClass:[LIFEClearNavigationController class]]) {
-        let nav = (LIFEClearNavigationController *)toVC;
+    if ([fromVC isKindOfClass:[LIFEAlertController class]] && [toVC isKindOfClass:[LIFENavigationController class]]) {
+        let nav = (LIFENavigationController *)toVC;
         
         if ([nav.visibleViewController isKindOfClass:[LIFEImageEditorViewController class]]) {
             return [[LIFEContainerAlertToImageEditorAnimator alloc] init];

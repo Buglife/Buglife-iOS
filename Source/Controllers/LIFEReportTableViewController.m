@@ -50,6 +50,7 @@
 #import "LIFERecordingShrinker.h"
 #import "LIFEUserFacingAttachment.h"
 #import "LIFEAVPlayerViewController.h"
+#import "LIFENavigationController.h"
 
 typedef NSString LIFEInputFieldValue;
 
@@ -191,6 +192,16 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_imagesDidChangeNotification:) name:LIFEReportBuilderAnnotatedImagesDidChangeNotification object:nil];
     
     [self _logWarningIfPhotoLibraryUsageDescriptionRequiredAndMissing];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ([self.navigationController isKindOfClass:[LIFENavigationController class]]) {
+        let nav = (LIFENavigationController *)self.navigationController;
+        nav.navigationBarStyleClear = NO;
+    }
 }
 
 - (void)_imagesDidChangeNotification:(NSNotification *)notification

@@ -32,4 +32,6 @@
 - (void)performSecondPresentationTransition;
 - (void)completeFirstPresentationTransition;
 
+- (nonnull UIView *)backgroundView;
+
 @end

@@ -101,6 +101,11 @@ let kImagePaddingBottom = 16.0f;
     return self;
 }
 
+- (void)setBackgroundViewBackgroundColor:(UIColor *)backgroundColor
+{
+    self.backgroundView.backgroundColor = backgroundColor;
+}
+
 - (void)setImage:(nullable UIImage *)image
 {
     _imageView.image = image;

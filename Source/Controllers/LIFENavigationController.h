@@ -19,6 +19,9 @@
 #import <UIKit/UIKit.h>
 
 @interface LIFENavigationController : UINavigationController
+
+@property (nonatomic) BOOL navigationBarStyleClear;
+
 @end
 
 @interface LIFENavigationBar : UINavigationBar

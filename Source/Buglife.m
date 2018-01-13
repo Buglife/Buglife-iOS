@@ -50,7 +50,6 @@
 #import "LIFEContainerWindow.h"
 #import "LIFEContainerViewController.h"
 #import "LIFEImageEditorViewController.h"
-#import "LIFEClearNavigationController.h"
 
 static NSString * const kSDKVersion = @"2.1.0";
 void life_dispatch_async_to_main_queue(dispatch_block_t block);
@@ -363,7 +362,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
         self.reportBuilder = reportBuilder;
         let vc = [[LIFEImageEditorViewController alloc] initWithScreenshot:screenshot context:context];
         vc.initialViewController = YES;
-        let nav = [[LIFEClearNavigationController alloc] initWithRootViewController:vc];
+        let nav = [[LIFENavigationController alloc] initWithRootViewController:vc];
         vc.delegate = self;
         [self.containerWindow.containerViewController life_setChildViewController:nav animated:animated completion:nil];
     } else {

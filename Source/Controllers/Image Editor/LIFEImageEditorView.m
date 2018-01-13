@@ -26,6 +26,7 @@
 #import "UIImage+LIFEAdditions.h"
 #import "LIFEAnnotatedImage.h"
 #import "LIFEMacros.h"
+#import "LIFEAppearanceImpl.h"
 
 let kImageBorderWidth = 1.0f;
 let kNavBarButtonFontSize = 18.0f;
@@ -51,10 +52,12 @@ let kNavButtonTopConstraintConstant = 26.0f;
 {
     self = [super init];
     if (self) {
-        _backgroundView = [[UIView alloc] init];
-        _backgroundView.backgroundColor = [UIColor whiteColor];
+        id<LIFEAppearance> appearance = [LIFEAppearanceImpl sharedAppearance];
         
-        UIColor *tintColor = [[self class] _buttonTintColor];
+        _backgroundView = [[UIView alloc] init];
+        _backgroundView.backgroundColor = appearance.barTintColor;
+        
+        UIColor *tintColor = appearance.tintColor;
         _cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [_cancelButton setTitle:LIFELocalizedString(LIFEStringKey_Cancel) forState:UIControlStateNormal];
         UIFont *cancelbuttonFont = _cancelButton.titleLabel.font;
@@ -199,13 +202,6 @@ let kNavButtonTopConstraintConstant = 26.0f;
     self.backgroundView.alpha = 1;
     self.screenshotAnnotatorView.alpha = 1;
     self.imageBorderView.alpha = 1;
-}
-
-#pragma mark - Private methods
-
-+ (nonnull UIColor *)_buttonTintColor
-{
-    return [UIColor blueColor];
 }
 
 @end

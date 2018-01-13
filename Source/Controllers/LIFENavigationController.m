@@ -24,33 +24,54 @@
 
 @implementation LIFENavigationController
 
+#pragma mark - UINavigationController
+
 - (instancetype)initWithRootViewController:(UIViewController *)viewController
 {
     self = [super initWithNavigationBarClass:[LIFENavigationBar class] toolbarClass:nil];
     if (self) {
         self.viewControllers = @[viewController];
-        
-        id<LIFEAppearance> appearance = [LIFEAppearanceImpl sharedAppearance];
+        self.navigationBarStyleClear = YES;
+    }
+    return self;
+}
+
+#pragma mark - UIViewController
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return [LIFEAppearanceImpl sharedAppearance].statusBarStyle;
+}
+
+#pragma mark - Public
+
+- (void)setNavigationBarStyleClear:(BOOL)navigationBarStyleClear
+{
+    _navigationBarStyleClear = navigationBarStyleClear;
+    
+    id<LIFEAppearance> appearance = [LIFEAppearanceImpl sharedAppearance];
+    
+    if (_navigationBarStyleClear) {
+        [self.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+        self.navigationBar.shadowImage = [[UIImage alloc] init];
+        self.navigationBar.translucent = YES;
+        self.view.backgroundColor = [UIColor clearColor];
+    } else {
         self.navigationBar.tintColor = appearance.tintColor;
         self.navigationBar.barTintColor = appearance.barTintColor;
         self.navigationBar.titleTextAttributes = appearance.titleTextAttributes;
         self.navigationBar.translucent = YES;
         [self.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
         [self.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsCompact];
-        
-        UIBarButtonItem *barButtonItemAppearance = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[LIFENavigationBar class]]];
-        barButtonItemAppearance.tintColor = appearance.tintColor;
-        [barButtonItemAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName : appearance.tintColor} forState:UIControlStateNormal];
-        
-        UIColor *disabledTintColor = [appearance.tintColor colorWithAlphaComponent:0.35];
-        [barButtonItemAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName : disabledTintColor} forState:UIControlStateDisabled];
+        self.view.backgroundColor = appearance.barTintColor;
     }
-    return self;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return [LIFEAppearanceImpl sharedAppearance].statusBarStyle;
+    
+    UIBarButtonItem *barButtonItemAppearance = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[LIFENavigationBar class]]];
+    barButtonItemAppearance.tintColor = appearance.tintColor;
+    [barButtonItemAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName : appearance.tintColor} forState:UIControlStateNormal];
+    
+    UIColor *disabledTintColor = [appearance.tintColor colorWithAlphaComponent:0.35];
+    [barButtonItemAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName : disabledTintColor} forState:UIControlStateDisabled];
 }
 
 @end

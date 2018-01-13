@@ -22,7 +22,7 @@
 #import "LIFEImageEditorViewController.h"
 #import "LIFEImageEditorView.h"
 #import "LIFEScreenshotAnnotatorView.h"
-#import "LIFEClearNavigationController.h"
+#import "LIFENavigationController.h"
 #import "LIFEMacros.h"
 
 let kInitialAnimationDuration = 0.75f;
@@ -34,12 +34,12 @@ let kSecondAnimationDuration = 0.75f;
 - (void)animateTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext
 {
     LIFEAlertController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    LIFEClearNavigationController *toNavVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    LIFENavigationController *toNavVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *containerView = transitionContext.containerView;
     [containerView addSubview:toNavVc.view];
     LIFEAssertIsKindOfClass(fromVc, LIFEAlertController);
-    LIFEAssertIsKindOfClass(toNavVc, LIFEClearNavigationController);
-    NSParameterAssert([toNavVc isKindOfClass:[LIFEClearNavigationController class]]);
+    LIFEAssertIsKindOfClass(toNavVc, LIFENavigationController);
+    NSParameterAssert([toNavVc isKindOfClass:[LIFENavigationController class]]);
     
     let toVc = (LIFEImageEditorViewController *)toNavVc.visibleViewController;
     LIFEAssertIsKindOfClass(toVc, LIFEImageEditorViewController);
@@ -67,10 +67,14 @@ let kSecondAnimationDuration = 0.75f;
     let navBarTransform = CGAffineTransformMakeTranslation(0, -60);
     toNavVc.navigationBar.transform = navBarTransform;
     
+    let newAlertViewBackgroundColor = imageEditorView.backgroundView.backgroundColor;
+    
     [UIView animateWithDuration:kInitialAnimationDuration delay:0 usingSpringWithDamping:damping initialSpringVelocity:initialSpringVelocity options:0 animations:^{
+        [fromVc.alertView setBackgroundViewBackgroundColor:newAlertViewBackgroundColor];
         [fromVc.alertView layoutIfNeeded];
         [fromVc.alertView performDismissTransition];
         imageView.frame = imageViewFrameEnd;
+        [toNavVc setNeedsStatusBarAppearanceUpdate];
     } completion:^(BOOL finished) {
         [toVc.imageEditorView completeFirstPresentationTransition];
         [imageView removeFromSuperview];
