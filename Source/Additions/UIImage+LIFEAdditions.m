@@ -558,7 +558,7 @@ static const CGFloat kLidSpacing = 1;
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     
     UIBezierPath *path = [LIFEUIBezierPath life_bezierPathForDiscloserIndicator];
-    UIColor *fillColor = [LIFEUIColor life_colorWithHexValue:0xc7c7cc];
+    UIColor *fillColor = [UIColor life_colorWithHexValue:0xc7c7cc];
     [fillColor setFill];
     [path fill];
     

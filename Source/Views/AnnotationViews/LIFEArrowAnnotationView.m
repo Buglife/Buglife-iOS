@@ -142,8 +142,8 @@
     CGPoint startPoint = self.startPoint;
     CGPoint endPoint = self.endPoint;
     
-    UIColor *fillColor = [LIFEUIColor life_annotationFillColor];
-    UIColor *strokeColor = [LIFEUIColor life_annotationStrokeColor];
+    UIColor *fillColor = [UIColor life_annotationFillColor];
+    UIColor *strokeColor = [UIColor life_annotationStrokeColor];
     
     CGFloat arrowLength = LIFECGPointDistance(startPoint, endPoint);
     CGFloat tailWidth = LIFETailWidthForArrowLength(arrowLength);

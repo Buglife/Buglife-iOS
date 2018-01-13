@@ -150,7 +150,7 @@
     }
     
     if (borderVisible) {
-        UIColor *borderColor = [LIFEUIColor life_annotationFillColor];
+        UIColor *borderColor = [UIColor life_annotationFillColor];
         borderColor = [borderColor colorWithAlphaComponent:(self.borderAlpha * 0.5)];
         UIBezierPath *path = [UIBezierPath bezierPathWithRect:cropRect];
         path.lineWidth = 1;

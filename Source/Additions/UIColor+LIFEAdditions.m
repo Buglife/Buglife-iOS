@@ -1,69 +1,81 @@
 //
 //  UIColor+LIFEAdditions.m
-//  Pods
+//  Copyright (C) 2017 Buglife, Inc.
 //
-//  Created by David Schukin on 10/27/15.
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 //
 
 #import "UIColor+LIFEAdditions.h"
 
-@implementation LIFEUIColor
+@implementation UIColor (LIFEAdditions)
 
-+ (UIColor *)life_annotationStrokeColor
+LIFE_CATEGORY_METHOD_IMPL(UIColor)
+
++ (instancetype)life_annotationStrokeColor
 {
-    return [UIColor whiteColor];
+    return [self whiteColor];
 }
 
-+ (UIColor *)life_annotationFillColor
++ (instancetype)life_annotationFillColor
 {
-    return [UIColor colorWithRed:0.94 green:0 blue:0.38 alpha:1];
+    return [self colorWithRed:0.94 green:0 blue:0.38 alpha:1];
 }
 
 #pragma mark - Brand colors
 
-+ (UIColor *)life_buglifeTurqoise
++ (instancetype)life_buglifeTurqoise
 {
-    return [LIFEUIColor life_colorWithHexValue:0x00d9c7];
+    return [self life_colorWithHexValue:0x00d9c7];
 }
 
-+ (UIColor *)life_buglifeNavy
++ (instancetype)life_buglifeNavy
 {
-    return [LIFEUIColor life_colorWithHexValue:0x242a33];
+    return [self life_colorWithHexValue:0x242a33];
 }
 
-+ (UIColor *)life_buglifeBlue
++ (instancetype)life_buglifeBlue
 {
-    return [LIFEUIColor life_colorWithHexValue:0x007cdc];
+    return [self life_colorWithHexValue:0x007cdc];
 }
 
-+ (UIColor *)life_buglifePurple
++ (instancetype)life_buglifePurple
 {
-    return [LIFEUIColor life_colorWithHexValue:0x5e07dd];
+    return [self life_colorWithHexValue:0x5e07dd];
 }
 
 #pragma mark - Helper factory methods
 
-+ (UIColor *)life_color255WithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha
++ (instancetype)life_color255WithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha
 {
-    return [UIColor colorWithRed:(red / 255.0) green:(green / 255.0) blue:(blue / 255.0) alpha:alpha];
+    return [self colorWithRed:(red / 255.0) green:(green / 255.0) blue:(blue / 255.0) alpha:alpha];
 }
 
-+ (UIColor *)life_colorWithHexValue:(NSUInteger)hexValue
++ (instancetype)life_colorWithHexValue:(NSUInteger)hexValue
 {
-    return [UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0
+    return [self colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0
                            green:((float)((hexValue & 0x00FF00) >>  8))/255.0
                             blue:((float)((hexValue & 0x0000FF) >>  0))/255.0
                            alpha:1.0];
 }
 
-+ (nullable UIColor *)life_debugColorWithAlpha:(CGFloat)alpha
++ (nullable instancetype)life_debugColorWithAlpha:(CGFloat)alpha
 {
 #if DEBUG
     CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
     CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
     CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha];
+    UIColor *color = [self colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha];
     return color;
 #else
     return nil;
@@ -71,3 +83,5 @@
 }
 
 @end
+
+LIFE_CATEGORY_FUNCTION_IMPL(UIColor);

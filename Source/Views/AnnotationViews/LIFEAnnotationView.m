@@ -40,8 +40,8 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         _annotation = annotation;
-        _annotationFillColor = [LIFEUIColor life_annotationFillColor];
-        _annotationStrokeColor = [LIFEUIColor life_annotationStrokeColor];
+        _annotationFillColor = [UIColor life_annotationFillColor];
+        _annotationStrokeColor = [UIColor life_annotationStrokeColor];
         
         [self.layer addSublayer:self.annotationLayer];
         self.annotationLayer.annotation = annotation;

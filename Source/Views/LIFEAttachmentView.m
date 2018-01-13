@@ -234,7 +234,7 @@ static const CGFloat kScreenshotViewPadding = 5;
 - (void)_updateBackgroundColor
 {
     if (self.isHighlighted || self.lifeSelected) {
-        UIColor *selectionColor = [LIFEUIColor life_colorWithHexValue:0xd9d9d9]; // same color as UITableView grey selection
+        UIColor *selectionColor = [UIColor life_colorWithHexValue:0xd9d9d9]; // same color as UITableView grey selection
         self.backgroundColor = selectionColor;
     } else {
         self.backgroundColor = [UIColor clearColor];

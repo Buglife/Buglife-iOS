@@ -43,7 +43,7 @@ static const CGFloat kAttachmentHeight = 44.0;
         [self addSubview:_attachmentButton];
         
         _separatorView = [[UIView alloc] init];
-        _separatorView.backgroundColor = [LIFEUIColor life_colorWithHexValue:0xc8c7cc];
+        _separatorView.backgroundColor = [UIColor life_colorWithHexValue:0xc8c7cc];
         [self addSubview:_separatorView];
         
         _whatHappenedTextView = [[LIFEWhatHappenedTextView alloc] init];

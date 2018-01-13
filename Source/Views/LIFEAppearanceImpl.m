@@ -42,7 +42,7 @@
 - (void)setTintColor:(UIColor *)tintColor
 {
     if (tintColor == nil) {
-        tintColor = [LIFEUIColor life_buglifeTurqoise];
+        tintColor = [UIColor life_buglifeTurqoise];
     }
     
     _tintColor = tintColor;
@@ -51,7 +51,7 @@
 - (void)setBarTintColor:(UIColor *)barTintColor
 {
     if (barTintColor == nil) {
-        barTintColor = [LIFEUIColor life_buglifeNavy];
+        barTintColor = [UIColor life_buglifeNavy];
     }
     
     _barTintColor = barTintColor;
