@@ -25,5 +25,6 @@
 
 - (void)life_setChildViewController:(nonnull UIViewController *)childViewController animated:(BOOL)animated completion:(void (^_Nullable)(void))completion;
 - (void)life_dismissEverythingAnimated:(BOOL)flag completion:(void (^ __nullable)(void))completion;
+- (void)dismissWithWindowBlindsAnimation:(BOOL)animated completion:(void (^ __nullable)(void))completion;
 
 @end

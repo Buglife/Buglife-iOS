@@ -24,6 +24,7 @@
 #import "LIFEImageEditorViewController.h"
 #import "LIFEContainerTransitionContext.h"
 #import "LIFENavigationController.h"
+#import "LIFEWindowBlindsAnimator.h"
 #import "LIFEMacros.h"
 
 @interface LIFEContainerViewController ()
@@ -112,7 +113,6 @@
 - (void)life_dismissEverythingAnimated:(BOOL)flag completion:(void (^ __nullable)(void))completion
 {
     UIViewController *visibleViewController = self.childViewControllers.lastObject;
-    
     id<UIViewControllerAnimatedTransitioning> animator = [self _animatorToDismissViewController:visibleViewController];
     
     if (animator) {
@@ -139,6 +139,30 @@
             completion();
         }
     }
+}
+
+- (void)dismissWithWindowBlindsAnimation:(BOOL)animated completion:(void (^ __nullable)(void))completion
+{
+    UIViewController *visibleViewController = self.visibleViewController;
+    let animator = [[LIFEWindowBlindsAnimator alloc] init];
+    let transitionContext = [[LIFEContainerTransitionContext alloc] initWithFromViewController:visibleViewController toViewController:self containerView:self.view];
+    transitionContext.animated = YES;
+    transitionContext.interactive = NO;
+    transitionContext.completionBlock = ^(BOOL didComplete) {
+        [visibleViewController.view removeFromSuperview];
+        [visibleViewController removeFromParentViewController];
+        
+        if ([animator respondsToSelector:@selector(animationEnded:)]) {
+            [animator animationEnded:didComplete];
+        }
+        
+        if (completion) {
+            completion();
+        }
+    };
+    
+    [visibleViewController willMoveToParentViewController:nil];
+    [animator animateTransition:transitionContext];
 }
 
 - (nullable id<UIViewControllerAnimatedTransitioning>)_animatorFromViewController:(nullable UIViewController *)fromVC toViewController:(nonnull UIViewController *)toVC

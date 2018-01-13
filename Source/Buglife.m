@@ -389,7 +389,26 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
 #endif
 }
 
-- (void)_dismissReporterAnimated:(BOOL)animated andShowThankYouDialog:(BOOL)shoudShowThankYouDialog
+- (void)_dismissReporterAnimated:(BOOL)animated
+{
+    __weak typeof(self) weakSelf = self;
+    
+    [self.containerWindow.containerViewController life_dismissEverythingAnimated:animated completion:^{
+        __strong Buglife *strongSelf = weakSelf;
+        if (strongSelf) {
+            [strongSelf _reporterAndThankYouDialogDidDismissAnimated:animated];
+        }
+    }];
+    
+    [self.reportWindow dismissAnimated:animated completion:^{
+        __strong Buglife *strongSelf = weakSelf;
+        if (strongSelf) {
+            [strongSelf _reporterAndThankYouDialogDidDismissAnimated:animated];
+        }
+    }];
+}
+
+- (void)_dismissReporterWithWindowBlindsAnimation:(BOOL)animated andShowThankYouDialog:(BOOL)shoudShowThankYouDialog
 {
     if (shoudShowThankYouDialog && [self.delegate respondsToSelector:@selector(buglifeWillPresentReportCompletedDialog:)]) {
         shoudShowThankYouDialog = [self.delegate buglifeWillPresentReportCompletedDialog:self];
@@ -397,7 +416,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     
     __weak typeof(self) weakSelf = self;
     
-    [self.containerWindow.containerViewController life_dismissEverythingAnimated:animated completion:^{
+    [self.containerWindow.containerViewController dismissWithWindowBlindsAnimation:animated completion:^{
         __strong Buglife *strongSelf = weakSelf;
         if (strongSelf) {
             if (shoudShowThankYouDialog) {
@@ -588,7 +607,7 @@ void life_dispatch_async_to_main_queue(dispatch_block_t block) {
 
 - (void)imageEditorViewControllerDidCancel:(nonnull LIFEImageEditorViewController *)controller
 {
-    [self _dismissReporterAnimated:YES andShowThankYouDialog:NO];
+    [self _dismissReporterAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:LIFENotificationUserCanceledReport object:self];
     if ([self.delegate respondsToSelector:@selector(buglife:userCanceledReportWithAttributes:)])
     {
@@ -622,7 +641,7 @@ void life_dispatch_async_to_main_queue(dispatch_block_t block) {
 
 - (void)reporterDidCancel:(nullable LIFEReportWindow *)reporter
 {
-    [self _dismissReporterAnimated:YES andShowThankYouDialog:NO];
+    [self _dismissReporterAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:LIFENotificationUserCanceledReport object:self];
     if ([self.delegate respondsToSelector:@selector(buglife:userCanceledReportWithAttributes:)])
     {
@@ -651,7 +670,7 @@ void life_dispatch_async_to_main_queue(dispatch_block_t block) {
                     [self _didCompleteReport:report];
                     
                     if (waitUntilSuccessfulSubmissionToDismissReporter) {
-                        [self _dismissReporterAnimated:YES andShowThankYouDialog:YES];
+                        [self _dismissReporterWithWindowBlindsAnimation:YES andShowThankYouDialog:YES];
                     }
                 }
             });
@@ -663,7 +682,7 @@ void life_dispatch_async_to_main_queue(dispatch_block_t block) {
     [[NSNotificationCenter defaultCenter] postNotificationName:LIFENotificationUserSubmittedReport object:self userInfo:[NSDictionary dictionaryWithDictionary:self.attributes]];
     
     if (!waitUntilSuccessfulSubmissionToDismissReporter) {
-        [self _dismissReporterAnimated:YES andShowThankYouDialog:YES];
+        [self _dismissReporterWithWindowBlindsAnimation:YES andShowThankYouDialog:YES];
     }
 }
 

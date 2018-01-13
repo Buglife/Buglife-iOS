@@ -24,6 +24,8 @@
 @protocol LIFEImageEditorViewControllerDelegate <NSObject>
 
 - (void)imageEditorViewController:(nonnull LIFEImageEditorViewController *)controller willCompleteWithAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage;
+
+@optional
 - (void)imageEditorViewControllerDidCancel:(nonnull LIFEImageEditorViewController *)controller;
 
 @end

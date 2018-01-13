@@ -46,11 +46,6 @@ let kFinalAlertViewScaleWhenAnimatingOut = 0.8;
     return animator;
 }
 
-+ (BOOL)canAnimateFromViewController:(nullable UIViewController *)fromVc toViewController:(nullable UIViewController *)toVc
-{
-    return [fromVc isKindOfClass:[LIFEAlertController class]] || [toVc isKindOfClass:[LIFEAlertController class]];
-}
-
 - (void)animateTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext {
     if (_animateIn) {
         [self _animateInTransition:transitionContext];

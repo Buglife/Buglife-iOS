@@ -95,7 +95,7 @@
 
 #pragma mark - Private methods
 
-- (void)_dismissSelfAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion
+- (void)_dismissSelfAnimated:(BOOL)flag completion:(void (^ __nullable)(void))completion
 {
     if ([self.parentViewController isKindOfClass:[LIFEContainerViewController class]]) {
         let container = (LIFEContainerViewController *)self.parentViewController;
