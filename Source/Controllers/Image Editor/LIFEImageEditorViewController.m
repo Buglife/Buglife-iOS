@@ -298,8 +298,6 @@ LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolB
             CGPoint startPoint = LIFECGPointAdd(self.previousStartPointForMovingAnnotation, translation);
             CGPoint endPoint = LIFECGPointAdd(self.previousEndPointForMovingAnnotation, translation);
             
-            NSLog(@"Moved %@", NSStringFromCGPoint(translation));
-            
             // Rotate
             CGFloat radians = self.angleForRotatingAnnotation;
             CGPoint anchor = CGPointMake((startPoint.x + endPoint.x) / 2.0, (startPoint.y + endPoint.y) / 2.0);

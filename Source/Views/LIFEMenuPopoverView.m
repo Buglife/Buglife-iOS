@@ -368,7 +368,8 @@
 {
     // get the top view
     // http://stackoverflow.com/questions/3843411/getting-reference-to-the-top-most-view-window-in-ios-application/8045804#8045804
-    UIView *topView = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+//    UIView *topView = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+    UIView *topView = [view window];
     
     CGRect screenBounds = [self currentScreenBoundsDependOnOrientation];
     float popoverMaxWidth = screenBounds.size.width - 2 * kPopOverViewPadding;
