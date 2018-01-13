@@ -29,9 +29,12 @@
 #import "LIFEMenuPopoverView.h"
 #import "LIFEGeometry.h"
 #import "LIFEMacros.h"
+#import "LIFEImageEditorSegmentedControl.h"
 
 static const CGFloat kDefaultAnnotationRotationAmount = 0.0;
 static const CGFloat kDefaultAnnotationScaleAmount = 1.0;
+
+LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolButtonType);
 
 @interface LIFEImageEditorViewController () <UIGestureRecognizerDelegate, LIFEMenuPopoverViewDelegate>
 
@@ -160,7 +163,7 @@ static const CGFloat kDefaultAnnotationScaleAmount = 1.0;
 
 - (void)_drawGestureHandler:(UIGestureRecognizer *)gestureRecognizer
 {
-    LIFEAnnotationType annotationType = self.screenshotAnnotatorView.selectedAnnotationType;
+    LIFEAnnotationType annotationType = LIFEAnnotationTypeFromToolButtonType(self.imageEditorView.selectedTool);
     CGPoint gestureLocation = [_panGestureRecognizer locationInView:_panGestureRecognizer.view];
     CGSize size = gestureRecognizer.view.bounds.size;
     CGVector gestureVector = LIFEVectorFromPointAndSize(gestureLocation, size);
@@ -570,3 +573,17 @@ static const CGFloat kMaximumLoupeRadius = 150;
 }
 
 @end
+
+LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolButtonType) {
+    switch (toolButtonType) {
+        case LIFEToolButtonTypeArrow:
+            return LIFEAnnotationTypeArrow;
+        case LIFEToolButtonTypeLoupe:
+            return LIFEAnnotationTypeLoupe;
+        case LIFEToolButtonTypeBlur:
+            return LIFEAnnotationTypeBlur;
+    }
+    
+    NSCParameterAssert(NO); // how'd you get here?
+    return LIFEAnnotationTypeArrow;
+}

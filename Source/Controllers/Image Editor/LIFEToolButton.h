@@ -18,6 +18,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, LIFEToolButtonType)
+{
+    LIFEToolButtonTypeArrow = 0,
+    LIFEToolButtonTypeLoupe = 1,
+    LIFEToolButtonTypeBlur = 2
+};
+
 @interface LIFEToolButton : UIControl
 
 @property (nonnull, nonatomic) UIImageView *imageView;

@@ -17,11 +17,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LIFEToolButton.h"
 
 // Has the same basic functionality as a UISegmentedControl,
 // however it's styled to look like more of a UITabBar
 @interface LIFEImageEditorSegmentedControl : UIControl
 
-@property (nonatomic) NSInteger selectedSegmentIndex;
+@property (nonatomic, readonly) LIFEToolButtonType selectedTool;
 
 @end

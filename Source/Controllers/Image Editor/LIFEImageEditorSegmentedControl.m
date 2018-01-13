@@ -18,7 +18,6 @@
 
 #import "LIFEImageEditorSegmentedControl.h"
 #import "UIImage+LIFEAdditions.h"
-#import "LIFEToolButton.h"
 #import "LIFEMacros.h"
 #import "LIFEAppearanceImpl.h"
 #import "UIColor+LIFEAdditions.h"
@@ -26,6 +25,7 @@
 
 @interface LIFEImageEditorSegmentedControl ()
 
+@property (nonatomic, readonly) NSInteger selectedSegmentIndex;
 @property (nonnull, nonatomic) LIFEToolButton *arrowButton;
 @property (nonnull, nonatomic) LIFEToolButton *loupeButton;
 @property (nonnull, nonatomic) LIFEToolButton *blurButton;
@@ -87,6 +87,11 @@
     }
     
     [self sendActionsForControlEvents:UIControlEventValueChanged];
+}
+
+- (LIFEToolButtonType)selectedTool
+{
+    return (LIFEToolButtonType)_selectedSegmentIndex;
 }
 
 - (void)_buttonTapped:(LIFEToolButton *)button

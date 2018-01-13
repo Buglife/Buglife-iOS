@@ -32,7 +32,7 @@
 
 let kImageBorderWidth = 1.0f;
 let kNavBarButtonFontSize = 18.0f;
-let kToolbarHeight = 50.0f;
+let kSegmentedControlHeight = 50.0f;
 let kNavButtonTopConstraintConstant = 26.0f;
 
 @interface LIFEImageEditorView ()
@@ -41,8 +41,9 @@ let kNavButtonTopConstraintConstant = 26.0f;
 @property (nonatomic) UIButton *cancelButton; // TODO: unused, remove
 @property (nonatomic) UIButton *nextButton; // TODO: unused, remove
 @property (nonatomic) UIView *imageBorderView;
+@property (nonatomic) LIFEImageEditorSegmentedControl *segmentedControl;
 @property (nonatomic) LIFEScreenshotAnnotatorView *screenshotAnnotatorView;
-@property (nonatomic) NSLayoutConstraint *toolbarBottomConstraint;
+@property (nonatomic) NSLayoutConstraint *segmentedControlBottomConstraint;
 @property (nonatomic) NSLayoutConstraint *cancelButtonTopConstraint;
 @property (nonatomic) NSLayoutConstraint *nextButtonTopConstraint;
 
@@ -109,7 +110,7 @@ let kNavButtonTopConstraintConstant = 26.0f;
         CGFloat navbarHeight = 44;
         CGFloat statusBarHeight = 20;
         CGFloat arbitraryMargin = 10;
-        CGFloat verticalMargin = (kToolbarHeight + navbarHeight + statusBarHeight + arbitraryMargin); // Toolbar + nav + status bar
+        CGFloat verticalMargin = (kSegmentedControlHeight + navbarHeight + statusBarHeight + arbitraryMargin); // Toolbar + nav + status bar
         
         [NSLayoutConstraint activateConstraints:@[
             [_screenshotAnnotatorView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
@@ -123,17 +124,17 @@ let kNavButtonTopConstraintConstant = 26.0f;
         [_imageBorderView life_makeEdgesEqualTo:_screenshotAnnotatorView withInset:-kImageBorderWidth];
         
         
-        let segmentedControl = [[LIFEImageEditorSegmentedControl alloc] init];
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:segmentedControl];
+        _segmentedControl = [[LIFEImageEditorSegmentedControl alloc] init];
+        _segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_segmentedControl];
         
-        _toolbarBottomConstraint = [segmentedControl.bottomAnchor constraintEqualToAnchor:self.bottomAnchor];
+        _segmentedControlBottomConstraint = [_segmentedControl.bottomAnchor constraintEqualToAnchor:self.bottomAnchor];
         
         [NSLayoutConstraint activateConstraints:@[
-            [segmentedControl.heightAnchor constraintEqualToConstant:kToolbarHeight],
-            [segmentedControl.widthAnchor constraintEqualToAnchor:self.widthAnchor multiplier:0.75],
-            [segmentedControl.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
-            _toolbarBottomConstraint
+            [_segmentedControl.heightAnchor constraintEqualToConstant:kSegmentedControlHeight],
+            [_segmentedControl.widthAnchor constraintEqualToAnchor:self.widthAnchor multiplier:0.75],
+            [_segmentedControl.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
+            _segmentedControlBottomConstraint
             ]];
         
         self.cancelButton.hidden = YES; // hidden because we now use the navigation controller's nav bar items to show these buttons
@@ -147,6 +148,11 @@ let kNavButtonTopConstraintConstant = 26.0f;
     return _screenshotAnnotatorView.sourceImageView;
 }
 
+- (LIFEToolButtonType)selectedTool
+{
+    return self.segmentedControl.selectedTool;
+}
+
 #pragma mark - Transitions
 
 - (void)prepareFirstPresentationTransition
@@ -154,7 +160,7 @@ let kNavButtonTopConstraintConstant = 26.0f;
     self.backgroundView.alpha = 0;
     self.imageBorderView.alpha = 0;
     self.screenshotAnnotatorView.alpha = 0;
-    _toolbarBottomConstraint.constant = kToolbarHeight;
+    _segmentedControlBottomConstraint.constant = kSegmentedControlHeight;
     _nextButtonTopConstraint.constant = -kNavButtonTopConstraintConstant;
     _cancelButtonTopConstraint.constant = -kNavButtonTopConstraintConstant;
     [self layoutIfNeeded];
@@ -162,7 +168,7 @@ let kNavButtonTopConstraintConstant = 26.0f;
 
 - (void)prepareSecondPresentationTransition
 {
-    _toolbarBottomConstraint.constant = 0;
+    _segmentedControlBottomConstraint.constant = 0;
     _nextButtonTopConstraint.constant = kNavButtonTopConstraintConstant;
     _cancelButtonTopConstraint.constant = kNavButtonTopConstraintConstant;
 }

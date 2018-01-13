@@ -17,6 +17,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LIFEToolButton.h"
 
 @class LIFEAnnotatedImage;
 @class LIFEScreenshotAnnotatorView;
@@ -33,5 +34,7 @@
 - (void)completeFirstPresentationTransition;
 
 - (nonnull UIView *)backgroundView;
+
+@property (nonatomic, readonly) LIFEToolButtonType selectedTool;
 
 @end
