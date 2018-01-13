@@ -1,5 +1,5 @@
 //
-//  UIColor+LIFEAdditions.h
+//  LIFEImageEditorSegmentedControl.h
 //  Copyright (C) 2018 Buglife, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,24 +17,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LIFECategories.h"
 
-@interface UIColor (LIFEAdditions)
+// Has the same basic functionality as a UISegmentedControl,
+// however it's styled to look like more of a UITabBar
+@interface LIFEImageEditorSegmentedControl : UIControl
 
-+ (nonnull instancetype)life_annotationStrokeColor;
-+ (nonnull instancetype)life_annotationFillColor;
-
-#pragma mark - Brand colors
-
-+ (nonnull instancetype)life_buglifeTurqoise;
-+ (nonnull instancetype)life_buglifeNavy;
-
-#pragma mark - Helper methods
-
-- (nonnull instancetype)life_grayscale;
-+ (nonnull instancetype)life_colorWithHexValue:(NSUInteger)hexValue;
-+ (nullable instancetype)life_debugColorWithAlpha:(CGFloat)alpha __deprecated_msg("This should only be used for debug builds!");;
+@property (nonatomic) NSInteger selectedSegmentIndex;
 
 @end
-
-LIFE_CATEGORY_FUNCTION_DECL(UIColor);

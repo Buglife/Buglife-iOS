@@ -27,6 +27,8 @@
 #import "LIFEAnnotatedImage.h"
 #import "LIFEMacros.h"
 #import "LIFEAppearanceImpl.h"
+#import "UIColor+LIFEAdditions.h"
+#import "LIFEImageEditorSegmentedControl.h"
 
 let kImageBorderWidth = 1.0f;
 let kNavBarButtonFontSize = 18.0f;
@@ -121,43 +123,16 @@ let kNavButtonTopConstraintConstant = 26.0f;
         [_imageBorderView life_makeEdgesEqualTo:_screenshotAnnotatorView withInset:-kImageBorderWidth];
         
         
-        // TODO: Localize these strings!
-        LIFEToolButton *arrowButton = [[LIFEToolButton alloc] init];
-        arrowButton.imageView.image = [LIFEUIImage life_arrowToolbarIcon];
-        arrowButton.titleView.text = @"Point";
+        let segmentedControl = [[LIFEImageEditorSegmentedControl alloc] init];
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:segmentedControl];
         
-        arrowButton.selected = YES;
-        
-        LIFEToolButton *loupeButton = [[LIFEToolButton alloc] init];
-        loupeButton.imageView.image = [LIFEUIImage life_loupeIcon];
-        loupeButton.titleView.text = @"Zoom";
-        
-        LIFEToolButton *blurButton = [[LIFEToolButton alloc] init];
-        blurButton.imageView.image = [LIFEUIImage life_pixelateIcon];
-        blurButton.titleView.text = @"Blur";
-        
-        NSArray *buttons = @[arrowButton, loupeButton, blurButton];
-        
-        for (LIFEToolButton *button in buttons) {
-            UIColor *normalColor = [UIColor blackColor];
-            [button setTintColor:normalColor forState:UIControlStateNormal];
-            [button setTintColor:tintColor forState:UIControlStateSelected];
-        }
-        
-        UIStackView *toolButtons = [[UIStackView alloc] initWithArrangedSubviews:@[arrowButton, loupeButton, blurButton]];
-        toolButtons.axis = UILayoutConstraintAxisHorizontal;
-        toolButtons.distribution = UIStackViewDistributionFillEqually;
-        toolButtons.alignment = UIStackViewAlignmentFill;
-        
-        toolButtons.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:toolButtons];
-        
-        _toolbarBottomConstraint = [toolButtons.bottomAnchor constraintEqualToAnchor:self.bottomAnchor];
+        _toolbarBottomConstraint = [segmentedControl.bottomAnchor constraintEqualToAnchor:self.bottomAnchor];
         
         [NSLayoutConstraint activateConstraints:@[
-            [toolButtons.heightAnchor constraintEqualToConstant:kToolbarHeight],
-            [toolButtons.widthAnchor constraintEqualToAnchor:self.widthAnchor multiplier:0.75],
-            [toolButtons.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
+            [segmentedControl.heightAnchor constraintEqualToConstant:kToolbarHeight],
+            [segmentedControl.widthAnchor constraintEqualToAnchor:self.widthAnchor multiplier:0.75],
+            [segmentedControl.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
             _toolbarBottomConstraint
             ]];
         

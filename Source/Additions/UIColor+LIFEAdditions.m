@@ -56,6 +56,19 @@ LIFE_CATEGORY_METHOD_IMPL(UIColor)
 
 #pragma mark - Helper factory methods
 
+- (instancetype)life_grayscale
+{
+    CGFloat red = 0;
+    CGFloat blue = 0;
+    CGFloat green = 0;
+    CGFloat alpha = 0;
+    if ([self getRed:&red green:&green blue:&blue alpha:&alpha]) {
+        return [UIColor colorWithWhite:(0.299*red + 0.587*green + 0.114*blue) alpha:alpha];
+    } else {
+        return self;
+    }
+}
+
 + (instancetype)life_color255WithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha
 {
     return [self colorWithRed:(red / 255.0) green:(green / 255.0) blue:(blue / 255.0) alpha:alpha];
