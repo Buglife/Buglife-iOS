@@ -20,6 +20,9 @@
 
 @interface LIFEToastViewController : UIViewController
 
+@property (nonatomic) UIStatusBarStyle statusBarStyle;
+@property (nonatomic) BOOL statusBarHidden;
+
 @property (nonatomic, copy) void (^dismissHandler)(void);
 
 - (void)prepareAnimateIn;

@@ -61,11 +61,10 @@ static let kToastDuration = (0.3f * kAnimationDuratioMultiplier);
         let navigationBarHeight = 64.0f;
         CGAffineTransform hackedTransform = CGAffineTransformTranslate(anticipationTransform, 0, -(navigationBarHeight * heightMultiplier));
         fromVc.view.transform = hackedTransform;
-        [UIView animateWithDuration:kSpringDuration delay:0 options:(UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState) animations:^{
+        UIViewAnimationOptions options = (UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState);
+        [UIView animateWithDuration:kSpringDuration delay:0 options:options animations:^{
             fromVc.view.transform = finalTransform;
-        } completion:^(BOOL finished) {
-            
-        }];
+        } completion:nil];
         
         // The toast should lag by a tiny bit
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kToastDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

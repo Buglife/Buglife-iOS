@@ -55,18 +55,17 @@ static let kHiddenToastBottomConstraintConstant = 100.0f;
     [_toastView addGestureRecognizer:_panGesture];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (UIStatusBarStyle)preferredStatusBarStyle
 {
-    [super viewDidAppear:animated];
-    
-//    _bottomConstraint.constant = -kPaddingY;
-//
-//    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:0.9 options:(UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction) animations:^{
-//        [self.view layoutIfNeeded];
-//    } completion:^(BOOL finished) {
-//        [self _startTimer];
-//    }];
+    return _statusBarStyle;
 }
+
+- (BOOL)prefersStatusBarHidden
+{
+    return _statusBarHidden;
+}
+
+#pragma mark - Animation
 
 - (void)prepareAnimateIn
 {
@@ -88,6 +87,7 @@ static let kHiddenToastBottomConstraintConstant = 100.0f;
 - (void)_handlePanGesture:(UIPanGestureRecognizer *)panGesture
 {
     let location = [panGesture locationInView:self.view];
+    let velocity = [panGesture velocityInView:self.view];
     
     switch (panGesture.state) {
         case UIGestureRecognizerStateBegan:
@@ -96,24 +96,43 @@ static let kHiddenToastBottomConstraintConstant = 100.0f;
             break;
         case UIGestureRecognizerStateChanged:
         {
-            CGFloat y = location.y - _panGestureStartLocation.y;
+            CGFloat deltaY = location.y - _panGestureStartLocation.y;
             
-            if (y < 0) {
-                return;
+            if (deltaY < 0) {
+                let verticalLimit = 150.0f;
+                let absY = fabs(deltaY) + verticalLimit;
+                let constrainedY = verticalLimit * (1.0f * log10(absY / verticalLimit));
+                deltaY = -constrainedY;
             }
             
-            _bottomConstraint.constant = (-kPaddingY) + y;
+            _bottomConstraint.constant = (-kPaddingY) + deltaY;
             [self.view layoutIfNeeded];
             break;
         }
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateFailed:
         case UIGestureRecognizerStateCancelled:
-            [self _startTimer];
+            if (velocity.y > 20.0f) {
+                [self _dismissWithVelocity:20.0f];
+            } else {
+                [self _resetPosition];
+            }
+            
             break;
         default:
             break;
     }
+}
+
+- (void)_resetPosition
+{
+    [self prepareAnimateIn];
+    
+    [UIView animateWithDuration:0.2 delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:0.9 options:(UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction) animations:^{
+        [self animateIn];
+    } completion:^(BOOL finished) {
+        [self didAnimateIn];
+    }];
 }
 
 - (void)_cancelTimer
@@ -125,17 +144,22 @@ static let kHiddenToastBottomConstraintConstant = 100.0f;
 - (void)_startTimer
 {
     [self _cancelTimer];
-    _dismissTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(_timerEnded) userInfo:nil repeats:NO];
+    _dismissTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(_timerEnded) userInfo:nil repeats:NO];
 }
 
 - (void)_timerEnded
+{
+    [self _dismissWithVelocity:0.9];
+}
+
+- (void)_dismissWithVelocity:(CGFloat)velocity
 {
     [_dismissTimer invalidate];
     _dismissTimer = nil;
     
     _bottomConstraint.constant = kHiddenToastBottomConstraintConstant;
     
-    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:0.9 options:(UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction) animations:^{
+    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:velocity options:(UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction) animations:^{
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         self.dismissHandler();
