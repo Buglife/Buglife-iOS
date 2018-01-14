@@ -21,6 +21,7 @@
 #import "LIFEAlertActionView.h"
 #import "LIFEAlertAction.h"
 #import "UIImage+LIFEAdditions.h"
+#import "LIFEPoweredByBuglifeView.h"
 #import "LIFEMacros.h"
 
 let kTitleViewPaddingX = 16.0f;
@@ -85,6 +86,11 @@ let kImagePaddingBottom = 16.0f;
         _actionButtonStack.alignment = UIStackViewAlignmentFill;
         [_backgroundView addSubview:_actionButtonStack];
         
+        let poweredView = [[LIFEPoweredByBuglifeView alloc] init];
+        poweredView.translatesAutoresizingMaskIntoConstraints = NO;
+        poweredView.foregroundColor = [UIColor whiteColor];
+        [self addSubview:poweredView];
+        
         [NSLayoutConstraint activateConstraints:@[
             [_titleLabel.leadingAnchor constraintEqualToAnchor:_backgroundView.leadingAnchor constant:kTitleViewPaddingX],
             [_titleLabel.trailingAnchor constraintEqualToAnchor:_backgroundView.trailingAnchor constant:-kTitleViewPaddingX],
@@ -95,7 +101,9 @@ let kImagePaddingBottom = 16.0f;
             [_actionButtonStack.topAnchor constraintEqualToAnchor:_imageView.bottomAnchor constant:kImagePaddingBottom],
             [_actionButtonStack.leadingAnchor constraintEqualToAnchor:_backgroundView.leadingAnchor],
             [_actionButtonStack.trailingAnchor constraintEqualToAnchor:_backgroundView.trailingAnchor],
-            [_actionButtonStack.bottomAnchor constraintEqualToAnchor:_backgroundView.bottomAnchor]
+            [_actionButtonStack.bottomAnchor constraintEqualToAnchor:_backgroundView.bottomAnchor],
+            [poweredView.topAnchor constraintEqualToAnchor:_backgroundView.bottomAnchor constant:-10],
+            [poweredView.centerXAnchor constraintEqualToAnchor:_backgroundView.centerXAnchor],
             ]];
     }
     return self;

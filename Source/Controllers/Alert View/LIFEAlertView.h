@@ -35,7 +35,7 @@
 @property (nullable, weak, nonatomic) id<LIFEAlertViewDelegate> delegate;
 @property (nonnull, nonatomic, readonly) UIImageView *imageView;
 
-- (void)setBackgroundViewBackgroundColor:(UIColor *)backgroundColor;
+- (void)setBackgroundViewBackgroundColor:(nullable UIColor *)backgroundColor;
 // This should only be used by view controller animators
 - (void)performDismissTransition;
 

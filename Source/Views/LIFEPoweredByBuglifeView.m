@@ -33,26 +33,27 @@ static const CGFloat kBugIconOffsetY = 1;
 
 @implementation LIFEPoweredByBuglifeView
 
+@synthesize foregroundColor = _foregroundColor;
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
         _textLabel = [[UILabel alloc] init];
-        _textLabel.textColor = [[self class] _foregroundColor];
         _textLabel.backgroundColor = [UIColor clearColor];
         _textLabel.text = LIFELocalizedString(LIFEStringKey_PoweredByBuglife);
         _textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
         [_textLabel sizeToFit];
         [self addSubview:_textLabel];
         
-        UIImage *image = [[self class] _dragonFlyImage];
-        _bugIcon = [[UIImageView alloc] initWithImage:image];
+        _bugIcon = [[UIImageView alloc] init];
         _bugIcon.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:_bugIcon];
         
         _textLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _bugIcon.translatesAutoresizingMaskIntoConstraints = NO;
         
+        UIImage *image = self.dragonflyIcon;
         CGSize bugIconSize = CGSizeMake(image.size.width / 2.0, image.size.height / 2.0);
         CGFloat textLabelXoffset = -(bugIconSize.width / 2.0);
         
@@ -67,27 +68,48 @@ static const CGFloat kBugIconOffsetY = 1;
         [_bugIcon.centerYAnchor constraintEqualToAnchor:_textLabel.centerYAnchor constant:kBugIconOffsetY].active = YES;
         [_bugIcon.widthAnchor constraintEqualToConstant:bugIconSize.width].active = YES;
         [_bugIcon.heightAnchor constraintEqualToConstant:bugIconSize.height].active = YES;
+        
+        [self _updateContent];
     }
     return self;
 }
 
+- (CGSize)intrinsicContentSize
+{
+    return CGSizeMake(UIViewNoIntrinsicMetric, [[self class] defaultHeight]);
+}
+
 #pragma mark - Public methods
+
+- (void)setForegroundColor:(UIColor *)foregroundColor
+{
+    _foregroundColor = foregroundColor;
+    [self _updateContent];
+}
+
+- (UIColor *)foregroundColor
+{
+    if (_foregroundColor == nil) {
+        _foregroundColor = [UIColor grayColor];
+    }
+
+    return _foregroundColor;
+}
 
 + (CGFloat)defaultHeight
 {
     return 60;
 }
 
-#pragma mark - Private methods
-
-+ (UIImage *)_dragonFlyImage
+- (void)_updateContent
 {
-    return [UIImage life_dragonflyIconWithColor:[self _foregroundColor]];
+    _textLabel.textColor = self.foregroundColor;
+    _bugIcon.image = self.dragonflyIcon;
 }
 
-+ (UIColor *)_foregroundColor
+- (nonnull UIImage *)dragonflyIcon
 {
-    return [UIColor grayColor];
+    return [UIImage life_dragonflyIconWithColor:self.foregroundColor];
 }
 
 @end

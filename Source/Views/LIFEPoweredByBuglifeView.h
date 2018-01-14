@@ -20,6 +20,8 @@
 
 @interface LIFEPoweredByBuglifeView : UIView
 
+@property (null_resettable, nonatomic) UIColor *foregroundColor;
+
 + (CGFloat)defaultHeight;
 
 @end
