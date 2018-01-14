@@ -52,7 +52,7 @@ let kSecondAnimationDuration = 0.75f;
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:fromVc.alertView.imageView.image];
     imageView.layer.borderColor = [UIColor blackColor].CGColor;
-    imageView.layer.borderWidth = 1;
+    imageView.layer.borderWidth = [LIFEImageEditorView imageBorderWidth];
     [containerView addSubview:imageView];
     imageView.frame = imageViewFrameStart;
     

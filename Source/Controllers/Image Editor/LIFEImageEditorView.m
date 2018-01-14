@@ -30,7 +30,7 @@
 #import "UIColor+LIFEAdditions.h"
 #import "LIFEImageEditorSegmentedControl.h"
 
-let kImageBorderWidth = 1.0f;
+let kImageBorderWidth = 2.0f;
 let kNavBarButtonFontSize = 18.0f;
 let kSegmentedControlHeight = 50.0f;
 let kNavButtonTopConstraintConstant = 26.0f;
@@ -78,12 +78,9 @@ let kNavButtonTopConstraintConstant = 26.0f;
         // On iPhone 7 Plus, the image is 1545px high (out of 2208px high screen, in portrait mode)
 //        CGFloat multiplier = (1545.0f / 2208.0f);
         CGFloat aspectRatio = [LIFEUIImage life_aspectRatio:annotatedImage.sourceImage];
-        CGFloat navbarHeight = 44;
-        CGFloat statusBarHeight = 20;
-        CGFloat arbitraryMargin = 10;
         
         [NSLayoutConstraint activateConstraints:@[
-            [_screenshotAnnotatorView.topAnchor constraintEqualToAnchor:self.topAnchor],
+            [_screenshotAnnotatorView.topAnchor constraintEqualToAnchor:self.topAnchor constant:kImageBorderWidth],
             [_screenshotAnnotatorView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
             [_screenshotAnnotatorView.widthAnchor constraintEqualToAnchor:_screenshotAnnotatorView.heightAnchor multiplier:aspectRatio]
             ]];
@@ -146,6 +143,11 @@ let kNavButtonTopConstraintConstant = 26.0f;
     self.backgroundView.alpha = 1;
     self.screenshotAnnotatorView.alpha = 1;
     self.imageBorderView.alpha = 1;
+}
+
++ (CGFloat)imageBorderWidth
+{
+    return kImageBorderWidth;
 }
 
 @end

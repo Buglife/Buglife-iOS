@@ -37,4 +37,6 @@
 
 @property (nonatomic, readonly) LIFEToolButtonType selectedTool;
 
++ (CGFloat)imageBorderWidth;
+
 @end
