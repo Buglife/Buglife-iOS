@@ -107,6 +107,20 @@ NSData * _LIFEUIImageRepresentationScaledForMaximumFilesize(LIFEImageFormat imag
          interpolationQuality:quality];
 }
 
++ (UIImage *)life_dragonflyIconWithColor:(UIColor *)color
+{
+    CGSize size = [LIFEUIBezierPath life_dragonFlyBezierPathSize];
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    
+    UIBezierPath *path = [LIFEUIBezierPath life_dragonFlyBezierPath];
+    [color setFill];
+    [path fill];
+    
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return result;
+}
+
 #pragma mark - Private methods
 
 // Returns a copy of the image that has been transformed using the given affine transform and scaled to the new size
@@ -308,20 +322,6 @@ NSData * _LIFEUIImageRepresentationScaledForMaximumFilesize(LIFEImageFormat imag
 }
 
 #pragma mark - Icons
-
-+ (UIImage *)life_dragonflyIconWithColor:(UIColor *)color
-{
-    CGSize size = [LIFEUIBezierPath life_dragonFlyBezierPathSize];
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
-    
-    UIBezierPath *path = [LIFEUIBezierPath life_dragonFlyBezierPath];
-    [color setFill];
-    [path fill];
-    
-    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return result;
-}
 
 + (UIImage *)life_arrowToolbarIcon
 {

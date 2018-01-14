@@ -82,7 +82,7 @@ static const CGFloat kBugIconOffsetY = 1;
 
 + (UIImage *)_dragonFlyImage
 {
-    return [LIFEUIImage life_dragonflyIconWithColor:[self _foregroundColor]];
+    return [UIImage life_dragonflyIconWithColor:[self _foregroundColor]];
 }
 
 + (UIColor *)_foregroundColor

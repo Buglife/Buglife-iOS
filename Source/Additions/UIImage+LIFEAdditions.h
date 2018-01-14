@@ -27,8 +27,9 @@ void LIFELoadCategoryFor_UIImageLIFEAdditions(void);
 
 @interface UIImage (LIFEAdditions)
 
-- (null_unspecified UIImage *)life_resizedImageWithScaleFactor:(CGFloat)scaleFactor interpolationQuality:(CGInterpolationQuality)quality;
-- (null_unspecified UIImage *)life_resizedImage:(CGSize)newSize interpolationQuality:(CGInterpolationQuality)quality;
+- (null_unspecified instancetype)life_resizedImageWithScaleFactor:(CGFloat)scaleFactor interpolationQuality:(CGInterpolationQuality)quality;
+- (null_unspecified instancetype)life_resizedImage:(CGSize)newSize interpolationQuality:(CGInterpolationQuality)quality;
++ (nonnull instancetype)life_dragonflyIconWithColor:(nonnull UIColor *)color;
 
 @end
 
@@ -43,7 +44,6 @@ void LIFELoadCategoryFor_UIImageLIFEAdditions(void);
 
 #pragma mark - Icons
 
-+ (nonnull UIImage *)life_dragonflyIconWithColor:(nonnull UIColor *)color;
 + (nonnull UIImage *)life_arrowToolbarIcon;
 + (nonnull UIImage *)life_loupeIcon;
 + (nonnull UIImage *)life_pixelateIcon;
