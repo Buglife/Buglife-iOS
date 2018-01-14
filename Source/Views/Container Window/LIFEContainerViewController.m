@@ -26,6 +26,7 @@
 #import "LIFENavigationController.h"
 #import "LIFEWindowBlindsAnimator.h"
 #import "LIFEMacros.h"
+#import "LIFEToastViewController.h"
 
 @interface LIFEContainerViewController ()
 
@@ -141,27 +142,43 @@
     }
 }
 
-- (void)dismissWithWindowBlindsAnimation:(BOOL)animated completion:(void (^ __nullable)(void))completion
+- (void)dismissWithWindowBlindsAnimation:(BOOL)animated showToast:(BOOL)showToast completion:(void (^ __nullable)(void))completion
 {
-    UIViewController *visibleViewController = self.visibleViewController;
-    let animator = [[LIFEWindowBlindsAnimator alloc] init];
-    let transitionContext = [[LIFEContainerTransitionContext alloc] initWithFromViewController:visibleViewController toViewController:self containerView:self.view];
+    let fromVc = self.visibleViewController;
+    LIFEToastViewController *toastViewController;
+    
+    if (showToast) {
+        toastViewController = [[LIFEToastViewController alloc] init];
+        toastViewController.dismissHandler = completion;
+        UIView *toView = toastViewController.view;
+        toView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        toView.frame = self.view.bounds;
+        [self addChildViewController:toastViewController];
+    }
+    
+    id<UIViewControllerAnimatedTransitioning> animator = [[LIFEWindowBlindsAnimator alloc] init];
+    
+    UIView *containerView = self.view;
+    LIFEContainerTransitionContext *transitionContext = [[LIFEContainerTransitionContext alloc] initWithFromViewController:fromVc toViewController:toastViewController containerView:containerView];
     transitionContext.animated = YES;
     transitionContext.interactive = NO;
     transitionContext.completionBlock = ^(BOOL didComplete) {
-        [visibleViewController.view removeFromSuperview];
-        [visibleViewController removeFromParentViewController];
+        if (fromVc != self) {
+            [fromVc.view removeFromSuperview];
+            [fromVc removeFromParentViewController];
+        }
+        
+        [toastViewController didMoveToParentViewController:self];
         
         if ([animator respondsToSelector:@selector(animationEnded:)]) {
             [animator animationEnded:didComplete];
         }
         
-        if (completion) {
+        if (!showToast) {
             completion();
         }
     };
     
-    [visibleViewController willMoveToParentViewController:nil];
     [animator animateTransition:transitionContext];
 }
 

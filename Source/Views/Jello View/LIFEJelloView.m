@@ -45,7 +45,7 @@ static let kInitialSpringVelocity = 0.8f;
         _dummyView = [[UIView alloc] init];
         _shapeLayer = [CAShapeLayer layer];
         [self.layer insertSublayer:_shapeLayer atIndex:0];
-        [self _updatePath];
+        [self updatePath];
         _shapeLayer.fillColor = [[self class] backgroundColor].CGColor;
         
         [self addSubview:_dummyView];
@@ -57,7 +57,7 @@ static let kInitialSpringVelocity = 0.8f;
 {
     [super layoutSubviews];
     
-    [self _updatePath];
+    [self updatePath];
     
     CGRect newFrame = CGRectMake(self.frame.origin.x, self.frame.origin.y, CGRectGetWidth(_dummyView.frame), CGRectGetHeight(_dummyView.frame));
     _dummyView.frame = newFrame;
@@ -79,7 +79,7 @@ static let kInitialSpringVelocity = 0.8f;
 - (void)setBendableOffset:(UIOffset)bendableOffset
 {
     _bendableOffset = bendableOffset;
-    [self _updatePath];
+    [self updatePath];
 }
 
 #pragma mark - LIFEJelloLayerDelegate
@@ -112,7 +112,7 @@ static let kInitialSpringVelocity = 0.8f;
 
 #pragma mark - Private methods
 
-- (void)_updatePath
+- (void)updatePath
 {
     CGRect bounds;
     CALayer *presentationLayer = self.layer.presentationLayer;

@@ -20,4 +20,10 @@
 
 @interface LIFEToastViewController : UIViewController
 
+@property (nonatomic, copy) void (^dismissHandler)(void);
+
+- (void)prepareAnimateIn;
+- (void)animateIn;
+- (void)didAnimateIn;
+
 @end

@@ -20,4 +20,7 @@
 
 @interface LIFEJelloView : UIView
 
+@property (nonnull, nonatomic, readonly) CAShapeLayer *shapeLayer;
+- (void)updatePath;
+
 @end

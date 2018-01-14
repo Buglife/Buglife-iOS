@@ -17,27 +17,42 @@
 //
 
 #import "LIFEWindowBlindsAnimator.h"
+#import "UIView+LIFEAdditions.h"
+#import "LIFEToastViewController.h"
 #import "LIFEMacros.h"
 
 static let kAnimationDuratioMultiplier = 1.0f;
 static let kAnticipationScale = 1.1f;
 static let kAnticipationDuration = (0.15f * kAnimationDuratioMultiplier);
 static let kSpringDuration = (0.3f * kAnimationDuratioMultiplier);
+static let kToastDelay = (kSpringDuration / 2.0);
+static let kToastDuration = (0.3f * kAnimationDuratioMultiplier);
+
+@interface LIFEWindowBlindsAnimator ()
+
+@property (nonatomic) NSLayoutConstraint *centerYConstraint;
+@property (nonatomic) NSLayoutConstraint *heightConstraint;
+
+@end
 
 @implementation LIFEWindowBlindsAnimator
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
     let fromVc = (UIViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    let toVc = (LIFEToastViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    let containerView = transitionContext.containerView;
     let normalHeight = CGRectGetHeight(fromVc.view.frame);
     let scaledHeight = normalHeight * kAnticipationScale;
     let heightDelta = scaledHeight - normalHeight;
     CGAffineTransform anticipationTransform = CGAffineTransformMakeScale(1, kAnticipationScale);
     anticipationTransform = CGAffineTransformTranslate(anticipationTransform, 0, heightDelta);
-    
+
     let heightMultiplier = 1.25f;
     CGAffineTransform finalTransform = CGAffineTransformMakeTranslation(0, -(normalHeight * heightMultiplier));
     
+    [containerView addSubview:toVc.view];
+
     [UIView animateWithDuration:kAnticipationDuration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         fromVc.view.transform = anticipationTransform;
     } completion:^(BOOL finished) {
@@ -49,13 +64,25 @@ static let kSpringDuration = (0.3f * kAnimationDuratioMultiplier);
         [UIView animateWithDuration:kSpringDuration delay:0 options:(UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState) animations:^{
             fromVc.view.transform = finalTransform;
         } completion:^(BOOL finished) {
-            [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
+            
         }];
+        
+        // The toast should lag by a tiny bit
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kToastDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [toVc prepareAnimateIn];
+            
+            [UIView animateWithDuration:kToastDuration delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:0.9 options:(UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction) animations:^{
+                [toVc animateIn];
+            } completion:^(BOOL finished) {
+                [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
+                [toVc didAnimateIn];
+            }];
+        });
     }];
 }
 
 - (NSTimeInterval)transitionDuration:(nullable id<UIViewControllerContextTransitioning>)transitionContext {
-    return kAnticipationDuration + kSpringDuration;
+    return kAnticipationDuration + kToastDelay + kToastDuration;
 }
 
 @end

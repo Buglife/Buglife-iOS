@@ -26,7 +26,7 @@
  * If moving from one view controller to another, the containterView
  * should be fromVc's view's superView.
  */
-- (nonnull instancetype)initWithFromViewController:(nonnull UIViewController *)fromVc toViewController:(nonnull UIViewController *)toVc containerView:(nonnull UIView *)containerView;
+- (nonnull instancetype)initWithFromViewController:(nullable UIViewController *)fromVc toViewController:(nullable UIViewController *)toVc containerView:(nonnull UIView *)containerView;
 
 @property (nonatomic, copy) void (^ _Nullable completionBlock)(BOOL didComplete);
 @property (nonatomic, getter=isAnimated) BOOL animated;

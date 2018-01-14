@@ -22,11 +22,15 @@
 
 static let kPaddingX = 10.0f;
 static let kPaddingY = 10.0f;
+static let kHiddenToastBottomConstraintConstant = 100.0f;
 
 @interface LIFEToastViewController ()
 
 @property (nonnull, nonatomic) LIFEToastView *toastView;
 @property (nonnull, nonatomic) NSLayoutConstraint *bottomConstraint;
+@property (nonnull, nonatomic) NSTimer *dismissTimer;
+@property (nonnull, nonatomic) UIPanGestureRecognizer *panGesture;
+@property (nonatomic) CGPoint panGestureStartLocation;
 
 @end
 
@@ -44,20 +48,97 @@ static let kPaddingY = 10.0f;
         [_toastView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-kPaddingX]
         ]];
     
-    _bottomConstraint = [_toastView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:100];
+    _bottomConstraint = [_toastView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:kHiddenToastBottomConstraintConstant];
     _bottomConstraint.active = YES;
+    
+    _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(_handlePanGesture:)];
+    [_toastView addGestureRecognizer:_panGesture];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    _bottomConstraint.constant = -kPaddingY;
+//    _bottomConstraint.constant = -kPaddingY;
+//
+//    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:0.9 options:(UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction) animations:^{
+//        [self.view layoutIfNeeded];
+//    } completion:^(BOOL finished) {
+//        [self _startTimer];
+//    }];
+}
 
+- (void)prepareAnimateIn
+{
+    _bottomConstraint.constant = -kPaddingY;
+}
+
+- (void)animateIn
+{
+    [self.view layoutIfNeeded];
+}
+
+- (void)didAnimateIn
+{
+    [self _startTimer];
+}
+
+#pragma mark - Private
+
+- (void)_handlePanGesture:(UIPanGestureRecognizer *)panGesture
+{
+    let location = [panGesture locationInView:self.view];
+    
+    switch (panGesture.state) {
+        case UIGestureRecognizerStateBegan:
+            _panGestureStartLocation = location;
+            [self _cancelTimer];
+            break;
+        case UIGestureRecognizerStateChanged:
+        {
+            CGFloat y = location.y - _panGestureStartLocation.y;
+            
+            if (y < 0) {
+                return;
+            }
+            
+            _bottomConstraint.constant = (-kPaddingY) + y;
+            [self.view layoutIfNeeded];
+            break;
+        }
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateFailed:
+        case UIGestureRecognizerStateCancelled:
+            [self _startTimer];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)_cancelTimer
+{
+    [_dismissTimer invalidate];
+    _dismissTimer = nil;
+}
+
+- (void)_startTimer
+{
+    [self _cancelTimer];
+    _dismissTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(_timerEnded) userInfo:nil repeats:NO];
+}
+
+- (void)_timerEnded
+{
+    [_dismissTimer invalidate];
+    _dismissTimer = nil;
+    
+    _bottomConstraint.constant = kHiddenToastBottomConstraintConstant;
+    
     [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:0.9 options:(UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction) animations:^{
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
-
+        self.dismissHandler();
     }];
 }
 

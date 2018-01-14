@@ -33,16 +33,24 @@
 
 #pragma mark - Public methods
 
-- (instancetype)initWithFromViewController:(nonnull UIViewController *)fromVc toViewController:(nonnull UIViewController *)toVc containerView:(nonnull UIView *)containerView
+- (instancetype)initWithFromViewController:(nullable UIViewController *)fromVc toViewController:(nullable UIViewController *)toVc containerView:(nonnull UIView *)containerView
 {
     self = [super init];
     if (self) {
         self.presentationStyle = UIModalPresentationCustom;
         self.containerView = containerView;
-        _privateViewControllers = @{
-            UITransitionContextFromViewControllerKey: fromVc,
-            UITransitionContextToViewControllerKey: toVc
-            };
+        
+        NSMutableDictionary *privateViewControllers = [NSMutableDictionary dictionary];
+        
+        if (fromVc) {
+            privateViewControllers[UITransitionContextFromViewControllerKey] = fromVc;
+        }
+        
+        if (toVc) {
+            privateViewControllers[UITransitionContextToViewControllerKey] = toVc;
+        }
+        
+        _privateViewControllers = [NSDictionary dictionaryWithDictionary:privateViewControllers];
     }
     return self;
 }

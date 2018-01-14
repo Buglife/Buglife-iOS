@@ -416,19 +416,10 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     
     __weak typeof(self) weakSelf = self;
     
-    [self.containerWindow.containerViewController dismissWithWindowBlindsAnimation:animated completion:^{
+    [self.containerWindow.containerViewController dismissWithWindowBlindsAnimation:animated showToast:shoudShowThankYouDialog completion:^{
         __strong Buglife *strongSelf = weakSelf;
         if (strongSelf) {
-            if (shoudShowThankYouDialog) {
-                [strongSelf _showThankYouDialogWithCancelActionHandler:^{
-                    __strong Buglife *strongSelf2 = weakSelf;
-                    if (strongSelf2) {
-                        [strongSelf2 _reporterAndThankYouDialogDidDismissAnimated:animated];
-                    }
-                }];
-            } else {
-                [strongSelf _reporterAndThankYouDialogDidDismissAnimated:animated];
-            }
+            [strongSelf _reporterAndThankYouDialogDidDismissAnimated:animated];
         }
     }];
 
