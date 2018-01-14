@@ -125,6 +125,11 @@
     [self.loupeQueue addOperation:operation];
 }
 
+- (void)clearImageCache
+{
+    [self.imageCache removeAllObjects];
+}
+
 - (void)getFlattenedScaledImageForAnnotatedImage:(LIFEAnnotatedImage *)annotatedImage targetSize:(CGSize)targetSize toQueue:(dispatch_queue_t)completionQueue completion:(LIFEImageProcessorResultBlock)completion
 {
     // Annotated images can be mutable!

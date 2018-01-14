@@ -38,6 +38,7 @@ typedef void (^LIFEImageProcessorResultBlock)(LIFEImageIdentifier * _Null_unspec
 
 #pragma mark - Cache clearing
 
+- (void)clearImageCache;
 - (void)clearCachedLoupeSourceScaledImagesForAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage targetSize:(CGSize)targetSize;
 
 @end

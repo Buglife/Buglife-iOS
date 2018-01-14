@@ -885,6 +885,9 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
         return;
     }
     
+    // Invalidate the image cache
+    [self.imageProcessor clearImageCache];
+    
     // Replace the stored annotated image
     [self.reportBuilder replaceAnnotatedImageAtIndex:self.indexOfCurrentEditingAnnotatedImage withAnnotatedImage:annotatedImage];
     
