@@ -84,6 +84,12 @@ LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolB
     return self;
 }
 
+- (void)dealloc
+{
+    [self.view removeGestureRecognizer:_panGestureRecognizer];
+    _panGestureRecognizer = nil;
+}
+
 #pragma mark - UIViewController
 
 - (void)loadView
@@ -110,6 +116,37 @@ LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolB
     if ([self.navigationController isKindOfClass:[LIFENavigationController class]]) {
         let nav = (LIFENavigationController *)self.navigationController;
         nav.navigationBarStyleClear = YES;
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // When we add annotation views for the first time, we need
+    // to first cache the various source images (i.e. blurs, loupes, etc)
+    CGSize targetSize = [self _targetSizeForAnnotationViewImages];
+    __weak typeof(self) weakSelf = self;
+    
+    [self.imageProcessor getLoupeSourceScaledImageForAnnotatedImage:self.annotatedImage targetSize:targetSize toQueue:dispatch_get_main_queue() completion:^(LIFEImageIdentifier *identifier, UIImage *result) {
+        __strong LIFEImageEditorViewController *strongSelf = weakSelf;
+        if (strongSelf) {
+            for (LIFEAnnotation *annotation in strongSelf.annotatedImage.annotations) {
+                LIFEAnnotationView *annotationView = [strongSelf _addAnnotationViewForAnnotation:annotation animated:animated];
+                [strongSelf _addGestureHandlersToAnnotationView:annotationView];
+            }
+        }
+    }];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // If going back to the previous view controller,
+    // to notify it so that it can refresh its thumbnail
+    if (!self.isInitialViewController) {
+        [self _notifyDelegateOfCompletion];
     }
 }
 
