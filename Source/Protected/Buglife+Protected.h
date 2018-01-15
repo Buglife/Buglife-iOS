@@ -16,6 +16,7 @@ extern const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished;
 @class LIFEContainerWindow;
 @class LIFEReportOwner;
 @class LIFEAttribute;
+@class LIFEDataProvider;
 
 @interface Buglife (Protected)
 
@@ -31,6 +32,7 @@ extern const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished;
 @property (nullable, nonatomic, readonly) LIFEBugButtonWindow *bugButtonWindow;
 @property (nullable, nonatomic, readonly) NSString *apiKey;
 @property (nullable, nonatomic, readonly) NSString *email;
+@property (nullable, nonatomic, readonly) NSString *userIdentifier;
 @property (nullable, nonatomic, readonly) NSString *userEmail;
 @property (nullable, nonatomic, readonly) NSMutableDictionary<NSString *, LIFEAttribute *> *attributes;
 @property (nullable, nonatomic, readonly) LIFEReportOwner *reportOwner;
@@ -38,6 +40,7 @@ extern const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished;
 @property (nonatomic, nullable) LIFEContainerWindow *containerWindow;
 @property (nonatomic) BOOL reportAlertOrWindowVisible;
 @property (nonatomic, getter=isScreenRecordingInvocationEnabled) BOOL screenRecordingInvocationEnabled;
+@property (null_unspecified, nonatomic, readonly) LIFEDataProvider *dataProvider;
 - (nullable instancetype)initInternal;
 
 @property (nonatomic, null_resettable) NSString *thankYouMessage;

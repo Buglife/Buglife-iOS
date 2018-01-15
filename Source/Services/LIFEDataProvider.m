@@ -25,7 +25,7 @@
 #import "LIFENetworkManager.h"
 #import "LIFEUserDefaults.h"
 #import "LIFEReportOwner.h"
-#import "Buglife.h"
+#import "Buglife+Protected.h"
 #import "NSMutableDictionary+LIFEAdditions.h"
 #import "NSError+LIFEAdditions.h"
 
@@ -40,6 +40,7 @@
 static NSString * const kBuglifeDirectory = @"com.buglife.buglife";
 static NSString * const kLegacyPendingReportsDirectory = @"cached_reports";
 static NSString * const kPendingReportsDirectory = @"pending_reports";
+static NSString * const kPlatform = @"ios";
 
 @interface LIFEDataProvider ()
 
@@ -73,6 +74,58 @@ static NSString * const kPendingReportsDirectory = @"pending_reports";
 - (instancetype)init
 {
     LIFE_THROW_UNAVAILABLE_EXCEPTION(initWithReportOwner:SDKVersion:);
+}
+
+#pragma mark - Client Events
+
+- (void)logClientEventWithName:(nonnull NSString *)eventName afterDelay:(NSTimeInterval)delay
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self logClientEventWithName:eventName];
+    });
+}
+
+- (void)logClientEventWithName:(nonnull NSString *)eventName
+{
+    LIFELogIntDebug(@"Logging event: \"%@\"", eventName);
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    [self.reportOwner switchCaseAPIKey:^(NSString *apiKey) {
+        [LIFENSMutableDictionaryify(params) life_safeSetObject:apiKey forKey:@"api_key"];
+    } email:^(NSString * _Nonnull email) {
+        [LIFENSMutableDictionaryify(params) life_safeSetObject:email forKey:@"email"];
+    }];
+
+    NSString *deviceIdentifier = [UIDevice currentDevice].identifierForVendor.UUIDString;
+    NSString *userIdentifier = [Buglife sharedBuglife].userIdentifier;
+    NSString *userEmail = [Buglife sharedBuglife].userEmail;
+    NSMutableDictionary *clientEventParams = [NSMutableDictionary dictionary];
+    [clientEventParams life_safeSetObject:_sdkVersion forKey:@"sdk_version"];
+    [clientEventParams life_safeSetObject:_sdkName forKey:@"sdk_name"];
+    [clientEventParams life_safeSetObject:eventName forKey:@"event_name"];
+    [clientEventParams life_safeSetObject:userIdentifier forKey:@"user_identifier"];
+    [clientEventParams life_safeSetObject:userEmail forKey:@"user_email"];
+    [clientEventParams life_safeSetObject:deviceIdentifier forKey:@"device_identifier"];
+
+    [_appInfoProvider asyncFetchAppInfoToQueue:_workQueue completion:^(LIFEAppInfo *appInfo) {
+        clientEventParams[@"bundle_short_version"] = appInfo.bundleShortVersion;
+        clientEventParams[@"bundle_version"] = appInfo.bundleVersion;
+        
+        NSMutableDictionary *appParams = [NSMutableDictionary dictionary];
+        [appParams life_safeSetObject:appInfo.bundleIdentifier forKey:@"bundle_identifier"];
+        [appParams life_safeSetObject:kPlatform forKey:@"platform"];
+        [appParams life_safeSetObject:appInfo.bundleName forKey:@"bundle_name"];
+
+        [params life_safeSetObject:appParams forKey:@"app"];
+        [params life_safeSetObject:clientEventParams forKey:@"client_event"];
+        
+        [self.networkManager POST:@"api/v1/client_events.json" parameters:params callbackQueue:self.workQueue success:^(id responseObject) {
+            LIFELogIntDebug(@"Successfully posted event \"%@\"", eventName);
+        } failure:^(NSError *error) {
+            LIFELogIntError(@"Error posting event \"%@\"\n  Error: %@", eventName, error);
+        }];
+    }];
 }
 
 #pragma mark - Public methods

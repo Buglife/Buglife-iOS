@@ -200,6 +200,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     
     [self _enableOrDisableBugButton];
     [self.dataProvider flushPendingReportsAfterDelay:2.0];
+    [self.dataProvider logClientEventWithName:@"app_launch" afterDelay:10.0];
 }
 
 - (BOOL)_isStarted
@@ -346,6 +347,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     if (invocation == LIFEInvocationOptionsNone) {
         // If the reporter was presented manually, we should log it. Otherwise it should be logged at the actual invocation time
         [self _notifyBuglifeInvoked];
+        [self.dataProvider logClientEventWithName:@"reporter_invoked_manually"];
     }
     
     self.lastUsedInovcationMethod = invocation;
@@ -400,6 +402,8 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     if (self.useLegacyReporterUI) {
         self.reportWindow = reportWindow;
     }
+    
+    [self.dataProvider logClientEventWithName:@"presented_reporter" afterDelay:2.0];
 }
 
 - (void)_showContainerWindowWithViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated

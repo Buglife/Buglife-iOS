@@ -30,5 +30,7 @@ typedef void (^LIFEDataProviderSubmitCompletion)(BOOL submitted);
 - (_Null_unspecified instancetype)init NS_UNAVAILABLE;
 - (void)submitReport:(nonnull LIFEReport *)report withRetryPolicy:(LIFERetryPolicy)retryPolicy completion:(nullable LIFEDataProviderSubmitCompletion)completion;
 - (void)flushPendingReportsAfterDelay:(NSTimeInterval)delay;
+- (void)logClientEventWithName:(nonnull NSString *)eventName afterDelay:(NSTimeInterval)delay;
+- (void)logClientEventWithName:(nonnull NSString *)eventName;
 
 @end

@@ -27,6 +27,7 @@
 #import "LIFEContainerWindow.h"
 #import "LIFEContainerViewController.h"
 #import "UIApplication+LIFEAdditions.h"
+#import "LIFEDataProvider.h"
 
 // Block type that can be used as a handler for both LIFEAlertAction and UIAlertAction
 typedef void (^LIFEOrUIAlertActionHandler)(NSObject *action);
@@ -47,6 +48,7 @@ typedef void (^LIFEOrUIAlertActionHandler)(NSObject *action);
 - (void)_presentAlertControllerForInvocation:(LIFEInvocationOptions)invocation withScreenshot:(UIImage *)screenshot
 {
     [self _notifyBuglifeInvoked];
+    [self.dataProvider logClientEventWithName:@"reporter_invoked"];
     
     // Hide the keyboard before showing the alert
     UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
