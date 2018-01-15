@@ -21,6 +21,7 @@
 #import "LIFEMacros.h"
 
 let kIntrinsicHeight = 44.0f;
+let kFontSize = 17.0f;
 
 @interface LIFEAlertActionView ()
 
@@ -37,7 +38,12 @@ let kIntrinsicHeight = 44.0f;
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _titleLabel.text = title;
-        _titleLabel.font = [UIFont systemFontOfSize:17.0];
+        
+        if (style == UIAlertViewStyleDefault) {
+            _titleLabel.font = [UIFont boldSystemFontOfSize:kFontSize];
+        } else {
+            _titleLabel.font = [UIFont systemFontOfSize:kFontSize];
+        }
         
         if (style == UIAlertActionStyleDestructive) {
             _titleLabel.textColor = [UIColor redColor];
