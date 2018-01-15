@@ -196,8 +196,6 @@
 		B767C14E1FF9AACD00923DAB /* LIFEContainerAlertToImageEditorAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B767C14C1FF9AACD00923DAB /* LIFEContainerAlertToImageEditorAnimator.m */; };
 		B767C1511FF9AC4700923DAB /* LIFEContainerTransitionContext.h in Headers */ = {isa = PBXBuildFile; fileRef = B767C14F1FF9AC4700923DAB /* LIFEContainerTransitionContext.h */; };
 		B767C1521FF9AC4700923DAB /* LIFEContainerTransitionContext.m in Sources */ = {isa = PBXBuildFile; fileRef = B767C1501FF9AC4700923DAB /* LIFEContainerTransitionContext.m */; };
-		B7EE929A1FFB7366003C44E7 /* LIFEImageEditorCancelAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EE92981FFB7366003C44E7 /* LIFEImageEditorCancelAnimator.h */; };
-		B7EE929B1FFB7366003C44E7 /* LIFEImageEditorCancelAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EE92991FFB7366003C44E7 /* LIFEImageEditorCancelAnimator.m */; };
 		B7EE92E71FFDF8FF003C44E7 /* LIFEContainerModalDismissAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EE92E51FFDF8FF003C44E7 /* LIFEContainerModalDismissAnimator.h */; };
 		B7EE92E81FFDF8FF003C44E7 /* LIFEContainerModalDismissAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EE92E61FFDF8FF003C44E7 /* LIFEContainerModalDismissAnimator.m */; };
 		B878F62969AAAD129BF17BD68FC46EF1 /* LIFEAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 37F35F68104435B9E57CA58134DFBEB7 /* LIFEAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -447,8 +445,6 @@
 		B767C14F1FF9AC4700923DAB /* LIFEContainerTransitionContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LIFEContainerTransitionContext.h; sourceTree = "<group>"; };
 		B767C1501FF9AC4700923DAB /* LIFEContainerTransitionContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LIFEContainerTransitionContext.m; sourceTree = "<group>"; };
 		B7E98CDDAD7D572F9B6848CB755CB2BE /* LIFEReportAttachmentImpl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LIFEReportAttachmentImpl.h; sourceTree = "<group>"; };
-		B7EE92981FFB7366003C44E7 /* LIFEImageEditorCancelAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LIFEImageEditorCancelAnimator.h; sourceTree = "<group>"; };
-		B7EE92991FFB7366003C44E7 /* LIFEImageEditorCancelAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LIFEImageEditorCancelAnimator.m; sourceTree = "<group>"; };
 		B7EE92E51FFDF8FF003C44E7 /* LIFEContainerModalDismissAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LIFEContainerModalDismissAnimator.h; sourceTree = "<group>"; };
 		B7EE92E61FFDF8FF003C44E7 /* LIFEContainerModalDismissAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LIFEContainerModalDismissAnimator.m; sourceTree = "<group>"; };
 		B918A4A2CC44F708BFE016F5BD9600A7 /* LIFEContextAwareLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LIFEContextAwareLogFormatter.m; sourceTree = "<group>"; };
@@ -805,8 +801,6 @@
 				B767C1141FF587C000923DAB /* LIFEImageEditorView.m */,
 				B767C1171FF5C09800923DAB /* LIFEToolButton.h */,
 				B767C1181FF5C09800923DAB /* LIFEToolButton.m */,
-				B7EE92981FFB7366003C44E7 /* LIFEImageEditorCancelAnimator.h */,
-				B7EE92991FFB7366003C44E7 /* LIFEImageEditorCancelAnimator.m */,
 				B73E41082009E19000D65177 /* LIFEImageEditorSegmentedControl.h */,
 				B73E41092009E19000D65177 /* LIFEImageEditorSegmentedControl.m */,
 			);
@@ -1072,7 +1066,6 @@
 				9E59186BEF8469AF5C45E4F8A3B289E3 /* LIFELogger.h in Headers */,
 				0226EB9E3D5A23E4BB608B12933F7648 /* LIFELogMacros.h in Headers */,
 				F7BD5D39BEF3ABC10C993912502C91D7 /* LIFELogViewController.h in Headers */,
-				B7EE929A1FFB7366003C44E7 /* LIFEImageEditorCancelAnimator.h in Headers */,
 				44A0A9086B872AC468103B4D2A87330C /* LIFELoupeAnnotationView.h in Headers */,
 				3590C203104FE5757ABF0A53AE0069D9 /* LIFEMacros.h in Headers */,
 				9E0EA031FB47627D1FE02BE9D25512A7 /* LIFEMenuPopoverView.h in Headers */,
@@ -1278,7 +1271,6 @@
 				C118562353507C3A652CDD9AD28BCB37 /* LIFEPickerInputField.m in Sources */,
 				B185DC9AF74229AF69CEA950AAB95588 /* LIFEPickerViewController.m in Sources */,
 				48C6C758782052479372AB40C104CF16 /* LIFEPoweredByBuglifeView.m in Sources */,
-				B7EE929B1FFB7366003C44E7 /* LIFEImageEditorCancelAnimator.m in Sources */,
 				29B8FBF030403D2F773D72F205F80898 /* LIFEReachability.m in Sources */,
 				CC8FB6B2F1D728151FED1EA086B38302 /* LIFERecordingShrinker.m in Sources */,
 				0B154FE0D67109A341809171F83F21DC /* LIFEReport.m in Sources */,

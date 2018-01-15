@@ -18,6 +18,8 @@
 
 #import "LIFEContainerModalDismissAnimator.h"
 #import "LIFEImageEditorViewController.h"
+#import "LIFEContainerViewController.h"
+#import "UIViewController+LIFEAdditions.h"
 #import "LIFEMacros.h"
 
 @implementation LIFEContainerModalDismissAnimator
@@ -25,6 +27,7 @@
 - (void)animateTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext
 {
     LIFEImageEditorViewController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    let containerVc = fromVc.life_containerViewController;
     let duration = [self transitionDuration:transitionContext];
     let oldFrame = fromVc.view.frame;
     let newFrame = CGRectOffset(oldFrame, 0, [UIScreen mainScreen].bounds.size.height);
@@ -32,6 +35,7 @@
     UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseInOut;
     [UIView animateWithDuration:duration delay:0 options:options animations:^{
         fromVc.view.frame = newFrame;
+        [containerVc setNeedsStatusBarAppearanceUpdate];
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
     }];

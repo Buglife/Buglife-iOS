@@ -20,7 +20,7 @@
 #import "LIFEAlertAnimator.h"
 #import "LIFEAlertController.h"
 #import "LIFEContainerAlertToImageEditorAnimator.h"
-#import "LIFEImageEditorCancelAnimator.h"
+#import "LIFEContainerModalDismissAnimator.h"
 #import "LIFEImageEditorViewController.h"
 #import "LIFEContainerTransitionContext.h"
 #import "LIFENavigationController.h"
@@ -228,11 +228,9 @@
 {
     if ([viewController isKindOfClass:[LIFEAlertController class]]) {
         return [LIFEAlertAnimator dismissAnimator];
-    } else if ([viewController isKindOfClass:[LIFEImageEditorViewController class]]) {
-        return [[LIFEImageEditorCancelAnimator alloc] init];
     }
     
-    return nil;
+    return [[LIFEContainerModalDismissAnimator alloc] init];
 }
 
 @end
