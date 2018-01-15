@@ -109,6 +109,10 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
 @property (nonatomic, null_resettable) NSString *thankYouMessage;
 @property (nonatomic, null_resettable) NSString *titleForReportViewController;
 
+// Legacy feature, but some people might still want to use it.
+// If they're dying for it, let them use it via private API.
+@property (nonatomic) BOOL hideUntilNextLaunchButtonEnabled;
+
 @end
 
 @implementation Buglife
@@ -135,6 +139,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     if (self) {
         _debugMode = NO;
         _reportAlertOrWindowVisible = NO;
+        _hideUntilNextLaunchButtonEnabled = NO;
         _attachmentManager = [[LIFEAttachmentManager alloc] init];
         _attributes = [[NSMutableDictionary alloc] init];
         self.invocationOptions = LIFEInvocationOptionsShake;

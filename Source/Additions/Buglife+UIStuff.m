@@ -86,35 +86,32 @@
     }];
     [alert addAction:reportAction];
     
-#if !LIFE_DEMO_MODE
-    
-    NSString *disableTitle;
-    
-    if (invocation == LIFEInvocationOptionsScreenRecordingFinished) {
-        disableTitle = LIFELocalizedString(LIFEStringKey_DontAskUntilNextLaunch);
-    } else if (invocation == LIFEInvocationOptionsFloatingButton) {
-        disableTitle = LIFELocalizedString(LIFEStringKey_HideUntilNextLaunch);
-    } else if (invocation == LIFEInvocationOptionsScreenshot) {
-        disableTitle = LIFELocalizedString(LIFEStringKey_DontAskUntilNextLaunch);
-    } else if (invocation == LIFEInvocationOptionsShake) {
-        disableTitle = LIFELocalizedString(LIFEStringKey_DontAskUntilNextLaunch);
-    } else if (invocation == LIFEInvocationOptionsNone) {
-        // Do nothing
+    if (self.hideUntilNextLaunchButtonEnabled) {
+        NSString *disableTitle;
+        
+        if (invocation == LIFEInvocationOptionsScreenRecordingFinished) {
+            disableTitle = LIFELocalizedString(LIFEStringKey_DontAskUntilNextLaunch);
+        } else if (invocation == LIFEInvocationOptionsFloatingButton) {
+            disableTitle = LIFELocalizedString(LIFEStringKey_HideUntilNextLaunch);
+        } else if (invocation == LIFEInvocationOptionsScreenshot) {
+            disableTitle = LIFELocalizedString(LIFEStringKey_DontAskUntilNextLaunch);
+        } else if (invocation == LIFEInvocationOptionsShake) {
+            disableTitle = LIFELocalizedString(LIFEStringKey_DontAskUntilNextLaunch);
+        } else if (invocation == LIFEInvocationOptionsNone) {
+            // Do nothing
+        }
+        
+        if (disableTitle) {
+            let hideFloatingButtonAction = [LIFEAlertActionClass actionWithTitle:disableTitle style:UIAlertActionStyleDestructive handler:^(LIFEAlertActionClass * _Nonnull action) {
+                if (bugButtonIsEnabled) {
+                    [self.bugButtonWindow setBugButtonHidden:NO animated:YES];
+                }
+                
+                [self _temporarilyDisableInvocation:invocation];
+            }];
+            [alert addAction:hideFloatingButtonAction];
+        }
     }
-    
-    if (disableTitle) {
-        let hideFloatingButtonAction = [LIFEAlertActionClass actionWithTitle:disableTitle style:UIAlertActionStyleDestructive handler:^(LIFEAlertActionClass * _Nonnull action) {
-            if (bugButtonIsEnabled) {
-                [self.bugButtonWindow setBugButtonHidden:NO animated:YES];
-            }
-            
-            [self _temporarilyDisableInvocation:invocation];
-        }];
-        [alert addAction:hideFloatingButtonAction];
-    }
-#else
-    #warning DEMO MODE ON
-#endif
     
     let cancelAction = [LIFEAlertActionClass actionWithTitle:LIFELocalizedString(LIFEStringKey_Cancel) style:UIAlertActionStyleCancel handler:^(LIFEAlertActionClass * _Nonnull action) {
         if (bugButtonIsEnabled) {
