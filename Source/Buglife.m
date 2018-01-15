@@ -109,9 +109,10 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
 @property (nonatomic, null_resettable) NSString *thankYouMessage;
 @property (nonatomic, null_resettable) NSString *titleForReportViewController;
 
-// Legacy feature, but some people might still want to use it.
+// Legacy features, but some people might still want to use them.
 // If they're dying for it, let them use it via private API.
 @property (nonatomic) BOOL hideUntilNextLaunchButtonEnabled;
+@property (nonatomic) BOOL useLegacyReporterUI;
 
 @end
 
@@ -352,46 +353,48 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     
     [self.bugButtonWindow setBugButtonHidden:YES animated:animated];
     
-#if !USE_NEW_CONTAINER_WINDOW
-    LIFEReportWindow *reportWindow = [LIFEReportWindow reportWindow];
-    reportWindow.reporterDelegate = self;
-#endif
+    LIFEReportWindow *reportWindow;
+    
+    if (self.useLegacyReporterUI) {
+        reportWindow = [LIFEReportWindow reportWindow];
+        reportWindow.reporterDelegate = self;
+    }
     
     LIFEReportBuilder *reportBuilder = [[LIFEReportBuilder alloc] init];
     reportBuilder.attributes = self.attributes;
     reportBuilder.creationDate = [NSDate date];
     LIFEScreenshotContext *context = [LIFEScreenshotContext currentContext];
     
-#if USE_NEW_CONTAINER_WINDOW
-    if (screenshot) {
-        self.reportBuilder = reportBuilder;
-        let vc = [[LIFEImageEditorViewController alloc] initWithScreenshot:screenshot context:context];
-        vc.initialViewController = YES;
-        let nav = [[LIFENavigationController alloc] initWithRootViewController:vc];
-        vc.delegate = self;
-        [self.containerWindow.containerViewController life_setChildViewController:nav animated:animated completion:nil];
+    if (!self.useLegacyReporterUI) {
+        if (screenshot) {
+            self.reportBuilder = reportBuilder;
+            let vc = [[LIFEImageEditorViewController alloc] initWithScreenshot:screenshot context:context];
+            vc.initialViewController = YES;
+            let nav = [[LIFENavigationController alloc] initWithRootViewController:vc];
+            vc.delegate = self;
+            [self.containerWindow.containerViewController life_setChildViewController:nav animated:animated completion:nil];
+        } else {
+            // TODO: THIS!!!!
+            NSParameterAssert(NO);
+        }
     } else {
-        // TODO: THIS!!!!
-        NSParameterAssert(NO);
+        if (screenshot) {
+            BOOL simulateScreenshotCapture = (invocation != LIFEInvocationOptionsScreenshot);
+            [reportWindow presentReporterWithReportBuilder:reportBuilder screenshot:screenshot context:context simulateScreenshotCapture:simulateScreenshotCapture animated:animated];
+        } else {
+            [reportWindow presentReporterWithReportBuilder:reportBuilder context:context animated:animated completion:^(LIFEReportTableViewController *reportTableViewController) {
+                if (invocation == LIFEInvocationOptionsScreenRecordingFinished) {
+                    [reportTableViewController addLastVideoAsAttachment];
+                }
+            }];
+        }
     }
-#else
-    if (screenshot) {
-        BOOL simulateScreenshotCapture = (invocation != LIFEInvocationOptionsScreenshot);
-        [reportWindow presentReporterWithReportBuilder:reportBuilder screenshot:screenshot context:context simulateScreenshotCapture:simulateScreenshotCapture animated:animated];
-    } else {
-        [reportWindow presentReporterWithReportBuilder:reportBuilder context:context animated:animated completion:^(LIFEReportTableViewController *reportTableViewController) {
-            if (invocation == LIFEInvocationOptionsScreenRecordingFinished) {
-                [reportTableViewController addLastVideoAsAttachment];
-            }
-        }];
-    }
-#endif
     
     [self _requestAttachmentsForReportBuilder:reportBuilder];
     
-#if !USE_NEW_CONTAINER_WINDOW
-    self.reportWindow = reportWindow;
-#endif
+    if (self.useLegacyReporterUI) {
+        self.reportWindow = reportWindow;
+    }
 }
 
 - (void)_dismissReporterAnimated:(BOOL)animated

@@ -18,6 +18,7 @@
 
 #import "LIFENavigationController.h"
 #import "LIFEAppearanceImpl.h"
+#import "Buglife+Protected.h"
 
 @interface LIFENavigationController ()
 @end
@@ -32,6 +33,10 @@
     if (self) {
         self.viewControllers = @[viewController];
         self.navigationBarStyleClear = YES;
+        
+        if ([Buglife sharedBuglife].useLegacyReporterUI) {
+            self.navigationBar.translucent = YES;
+        }
     }
     return self;
 }

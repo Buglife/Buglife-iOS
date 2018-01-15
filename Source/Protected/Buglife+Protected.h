@@ -43,5 +43,6 @@ extern const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished;
 @property (nonatomic, null_resettable) NSString *whatHappenedLabel;
 @property (nonatomic, null_resettable) NSString *titleForReportViewController;
 @property (nonatomic, readonly) BOOL hideUntilNextLaunchButtonEnabled;
+@property (nonatomic, readonly) BOOL useLegacyReporterUI;
 
 @end

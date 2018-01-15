@@ -18,6 +18,9 @@
 #import "LIFEContainerWindow.h"
 #import "LIFEContainerViewController.h"
 
+// Block type that can be used as a handler for both LIFEAlertAction and UIAlertAction
+typedef void (^LIFEOrUIAlertActionHandler)(NSObject *action);
+
 @implementation Buglife (UIStuff)
 
 + (void)life_loadCategory_BuglifeUIStuff { }
@@ -76,19 +79,14 @@
         style = UIAlertControllerStyleAlert;
     }
     
-    let alert = [LIFEAlertControllerClass alertControllerWithTitle:message message:nil preferredStyle:style];
-#if USE_NEW_CONTAINER_WINDOW
-    [alert setImage:screenshot];
-#endif
-    
-    let reportAction = [LIFEAlertActionClass actionWithTitle:LIFELocalizedString(LIFEStringKey_ReportABug) style:UIAlertActionStyleDefault handler:^(LIFEAlertActionClass * _Nonnull action) {
+    LIFEOrUIAlertActionHandler reportHandler = ^void(NSObject *action) {
         [self _presentReporterFromInvocation:invocation withScreenshot:screenshot animated:YES];
-    }];
-    [alert addAction:reportAction];
+    };
+    
+    LIFEOrUIAlertActionHandler disableHandler;
+    NSString *disableTitle;
     
     if (self.hideUntilNextLaunchButtonEnabled) {
-        NSString *disableTitle;
-        
         if (invocation == LIFEInvocationOptionsScreenRecordingFinished) {
             disableTitle = LIFELocalizedString(LIFEStringKey_DontAskUntilNextLaunch);
         } else if (invocation == LIFEInvocationOptionsFloatingButton) {
@@ -102,41 +100,78 @@
         }
         
         if (disableTitle) {
-            let hideFloatingButtonAction = [LIFEAlertActionClass actionWithTitle:disableTitle style:UIAlertActionStyleDestructive handler:^(LIFEAlertActionClass * _Nonnull action) {
+            disableHandler = ^void(NSObject *action) {
                 if (bugButtonIsEnabled) {
                     [self.bugButtonWindow setBugButtonHidden:NO animated:YES];
                 }
                 
                 [self _temporarilyDisableInvocation:invocation];
-            }];
-            [alert addAction:hideFloatingButtonAction];
+            };
         }
     }
     
-    let cancelAction = [LIFEAlertActionClass actionWithTitle:LIFELocalizedString(LIFEStringKey_Cancel) style:UIAlertActionStyleCancel handler:^(LIFEAlertActionClass * _Nonnull action) {
+    LIFEOrUIAlertActionHandler cancelHandler = ^void(NSObject *action) {
         if (bugButtonIsEnabled) {
             [self.bugButtonWindow setBugButtonHidden:NO animated:YES];
         }
         
         [firstResponder becomeFirstResponder];
         self.reportAlertOrWindowVisible = NO;
-    }];
-    [alert addAction:cancelAction];
-
-#if USE_NEW_CONTAINER_WINDOW
-    LIFEContainerWindow *window = [LIFEContainerWindow window];
-    window.hidden = NO;
-    [window.containerViewController life_setChildViewController:alert animated:YES completion:NULL];
+    };
     
-    self.containerWindow = window;
-#else
-    LIFEOverlayWindow *alertWindow = [LIFEOverlayWindow overlayWindow];
-    alertWindow.hidden = NO;
-    [alertWindow.rootViewController presentViewController:alert animated:YES completion:NULL];
+    UIViewController *alert = [self alertControllerWithTitle:message image:screenshot preferredStyle:style reportHandler:reportHandler disableActionTitle:disableTitle disableHandler:disableHandler cancelHandler:cancelHandler];;
     
-    self.overlayWindow = alertWindow;
-#endif
+    if (!self.useLegacyReporterUI) {
+        LIFEContainerWindow *window = [LIFEContainerWindow window];
+        window.hidden = NO;
+        [window.containerViewController life_setChildViewController:alert animated:YES completion:NULL];
+        self.containerWindow = window;
+    } else {
+        LIFEOverlayWindow *alertWindow = [LIFEOverlayWindow overlayWindow];
+        alertWindow.hidden = NO;
+        [alertWindow.rootViewController presentViewController:alert animated:YES completion:NULL];
+        self.overlayWindow = alertWindow;
+    }
+    
     self.reportAlertOrWindowVisible = YES;
+}
+
+- (nonnull UIViewController *)alertControllerWithTitle:(nonnull NSString *)title image:(nullable UIImage *)image preferredStyle:(UIAlertControllerStyle)style reportHandler:(LIFEOrUIAlertActionHandler)reportHandler disableActionTitle:(nullable NSString *)disableActionTitle disableHandler:(LIFEOrUIAlertActionHandler)disableHandler cancelHandler:(LIFEOrUIAlertActionHandler)cancelHandler
+{
+    if (!self.useLegacyReporterUI) {
+        let alert = [LIFEAlertController alertControllerWithTitle:title message:nil preferredStyle:style];
+        
+        if (image) {
+            [alert setImage:image];
+        }
+        
+        let reportAction = [LIFEAlertAction actionWithTitle:LIFELocalizedString(LIFEStringKey_ReportABug) style:UIAlertActionStyleDefault handler:reportHandler];
+        [alert addAction:reportAction];
+        
+        if (disableActionTitle != nil && disableHandler != nil) {
+            let disableAction = [LIFEAlertAction actionWithTitle:disableActionTitle style:UIAlertActionStyleDestructive handler:disableHandler];
+            [alert addAction:disableAction];
+        }
+        
+        let cancelAction = [LIFEAlertAction actionWithTitle:LIFELocalizedString(LIFEStringKey_Cancel) style:UIAlertActionStyleCancel handler:cancelHandler];
+        [alert addAction:cancelAction];
+        
+        return alert;
+    } else {
+        let alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:style];
+        let reportAction = [UIAlertAction actionWithTitle:LIFELocalizedString(LIFEStringKey_ReportABug) style:UIAlertActionStyleDefault handler:reportHandler];
+        [alert addAction:reportAction];
+        
+        if (disableHandler != nil) {
+            let disableAction = [UIAlertAction actionWithTitle:disableActionTitle style:UIAlertActionStyleDestructive handler:disableHandler];
+            [alert addAction:disableAction];
+        }
+        
+        let cancelAction = [UIAlertAction actionWithTitle:LIFELocalizedString(LIFEStringKey_Cancel) style:UIAlertActionStyleCancel handler:cancelHandler];
+        [alert addAction:cancelAction];
+        
+        return alert;
+    }
 }
 
 - (void)_notifyBuglifeInvoked

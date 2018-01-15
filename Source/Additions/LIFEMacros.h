@@ -70,12 +70,4 @@
 #warning SERIOUSLY DON'T SHIP THIS
 #endif
 
-//////////////////////////////////////////////////
-// New image editor / alerts / container window //
-//////////////////////////////////////////////////
-
-#define USE_NEW_CONTAINER_WINDOW 1
-#define LIFEAlertControllerClass LIFEAlertController
-#define LIFEAlertActionClass LIFEAlertAction
-
 #endif /* LIFEMacros_h */
