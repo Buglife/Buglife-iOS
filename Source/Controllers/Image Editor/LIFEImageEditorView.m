@@ -56,8 +56,6 @@ let kNavButtonTopConstraintConstant = 26.0f;
         _backgroundView = [[UIView alloc] init];
         _backgroundView.backgroundColor = appearance.barTintColor;
         
-        UIColor *tintColor = appearance.tintColor;
-        
         _imageBorderView = [[UIView alloc] init];
         _imageBorderView.backgroundColor = [UIColor blackColor];
         
@@ -94,7 +92,8 @@ let kNavButtonTopConstraintConstant = 26.0f;
         _segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_segmentedControl];
         
-        _segmentedControlBottomConstraint = [_segmentedControl.bottomAnchor constraintEqualToAnchor:self.bottomAnchor];
+        
+        _segmentedControlBottomConstraint = [_segmentedControl.bottomAnchor constraintEqualToAnchor:self.life_safeAreaLayoutGuideBottomAnchor];
         
         [NSLayoutConstraint activateConstraints:@[
             [_screenshotAnnotatorView.bottomAnchor constraintEqualToAnchor:_segmentedControl.topAnchor],

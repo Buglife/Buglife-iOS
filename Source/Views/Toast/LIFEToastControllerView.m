@@ -18,6 +18,7 @@
 
 #import "LIFEToastControllerView.h"
 #import "LIFEToastView.h"
+#import "UIView+LIFEAdditions.h"
 #import "LIFEMacros.h"
 
 static let kPaddingX = 10.0f;
@@ -44,7 +45,7 @@ static let kPaddingY = 10.0f;
                                                   [_toastView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-kPaddingX]
                                                   ]];
         
-        _bottomConstraint = [_toastView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor constant:LIFEToastControllerViewDismissedOffsetY];
+        _bottomConstraint = [_toastView.bottomAnchor constraintEqualToAnchor:self.life_safeAreaLayoutGuideBottomAnchor constant:LIFEToastControllerViewDismissedOffsetY];
         _bottomConstraint.active = YES;
     }
     return self;

@@ -18,7 +18,7 @@
 
 #import <UIKit/UIKit.h>
 
-static const CGFloat LIFEToastControllerViewDismissedOffsetY = 100.0f;
+static const CGFloat LIFEToastControllerViewDismissedOffsetY = 140.0f;
 
 @class LIFEToastView;
 

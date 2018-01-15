@@ -25,9 +25,10 @@
 #import "LIFENavigationController.h"
 #import "LIFEMacros.h"
 
-let kInitialAnimationDuration = 0.75f;
-let kSecondAnimationDelay = 0.25f;
-let kSecondAnimationDuration = 0.75f;
+let kAnimationMultiplier = 1.0f; // To test slowing down animations
+let kInitialAnimationDuration = (0.75f * kAnimationMultiplier);
+let kSecondAnimationDelay = (0.25f * kAnimationMultiplier);
+let kSecondAnimationDuration = (0.75f * kAnimationMultiplier);
 
 @implementation LIFEContainerAlertToImageEditorAnimator
 
@@ -64,8 +65,9 @@ let kSecondAnimationDuration = 0.75f;
     let damping = 0.6f;
     let initialSpringVelocity = 0.0f;
     
-    let navBarTransform = CGAffineTransformMakeTranslation(0, -60);
+    let navBarTransform = CGAffineTransformMakeTranslation(0, -100);
     toNavVc.navigationBar.transform = navBarTransform;
+    toNavVc.navigationBar.alpha = 0;
     
     let newAlertViewBackgroundColor = imageEditorView.backgroundView.backgroundColor;
     
