@@ -21,6 +21,7 @@ extern const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished;
 
 - (void)life_motionEnded:(UIEventSubtype)motion withEvent:(nullable UIEvent *)event;
 - (void)_presentReporterFromInvocation:(LIFEInvocationOptions)invocation withScreenshot:(nullable UIImage *)screenshot animated:(BOOL)animated;
+- (void)_showContainerWindowWithViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated;
 
 #pragma mark - Testable stuff
 

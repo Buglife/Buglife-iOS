@@ -39,7 +39,6 @@
 {
     self = [super init];
     if (self) {
-        // TODO: Localize these strings!
         let arrowButton = [[LIFEToolButton alloc] init];
         arrowButton.imageView.image = [LIFEUIImage life_arrowToolbarIcon];
         arrowButton.titleView.text = LIFELocalizedString(LIFEStringKey_ArrowToolLabel);

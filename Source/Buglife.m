@@ -366,17 +366,22 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     LIFEScreenshotContext *context = [LIFEScreenshotContext currentContext];
     
     if (!self.useLegacyReporterUI) {
+        UIViewController *vc;
+        self.reportBuilder = reportBuilder;
+        
         if (screenshot) {
-            self.reportBuilder = reportBuilder;
-            let vc = [[LIFEImageEditorViewController alloc] initWithScreenshot:screenshot context:context];
-            vc.initialViewController = YES;
-            let nav = [[LIFENavigationController alloc] initWithRootViewController:vc];
-            vc.delegate = self;
-            [self.containerWindow.containerViewController life_setChildViewController:nav animated:animated completion:nil];
+            let ivc = [[LIFEImageEditorViewController alloc] initWithScreenshot:screenshot context:context];
+            ivc.initialViewController = YES;
+            ivc.delegate = self;
+            vc = ivc;
         } else {
-            // TODO: THIS!!!!
-            NSParameterAssert(NO);
+            let rvc = [[LIFEReportTableViewController alloc] initWithReportBuilder:self.reportBuilder context:context];
+            rvc.delegate = self;
+            vc = rvc;
         }
+        
+        let nav = [[LIFENavigationController alloc] initWithRootViewController:vc];
+        [self _showContainerWindowWithViewController:nav animated:animated];
     } else {
         if (screenshot) {
             BOOL simulateScreenshotCapture = (invocation != LIFEInvocationOptionsScreenshot);
@@ -395,6 +400,17 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     if (self.useLegacyReporterUI) {
         self.reportWindow = reportWindow;
     }
+}
+
+- (void)_showContainerWindowWithViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated
+{
+    if (self.containerWindow == nil) {
+        self.containerWindow = [LIFEContainerWindow window];
+        self.containerWindow.hidden = NO;
+    }
+    
+    [self.containerWindow.containerViewController life_setChildViewController:viewController animated:YES completion:NULL];
+    self.reportAlertOrWindowVisible = YES;
 }
 
 - (void)_dismissReporterAnimated:(BOOL)animated

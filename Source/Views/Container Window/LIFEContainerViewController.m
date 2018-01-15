@@ -27,6 +27,7 @@
 #import "LIFEWindowBlindsAnimator.h"
 #import "LIFEMacros.h"
 #import "LIFEToastController.h"
+#import "LIFEContainerModalPresentAnimator.h"
 
 @interface LIFEPassThroughView : UIView
 @end
@@ -93,10 +94,6 @@
         let navVC = (LIFENavigationController *)visibleViewController;
         [navVC setViewControllers:@[childViewController] animated:animated];
         return;
-    }
-    
-    if (visibleViewController == nil) {
-        visibleViewController = self;
     }
     
     UIView *toView = childViewController.view;
@@ -219,6 +216,12 @@
         if ([nav.visibleViewController isKindOfClass:[LIFEImageEditorViewController class]]) {
             return [[LIFEContainerAlertToImageEditorAnimator alloc] init];
         }
+    }
+    
+    BOOL isFirstChildViewController = (fromVC == nil);
+    
+    if (isFirstChildViewController) {
+        return [[LIFEContainerModalPresentAnimator alloc] init];
     }
     
     return nil;
