@@ -65,7 +65,8 @@ static CGFloat SNRInputViewWidthForBoundsWidth(CGFloat boundsWidth);
         [self addSubview:_textViewImpl];
         
         _placeholderView = [[UILabel alloc] init];
-        _placeholderView.numberOfLines = 1;
+        _placeholderView.numberOfLines = 0;
+        _placeholderView.lineBreakMode = NSLineBreakByWordWrapping;
         _placeholderView.textColor = [UIColor colorWithRed:0.78 green:0.78 blue:0.80 alpha:1];
         _placeholderView.backgroundColor = [UIColor clearColor];
         _placeholderView.isAccessibilityElement = NO;

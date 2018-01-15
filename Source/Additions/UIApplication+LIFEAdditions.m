@@ -1,9 +1,18 @@
 //
 //  UIApplication+LIFEAdditions.m
-//  Pods
+//  Copyright (C) 2018 Buglife, Inc.
 //
-//  Created by David Schukin on 9/20/15.
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
 //
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 #import "UIApplication+LIFEAdditions.h"
@@ -21,14 +30,16 @@
 // This is just `UITextEffectsWindow` encoded in bas64
 static NSString * const kHackedClassBase64 = @"VUlUZXh0RWZmZWN0c1dpbmRvdw==";
 
-@implementation LIFEUIApplication
+@implementation UIApplication (LIFEAdditions)
 
-+ (UIImage *)life_screenshot
+LIFE_CATEGORY_METHOD_IMPL(UIApplication)
+
+- (UIImage *)life_screenshot
 {
     return [self life_screenshotAfterScreenUpdates:YES];
 }
 
-+ (UIImage *)life_screenshotAfterScreenUpdates:(BOOL)afterScreenUpdates
+- (UIImage *)life_screenshotAfterScreenUpdates:(BOOL)afterScreenUpdates
 {
     // Create a graphics context with the target size
     CGSize imageSize = [[UIScreen mainScreen] bounds].size;
@@ -119,9 +130,9 @@ static NSString * const kHackedClassBase64 = @"VUlUZXh0RWZmZWN0c1dpbmRvdw==";
     return image;
 }
 
-+ (NSArray<__kindof UIWindow *> *)life_windowsForScreenshot
+- (NSArray<__kindof UIWindow *> *)life_windowsForScreenshot
 {
-    NSArray<__kindof UIWindow *> *allWindows = [[UIApplication sharedApplication] windows];
+    NSArray<__kindof UIWindow *> *allWindows = [self windows];
     UIScreen *mainScreen = [UIScreen mainScreen];
     
     NSPredicate *windowPredicate = [NSPredicate predicateWithBlock:^BOOL(UIWindow *evaluatedWindow, NSDictionary *bindings) {
@@ -146,8 +157,22 @@ static NSString * const kHackedClassBase64 = @"VUlUZXh0RWZmZWN0c1dpbmRvdw==";
     return [allWindows filteredArrayUsingPredicate:windowPredicate];
 }
 
+- (nullable NSString *)life_hostApplicationName
+{
+    NSDictionary *infoDictionary = [NSBundle mainBundle].infoDictionary;
+    NSString *appName = infoDictionary[@"CFBundleDisplayName"];
+    
+    if (appName == nil) {
+        appName = infoDictionary[@"CFBundleName"];
+    }
+    
+    return appName;
+}
+
 static BOOL LIFEWindowLevelsEqual(UIWindowLevel windowLevel1, UIWindowLevel windowLevel2) {
     return (fabs(windowLevel1 - windowLevel2) < 0.1);
 }
 
 @end
+
+LIFE_CATEGORY_FUNCTION_IMPL(UIApplication);

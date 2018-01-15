@@ -290,7 +290,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
         LIFELogExtWarn(@"Buglife warning: Calling %@.%@ off the main thread is unsupported!", NSStringFromClass([self class]), NSStringFromSelector(@selector(screenshot)));
     }
 
-    return [LIFEUIApplication life_screenshot];
+    return [[UIApplication sharedApplication] life_screenshot];
 }
 
 - (id<LIFEAppearance>)appearance
@@ -591,7 +591,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
 
 - (UIImage *)_screenshot
 {
-    return [LIFEUIApplication life_screenshot];
+    return [[UIApplication sharedApplication] life_screenshot];
 }
 
 #pragma mark - Test helpers
