@@ -36,7 +36,7 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    if (self.visibleViewController) {
+    if ([self _visibleViewControllerCapturesStatusBarAppearance]) {
         return [self.visibleViewController preferredStatusBarStyle];
     }
     
@@ -45,11 +45,26 @@
 
 - (BOOL)prefersStatusBarHidden
 {
-    if (self.visibleViewController) {
+    if ([self _visibleViewControllerCapturesStatusBarAppearance]) {
         return [self.visibleViewController prefersStatusBarHidden];
     }
     
     return _statusBarHidden;
+}
+
+// If you'd like your child view controller to set the status
+// bar appearance, implement -modalPresentationCapturesStatusBarAppearance
+// in that child view controller, along with -preferredStatusBarStyle
+// and -prefersStatusBarHidden. Otherwise, LIFEContainerViewController
+// will simply use its own properties, which should match the host application
+// (giving the appearance of being "transparent").
+- (BOOL)_visibleViewControllerCapturesStatusBarAppearance
+{
+    if (self.visibleViewController) {
+        return [self.visibleViewController modalPresentationCapturesStatusBarAppearance];
+    }
+    
+    return NO;
 }
 
 - (nullable UIViewController *)visibleViewController

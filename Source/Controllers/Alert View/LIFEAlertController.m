@@ -41,6 +41,8 @@
     [_alertView setImage:image];
 }
 
+#pragma mark - UIViewController
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -58,6 +60,13 @@
     
     [self setDarkOverlayHidden:NO];
 }
+
+- (BOOL)modalPresentationCapturesStatusBarAppearance
+{
+    return NO;
+}
+
+#pragma mark - Animation
 
 - (void)prepareExpandToDismissTransition
 {

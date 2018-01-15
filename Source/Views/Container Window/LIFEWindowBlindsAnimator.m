@@ -18,7 +18,9 @@
 
 #import "LIFEWindowBlindsAnimator.h"
 #import "UIView+LIFEAdditions.h"
+#import "UIViewController+LIFEAdditions.h"
 #import "LIFEToastViewController.h"
+#import "LIFEContainerViewController.h"
 #import "LIFEMacros.h"
 
 static let kAnimationDuratioMultiplier = 1.0f;
@@ -41,6 +43,7 @@ static let kToastDuration = (0.3f * kAnimationDuratioMultiplier);
 {
     let fromVc = (UIViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     let toVc = (LIFEToastViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    let containerVc = fromVc.life_containerViewController;
     let containerView = transitionContext.containerView;
     let normalHeight = CGRectGetHeight(fromVc.view.frame);
     let scaledHeight = normalHeight * kAnticipationScale;
@@ -64,6 +67,7 @@ static let kToastDuration = (0.3f * kAnimationDuratioMultiplier);
         UIViewAnimationOptions options = (UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState);
         [UIView animateWithDuration:kSpringDuration delay:0 options:options animations:^{
             fromVc.view.transform = finalTransform;
+            [containerVc setNeedsStatusBarAppearanceUpdate];
         } completion:nil];
         
         // The toast should lag by a tiny bit

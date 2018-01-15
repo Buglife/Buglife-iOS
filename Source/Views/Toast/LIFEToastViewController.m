@@ -36,6 +36,8 @@ static let kHiddenToastBottomConstraintConstant = 100.0f;
 
 @implementation LIFEToastViewController
 
+#pragma mark - UIViewController
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -63,6 +65,11 @@ static let kHiddenToastBottomConstraintConstant = 100.0f;
 - (BOOL)prefersStatusBarHidden
 {
     return _statusBarHidden;
+}
+
+- (BOOL)modalPresentationCapturesStatusBarAppearance
+{
+    return NO;
 }
 
 #pragma mark - Animation

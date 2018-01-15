@@ -26,6 +26,7 @@
 #import "NSString+LIFEAdditions.h"
 #import "UIDevice+LIFEAdditions.h"
 #import "UIColor+LIFEAdditions.h"
+#import "UIViewController+LIFEAdditions.h"
 
 @implementation LIFECategories
 
@@ -42,6 +43,7 @@
         LIFELoadCategoryFor_NSMutableDictionaryLIFEAdditions();
         LIFELoadCategoryFor_UIDeviceLIFEAdditions();
         LIFELoadCategoryFor_UIColorLIFEAdditions();
+        LIFELoadCategoryFor_UIViewControllerLIFEAdditions();
     });
 }
 

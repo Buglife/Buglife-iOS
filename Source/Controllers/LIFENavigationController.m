@@ -43,6 +43,19 @@
     return [LIFEAppearanceImpl sharedAppearance].statusBarStyle;
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+
+// LIFENavigationController is presumably always shown full screen.
+// LIFEContainerViewController uses this method to determine
+// whether its child should capture status bar appearance
+- (BOOL)modalPresentationCapturesStatusBarAppearance
+{
+    return YES;
+}
+
 #pragma mark - Public
 
 - (void)setNavigationBarStyleClear:(BOOL)navigationBarStyleClear
