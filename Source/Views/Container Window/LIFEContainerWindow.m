@@ -54,4 +54,20 @@ let kWindowLevel = 999.0f;
     return (LIFEContainerViewController *)self.rootViewController;
 }
 
+// Unless a touch event hits an actual subview,
+// let it pass through to whatever's behind. This allows things like
+// LIFEToastView to remain onscreen while allowing the host app to
+// receive touches.
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *hitView = [super hitTest:point withEvent:event];
+    
+    if (hitView == self) {
+        return nil;
+    }
+    
+    return hitView;
+}
+
+
 @end

@@ -1,5 +1,5 @@
 //
-//  LIFEToastViewController.m
+//  LIFEToastController.m
 //  Copyright (C) 2018 Buglife, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,45 +16,40 @@
 //
 //
 
-#import "LIFEToastViewController.h"
+#import "LIFEToastController.h"
+#import "LIFEToastControllerView.h"
 #import "LIFEToastView.h"
 #import "LIFEMacros.h"
 
-static let kPaddingX = 10.0f;
-static let kPaddingY = 10.0f;
-static let kHiddenToastBottomConstraintConstant = 100.0f;
+@interface LIFEToastController ()
 
-@interface LIFEToastViewController ()
-
-@property (nonnull, nonatomic) LIFEToastView *toastView;
-@property (nonnull, nonatomic) NSLayoutConstraint *bottomConstraint;
+@property (nonnull, nonatomic, readonly) LIFEToastControllerView *toastControllerView;
 @property (nonnull, nonatomic) NSTimer *dismissTimer;
 @property (nonnull, nonatomic) UIPanGestureRecognizer *panGesture;
 @property (nonatomic) CGPoint panGestureStartLocation;
 
 @end
 
-@implementation LIFEToastViewController
+@implementation LIFEToastController
 
 #pragma mark - UIViewController
+
+- (void)loadView
+{
+    self.view = [[LIFEToastControllerView alloc] init];
+}
+
+- (LIFEToastControllerView *)toastControllerView
+{
+    return (LIFEToastControllerView *)self.view;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    _toastView = [[LIFEToastView alloc] init];
-    _toastView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:_toastView];
-    [NSLayoutConstraint activateConstraints:@[
-        [_toastView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:kPaddingX],
-        [_toastView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-kPaddingX]
-        ]];
-    
-    _bottomConstraint = [_toastView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:kHiddenToastBottomConstraintConstant];
-    _bottomConstraint.active = YES;
-    
     _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(_handlePanGesture:)];
-    [_toastView addGestureRecognizer:_panGesture];
+    [self.toastControllerView.toastView addGestureRecognizer:_panGesture];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -76,7 +71,7 @@ static let kHiddenToastBottomConstraintConstant = 100.0f;
 
 - (void)prepareAnimateIn
 {
-    _bottomConstraint.constant = -kPaddingY;
+    self.toastControllerView.toastViewOffsetY = 0;
 }
 
 - (void)animateIn
@@ -112,7 +107,7 @@ static let kHiddenToastBottomConstraintConstant = 100.0f;
                 deltaY = -constrainedY;
             }
             
-            _bottomConstraint.constant = (-kPaddingY) + deltaY;
+            self.toastControllerView.toastViewOffsetY = deltaY;
             [self.view layoutIfNeeded];
             break;
         }
@@ -164,7 +159,7 @@ static let kHiddenToastBottomConstraintConstant = 100.0f;
     [_dismissTimer invalidate];
     _dismissTimer = nil;
     
-    _bottomConstraint.constant = kHiddenToastBottomConstraintConstant;
+    self.toastControllerView.toastViewOffsetY = LIFEToastControllerViewDismissedOffsetY;
     
     [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:velocity options:(UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction) animations:^{
         [self.view layoutIfNeeded];

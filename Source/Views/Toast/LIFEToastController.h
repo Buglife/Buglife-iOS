@@ -18,7 +18,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LIFEToastViewController : UIViewController
+@interface LIFEToastController : UIViewController
 
 @property (nonatomic) UIStatusBarStyle statusBarStyle;
 @property (nonatomic) BOOL statusBarHidden;

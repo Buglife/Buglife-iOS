@@ -26,13 +26,23 @@
 #import "LIFENavigationController.h"
 #import "LIFEWindowBlindsAnimator.h"
 #import "LIFEMacros.h"
-#import "LIFEToastViewController.h"
+#import "LIFEToastController.h"
+
+@interface LIFEPassThroughView : UIView
+@end
 
 @interface LIFEContainerViewController ()
+
+@property (nonnull, nonatomic) LIFEPassThroughView *passThroughView;
 
 @end
 
 @implementation LIFEContainerViewController
+
+- (void)loadView
+{
+    self.view = [[LIFEPassThroughView alloc] init];
+}
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -160,10 +170,10 @@
 - (void)dismissWithWindowBlindsAnimation:(BOOL)animated showToast:(BOOL)showToast completion:(void (^ __nullable)(void))completion
 {
     let fromVc = self.visibleViewController;
-    LIFEToastViewController *toastViewController;
+    LIFEToastController *toastViewController;
     
     if (showToast) {
-        toastViewController = [[LIFEToastViewController alloc] init];
+        toastViewController = [[LIFEToastController alloc] init];
         toastViewController.dismissHandler = completion;
         UIView *toView = toastViewController.view;
         toView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -223,6 +233,25 @@
     }
     
     return nil;
+}
+
+@end
+
+@implementation LIFEPassThroughView
+
+// Unless a touch event hits an actual subview,
+// let it pass through to whatever's behind. This allows things like
+// LIFEToastView to remain onscreen while allowing the host app to
+// receive touches.
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *hitView = [super hitTest:point withEvent:event];
+    
+    if (hitView == self) {
+        return nil;
+    }
+    
+    return hitView;
 }
 
 @end

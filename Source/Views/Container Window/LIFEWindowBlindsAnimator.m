@@ -19,7 +19,7 @@
 #import "LIFEWindowBlindsAnimator.h"
 #import "UIView+LIFEAdditions.h"
 #import "UIViewController+LIFEAdditions.h"
-#import "LIFEToastViewController.h"
+#import "LIFEToastController.h"
 #import "LIFEContainerViewController.h"
 #import "LIFEMacros.h"
 
@@ -42,7 +42,7 @@ static let kToastDuration = (0.3f * kAnimationDuratioMultiplier);
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
     let fromVc = (UIViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    let toVc = (LIFEToastViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    let toVc = (LIFEToastController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     let containerVc = fromVc.life_containerViewController;
     let containerView = transitionContext.containerView;
     let normalHeight = CGRectGetHeight(fromVc.view.frame);
