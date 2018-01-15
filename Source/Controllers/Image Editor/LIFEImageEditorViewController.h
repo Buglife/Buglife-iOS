@@ -38,7 +38,7 @@
  */
 @interface LIFEImageEditorViewController : UIViewController
 
-- (instancetype)initWithAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage NS_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithScreenshot:(nonnull UIImage *)screenshot context:(nullable LIFEScreenshotContext *)context;
 
 - (_Null_unspecified instancetype)init NS_UNAVAILABLE;

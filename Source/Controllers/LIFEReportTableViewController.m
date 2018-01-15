@@ -64,7 +64,7 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
 
 @interface LIFEReportTableViewController () <LIFEScreenshotAnnotatorViewControllerDelegate, LIFEWhatHappenedTextViewDelegate, LIFEStepsToReproTableViewControllerDelegate, LIFETextInputViewControllerDelegate, LIFETextFieldCellDelegate, LIFEPickerViewControllerDelegate, LIFEImageEditorViewControllerDelegate>
 
-@property (nonatomic, nonnull) LIFEScreenshotContext *screenshotContext;
+@property (nonatomic, nullable) LIFEScreenshotContext *screenshotContext;
 @property (nonatomic) LIFEImageProcessor *imageProcessor;
 @property (nonatomic) LIFEImagePickerController *imagePickerController;
 @property (nonatomic) LIFEReportBuilder *reportBuilder;
@@ -97,7 +97,12 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
     BOOL _hasAppearedAtLeastOnce;
 }
 
-- (instancetype)initWithReportBuilder:(LIFEReportBuilder *)reportBuilder context:(LIFEScreenshotContext *)context
+- (nonnull instancetype)initWithReportBuilder:(nonnull LIFEReportBuilder *)reportBuilder
+{
+    return [self initWithReportBuilder:reportBuilder context:nil];
+}
+
+- (instancetype)initWithReportBuilder:(LIFEReportBuilder *)reportBuilder context:(nullable LIFEScreenshotContext *)context
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {

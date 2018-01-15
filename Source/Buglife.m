@@ -375,7 +375,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
             ivc.delegate = self;
             vc = ivc;
         } else {
-            let rvc = [[LIFEReportTableViewController alloc] initWithReportBuilder:self.reportBuilder context:context];
+            let rvc = [[LIFEReportTableViewController alloc] initWithReportBuilder:self.reportBuilder];
             rvc.delegate = self;
             vc = rvc;
         }
@@ -615,7 +615,7 @@ void life_dispatch_async_to_main_queue(dispatch_block_t block) {
 - (void)imageEditorViewController:(LIFEImageEditorViewController *)controller willCompleteWithAnnotatedImage:(LIFEAnnotatedImage *)annotatedImage
 {
     [self.reportBuilder addAnnotatedImage:annotatedImage];
-    let vc = [[LIFEReportTableViewController alloc] initWithReportBuilder:self.reportBuilder context:nil];
+    let vc = [[LIFEReportTableViewController alloc] initWithReportBuilder:self.reportBuilder];
     vc.delegate = self;
     [self.containerWindow.containerViewController life_setChildViewController:vc animated:YES completion:nil];
 }

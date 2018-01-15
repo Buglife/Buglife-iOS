@@ -26,7 +26,9 @@
 
 @property (nonatomic, weak, null_unspecified) id<LIFEReportViewControllerDelegate> delegate;
 
-- (nonnull instancetype)initWithReportBuilder:(nonnull LIFEReportBuilder *)reportBuilder context:(nonnull LIFEScreenshotContext *)context NS_DESIGNATED_INITIALIZER;
+// When using LIFEContainerViewController, the screenshot context parameter is unused
+- (nonnull instancetype)initWithReportBuilder:(nonnull LIFEReportBuilder *)reportBuilder;
+- (nonnull instancetype)initWithReportBuilder:(nonnull LIFEReportBuilder *)reportBuilder context:(nullable LIFEScreenshotContext *)context NS_DESIGNATED_INITIALIZER;
 
 - (_Null_unspecified instancetype)init NS_UNAVAILABLE;
 - (_Null_unspecified instancetype)initWithStyle:(UITableViewStyle)style NS_UNAVAILABLE;

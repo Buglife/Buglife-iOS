@@ -26,7 +26,7 @@
 
 - (void)animateTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext
 {
-    LIFEImageEditorViewController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     let containerVc = fromVc.life_containerViewController;
     let duration = [self transitionDuration:transitionContext];
     let oldFrame = fromVc.view.frame;
