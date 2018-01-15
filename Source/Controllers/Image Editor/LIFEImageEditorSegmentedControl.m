@@ -42,15 +42,15 @@
         // TODO: Localize these strings!
         let arrowButton = [[LIFEToolButton alloc] init];
         arrowButton.imageView.image = [LIFEUIImage life_arrowToolbarIcon];
-        arrowButton.titleView.text = @"Point";
+        arrowButton.titleView.text = LIFELocalizedString(LIFEStringKey_ArrowToolLabel);
         
         let loupeButton = [[LIFEToolButton alloc] init];
         loupeButton.imageView.image = [LIFEUIImage life_loupeIcon];
-        loupeButton.titleView.text = @"Zoom";
+        loupeButton.titleView.text = LIFELocalizedString(LIFEStringKey_LoupeToolLabel);
         
         let blurButton = [[LIFEToolButton alloc] init];
         blurButton.imageView.image = [LIFEUIImage life_pixelateIcon];
-        blurButton.titleView.text = @"Blur";
+        blurButton.titleView.text = LIFELocalizedString(LIFEStringKey_BlurToolLabel);
         
         _buttons = @[arrowButton, loupeButton, blurButton];
         
