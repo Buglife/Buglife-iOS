@@ -21,6 +21,8 @@
 #import "LIFEToastView.h"
 #import "LIFEMacros.h"
 
+let kToastDisplayDuration = 2.0f;
+
 @interface LIFEToastController ()
 
 @property (nonnull, nonatomic, readonly) LIFEToastControllerView *toastControllerView;
@@ -146,7 +148,7 @@
 - (void)_startTimer
 {
     [self _cancelTimer];
-    _dismissTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(_timerEnded) userInfo:nil repeats:NO];
+    _dismissTimer = [NSTimer scheduledTimerWithTimeInterval:kToastDisplayDuration target:self selector:@selector(_timerEnded) userInfo:nil repeats:NO];
 }
 
 - (void)_timerEnded
