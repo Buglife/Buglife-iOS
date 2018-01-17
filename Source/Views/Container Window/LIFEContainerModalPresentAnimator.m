@@ -35,8 +35,9 @@
     toVc.view.frame = oldFrame;
     [containerView addSubview:toVc.view];
     
+    let damping = 1.0f;
     UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseInOut;
-    [UIView animateWithDuration:duration delay:0 options:options animations:^{
+    [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:damping initialSpringVelocity:0 options:options animations:^{
         toVc.view.frame = newFrame;
         [containerVc setNeedsStatusBarAppearanceUpdate];
     } completion:^(BOOL finished) {
