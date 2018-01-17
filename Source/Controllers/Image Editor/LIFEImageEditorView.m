@@ -57,7 +57,7 @@ let kNavButtonTopConstraintConstant = 26.0f;
         _backgroundView.backgroundColor = appearance.barTintColor;
         
         _imageBorderView = [[UIView alloc] init];
-        _imageBorderView.backgroundColor = [UIColor blackColor];
+        _imageBorderView.backgroundColor = [[self class] imageBorderColor];
         
         _screenshotAnnotatorView = [[LIFEScreenshotAnnotatorView alloc] initWithAnnotatedImage:annotatedImage];
         [_screenshotAnnotatorView setToolbarsHidden:YES animated:NO completion:nil];
@@ -121,8 +121,8 @@ let kNavButtonTopConstraintConstant = 26.0f;
 - (void)prepareFirstPresentationTransition
 {
     self.backgroundView.alpha = 0;
-    self.imageBorderView.alpha = 0;
     self.screenshotAnnotatorView.alpha = 0;
+    self.imageBorderView.hidden = YES;
     _segmentedControlBottomConstraint.constant = kSegmentedControlHeight;
     [self layoutIfNeeded];
 }
@@ -141,12 +141,17 @@ let kNavButtonTopConstraintConstant = 26.0f;
 {
     self.backgroundView.alpha = 1;
     self.screenshotAnnotatorView.alpha = 1;
-    self.imageBorderView.alpha = 1;
+    self.imageBorderView.hidden = NO;
 }
 
 + (CGFloat)imageBorderWidth
 {
     return kImageBorderWidth;
+}
+
++ (nonnull UIColor *)imageBorderColor
+{
+    return [UIColor blackColor];
 }
 
 @end
