@@ -370,6 +370,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     if (!self.useLegacyReporterUI) {
         UIViewController *vc;
         self.reportBuilder = reportBuilder;
+        void (^completionBlock)(void) = nil;
         
         if (screenshot) {
             let ivc = [[LIFEImageEditorViewController alloc] initWithScreenshot:screenshot context:context];
@@ -380,10 +381,16 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
             let rvc = [[LIFEReportTableViewController alloc] initWithReportBuilder:self.reportBuilder];
             rvc.delegate = self;
             vc = rvc;
+            
+            if (invocation == LIFEInvocationOptionsScreenRecordingFinished) {
+                completionBlock = ^{
+                    [rvc addLastVideoAsAttachment];
+                };
+            }
         }
         
         let nav = [[LIFENavigationController alloc] initWithRootViewController:vc];
-        [self _showContainerWindowWithViewController:nav animated:animated];
+        [self _showContainerWindowWithViewController:nav animated:animated completion:completionBlock];
     } else {
         if (screenshot) {
             BOOL simulateScreenshotCapture = (invocation != LIFEInvocationOptionsScreenshot);
@@ -406,14 +413,14 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     [self.dataProvider logClientEventWithName:@"presented_reporter" afterDelay:2.0];
 }
 
-- (void)_showContainerWindowWithViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated
+- (void)_showContainerWindowWithViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated completion:(void (^)(void))completion
 {
     if (self.containerWindow == nil) {
         self.containerWindow = [LIFEContainerWindow window];
         self.containerWindow.hidden = NO;
     }
     
-    [self.containerWindow.containerViewController life_setChildViewController:viewController animated:YES completion:NULL];
+    [self.containerWindow.containerViewController life_presentViewController:viewController animated:animated completion:completion];
     self.reportAlertOrWindowVisible = YES;
 }
 

@@ -119,9 +119,9 @@
 {
     if ([self.parentViewController isKindOfClass:[LIFEContainerViewController class]]) {
         let container = (LIFEContainerViewController *)self.parentViewController;
-        [container life_dismissEverythingAnimated:kCAAnimationCubic completion:completion];
+        [container life_dismissEverythingAnimated:flag completion:completion];
     } else {
-        [self.parentViewController dismissViewControllerAnimated:kCAAnimationCubic completion:completion];
+        [self.parentViewController dismissViewControllerAnimated:flag completion:completion];
     }
 }
 

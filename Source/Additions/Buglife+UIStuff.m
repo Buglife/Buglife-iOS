@@ -134,7 +134,7 @@ typedef void (^LIFEAlertOrUIAlertActionHandler)(NSObject *action);
     UIViewController *alert = [self alertControllerWithTitle:message image:screenshot preferredStyle:style reportHandler:reportHandler disableActionTitle:disableTitle disableHandler:disableHandler cancelHandler:cancelHandler];;
     
     if (!self.useLegacyReporterUI) {
-        [self _showContainerWindowWithViewController:alert animated:YES];
+        [self _showContainerWindowWithViewController:alert animated:YES completion:nil];
     } else {
         LIFEOverlayWindow *alertWindow = [LIFEOverlayWindow overlayWindow];
         alertWindow.hidden = NO;
