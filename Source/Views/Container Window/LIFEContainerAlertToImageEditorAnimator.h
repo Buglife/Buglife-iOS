@@ -16,7 +16,7 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface LIFEContainerAlertToImageEditorAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 

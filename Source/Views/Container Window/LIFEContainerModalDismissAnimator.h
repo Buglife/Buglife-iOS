@@ -16,7 +16,7 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 // Simply replicates a downward modal dismiss animation.
 @interface LIFEContainerModalDismissAnimator : NSObject <UIViewControllerAnimatedTransitioning>
