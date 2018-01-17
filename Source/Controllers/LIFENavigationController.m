@@ -67,8 +67,6 @@
 {
     _navigationBarStyleClear = navigationBarStyleClear;
     
-    id<LIFEAppearance> appearance = [LIFEAppearanceImpl sharedAppearance];
-    
     if (_navigationBarStyleClear) {
         self.navigationBar.shadowImage = [[UIImage alloc] init];
     } else {
@@ -80,6 +78,7 @@
 
 - (void)_configureNavigationBarAppearance
 {
+    id<LIFEAppearance> appearance = [LIFEAppearanceImpl sharedAppearance];
     self.navigationBar.tintColor = appearance.tintColor;
     self.navigationBar.barTintColor = appearance.barTintColor;
     self.navigationBar.titleTextAttributes = appearance.titleTextAttributes;

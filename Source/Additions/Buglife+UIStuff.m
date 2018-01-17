@@ -146,6 +146,8 @@ typedef void (^LIFEAlertOrUIAlertActionHandler)(NSObject *action);
 
 - (nonnull UIViewController *)alertControllerWithTitle:(nonnull NSString *)title image:(nullable UIImage *)image preferredStyle:(UIAlertControllerStyle)style reportHandler:(LIFEAlertOrUIAlertActionHandler)reportHandler disableActionTitle:(nullable NSString *)disableActionTitle disableHandler:(LIFEAlertOrUIAlertActionHandler)disableHandler cancelHandler:(LIFEAlertOrUIAlertActionHandler)cancelHandler
 {
+    BOOL showDisableButton = (disableActionTitle != nil && disableHandler != nil);
+    
     if (!self.useLegacyReporterUI) {
         let alert = [LIFEAlertController alertControllerWithTitle:title message:nil preferredStyle:style];
         
@@ -156,7 +158,7 @@ typedef void (^LIFEAlertOrUIAlertActionHandler)(NSObject *action);
         let reportAction = [LIFEAlertAction actionWithTitle:LIFELocalizedString(LIFEStringKey_ReportABug) style:UIAlertActionStyleDefault handler:reportHandler];
         [alert addAction:reportAction];
         
-        if (disableActionTitle != nil || disableHandler != nil) {
+        if (showDisableButton) {
             let disableAction = [LIFEAlertAction actionWithTitle:disableActionTitle style:UIAlertActionStyleDestructive handler:disableHandler];
             [alert addAction:disableAction];
         }
@@ -170,7 +172,7 @@ typedef void (^LIFEAlertOrUIAlertActionHandler)(NSObject *action);
         let reportAction = [UIAlertAction actionWithTitle:LIFELocalizedString(LIFEStringKey_ReportABug) style:UIAlertActionStyleDefault handler:reportHandler];
         [alert addAction:reportAction];
         
-        if (disableActionTitle != nil || disableHandler != nil) {
+        if (showDisableButton) {
             let disableAction = [UIAlertAction actionWithTitle:disableActionTitle style:UIAlertActionStyleDestructive handler:disableHandler];
             [alert addAction:disableAction];
         }
