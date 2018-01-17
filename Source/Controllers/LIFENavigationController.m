@@ -75,6 +75,11 @@
         self.navigationBar.shadowImage = nil;
     }
 
+    [self _configureNavigationBarAppearance];
+}
+
+- (void)_configureNavigationBarAppearance
+{
     self.navigationBar.tintColor = appearance.tintColor;
     self.navigationBar.barTintColor = appearance.barTintColor;
     self.navigationBar.titleTextAttributes = appearance.titleTextAttributes;

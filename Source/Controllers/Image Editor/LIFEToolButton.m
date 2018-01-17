@@ -55,7 +55,7 @@ let kImageHeight = 23.0f;
 //        _titleView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.25];
 //        self.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.25];
         
-        CGFloat imageScale = 0.75;
+        let imageScale = 0.75f;
         
         _imageCenterX = [_imageView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor];
         _imageBottom = [_imageView.bottomAnchor constraintEqualToAnchor:_titleView.topAnchor constant:-5.0];

@@ -24,6 +24,7 @@
 #import "LIFEPoweredByBuglifeView.h"
 #import "LIFEMacros.h"
 
+let kAlertViewCornerRadius = 10.0f;
 let kTitleViewPaddingX = 16.0f;
 let kTitleViewPaddingY = 19.0f;
 let kImagePaddingTop = 16.0f;
@@ -42,6 +43,9 @@ let kImagePaddingBottom = 16.0f;
 @end
 
 @interface LIFEAlertActionSeparatorView : UIView
+
++ (nonnull UIColor *)defaultColor;
+
 @end
 
 @implementation LIFEAlertView
@@ -57,7 +61,7 @@ let kImagePaddingBottom = 16.0f;
         _backgroundView = [[UIView alloc] init];
         _backgroundView.backgroundColor = [UIColor whiteColor];
         _backgroundView.layer.masksToBounds = YES;
-        _backgroundView.layer.cornerRadius = 10.0f;
+        _backgroundView.layer.cornerRadius = kAlertViewCornerRadius;
         [self addSubview:_backgroundView];
         _backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
         [_backgroundView life_makeEdgesEqualTo:self];
@@ -74,7 +78,7 @@ let kImagePaddingBottom = 16.0f;
         _imageView = [[UIImageView alloc] init];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
         _imageView.translatesAutoresizingMaskIntoConstraints = NO;
-        _imageView.layer.borderColor = [UIColor colorWithWhite:(219.0/255.0) alpha:1].CGColor;
+        _imageView.layer.borderColor = [LIFEAlertActionSeparatorView defaultColor].CGColor;
         _imageView.layer.borderWidth = 1.0;
         [_backgroundView addSubview:_imageView];
         
@@ -159,7 +163,7 @@ let kImagePaddingBottom = 16.0f;
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor colorWithWhite:(219.0/255.0) alpha:1];
+        self.backgroundColor = [[self class] defaultColor];
     }
     return self;
 }
@@ -167,6 +171,11 @@ let kImagePaddingBottom = 16.0f;
 - (CGSize)intrinsicContentSize
 {
     return CGSizeMake(UIViewNoIntrinsicMetric, 1);
+}
+
++ (nonnull UIColor *)defaultColor
+{
+    return [UIColor colorWithWhite:(219.0/255.0) alpha:1];;
 }
 
 @end

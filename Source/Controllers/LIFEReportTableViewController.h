@@ -26,8 +26,15 @@
 
 @property (nonatomic, weak, null_unspecified) id<LIFEReportViewControllerDelegate> delegate;
 
-// When using LIFEContainerViewController, the screenshot context parameter is unused
+// Buglife does not attempt to mimic the host application's status bar appearance
+// when presenting full-screen view controllers (such as LIFEReportTableViewController)
+// within an instance of LIFEContainerViewController. Thus no screenshot context is
+// needed, since LIFEReportTableViewController doesn't manage status bar appearance.
 - (nonnull instancetype)initWithReportBuilder:(nonnull LIFEReportBuilder *)reportBuilder;
+
+// When using the legacy bug reporter UI, LIFEReportTableViewController will attempt
+// to mimic the host application's status bar appearance. It uses the screenshot context
+// to do so.
 - (nonnull instancetype)initWithReportBuilder:(nonnull LIFEReportBuilder *)reportBuilder context:(nullable LIFEScreenshotContext *)context NS_DESIGNATED_INITIALIZER;
 
 - (_Null_unspecified instancetype)init NS_UNAVAILABLE;

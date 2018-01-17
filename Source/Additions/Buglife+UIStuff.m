@@ -30,7 +30,7 @@
 #import "LIFEDataProvider.h"
 
 // Block type that can be used as a handler for both LIFEAlertAction and UIAlertAction
-typedef void (^LIFEOrUIAlertActionHandler)(NSObject *action);
+typedef void (^LIFEAlertOrUIAlertActionHandler)(NSObject *action);
 
 @implementation Buglife (UIStuff)
 
@@ -91,11 +91,11 @@ typedef void (^LIFEOrUIAlertActionHandler)(NSObject *action);
         style = UIAlertControllerStyleAlert;
     }
     
-    LIFEOrUIAlertActionHandler reportHandler = ^void(NSObject *action) {
+    LIFEAlertOrUIAlertActionHandler reportHandler = ^void(NSObject *action) {
         [self _presentReporterFromInvocation:invocation withScreenshot:screenshot animated:YES];
     };
     
-    LIFEOrUIAlertActionHandler disableHandler;
+    LIFEAlertOrUIAlertActionHandler disableHandler;
     NSString *disableTitle;
     
     if (self.hideUntilNextLaunchButtonEnabled) {
@@ -122,7 +122,7 @@ typedef void (^LIFEOrUIAlertActionHandler)(NSObject *action);
         }
     }
     
-    LIFEOrUIAlertActionHandler cancelHandler = ^void(NSObject *action) {
+    LIFEAlertOrUIAlertActionHandler cancelHandler = ^void(NSObject *action) {
         if (bugButtonIsEnabled) {
             [self.bugButtonWindow setBugButtonHidden:NO animated:YES];
         }
@@ -144,7 +144,7 @@ typedef void (^LIFEOrUIAlertActionHandler)(NSObject *action);
     }
 }
 
-- (nonnull UIViewController *)alertControllerWithTitle:(nonnull NSString *)title image:(nullable UIImage *)image preferredStyle:(UIAlertControllerStyle)style reportHandler:(LIFEOrUIAlertActionHandler)reportHandler disableActionTitle:(nullable NSString *)disableActionTitle disableHandler:(LIFEOrUIAlertActionHandler)disableHandler cancelHandler:(LIFEOrUIAlertActionHandler)cancelHandler
+- (nonnull UIViewController *)alertControllerWithTitle:(nonnull NSString *)title image:(nullable UIImage *)image preferredStyle:(UIAlertControllerStyle)style reportHandler:(LIFEAlertOrUIAlertActionHandler)reportHandler disableActionTitle:(nullable NSString *)disableActionTitle disableHandler:(LIFEAlertOrUIAlertActionHandler)disableHandler cancelHandler:(LIFEAlertOrUIAlertActionHandler)cancelHandler
 {
     if (!self.useLegacyReporterUI) {
         let alert = [LIFEAlertController alertControllerWithTitle:title message:nil preferredStyle:style];
@@ -156,7 +156,7 @@ typedef void (^LIFEOrUIAlertActionHandler)(NSObject *action);
         let reportAction = [LIFEAlertAction actionWithTitle:LIFELocalizedString(LIFEStringKey_ReportABug) style:UIAlertActionStyleDefault handler:reportHandler];
         [alert addAction:reportAction];
         
-        if (disableActionTitle != nil && disableHandler != nil) {
+        if (disableActionTitle != nil || disableHandler != nil) {
             let disableAction = [LIFEAlertAction actionWithTitle:disableActionTitle style:UIAlertActionStyleDestructive handler:disableHandler];
             [alert addAction:disableAction];
         }
@@ -170,7 +170,7 @@ typedef void (^LIFEOrUIAlertActionHandler)(NSObject *action);
         let reportAction = [UIAlertAction actionWithTitle:LIFELocalizedString(LIFEStringKey_ReportABug) style:UIAlertActionStyleDefault handler:reportHandler];
         [alert addAction:reportAction];
         
-        if (disableHandler != nil) {
+        if (disableActionTitle != nil || disableHandler != nil) {
             let disableAction = [UIAlertAction actionWithTitle:disableActionTitle style:UIAlertActionStyleDestructive handler:disableHandler];
             [alert addAction:disableAction];
         }
@@ -196,26 +196,21 @@ typedef void (^LIFEOrUIAlertActionHandler)(NSObject *action);
     } else if ([self.delegate respondsToSelector:@selector(buglife:titleForPromptWithInvocation:)]) {
         message = [self.delegate buglife:self titleForPromptWithInvocation:invocation];
     } else {
-        message = [[self class] _randomAlertMessageForInvocation:invocation];
+        message = [[self class] _alertMessageForInvocation:invocation];
     }
     
     return message;
 }
 
-+ (NSString *)_randomAlertMessageForInvocation:(LIFEInvocationOptions)invocation
++ (NSString *)_alertMessageForInvocation:(LIFEInvocationOptions)invocation
 {
-    NSMutableArray<NSString *> *messages = [NSMutableArray array];
-    
-    NSString *appName = [[UIApplication sharedApplication] life_hostApplicationName];
+    let appName = [[UIApplication sharedApplication] life_hostApplicationName];
     
     if (appName) {
-        [messages addObject:[NSString stringWithFormat:LIFELocalizedString(LIFEStringKey_HelpUsMakeXYZBetter), appName]];
+        return [NSString stringWithFormat:LIFELocalizedString(LIFEStringKey_HelpUsMakeXYZBetter), appName];
     } else {
-        [messages addObject:LIFELocalizedString(LIFEStringKey_HelpUsMakeThisAppBetter)];
+        return LIFELocalizedString(LIFEStringKey_HelpUsMakeThisAppBetter);
     }
-    
-    NSString *randomMessage = [messages objectAtIndex:arc4random() % messages.count];
-    return randomMessage;
 }
 
 - (void)_temporarilyDisableInvocation:(LIFEInvocationOptions)invocation
