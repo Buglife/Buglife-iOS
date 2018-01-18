@@ -29,12 +29,26 @@ let kToastDisplayDuration = 2.0f;
 @property (nonnull, nonatomic) NSTimer *dismissTimer;
 @property (nonnull, nonatomic) UIPanGestureRecognizer *panGesture;
 @property (nonatomic) CGPoint panGestureStartLocation;
+@property (nullable, nonatomic) UINotificationFeedbackGenerator *feedbackGenerator NS_AVAILABLE_IOS(10_0);
 
 @end
 
 @implementation LIFEToastController
 
 #pragma mark - UIViewController
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        if (@available(iOS 10.0, *)) {
+            _feedbackGenerator = [[UINotificationFeedbackGenerator alloc] init];
+        }
+        
+        [_feedbackGenerator prepare];
+    }
+    return self;
+}
 
 - (void)loadView
 {
@@ -86,6 +100,11 @@ let kToastDisplayDuration = 2.0f;
     [self _startTimer];
 }
 
+- (void)generateSuccessFeedback
+{
+    [_feedbackGenerator notificationOccurred:UINotificationFeedbackTypeSuccess];
+}
+
 #pragma mark - Private
 
 - (void)_handlePanGesture:(UIPanGestureRecognizer *)panGesture
@@ -135,7 +154,7 @@ let kToastDisplayDuration = 2.0f;
     [UIView animateWithDuration:0.2 delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:0.9 options:(UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction) animations:^{
         [self animateIn];
     } completion:^(BOOL finished) {
-        [self didAnimateIn];
+        [self _startTimer];;
     }];
 }
 

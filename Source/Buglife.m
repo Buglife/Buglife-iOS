@@ -50,6 +50,7 @@
 #import "LIFEContainerWindow.h"
 #import "LIFEContainerViewController.h"
 #import "LIFEImageEditorViewController.h"
+#import "LIFEToastController.h"
 
 static NSString * const kSDKVersion = @"2.1.0";
 void life_dispatch_async_to_main_queue(dispatch_block_t block);
@@ -451,7 +452,8 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     
     __weak typeof(self) weakSelf = self;
     
-    [self.containerWindow.containerViewController dismissWithWindowBlindsAnimation:animated showToast:shoudShowThankYouDialog completion:^{
+    LIFEToastController *toast = [[LIFEToastController alloc] init];
+    [self.containerWindow.containerViewController dismissWithWindowBlindsAnimation:animated showToast:toast completion:^{
         __strong Buglife *strongSelf = weakSelf;
         if (strongSelf) {
             [strongSelf _reporterAndThankYouDialogDidDismissAnimated:animated];

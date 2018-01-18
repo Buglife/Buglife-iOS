@@ -216,13 +216,11 @@
     }
 }
 
-- (void)dismissWithWindowBlindsAnimation:(BOOL)animated showToast:(BOOL)showToast completion:(void (^ __nullable)(void))completion
+- (void)dismissWithWindowBlindsAnimation:(BOOL)animated showToast:(nullable LIFEToastController *)toastViewController completion:(void (^ __nullable)(void))completion
 {
     let fromVc = self.visibleViewController;
-    LIFEToastController *toastViewController;
     
-    if (showToast) {
-        toastViewController = [[LIFEToastController alloc] init];
+    if (toastViewController) {
         toastViewController.dismissHandler = completion;
         UIView *toView = toastViewController.view;
         toView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -248,7 +246,7 @@
             [animator animationEnded:didComplete];
         }
         
-        if (!showToast) {
+        if (toastViewController == nil) {
             completion();
         }
     };
