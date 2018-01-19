@@ -29,6 +29,7 @@ static let kAnticipationDuration = (0.15f * kAnimationDuratioMultiplier);
 static let kSpringDuration = (0.3f * kAnimationDuratioMultiplier);
 static let kToastDelay = (kSpringDuration / 2.0);
 static let kToastDuration = (0.3f * kAnimationDuratioMultiplier);
+static let kToastSuccessFeedbackDelay = (kToastDelay * 0.75f);
 
 @interface LIFEWindowBlindsAnimator ()
 
@@ -80,6 +81,11 @@ static let kToastDuration = (0.3f * kAnimationDuratioMultiplier);
                 [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
                 [toVc didAnimateIn];
             }];
+        });
+        
+        // Success haptic feedback needs to be timed just right, kinda between animations
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kToastSuccessFeedbackDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [toVc generateSuccessFeedback];
         });
     }];
 }

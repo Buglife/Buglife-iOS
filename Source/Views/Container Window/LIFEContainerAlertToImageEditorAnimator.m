@@ -36,6 +36,20 @@ let kSecondAnimationDuration = (0.75f * kAnimationMultiplier);
 {
     LIFEAlertController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     LIFENavigationController *toNavVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    
+    BOOL hostAppStatusBarWasHidden = [UIApplication sharedApplication].statusBarHidden;
+    
+    
+    // HORRIBLE HACK: (well, maybe not that bad, cause UIKit status bar
+    // things are often difficult to work around.)
+    // 1. So we need to call setNeedsStatusBarAppearanceUpdate on the nav VC
+    // before we add subviews & lay them out, so that the last frames of the
+    // animation are laid out correctly (i.e. with a status bar in place),
+    // and that the views don't suddenly "jump" 20px once the animation is
+    // complete.
+    [toNavVc setNeedsStatusBarAppearanceUpdate];
+    
+    // 2. Add & layout the subviews
     UIView *containerView = transitionContext.containerView;
     [containerView addSubview:toNavVc.view];
     LIFEAssertIsKindOfClass(fromVc, LIFEAlertController);
@@ -50,10 +64,22 @@ let kSecondAnimationDuration = (0.75f * kAnimationMultiplier);
     [toNavVc.view layoutIfNeeded];
     [imageEditorView layoutIfNeeded];
     CGRect imageViewFrameEnd = [containerView convertRect:imageEditorView.sourceImageView.frame fromView:imageEditorView.sourceImageView.superview];
+    CGFloat borderWidth = [LIFEImageEditorView imageBorderWidth];
+    CGRect borderViewFrameStart = CGRectInset(imageViewFrameStart, -borderWidth, -borderWidth);
+    CGRect borderViewFrameEnd = CGRectInset(imageViewFrameEnd, -borderWidth, -borderWidth);
+    
+    // Create a temporary border view for the interim of the transition.
+    // We can't rely on UIView.layer.border, because this will expand/contract
+    // and result in a weird flicker during a spring transition. By having
+    // a separate borderView that is always 2pt outset from the imageView,
+    // the border will hav ethe appearance of always being 2pt thick during
+    // the transition.
+    UIView *borderView = [[UIView alloc] init];
+    borderView.backgroundColor = [LIFEImageEditorView imageBorderColor];
+    borderView.frame = borderViewFrameStart;
+    [containerView addSubview:borderView];
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:fromVc.alertView.imageView.image];
-    imageView.layer.borderColor = [UIColor blackColor].CGColor;
-    imageView.layer.borderWidth = [LIFEImageEditorView imageBorderWidth];
     [containerView addSubview:imageView];
     imageView.frame = imageViewFrameStart;
     
@@ -61,6 +87,15 @@ let kSecondAnimationDuration = (0.75f * kAnimationMultiplier);
     [fromVc prepareExpandToDismissTransition];
     
     fromVc.alertView.imageView.hidden = YES;
+    
+    // 3. Temporarily "hide" the status bar on LIFENavigationController,
+    // so that we can immediately call -setNeedsStatusBarAppearanceUpdate
+    // again, so that the beginning of the animation functions correctly
+    toNavVc.statusBarHidden = YES;
+    [toNavVc setNeedsStatusBarAppearanceUpdate];
+    
+    // 4. Reset LIFENavigationController's statusBarHidden property
+    toNavVc.statusBarHidden = NO;
     
     let damping = 0.6f;
     let initialSpringVelocity = 0.0f;
@@ -76,10 +111,13 @@ let kSecondAnimationDuration = (0.75f * kAnimationMultiplier);
         [fromVc.alertView layoutIfNeeded];
         [fromVc.alertView performDismissTransition];
         imageView.frame = imageViewFrameEnd;
+        borderView.frame = borderViewFrameEnd;
+        // 5. Animate in the status bar
         [toNavVc setNeedsStatusBarAppearanceUpdate];
     } completion:^(BOOL finished) {
         [toVc.imageEditorView completeFirstPresentationTransition];
         [imageView removeFromSuperview];
+        [borderView removeFromSuperview];
     }];
     
     // We need to use a dispatch_after instead of the UIView delay

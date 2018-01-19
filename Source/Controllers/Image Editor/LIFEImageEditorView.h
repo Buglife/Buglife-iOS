@@ -38,5 +38,6 @@
 @property (nonatomic, readonly) LIFEToolButtonType selectedTool;
 
 + (CGFloat)imageBorderWidth;
++ (nonnull UIColor *)imageBorderColor;
 
 @end

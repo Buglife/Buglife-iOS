@@ -29,4 +29,9 @@
 - (void)animateIn;
 - (void)didAnimateIn;
 
+// Preparing the haptic feedback generator is done in init(), so it's
+// best to initialize an instance of this class some time before calling
+// generateSuccessFeedback().
+- (void)generateSuccessFeedback;
+
 @end

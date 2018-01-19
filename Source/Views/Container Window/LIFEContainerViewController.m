@@ -83,43 +83,61 @@
     return self.childViewControllers.lastObject;
 }
 
-// This will attempt to animate in the new child view controller,
-// in whatever way makes sense w/ respect to the existing child view
-// controller (if any).
-- (void)life_setChildViewController:(UIViewController *)childViewController animated:(BOOL)animated completion:(void (^)(void))completion
+- (void)life_presentViewController:(nonnull UIViewController *)newViewController animated:(BOOL)animated completion:(void (^)(void))completion
 {
     UIViewController *visibleViewController = self.visibleViewController;
+    id<UIViewControllerAnimatedTransitioning> animator;
     
-    if ([visibleViewController isKindOfClass:[LIFENavigationController class]]) {
-        let navVC = (LIFENavigationController *)visibleViewController;
-        [navVC setViewControllers:@[childViewController] animated:animated];
+    // If an alert controller is already visible, we may have to have a special
+    // transition into the new view controller
+    if ([visibleViewController isKindOfClass:[LIFEAlertController class]]) {
+        if ([newViewController isKindOfClass:[LIFENavigationController class]]) {
+            let nav = (LIFENavigationController *)newViewController;
+            
+            if ([nav.visibleViewController isKindOfClass:[LIFEImageEditorViewController class]]) {
+                // If we're transitioning from an alert to the image editor,
+                // we want this to be one seamless transition
+                animator = [[LIFEContainerAlertToImageEditorAnimator alloc] init];
+                [self _performTransitionFromViewController:visibleViewController toViewController:nav withAnimator:animator completion:completion];
+                return;
+            }
+        }
+        
+        // If we're transitioning from an alert to any other view controller,
+        // we need to dismiss the alert first before we presnt the new view controller
+        [self _dismissCurrentViewControllerAndPresentViewController:newViewController animated:animated completion:completion];
         return;
     }
     
-    UIView *toView = childViewController.view;
+    if ([newViewController isKindOfClass:[LIFEAlertController class]]) {
+        // For a new alert, have a special presentation animation
+        animator = [LIFEAlertAnimator presentationAnimator];
+    } else {
+        // For anything else, just use our default modal presentation animation
+        animator = [[LIFEContainerModalPresentAnimator alloc] init];
+    }
+    
+    [self _performTransitionFromViewController:visibleViewController toViewController:newViewController withAnimator:animator completion:completion];
+}
+
+- (void)_performTransitionFromViewController:(nonnull UIViewController *)fromViewController toViewController:(nonnull UIViewController *)toViewController withAnimator:(nonnull id<UIViewControllerAnimatedTransitioning>)animator completion:(void (^)(void))completion
+{
+    UIView *toView = toViewController.view;
     toView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     toView.frame = self.view.bounds;
-    [self addChildViewController:childViewController];
-    
-    id<UIViewControllerAnimatedTransitioning> animator = [self _animatorFromViewController:visibleViewController toViewController:childViewController];
-    
-    if (animator == nil) {
-        [self.view addSubview:toView];
-        [childViewController didMoveToParentViewController:self];
-        return;
-    }
+    [self addChildViewController:toViewController];
     
     UIView *containerView = self.view;
-    LIFEContainerTransitionContext *transitionContext = [[LIFEContainerTransitionContext alloc] initWithFromViewController:visibleViewController toViewController:childViewController containerView:containerView];
+    LIFEContainerTransitionContext *transitionContext = [[LIFEContainerTransitionContext alloc] initWithFromViewController:fromViewController toViewController:toViewController containerView:containerView];
     transitionContext.animated = YES;
     transitionContext.interactive = NO;
     transitionContext.completionBlock = ^(BOOL didComplete) {
-        if (visibleViewController != self) {
-            [visibleViewController.view removeFromSuperview];
-            [visibleViewController removeFromParentViewController];
+        if (fromViewController != self) {
+            [fromViewController.view removeFromSuperview];
+            [fromViewController removeFromParentViewController];
         }
         
-        [childViewController didMoveToParentViewController:self];
+        [toViewController didMoveToParentViewController:self];
         
         if ([animator respondsToSelector:@selector(animationEnded:)]) {
             [animator animationEnded:didComplete];
@@ -131,6 +149,40 @@
     };
     
     [animator animateTransition:transitionContext];
+}
+
+- (void)life_setChildViewController:(UIViewController *)childViewController animated:(BOOL)animated completion:(void (^)(void))completion
+{
+    UIViewController *visibleViewController = self.visibleViewController;
+
+    if ([visibleViewController isKindOfClass:[LIFENavigationController class]]) {
+        let navVC = (LIFENavigationController *)visibleViewController;
+        [navVC setViewControllers:@[childViewController] animated:animated];
+        return;
+    }
+    
+    NSAssert(NO, @"Attempting to set child view controller, but there's no navigation controller yet. Wut?");
+
+    UIView *toView = childViewController.view;
+    toView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    toView.frame = self.view.bounds;
+    [self addChildViewController:childViewController];
+    [self.view addSubview:toView];
+    [childViewController didMoveToParentViewController:self];
+    return;
+}
+
+- (void)_dismissCurrentViewControllerAndPresentViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated completion:(void (^ __nullable)(void))completion
+{
+    __weak typeof(self) weakSelf = self;
+    
+    [self life_dismissEverythingAnimated:animated completion:^{
+        __strong LIFEContainerViewController *strongSelf = weakSelf;
+        
+        if (strongSelf) {
+            [strongSelf life_presentViewController:viewController animated:animated completion:completion];
+        }
+    }];
 }
 
 - (void)life_dismissEverythingAnimated:(BOOL)flag completion:(void (^ __nullable)(void))completion
@@ -164,13 +216,11 @@
     }
 }
 
-- (void)dismissWithWindowBlindsAnimation:(BOOL)animated showToast:(BOOL)showToast completion:(void (^ __nullable)(void))completion
+- (void)dismissWithWindowBlindsAnimation:(BOOL)animated showToast:(nullable LIFEToastController *)toastViewController completion:(void (^ __nullable)(void))completion
 {
     let fromVc = self.visibleViewController;
-    LIFEToastController *toastViewController;
     
-    if (showToast) {
-        toastViewController = [[LIFEToastController alloc] init];
+    if (toastViewController) {
         toastViewController.dismissHandler = completion;
         UIView *toView = toastViewController.view;
         toView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -196,7 +246,7 @@
             [animator animationEnded:didComplete];
         }
         
-        if (!showToast) {
+        if (toastViewController == nil) {
             completion();
         }
     };
