@@ -31,6 +31,7 @@
 {
     self = [super initWithNavigationBarClass:[LIFENavigationBar class] toolbarClass:nil];
     if (self) {
+        _statusBarHidden = NO;
         self.viewControllers = @[viewController];
         self.navigationBarStyleClear = YES;
         
@@ -50,7 +51,7 @@
 
 - (BOOL)prefersStatusBarHidden
 {
-    return NO;
+    return _statusBarHidden;
 }
 
 // LIFENavigationController is presumably always shown full screen.
