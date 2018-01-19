@@ -21,6 +21,14 @@
 #import "Buglife+Protected.h"
 
 @interface LIFENavigationController ()
+
+// These should only be used for temporarily hiding the status bar;
+// i.e. when you need to coordinate a transition.
+// Otherwise, this should be NO by default.
+@property (nonatomic) BOOL statusBarOverridesEnabled;
+@property (nonatomic) BOOL statusBarHiddenOverride;
+@property (nonatomic) UIStatusBarStyle statusBarStyleOverride;
+
 @end
 
 @implementation LIFENavigationController
@@ -31,7 +39,7 @@
 {
     self = [super initWithNavigationBarClass:[LIFENavigationBar class] toolbarClass:nil];
     if (self) {
-        _statusBarHidden = NO;
+        _statusBarOverridesEnabled = NO;
         self.viewControllers = @[viewController];
         self.navigationBarStyleClear = YES;
         
@@ -46,12 +54,32 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return [LIFEAppearanceImpl sharedAppearance].statusBarStyle;
+    if (self.statusBarOverridesEnabled) {
+        return self.statusBarStyleOverride;
+    } else {
+        return [LIFEAppearanceImpl sharedAppearance].statusBarStyle;
+    }
 }
 
 - (BOOL)prefersStatusBarHidden
 {
-    return _statusBarHidden;
+    if (self.statusBarOverridesEnabled) {
+        return self.statusBarHiddenOverride;
+    } else {
+        return NO;
+    }
+}
+
+- (void)enableStatusBarOverrideHidden:(BOOL)hidden style:(UIStatusBarStyle)style
+{
+    _statusBarOverridesEnabled = YES;
+    _statusBarHiddenOverride = hidden;
+    _statusBarStyleOverride = style;
+}
+
+- (void)disableStatusBarOverride
+{
+    _statusBarOverridesEnabled = NO;
 }
 
 // LIFENavigationController is presumably always shown full screen.

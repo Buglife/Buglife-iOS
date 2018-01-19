@@ -38,7 +38,7 @@ let kSecondAnimationDuration = (0.75f * kAnimationMultiplier);
     LIFENavigationController *toNavVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
     BOOL hostAppStatusBarWasHidden = [UIApplication sharedApplication].statusBarHidden;
-    
+    UIStatusBarStyle hostAppStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
     
     // HORRIBLE HACK: (well, maybe not that bad, cause UIKit status bar
     // things are often difficult to work around.)
@@ -88,14 +88,14 @@ let kSecondAnimationDuration = (0.75f * kAnimationMultiplier);
     
     fromVc.alertView.imageView.hidden = YES;
     
-    // 3. Temporarily "hide" the status bar on LIFENavigationController,
+    // 3. Temporarily "hide" the status bar on LIFENavigationController if needed,
     // so that we can immediately call -setNeedsStatusBarAppearanceUpdate
     // again, so that the beginning of the animation functions correctly
-    toNavVc.statusBarHidden = YES;
+    [toNavVc enableStatusBarOverrideHidden:hostAppStatusBarWasHidden style:hostAppStatusBarStyle];
     [toNavVc setNeedsStatusBarAppearanceUpdate];
     
     // 4. Reset LIFENavigationController's statusBarHidden property
-    toNavVc.statusBarHidden = NO;
+    [toNavVc disableStatusBarOverride];
     
     let damping = 0.6f;
     let initialSpringVelocity = 0.0f;

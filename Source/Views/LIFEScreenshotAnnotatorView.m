@@ -29,8 +29,6 @@
 #import "LIFECompatibilityUtils.h"
 #import "LIFEMacros.h"
 
-static const CGFloat kDarkOverlayAnimationDuration = 0.15;
-static const CGFloat kAlphaForDarkOverlayWhenVisible = 0.15;
 static const CGFloat kSegmentItemWidth = 100;
 static const NSTimeInterval kToolbarTransitionDuration = 0.25;
 
@@ -42,7 +40,6 @@ static const NSTimeInterval kToolbarTransitionDuration = 0.25;
 @property (nonatomic, nonnull) UIImageView *backgroundImageView;
 @property (nonatomic, nonnull) UIVisualEffectView *backgroundBlurView;
 @property (nonatomic, nonnull) LIFEAnnotatedImageView *annotatedImageView;
-@property (nonatomic) LIFEPassThroughTouchesView *darkOverlayView;
 
 @property (nonatomic) UIView *segmentedControlToolbarContainer;
 @property (nonatomic) UIToolbar *segmentedControlToolbar;
@@ -75,11 +72,6 @@ static const NSTimeInterval kToolbarTransitionDuration = 0.25;
         _annotatedImageView = [[LIFEAnnotatedImageView alloc] initWithAnnotatedImage:annotatedImage];
         [self addSubview:_annotatedImageView];
         
-        _darkOverlayView = [[LIFEPassThroughTouchesView alloc] init];
-        _darkOverlayView.backgroundColor = [UIColor blackColor];
-        _darkOverlayView.alpha = 0;
-        [self addSubview:_darkOverlayView];
-        
         _segmentedControlToolbarContainer = [[UIView alloc] init];
         _segmentedControlToolbarContainer.backgroundColor = LIFEAppearanceImpl.sharedAppearance.barTintColor;
         [self addSubview:_segmentedControlToolbarContainer];
@@ -100,7 +92,7 @@ static const NSTimeInterval kToolbarTransitionDuration = 0.25;
         [_segmentedControl setWidth:kSegmentItemWidth forSegmentAtIndex:2];
         [_segmentedControlToolbarContainer addSubview:_segmentedControl];
         
-        NSArray *customSubviews = @[_backgroundImageView, _backgroundBlurView, _annotatedImageView, _darkOverlayView, _segmentedControlToolbarContainer, _segmentedControlToolbar, _segmentedControl];
+        NSArray *customSubviews = @[_backgroundImageView, _backgroundBlurView, _annotatedImageView, _segmentedControlToolbarContainer, _segmentedControlToolbar, _segmentedControl];
         
         for (UIView *view in customSubviews) {
             view.translatesAutoresizingMaskIntoConstraints = NO;
@@ -120,7 +112,6 @@ static const NSTimeInterval kToolbarTransitionDuration = 0.25;
 {
     [_backgroundImageView life_makeEdgesEqualTo:self];
     [_backgroundBlurView life_makeEdgesEqualTo:self];
-    [_darkOverlayView life_makeEdgesEqualTo:self];
     
     CGFloat aspectRatio = self.annotatedImageView.aspectRatio;
     
@@ -221,16 +212,6 @@ static const NSTimeInterval kToolbarTransitionDuration = 0.25;
     }
     
     return height;
-}
-
-- (void)setDarkOverlayHidden:(BOOL)hidden animated:(BOOL)animated
-{
-    CGFloat duration = animated ? kDarkOverlayAnimationDuration : 0;
-    CGFloat alpha = hidden ? 0 : kAlphaForDarkOverlayWhenVisible;
-    
-    [UIView animateWithDuration:duration animations:^{
-        self.darkOverlayView.alpha = alpha;
-    }];
 }
 
 - (UIImageView *)sourceImageView

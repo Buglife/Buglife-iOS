@@ -28,7 +28,6 @@
 - (UIImageView *)sourceImageView;
 
 - (instancetype)initWithAnnotatedImage:(LIFEAnnotatedImage *)annotatedImage;
-- (void)setDarkOverlayHidden:(BOOL)hidden animated:(BOOL)animated;
 
 - (void)addAnnotationView:(LIFEAnnotationView *)annotationView;
 - (void)animateAddedAnnotationView:(LIFEAnnotationView *)annotationView;

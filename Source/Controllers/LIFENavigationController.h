@@ -24,8 +24,10 @@
 
 // This should only be used for temporarily hiding the status bar;
 // i.e. when you need to coordinate a transition.
-// Otherwise, this should be NO by default.
-@property (nonatomic) BOOL statusBarHidden;
+// Otherwise, by default LIFENavigationController should always show
+// the status bar, and use the style specified by LIFEAppearance.
+- (void)enableStatusBarOverrideHidden:(BOOL)hidden style:(UIStatusBarStyle)style;
+- (void)disableStatusBarOverride;
 
 @end
 

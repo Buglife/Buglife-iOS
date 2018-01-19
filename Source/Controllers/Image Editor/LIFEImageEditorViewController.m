@@ -226,10 +226,6 @@ LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolB
                 [self _updateLoupeAnnotationViews];
             }
             
-            if (annotation.annotationType == LIFEAnnotationTypeBlur) {
-                [self.screenshotAnnotatorView setDarkOverlayHidden:NO animated:YES];
-            }
-            
             NSParameterAssert(self.annotationViewInProgress == nil);
             
             self.annotationViewInProgress = annotationView;
@@ -289,12 +285,6 @@ LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolB
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_tapAnnotationViewGestureHandler:)];
     [annotationView addGestureRecognizer:tapGestureRecognizer];
     tapGestureRecognizer.numberOfTapsRequired = 1;
-    
-    BOOL isBlur = [annotationView isKindOfClass:[LIFEBlurAnnotationView class]];
-    
-    if (isBlur) {
-        [self.screenshotAnnotatorView setDarkOverlayHidden:YES animated:YES];
-    }
 }
 
 - (void)_editAnnotationViewGestureHandler:(UIGestureRecognizer *)gestureRecognizer
@@ -305,7 +295,6 @@ LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolB
             if (_activeEditingGestureRecognizers.count == 0) {
                 self.panGestureRecognizer.enabled = NO;
                 self.annotationViewInProgress = (LIFEAnnotationView *)gestureRecognizer.view;
-                [self.screenshotAnnotatorView setDarkOverlayHidden:NO animated:YES];
                 [self.annotationViewInProgress setSelected:YES animated:YES];
                 
                 self.previousStartPointForMovingAnnotation = self.annotationViewInProgress.startPoint;
@@ -380,7 +369,6 @@ LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolB
             
             if (_activeEditingGestureRecognizers.count == 0) {
                 self.panGestureRecognizer.enabled = YES;
-                [self.screenshotAnnotatorView setDarkOverlayHidden:YES animated:YES];
                 [self.annotationViewInProgress setSelected:NO animated:YES];
                 self.annotationViewInProgress = nil;
             }
