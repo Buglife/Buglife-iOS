@@ -83,7 +83,7 @@ static LIFEASLLogger *sharedInstance;
     
     NSString * message = _logFormatter ? [_logFormatter formatLogMessage:logMessage] : logMessage->_message;
     
-    if (logMessage) {
+    if (message != nil) {
         const char *msg = [message UTF8String];
         
         size_t aslLogLevel;

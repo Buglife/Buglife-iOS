@@ -33,15 +33,7 @@
 
 
 #import <Foundation/Foundation.h>
-
-typedef NS_ENUM(NSUInteger, LIFELogLevel) {
-    LIFELogLevelOff = 0,
-    LIFELogLevelError,
-    LIFELogLevelWarning,
-    LIFELogLevelInfo,
-    LIFELogLevelDebug,
-    LIFELogLevelVerbose
-};
+#import "LIFELog.h"
 
 @interface LIFELogger : NSObject
 

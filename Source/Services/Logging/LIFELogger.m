@@ -130,7 +130,8 @@
             shouldLogToConsole = [self.contextSet containsObject:@(context)];
         }
         
-        if (shouldLogToConsole) {
+        //HACK 1/18/18: disable Debug Mode logging. 
+        if (shouldLogToConsole && context != LIFELoggerContextInternalDebugMode) {
             NSLog(@"%@", message);
         }
     };

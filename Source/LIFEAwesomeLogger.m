@@ -92,6 +92,9 @@ static const BOOL kConsoleLoggingEnabledDefault = YES;
     _fileLogger.rollingFrequency = 0;
     
     _workQueue = dispatch_queue_create("com.buglife.LIFEBuglifeLogger.workQueue", DISPATCH_QUEUE_SERIAL);
+    
+    self.notificationLogger = [[LIFENotificationLogger alloc] init];
+    [self.notificationLogger beginLoggingNotifications];
 
     // Wrap this in a dispatch once;
     // API consumers *should* use the shared singleton, but in case
@@ -247,12 +250,6 @@ static const BOOL kConsoleLoggingEnabledDefault = YES;
                                                            timestamp:nil];
 
     [LIFELogImpl log:asynchronous message:logMessage];
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        self.notificationLogger = [[LIFENotificationLogger alloc] init];
-        [self.notificationLogger beginLoggingNotifications];
-    });
 }
 
 - (void)_logDebugMessage:(NSString *)message context:(NSInteger)context
