@@ -736,7 +736,7 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
             if (textInputField.isMultiline) {
                 NSNumber *cachedHeight = self.inputFieldRowHeightCache[inputField];
                 
-                if (cachedHeight) {
+                if (cachedHeight != nil) {
                     return cachedHeight.floatValue;
                 } else {
                     LIFEInputFieldValue *value = self.inputFieldValues[inputField];
@@ -924,7 +924,7 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
         BOOL updateRowHeight = NO;
         NSNumber *oldHeightNum = self.inputFieldRowHeightCache[inputField];
         
-        if (oldHeightNum) {
+        if (oldHeightNum != nil) {
             CGFloat oldHeight = oldHeightNum.floatValue;
             
             if (ABS(oldHeight - newHeight) > 2.0f) {

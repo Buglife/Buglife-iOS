@@ -62,7 +62,7 @@ NSString * const LIFENotificationLoggerSendButtonTapped = @"com.buglife.LIFENoti
     if (name) {
         NSNumber *notificationNumber = [LIFENotificationLogger _notifications][name];
         
-        if (notificationNumber) {
+        if (notificationNumber != nil) {
             NSString *message = [NSString stringWithFormat:@"%@", notificationNumber];
             [[LIFEAwesomeLogger sharedLogger] _logDebugMessage:message context:LIFELogContextNotification];
         } else {

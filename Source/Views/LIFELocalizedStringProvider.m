@@ -86,7 +86,7 @@ typedef NS_OPTIONS(NSUInteger, LIFELanguage) {
         
         NSNumber *languageNumber = languagePrefixes[languagePrefix];
         
-        if (languageNumber) {
+        if (languageNumber != nil) {
             result = languageNumber.unsignedIntegerValue;
             break;
         }

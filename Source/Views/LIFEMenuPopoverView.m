@@ -732,6 +732,7 @@
         layer.strokeColor = self.popOverBorderColor.CGColor;
         [self.layer addSublayer:layer];
     }
+    CFRelease(bubblePath);
 }
 
 #pragma mark - color getters

@@ -20,8 +20,8 @@
 
 @interface LIFEPickerInputField ()
 
-@property (nonatomic, nonnull, copy) NSMutableArray<NSString *> *optionTitles;
-@property (nonatomic, nonnull, copy) NSMutableArray<NSString *> *optionValues;
+@property (nonatomic, nonnull) NSMutableArray<NSString *> *optionTitles;
+@property (nonatomic, nonnull) NSMutableArray<NSString *> *optionValues;
 
 @end
 

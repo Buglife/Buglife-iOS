@@ -455,8 +455,6 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
         case UIGestureRecognizerStateChanged:
         {
             CGSize size = self.annotationViewInProgress.bounds.size;
-            LIFEAnnotation *oldAnnotation = self.annotationViewInProgress.annotation;
-            LIFEAnnotation *newAnnotation = nil;
             
             if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
                 UIPanGestureRecognizer *panGestureRecognizer = (UIPanGestureRecognizer *)gestureRecognizer;
@@ -488,8 +486,8 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
             // Put it all together
             CGVector startVector = LIFEVectorFromPointAndSize(startPoint, size);
             CGVector endVector = LIFEVectorFromPointAndSize(endPoint, size);
-            oldAnnotation = self.annotationViewInProgress.annotation;
-            newAnnotation = [[LIFEAnnotation alloc] initWithAnnotationType:self.annotationViewInProgress.annotation.annotationType startVector:startVector endVector:endVector];
+            LIFEAnnotation *oldAnnotation = self.annotationViewInProgress.annotation;
+            LIFEAnnotation *newAnnotation = [[LIFEAnnotation alloc] initWithAnnotationType:self.annotationViewInProgress.annotation.annotationType startVector:startVector endVector:endVector];
             newAnnotation = [self _annotationAdjustedForMinimumAndMaximumSize:newAnnotation];
             
             self.annotationViewInProgress.annotation = newAnnotation;

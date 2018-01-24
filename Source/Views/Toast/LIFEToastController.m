@@ -26,7 +26,7 @@ let kToastDisplayDuration = 2.0f;
 @interface LIFEToastController ()
 
 @property (nonnull, nonatomic, readonly) LIFEToastControllerView *toastControllerView;
-@property (nonnull, nonatomic) NSTimer *dismissTimer;
+@property (nonatomic) NSTimer *dismissTimer;
 @property (nonnull, nonatomic) UIPanGestureRecognizer *panGesture;
 @property (nonatomic) CGPoint panGestureStartLocation;
 @property (nullable, nonatomic) UINotificationFeedbackGenerator *feedbackGenerator NS_AVAILABLE_IOS(10_0);
