@@ -17,14 +17,21 @@
 //    limitations under the License.
 
 import UIKit
+import Buglife
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var testButton: UIButton?
+    
+    @IBAction func someAction() {
+        life_log_debug("I tapped a button!")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Buglife Example"
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

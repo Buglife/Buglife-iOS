@@ -26,10 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BuglifeDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Buglife.shared().start(withEmail: "dave+test@buglife.com")
+        Buglife.shared().start(withAPIKey: "TB5cxDWTfNS6rjZnREzG8gtt")
         Buglife.shared().invocationOptions = [.shake, .screenshot, .floatingButton]
         Buglife.shared().delegate = self
-
+//        Buglife.shared().captureUserEventsEnabled = false
+        
         return true
     }
 

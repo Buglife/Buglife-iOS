@@ -15,6 +15,7 @@
 		BCB7966F1FC62EF300305EF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCB7966D1FC62EF300305EF7 /* LaunchScreen.storyboard */; };
 		BCB796771FC62F3100305EF7 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = BCB796761FC62F3100305EF7 /* Podfile */; };
 		BCB796791FC6310400305EF7 /* AwesomeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB796781FC6310400305EF7 /* AwesomeLabel.swift */; };
+		BCD236C02016D38800056914 /* AwesomeLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD236BF2016D38700056914 /* AwesomeLogger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		BCB796701FC62EF300305EF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCB796761FC62F3100305EF7 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BCB796781FC6310400305EF7 /* AwesomeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwesomeLabel.swift; sourceTree = "<group>"; };
+		BCD236BF2016D38700056914 /* AwesomeLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AwesomeLogger.swift; path = ../../Swift/AwesomeLogger.swift; sourceTree = "<group>"; };
 		EE6D978DBF5F3BA016F795AF /* Pods-Buglife Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Buglife Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Buglife Example/Pods-Buglife Example.debug.xcconfig"; sourceTree = "<group>"; };
 		FDE01A1C4FA868079C717087 /* Pods-Buglife Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Buglife Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Buglife Example/Pods-Buglife Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,6 +84,7 @@
 		BCB796631FC62EF300305EF7 /* Buglife Example */ = {
 			isa = PBXGroup;
 			children = (
+				BCD236BF2016D38700056914 /* AwesomeLogger.swift */,
 				BCB796641FC62EF300305EF7 /* AppDelegate.swift */,
 				BCB796661FC62EF300305EF7 /* ViewController.swift */,
 				BCB796781FC6310400305EF7 /* AwesomeLabel.swift */,
@@ -187,9 +190,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Buglife Example/Pods-Buglife Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Buglife/Buglife.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Buglife.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -202,13 +208,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Buglife Example-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -221,6 +230,7 @@
 				BCB796791FC6310400305EF7 /* AwesomeLabel.swift in Sources */,
 				BCB796671FC62EF300305EF7 /* ViewController.swift in Sources */,
 				BCB796651FC62EF300305EF7 /* AppDelegate.swift in Sources */,
+				BCD236C02016D38800056914 /* AwesomeLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
