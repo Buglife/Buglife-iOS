@@ -124,6 +124,11 @@ extern NSString * __nonnull const LIFENotificationUserSubmittedReport;
 @property (nonatomic, weak, nullable) id<BuglifeDelegate> delegate;
 
 /**
+ * If this is true, then certain UIControl and navigation events will be logged.
+ */
+@property (nonatomic) BOOL captureUserEventsEnabled;
+
+/**
  *  Default shared initializer that returns the Buglife singleton.
  *
  *  @return The shared Buglife singleton

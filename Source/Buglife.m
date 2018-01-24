@@ -51,6 +51,7 @@
 #import "LIFEContainerViewController.h"
 #import "LIFEImageEditorViewController.h"
 #import "LIFEToastController.h"
+#import "UIControl+LIFEAdditions.h"
 
 static NSString * const kSDKVersion = @"2.5.0";
 void life_dispatch_async_to_main_queue(dispatch_block_t block);
@@ -142,9 +143,11 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
         _debugMode = NO;
         _reportAlertOrWindowVisible = NO;
         _hideUntilNextLaunchButtonEnabled = NO;
+        _captureUserEventsEnabled = YES;
         _attachmentManager = [[LIFEAttachmentManager alloc] init];
         _attributes = [[NSMutableDictionary alloc] init];
         self.invocationOptions = LIFEInvocationOptionsShake;
+        (void)[LIFEAwesomeLogger sharedLogger];
     }
     return self;
 }
@@ -245,6 +248,17 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
         if ([self _isStarted]) {
             [self _enableOrDisableBugButton];
         }
+    }
+}
+- (void)setCaptureUserEventsEnabled:(BOOL)captureUserEventsEnabled
+{
+    BOOL old = _captureUserEventsEnabled;
+    if (old != captureUserEventsEnabled)
+    {
+        _captureUserEventsEnabled = captureUserEventsEnabled;
+    }
+    if ([self _isStarted] && captureUserEventsEnabled && !old){
+        [UIControl swizzleSendAction];
     }
 }
 

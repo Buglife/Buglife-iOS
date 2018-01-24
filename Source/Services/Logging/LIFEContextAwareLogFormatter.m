@@ -77,6 +77,8 @@
         return NO;
     } else if (logMessage.context == LIFELogContextNotification) {
         return NO;
+    } else if (logMessage.context == LIFELogContextUserEvent) {
+        return NO;
     } else if (logMessage.context == LIFELogContextCocoaLumberjack) {
         // If they're using CocoaLumberjack, then they're probably
         // doing logging to the console + ASL themselves

@@ -245,6 +245,8 @@
 		B7EAFA3E1FC8DBA900196024 /* LIFETitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF97C1FC8DBA900196024 /* LIFETitleCell.m */; };
 		B7EAFA3F1FC8DBA900196024 /* LIFEWhatHappenedTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF97D1FC8DBA900196024 /* LIFEWhatHappenedTextView.h */; };
 		B7EAFA401FC8DBA900196024 /* LIFEWhatHappenedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF97E1FC8DBA900196024 /* LIFEWhatHappenedTextView.m */; };
+		BCD236BD200FF2BF00056914 /* UIControl+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD236BB200FF2BF00056914 /* UIControl+LIFEAdditions.h */; };
+		BCD236BE200FF2BF00056914 /* UIControl+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD236BC200FF2BF00056914 /* UIControl+LIFEAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -488,6 +490,8 @@
 		B7EAF97C1FC8DBA900196024 /* LIFETitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFETitleCell.m; sourceTree = "<group>"; };
 		B7EAF97D1FC8DBA900196024 /* LIFEWhatHappenedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEWhatHappenedTextView.h; sourceTree = "<group>"; };
 		B7EAF97E1FC8DBA900196024 /* LIFEWhatHappenedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEWhatHappenedTextView.m; sourceTree = "<group>"; };
+		BCD236BB200FF2BF00056914 /* UIControl+LIFEAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIControl+LIFEAdditions.h"; sourceTree = "<group>"; };
+		BCD236BC200FF2BF00056914 /* UIControl+LIFEAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIControl+LIFEAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -649,6 +653,8 @@
 				B7EAF8CB1FC8DBA900196024 /* UIBezierPath+LIFEAdditions.m */,
 				B7EAF8CC1FC8DBA900196024 /* UIColor+LIFEAdditions.h */,
 				B7EAF8CD1FC8DBA900196024 /* UIColor+LIFEAdditions.m */,
+				BCD236BB200FF2BF00056914 /* UIControl+LIFEAdditions.h */,
+				BCD236BC200FF2BF00056914 /* UIControl+LIFEAdditions.m */,
 				B7EAF8CE1FC8DBA900196024 /* UIDevice+LIFEAdditions.h */,
 				B7EAF8CF1FC8DBA900196024 /* UIDevice+LIFEAdditions.m */,
 				B7EAF8D01FC8DBA900196024 /* UIImage+LIFEAdditions.h */,
@@ -979,6 +985,7 @@
 				B7EAF9F41FC8DBA900196024 /* LIFENetworkManager.h in Headers */,
 				B7EAFA2B1FC8DBA900196024 /* LIFELocalizedStringProvider.h in Headers */,
 				B70926DE200FE83C00105417 /* LIFEContainerViewController.h in Headers */,
+				BCD236BD200FF2BF00056914 /* UIControl+LIFEAdditions.h in Headers */,
 				B7EAF9EC1FC8DBA900196024 /* LIFEDeviceInfoProvider.h in Headers */,
 				B7EAF9901FC8DBA900196024 /* NSString+LIFEAdditions.h in Headers */,
 				B7EAF9DE1FC8DBA900196024 /* Buglife+Protected.h in Headers */,
@@ -1119,6 +1126,7 @@
 				B7EAF9891FC8DBA900196024 /* NSArray+LIFEAdditions.m in Sources */,
 				B7EAF9F71FC8DBA900196024 /* LIFEReachability.m in Sources */,
 				B70926DC200FE83C00105417 /* LIFEContainerTransitionContext.m in Sources */,
+				BCD236BE200FF2BF00056914 /* UIControl+LIFEAdditions.m in Sources */,
 				B70926B5200FE7E700105417 /* LIFEImageEditorViewController.m in Sources */,
 				B70926E1200FE83C00105417 /* LIFEContainerAlertToImageEditorAnimator.m in Sources */,
 				B7EAF9BF1FC8DBA900196024 /* LIFEInputField.m in Sources */,

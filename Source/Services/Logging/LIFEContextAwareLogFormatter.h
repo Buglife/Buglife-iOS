@@ -48,6 +48,7 @@ static const NSInteger LIFELogContextSDKExternal = 101;
 
 // These shouldn't get logged to the console, or ASL
 static const NSInteger LIFELogContextNotification = 110;
+static const NSInteger LIFELogContextUserEvent = 111;
 
 // If SDK consumers are using CocoaLumberjack, then we only want to
 // write logs to our file (don't need to log to console or ASL, because

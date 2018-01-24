@@ -28,6 +28,7 @@
 #import "UIColor+LIFEAdditions.h"
 #import "UIViewController+LIFEAdditions.h"
 #import "UIApplication+LIFEAdditions.h"
+#import "UIControl+LIFEAdditions.h"
 
 @implementation LIFECategories
 
@@ -46,6 +47,7 @@
         LIFELoadCategoryFor_UIColorLIFEAdditions();
         LIFELoadCategoryFor_UIViewControllerLIFEAdditions();
         LIFELoadCategoryFor_UIApplicationLIFEAdditions();
+        LIFELoadCategoryFor_UIControlLIFEAdditions();
     });
 }
 
