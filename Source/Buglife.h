@@ -124,7 +124,7 @@ extern NSString * __nonnull const LIFENotificationUserSubmittedReport;
 @property (nonatomic, weak, nullable) id<BuglifeDelegate> delegate;
 
 /**
- * If this is true, then certain UIControl and navigation events will be logged.
+ * Whether certain UIControl and navigation events will be logged. Defaults to `YES`
  */
 @property (nonatomic) BOOL captureUserEventsEnabled;
 

@@ -258,7 +258,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
         _captureUserEventsEnabled = captureUserEventsEnabled;
     }
     if ([self _isStarted] && captureUserEventsEnabled && !old){
-        [UIControl swizzleSendAction];
+        [UIControl life_swizzleSendAction];
     }
 }
 
