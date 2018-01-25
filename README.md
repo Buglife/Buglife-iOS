@@ -54,6 +54,16 @@ Then, run the following command:
 $ pod install
 ```
 
+### Carthage
+
+Place the following line in your Cartfile:
+
+``` Swift
+github "Buglife/Buglife-iOS"
+```
+
+Now run `carthage update`. Then drag & drop the Buglife.framework in the Carthage/build folder to your project. Refer to the [Carthage README](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application) for detailed / updated instructions.
+
 ### Manually
 
 1. [Download the Buglife SDK](https://www.buglife.com/download-ios-sdk)
