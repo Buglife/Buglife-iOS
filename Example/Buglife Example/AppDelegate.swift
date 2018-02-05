@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BuglifeDelegate {
         Buglife.shared().start(withEmail: "dave+test@buglife.com")
         Buglife.shared().invocationOptions = [.shake, .screenshot, .floatingButton]
         Buglife.shared().delegate = self
+        Buglife.shared().inputFields = LIFETextInputField.bugDetailInputFields()
         
         return true
     }

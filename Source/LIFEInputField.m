@@ -99,6 +99,30 @@
     return [self.attributeName isEqualToString:LIFEInputFieldSummaryAttributeName];
 }
 
++ (NSArray<LIFEInputField *> *)bugDetailInputFields
+{
+    LIFETextInputField *summaryInputField = [LIFETextInputField summaryInputField];
+    summaryInputField.title = LIFELocalizedString(LIFEStringKey_SummaryInputFieldDetailedTitle);
+    summaryInputField.placeholder = LIFELocalizedString(LIFEStringKey_SummaryInputFieldDetailedPlaceholder);
+    summaryInputField.accessibilityHint = LIFELocalizedString(LIFEStringKey_SummaryInputFieldAccessibilityDetailedHint);
+    
+    LIFETextInputField *stepsToReproduce = [[LIFETextInputField alloc] initWithAttributeName:@"Steps to Reproduce"];
+    stepsToReproduce.multiline = YES;
+    stepsToReproduce.title = LIFELocalizedString(LIFEStringKey_StepsToReproduce);
+
+    LIFETextInputField *expectedResults = [[LIFETextInputField alloc] initWithAttributeName:@"Expected Results"];
+    expectedResults.multiline = YES;
+    expectedResults.title = LIFELocalizedString(LIFEStringKey_ExpectedResults);
+    expectedResults.placeholder = LIFELocalizedString(LIFEStringKey_ExpectedResultsPlaceholder);
+    
+    LIFETextInputField *actualResults = [[LIFETextInputField alloc] initWithAttributeName:@"Actual Results"];
+    actualResults.multiline = YES;
+    actualResults.title = LIFELocalizedString(LIFEStringKey_ActualResults);
+    actualResults.placeholder = LIFELocalizedString(LIFEStringKey_ActualResultsPlaceholder);
+    
+    return @[summaryInputField, stepsToReproduce, expectedResults, actualResults];
+}
+
 #pragma mark - Debug description
 
 - (NSString *)debugDescription
