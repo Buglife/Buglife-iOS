@@ -458,15 +458,15 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     }];
 }
 
-- (void)_dismissReporterWithWindowBlindsAnimation:(BOOL)animated andShowThankYouDialog:(BOOL)shoudShowThankYouDialog
+- (void)_dismissReporterWithWindowBlindsAnimation:(BOOL)animated andShowThankYouDialog:(BOOL)shouldShowThankYouDialog
 {
-    if (shoudShowThankYouDialog && [self.delegate respondsToSelector:@selector(buglifeWillPresentReportCompletedDialog:)]) {
-        shoudShowThankYouDialog = [self.delegate buglifeWillPresentReportCompletedDialog:self];
+    if (shouldShowThankYouDialog && [self.delegate respondsToSelector:@selector(buglifeWillPresentReportCompletedDialog:)]) {
+        shouldShowThankYouDialog = [self.delegate buglifeWillPresentReportCompletedDialog:self];
     }
     
     __weak typeof(self) weakSelf = self;
     
-    LIFEToastController *toast = [[LIFEToastController alloc] init];
+    LIFEToastController *toast = shouldShowThankYouDialog ? [[LIFEToastController alloc] init] : nil;
     [self.containerWindow.containerViewController dismissWithWindowBlindsAnimation:animated showToast:toast completion:^{
         __strong Buglife *strongSelf = weakSelf;
         if (strongSelf) {
@@ -477,7 +477,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     [self.reportWindow dismissAnimated:animated completion:^{
         __strong Buglife *strongSelf = weakSelf;
         if (strongSelf) {
-            if (shoudShowThankYouDialog) {
+            if (shouldShowThankYouDialog) {
                 [strongSelf _showThankYouDialogWithCancelActionHandler:^{
                     __strong Buglife *strongSelf2 = weakSelf;
                     if (strongSelf2) {

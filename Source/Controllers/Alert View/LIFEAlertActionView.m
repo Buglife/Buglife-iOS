@@ -19,6 +19,7 @@
 #import "LIFEAlertActionView.h"
 #import "UIImage+LIFEAdditions.h"
 #import "LIFEMacros.h"
+#import "LIFEAppearanceImpl.h"
 
 let kIntrinsicHeight = 44.0f;
 let kFontSize = 17.0f;
@@ -48,7 +49,7 @@ let kFontSize = 17.0f;
         if (style == UIAlertActionStyleDestructive) {
             _titleLabel.textColor = [UIColor redColor];
         } else {
-            _titleLabel.textColor = [UIColor blueColor];
+            _titleLabel.textColor = [LIFEAppearanceImpl sharedAppearance].tintColor;
         }
         
         [self addSubview:_titleLabel];
