@@ -19,7 +19,6 @@
 #import <UIKit/UIKit.h>
 #import "LIFEDeviceBatteryState.h"
 #import "LIFEAttribute.h"
-#import "Buglife.h"
 
 @class LIFEReproStep;
 @class LIFEAppInfo;
@@ -49,7 +48,6 @@
 @property (nullable, nonatomic) NSArray<LIFEReportAttachmentImpl *> *attachments;
 @property (nullable, nonatomic) NSString *timeZoneName;
 @property (nullable, nonatomic) NSString *timeZoneAbbreviation;
-@property (nonatomic) LIFEInvocationOptions invocationMethod;
 @property (nullable, nonatomic) NSDictionary<NSString *, LIFEAttribute *> *attributes;
 
 // Number of attempts to submit this report (default 0).

@@ -189,7 +189,6 @@ NSString * const LIFEReportBuilderAnnotatedImagesDidChangeNotification = @"com.b
     report.creationDate = self.creationDate;
     report.userIdentifier = self.userIdentifier;
     report.userEmail = self.userEmail;
-    report.invocationMethod = self.invocationMethod;
     report.attributes = self.attributes;
     
     // Time zone
