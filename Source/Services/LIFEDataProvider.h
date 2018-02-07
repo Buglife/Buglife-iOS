@@ -23,10 +23,11 @@ typedef void (^LIFEDataProviderSubmitCompletion)(BOOL submitted);
 
 @class LIFEReport;
 @class LIFEReportOwner;
+@protocol BuglifeDelegate;
 
 @interface LIFEDataProvider : NSObject
 
-- (nonnull instancetype)initWithReportOwner:(nonnull LIFEReportOwner *)reportOwner SDKVersion:(nonnull NSString *)sdkVersion;
+- (nonnull instancetype)initWithReportOwner:(nonnull LIFEReportOwner *)reportOwner SDKVersion:(nonnull NSString *)sdkVersion delegate:(nonnull id<BuglifeDelegate>)delegate;
 - (_Null_unspecified instancetype)init NS_UNAVAILABLE;
 - (void)submitReport:(nonnull LIFEReport *)report withRetryPolicy:(LIFERetryPolicy)retryPolicy completion:(nullable LIFEDataProviderSubmitCompletion)completion;
 - (void)flushPendingReportsAfterDelay:(NSTimeInterval)delay;

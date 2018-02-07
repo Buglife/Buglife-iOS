@@ -21,6 +21,7 @@
 #import "LIFEInputField.h"
 #import "LIFETextInputField.h"
 #import "LIFEPickerInputField.h"
+#import "LIFEReport.h"
 
 /**
  Options for automatically invocating the bug reporter view.
@@ -155,10 +156,9 @@ extern NSString * __nonnull const LIFENotificationUserSubmittedReport;
  *  This method should be called from within your app delegate's
  *  `-application:didFinishLaunchingWithOptions:` method.
  *
- *  @param email The email address to which bug reports should be sent. This email address should
- *               belong to you or someone on your team.
+ *  @param delegate The Delegate that will be responsible to submitting reports
  */
-- (void)startWithEmail:(nonnull NSString *)email;
+- (void)startWithDelegate:(nonnull id<BuglifeDelegate>)delegate;
 
 /**
  *  Immediately presents the Buglife bug reporter view controller.
@@ -274,6 +274,14 @@ extern NSString * __nonnull const LIFENotificationUserSubmittedReport;
  */
 @protocol BuglifeDelegate <NSObject>
 @optional
+
+/**
+ * For custom report submission overrides. When the completion handler is called
+ * with a success, the report and its attachments will be deleted.
+ *
+ */
+
+- (void)submitReport:(nonnull LIFEReport *)report wasSuccessful:(nonnull void (^)(BOOL))completionHandler;
 
 /**
  *  Buglife calls this method when the bug reporter is ready to accept attachments.

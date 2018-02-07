@@ -49,7 +49,6 @@
             [self setValue:value forKey:key];
         }
         
-        self.invocationMethod = [coder decodeIntegerForKey:NSStringFromSelector(@selector(invocationMethod))];
         self.submissionAttempts = [coder decodeIntegerForKey:NSStringFromSelector(@selector(submissionAttempts))];
     }
     return self;
@@ -62,7 +61,6 @@
         [coder encodeObject:value forKey:key];
     }
     
-    [coder encodeInteger:self.invocationMethod forKey:NSStringFromSelector(@selector(invocationMethod))];
     [coder encodeInteger:self.submissionAttempts forKey:NSStringFromSelector(@selector(submissionAttempts))];
 }
 
@@ -131,7 +129,6 @@
     
     [reportDict life_safeSetObject:report.userIdentifier forKey:@"user_identifier"];
     [reportDict life_safeSetObject:report.userEmail forKey:@"user_email"];
-    [reportDict life_safeSetObject:@(report.invocationMethod) forKey:@"invocation_method"];
     [reportDict life_safeSetObject:@(report.submissionAttempts) forKey:@"submission_attempts"];
     [reportDict life_safeSetObject:report._formattedCreationDate forKey:@"invoked_at"];
     

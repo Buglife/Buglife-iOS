@@ -50,6 +50,7 @@ static NSString * const kPlatform = @"ios";
 @property (nonatomic) LIFEAppInfoProvider *appInfoProvider;
 @property (nonatomic) LIFENetworkManager *networkManager;
 @property (nonatomic) dispatch_queue_t workQueue;
+@property (nonatomic) id<BuglifeDelegate> delegate;
 
 @end
 
@@ -57,7 +58,7 @@ static NSString * const kPlatform = @"ios";
 
 #pragma mark - Initialization
 
-- (instancetype)initWithReportOwner:(LIFEReportOwner *)reportOwner SDKVersion:(NSString *)sdkVersion
+- (instancetype)initWithReportOwner:(LIFEReportOwner *)reportOwner SDKVersion:(NSString *)sdkVersion delegate:(nonnull id<BuglifeDelegate>)delegate
 {
     self = [super init];
     if (self) {
@@ -67,13 +68,14 @@ static NSString * const kPlatform = @"ios";
         _appInfoProvider = [[LIFEAppInfoProvider alloc] init];
         _networkManager = [[LIFENetworkManager alloc] init];
         _workQueue = dispatch_queue_create("com.buglife.LIFEDataProvider.workQueue", DISPATCH_QUEUE_SERIAL);
+        _delegate = delegate;
     }
     return self;
 }
 
 - (instancetype)init
 {
-    LIFE_THROW_UNAVAILABLE_EXCEPTION(initWithReportOwner:SDKVersion:);
+    LIFE_THROW_UNAVAILABLE_EXCEPTION(initWithReportOwner:SDKVersion:delegate:);
 }
 
 #pragma mark - Client Events
@@ -172,7 +174,7 @@ static NSString * const kPlatform = @"ios";
     NSMutableDictionary *appDict = [report.appInfo JSONDictionary].mutableCopy;
     mutableParameters[@"app"] = appDict;
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+    
     BOOL saveFailedSubmissions = (!isFromPendingReportsDir && retryPolicy == LIFERetryPolicyNextLaunch);
     BOOL removeSuccessfulSubmissions = (saveFailedSubmissions || isFromPendingReportsDir);
     
@@ -182,23 +184,49 @@ static NSString * const kPlatform = @"ios";
         [self _savePendingReport:report];
     }
     
-    [_networkManager POST:@"api/v1/reports.json" parameters:parameters callbackQueue:self.workQueue success:^(id responseObject) {
-
-        LIFELogIntInfo(@"Report submitted!");
-        if (removeSuccessfulSubmissions) {
-            [self _removeSavedReport:report];
-        }
-        
-        if (completion) {
-            completion(YES);
-        }
-    } failure:^(NSError *error) {
-        LIFELogIntInfo(@"Error submitting report; Error: %@", [LIFENSError life_debugDescriptionForError:error]);
-        
-        if (completion) {
-            completion(NO);
-        }
-    }];
+    // Use delegate submission method, if it exists.
+    if ([_delegate respondsToSelector:@selector(submitReport:wasSuccessful:)]) {
+        [_delegate submitReport:report wasSuccessful:^(BOOL wasSuccessfullySaved) {
+            if (wasSuccessfullySaved) {
+                
+                LIFELogIntInfo(@"Report submitted!");
+                
+                if (removeSuccessfulSubmissions) {
+                    [self _removeSavedReport:report];
+                }
+                
+                if (completion) {
+                    completion(YES);
+                }
+            } else {
+                
+                LIFELogIntInfo(@"Error submitting Buglife report.");
+                
+                if (completion) {
+                    completion(NO);
+                }
+            }
+        }];
+    } else {
+        NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
+        [_networkManager POST:@"api/v1/reports.json" parameters:parameters callbackQueue:self.workQueue success:^(id responseObject) {
+            
+            LIFELogIntInfo(@"Report submitted!");
+            if (removeSuccessfulSubmissions) {
+                [self _removeSavedReport:report];
+            }
+            
+            if (completion) {
+                completion(YES);
+            }
+        } failure:^(NSError *error) {
+            LIFELogIntInfo(@"Error submitting report; Error: %@", [LIFENSError life_debugDescriptionForError:error]);
+            
+            if (completion) {
+                completion(NO);
+            }
+        }];
+    }
 }
 
 - (void)_flushPendingReports

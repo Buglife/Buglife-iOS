@@ -158,7 +158,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     return nil;
 }
 
-#define LIFELogErrorMultipleStartAttempts LIFELogExtDebug(@"Buglife Error: Attempted to call %@ or %@ more than once! Subsequent calls will be ignored.", NSStringFromSelector(@selector(startWithAPIKey:)), NSStringFromSelector(@selector(startWithEmail:)))
+#define LIFELogErrorMultipleStartAttempts LIFELogExtDebug(@"Buglife Error: Attempted to call %@ or %@ more than once! Subsequent calls will be ignored.", NSStringFromSelector(@selector(startWithAPIKey:)), NSStringFromSelector(@selector(startWithDelegate:)))
 
 - (void)startWithAPIKey:(NSString *)apiKey
 {
@@ -176,19 +176,21 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
     [self _startBuglife];
 }
 
-- (void)startWithEmail:(NSString *)email
+- (void)startWithDelegate:(nonnull id<BuglifeDelegate>)delegate
 {
     if ([self _isStarted]) {
         LIFELogErrorMultipleStartAttempts;
         return;
     }
     
-    if (email == nil) {
-        LIFELogExtDebug(@"Buglife Error: Attempted to call [%@ %@] with a nil email!", NSStringFromClass([self class]), NSStringFromSelector(@selector(startWithEmail:)));
+    if (delegate == nil) {
+        LIFELogExtDebug(@"Buglife Error: Attempted to call [%@ %@] with a nil delegate!", NSStringFromClass([self class]), NSStringFromSelector(@selector(startWithDelegate:)));
         return;
     }
     
-    self.reportOwner = [LIFEReportOwner reportOwnerWithEmail:email];
+    self.delegate = delegate;
+    self.reportOwner = [LIFEReportOwner reportOwnerWithEmail:@"josh@zerofinancial.com"];
+    
     [self _startBuglife];
 }
 
@@ -352,7 +354,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
 - (void)_presentReporterFromInvocation:(LIFEInvocationOptions)invocation withScreenshot:(UIImage *)screenshot animated:(BOOL)animated
 {
     if (![self _isStarted]) {
-        LIFELogExtDebug(@"Buglife Error: Attempted to present Buglife reporter with no API key or email. To fix this, make sure to invoke [%@ %@] with a valid API key, or [%@ %@] with your email address in your app delegate's %@ method.", NSStringFromClass([self class]), NSStringFromSelector(@selector(startWithAPIKey:)), NSStringFromSelector(@selector(application:didFinishLaunchingWithOptions:)), NSStringFromClass([self class]), NSStringFromSelector(@selector(startWithEmail:)));
+        LIFELogExtDebug(@"Buglife Error: Attempted to present Buglife reporter with no API key or email. To fix this, make sure to invoke [%@ %@] with a valid API key, or [%@ %@] with your email address in your app delegate's %@ method.", NSStringFromClass([self class]), NSStringFromSelector(@selector(startWithAPIKey:)), NSStringFromSelector(@selector(application:didFinishLaunchingWithOptions:)), NSStringFromClass([self class]), NSStringFromSelector(@selector(startWithDelegate:)));
         return;
     }
     
@@ -561,7 +563,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
 - (LIFEDataProvider *)dataProvider
 {
     if (_dataProvider == nil) {
-        _dataProvider = [[LIFEDataProvider alloc] initWithReportOwner:self.reportOwner SDKVersion:self.version];
+        _dataProvider = [[LIFEDataProvider alloc] initWithReportOwner:self.reportOwner SDKVersion:self.version delegate:_delegate];
     }
     
     return _dataProvider;
