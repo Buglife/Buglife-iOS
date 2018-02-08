@@ -122,6 +122,7 @@ static BOOL LIFEStatusCodeIsSuccess(NSInteger statusCode);
     NSDictionary *environment = [[NSProcessInfo processInfo] environment];
     NSString *overrideURL = environment[@"com.buglife.base_url"];
     if (overrideURL) {
+        NSLog(@"Running with overridden base url: %@", overrideURL);
         return [NSURL URLWithString:overrideURL];
     }
     

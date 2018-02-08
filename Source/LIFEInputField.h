@@ -34,6 +34,15 @@
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 
 /**
+ * Returns an array of fields for more detailed bug reports, to aid in reproducing the bug.
+ * These include Summary, Steps to Reproduce, Expected Results, and Actual Results
+ * Note that even without using detailed input fields, button taps (and other events)
+ * will be logged to the Buglife dashboard to aid in reproducing the bug.
+ *
+ */
++ (nonnull NSArray<LIFEInputField *> *)bugDetailInputFields;
+
+/**
  *  The bug report attribute name for this input field.
  *
  *  If the attribute name matches an attribute programmatically set
