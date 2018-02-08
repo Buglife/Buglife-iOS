@@ -109,19 +109,16 @@
     LIFETextInputField *stepsToReproduce = [[LIFETextInputField alloc] initWithAttributeName:@"Steps to Reproduce"];
     stepsToReproduce.multiline = YES;
     stepsToReproduce.title = LIFELocalizedString(LIFEStringKey_StepsToReproduce);
-    stepsToReproduce.systemAttribute = YES;
 
     LIFETextInputField *expectedResults = [[LIFETextInputField alloc] initWithAttributeName:@"Expected Results"];
     expectedResults.multiline = YES;
     expectedResults.title = LIFELocalizedString(LIFEStringKey_ExpectedResults);
     expectedResults.placeholder = LIFELocalizedString(LIFEStringKey_ExpectedResultsPlaceholder);
-    expectedResults.systemAttribute = YES;
     
     LIFETextInputField *actualResults = [[LIFETextInputField alloc] initWithAttributeName:@"Actual Results"];
     actualResults.multiline = YES;
     actualResults.title = LIFELocalizedString(LIFEStringKey_ActualResults);
     actualResults.placeholder = LIFELocalizedString(LIFEStringKey_ActualResultsPlaceholder);
-    actualResults.systemAttribute = YES;
     
     return @[summaryInputField, stepsToReproduce, expectedResults, actualResults];
 }
