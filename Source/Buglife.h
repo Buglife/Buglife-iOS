@@ -129,6 +129,11 @@ extern NSString * __nonnull const LIFENotificationUserSubmittedReport;
 @property (nonatomic) BOOL captureUserEventsEnabled;
 
 /**
+ * Whether the add additional attachments button will be displayed. Defaults to `YES`
+ */
+@property (nonatomic) BOOL allowsAdditionalAttachments;
+
+/**
  *  Default shared initializer that returns the Buglife singleton.
  *
  *  @return The shared Buglife singleton

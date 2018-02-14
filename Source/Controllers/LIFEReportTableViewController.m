@@ -95,6 +95,7 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
 {
     NSArray<LIFEInputField *> *_inputFields;
     BOOL _hasAppearedAtLeastOnce;
+    BOOL _allowsAdditionalAttachments;
 }
 
 - (nonnull instancetype)initWithReportBuilder:(nonnull LIFEReportBuilder *)reportBuilder
@@ -108,6 +109,7 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
     if (self) {
         _inputFieldRowHeightCache = [[NSMutableDictionary alloc] init];
         _inputFields = [Buglife sharedBuglife].inputFields.copy;
+        _allowsAdditionalAttachments = [Buglife sharedBuglife].allowsAdditionalAttachments;
         _screenshotContext = context;
         _imageProcessor = [[LIFEImageProcessor alloc] init];
         _imagePickerController = [[LIFEImagePickerController alloc] init];
@@ -1052,6 +1054,10 @@ static const NSUInteger kMaxImageAttachmentCount = 3;
 
 - (BOOL)addAttachmentsButtonEnabled
 {
+    if (!_allowsAdditionalAttachments) {
+        return NO;
+    }
+    
     if (self.reportBuilder.userFacingAttachments.count >= kMaxImageAttachmentCount) {
         return NO;
     }

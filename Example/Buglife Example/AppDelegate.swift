@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BuglifeDelegate {
         Buglife.shared().invocationOptions = [.shake, .screenshot, .floatingButton]
         Buglife.shared().delegate = self
         Buglife.shared().inputFields = LIFETextInputField.bugDetailInputFields()
-        
+        Buglife.shared().allowsAdditionalAttachments = false
         return true
     }
 
