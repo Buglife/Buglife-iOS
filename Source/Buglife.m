@@ -144,6 +144,7 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
         _reportAlertOrWindowVisible = NO;
         _hideUntilNextLaunchButtonEnabled = NO;
         _captureUserEventsEnabled = YES;
+        _allowsAdditionalAttachments = YES;
         _attachmentManager = [[LIFEAttachmentManager alloc] init];
         _attributes = [[NSMutableDictionary alloc] init];
         self.invocationOptions = LIFEInvocationOptionsShake;
