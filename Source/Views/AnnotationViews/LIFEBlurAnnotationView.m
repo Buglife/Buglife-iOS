@@ -38,9 +38,9 @@
 
 #pragma mark - Public methods
 
-- (instancetype)init
+- (instancetype)initWithAnnotation:(LIFEAnnotation *)annotation
 {
-    self = [super init];
+    self = [super initWithAnnotation:annotation];
     if (self) {
         NSParameterAssert(_blurAnnotationLayer);
         self.isAccessibilityElement = YES;

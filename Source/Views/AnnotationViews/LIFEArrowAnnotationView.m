@@ -36,15 +36,15 @@
 
 #pragma mark - UIView
 
-- (id)init
+- (instancetype)initWithAnnotation:(LIFEAnnotation *)annotation
 {
-    self = [super init];
+    self = [super initWithAnnotation:annotation];
     if (self) {
         self.opaque = NO;
-//        self.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-//        self.layer.shadowColor = [UIColor blackColor].CGColor;
-//        self.layer.shadowOpacity = 1.0f;
-//        self.layer.shadowRadius = 4.0f;
+        //        self.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        //        self.layer.shadowColor = [UIColor blackColor].CGColor;
+        //        self.layer.shadowOpacity = 1.0f;
+        //        self.layer.shadowRadius = 4.0f;
         
         self.isAccessibilityElement = YES;
         self.accessibilityLabel = LIFELocalizedString(LIFEStringKey_Arrow);

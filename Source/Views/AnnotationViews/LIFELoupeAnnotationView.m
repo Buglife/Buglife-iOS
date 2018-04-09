@@ -27,9 +27,9 @@ static const CGFloat kZoomFactor = 2.0;
     LIFELoupeAnnotationLayer *_loupeAnnotationLayer;
 }
 
-- (instancetype)init
+- (instancetype)initWithAnnotation:(LIFEAnnotation *)annotation
 {
-    self = [super init];
+    self = [super initWithAnnotation:annotation];
     if (self) {
         self.isAccessibilityElement = YES;
         self.accessibilityLabel = LIFELocalizedString(LIFEStringKey_LoupeAccessibilityLabel);
