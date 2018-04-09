@@ -599,7 +599,7 @@ unsigned long long const kLIFEDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 
     __block unsigned long long result;
     
     dispatch_block_t block = ^{
-        result = _maximumFileSize;
+        result = self->_maximumFileSize;
     };
     
     // The design of this method is taken from the LIFEAbstractLogger implementation.
@@ -627,7 +627,7 @@ unsigned long long const kLIFEDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 
 - (void)setMaximumFileSize:(unsigned long long)newMaximumFileSize {
     dispatch_block_t block = ^{
         @autoreleasepool {
-            _maximumFileSize = newMaximumFileSize;
+            self->_maximumFileSize = newMaximumFileSize;
             [self maybeRollLogFileDueToSize];
         }
     };
@@ -656,7 +656,7 @@ unsigned long long const kLIFEDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 
     __block NSTimeInterval result;
     
     dispatch_block_t block = ^{
-        result = _rollingFrequency;
+        result = self->_rollingFrequency;
     };
     
     // The design of this method is taken from the LIFEAbstractLogger implementation.
@@ -684,7 +684,7 @@ unsigned long long const kLIFEDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 
 - (void)setRollingFrequency:(NSTimeInterval)newRollingFrequency {
     dispatch_block_t block = ^{
         @autoreleasepool {
-            _rollingFrequency = newRollingFrequency;
+            self->_rollingFrequency = newRollingFrequency;
             [self maybeRollLogFileDueToAge];
         }
     };
