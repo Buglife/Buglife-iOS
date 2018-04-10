@@ -220,7 +220,7 @@ NSString * const LIFEReportBuilderAnnotatedImagesDidChangeNotification = @"com.b
         
         __weak typeof(self) weakSelf = self;
         
-        dispatch_async(_workQueue, ^{
+        dispatch_async(self->_workQueue, ^{
             __strong LIFEReportBuilder *strongSelf = weakSelf;
             if (strongSelf) {
                 // "Flatten" the annotated images

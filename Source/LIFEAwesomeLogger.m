@@ -100,7 +100,7 @@ static const BOOL kConsoleLoggingEnabledDefault = YES;
     // they don't, we still want to create our loggers just once
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [LIFELogImpl addLogger:_fileLogger];
+        [LIFELogImpl addLogger:self->_fileLogger];
         
         [LIFETTYLogger sharedInstance].logFormatter = [[LIFEContextAwareLogFormatter alloc] init];
         

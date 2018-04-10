@@ -928,7 +928,7 @@ static LIFETTYLogger *sharedInstance;
     
     dispatch_sync(globalLoggingQueue, ^{
         dispatch_sync(self.loggerQueue, ^{
-            result = _colorsEnabled;
+            result = self->_colorsEnabled;
         });
     });
     
@@ -938,9 +938,9 @@ static LIFETTYLogger *sharedInstance;
 - (void)setColorsEnabled:(BOOL)newColorsEnabled {
     dispatch_block_t block = ^{
         @autoreleasepool {
-            _colorsEnabled = newColorsEnabled;
+            self->_colorsEnabled = newColorsEnabled;
             
-            if ([_colorProfilesArray count] == 0) {
+            if ([self->_colorProfilesArray count] == 0) {
                 [self loadDefaultColorProfiles];
             }
         }
@@ -983,7 +983,7 @@ static LIFETTYLogger *sharedInstance;
             
             NSUInteger i = 0;
             
-            for (LIFETTYLoggerColorProfile *colorProfile in _colorProfilesArray) {
+            for (LIFETTYLoggerColorProfile *colorProfile in self->_colorProfilesArray) {
                 if ((colorProfile->mask == mask) && (colorProfile->context == ctxt)) {
                     break;
                 }
@@ -991,10 +991,10 @@ static LIFETTYLogger *sharedInstance;
                 i++;
             }
             
-            if (i < [_colorProfilesArray count]) {
-                _colorProfilesArray[i] = newColorProfile;
+            if (i < [self->_colorProfilesArray count]) {
+                self->_colorProfilesArray[i] = newColorProfile;
             } else {
-                [_colorProfilesArray addObject:newColorProfile];
+                [self->_colorProfilesArray addObject:newColorProfile];
             }
         }
     };
@@ -1027,7 +1027,7 @@ static LIFETTYLogger *sharedInstance;
             
             NSLogInfo(@"LIFETTYLogger: newColorProfile: %@", newColorProfile);
             
-            _colorProfilesDict[tag] = newColorProfile;
+            self->_colorProfilesDict[tag] = newColorProfile;
         }
     };
     
@@ -1055,7 +1055,7 @@ static LIFETTYLogger *sharedInstance;
         @autoreleasepool {
             NSUInteger i = 0;
             
-            for (LIFETTYLoggerColorProfile *colorProfile in _colorProfilesArray) {
+            for (LIFETTYLoggerColorProfile *colorProfile in self->_colorProfilesArray) {
                 if ((colorProfile->mask == mask) && (colorProfile->context == context)) {
                     break;
                 }
@@ -1063,8 +1063,8 @@ static LIFETTYLogger *sharedInstance;
                 i++;
             }
             
-            if (i < [_colorProfilesArray count]) {
-                [_colorProfilesArray removeObjectAtIndex:i];
+            if (i < [self->_colorProfilesArray count]) {
+                [self->_colorProfilesArray removeObjectAtIndex:i];
             }
         }
     };
@@ -1089,7 +1089,7 @@ static LIFETTYLogger *sharedInstance;
     
     dispatch_block_t block = ^{
         @autoreleasepool {
-            [_colorProfilesDict removeObjectForKey:tag];
+            [self->_colorProfilesDict removeObjectForKey:tag];
         }
     };
     
@@ -1111,7 +1111,7 @@ static LIFETTYLogger *sharedInstance;
 - (void)clearColorsForAllFlags {
     dispatch_block_t block = ^{
         @autoreleasepool {
-            [_colorProfilesArray removeAllObjects];
+            [self->_colorProfilesArray removeAllObjects];
         }
     };
     
@@ -1133,7 +1133,7 @@ static LIFETTYLogger *sharedInstance;
 - (void)clearColorsForAllTags {
     dispatch_block_t block = ^{
         @autoreleasepool {
-            [_colorProfilesDict removeAllObjects];
+            [self->_colorProfilesDict removeAllObjects];
         }
     };
     
@@ -1155,8 +1155,8 @@ static LIFETTYLogger *sharedInstance;
 - (void)clearAllColors {
     dispatch_block_t block = ^{
         @autoreleasepool {
-            [_colorProfilesArray removeAllObjects];
-            [_colorProfilesDict removeAllObjects];
+            [self->_colorProfilesArray removeAllObjects];
+            [self->_colorProfilesDict removeAllObjects];
         }
     };
     
