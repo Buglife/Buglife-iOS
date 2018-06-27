@@ -34,7 +34,8 @@ typedef NS_OPTIONS(NSUInteger, LIFELanguage) {
     LIFELanguageSwedish,
     LIFELanguageItalian,
     LIFELanguagePortuguese,
-    LIFELanguageArabic
+    LIFELanguageArabic,
+    LIFELanguagePersian
 };
 
 @interface LIFELocalizedStringProvider ()
@@ -81,7 +82,8 @@ typedef NS_OPTIONS(NSUInteger, LIFELanguage) {
                                            @"sv" : @(LIFELanguageSwedish),
                                            @"it" : @(LIFELanguageItalian),
                                            @"pt" : @(LIFELanguagePortuguese),
-                                           @"ar" : @(LIFELanguageArabic)
+                                           @"ar" : @(LIFELanguageArabic),
+                                           @"fa" : @(LIFELanguagePersian)
                                            };
         
         NSNumber *languageNumber = languagePrefixes[languagePrefix];
@@ -142,6 +144,9 @@ typedef NS_OPTIONS(NSUInteger, LIFELanguage) {
             break;
         case LIFELanguageArabic:
             return [self _arabicStringForKey:key];
+            break;
+        case LIFELanguagePersian:
+            return [self _persianStringForKey:key];
             break;
         case LIFELanguageEnglish:
             return key;
@@ -1199,6 +1204,77 @@ typedef NS_OPTIONS(NSUInteger, LIFELanguage) {
                     LIFEStringKey_InvalidEmailAlertMessage : @"%@ ليس عنوان بريد إلكتروني صالح.",
                     LIFEStringKey_ReportSubmissionErrorAlertTitle : @"لم نتمكن من إرسال تعليقك.",
                     LIFEStringKey_ReportSubmissionErrorAlertMessage : @"قد يكون هذا بسبب سوء توصيل الشبكة. يُرجى إعادة المحاولة مرة أخرى.",
+                    };
+    });
+    
+    NSString *result = strings[key];
+    
+    if (result == nil) {
+        result = key;
+    }
+    
+    return result;
+}
+
+#pragma mark - Persian
+
+- (NSString *)_persianStringForKey:(NSString *)key
+{
+    static NSDictionary *strings;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        strings = @{
+                    LIFEStringKey_Cancel : @"لغو",
+                    LIFEStringKey_OK : @"باشه",
+                    LIFEStringKey_Done : @"ارسال",
+                    LIFEStringKey_Next : @"بعدی",
+                    LIFEStringKey_ReportABug : @"ارسال بازخورد",
+                    LIFEStringKey_Delete : @"حذف",
+                    LIFEStringKey_ArrowToolLabel : @"اشاره", // Tool labels should be verbs
+                    LIFEStringKey_LoupeToolLabel : @"ذره‌بین", // Tool labels should be verbs
+                    LIFEStringKey_BlurToolLabel : @"تار کردن", // Tool labels should be verbs
+                    LIFEStringKey_DeleteArrow : @"حذف اشاره‌گر",
+                    LIFEStringKey_DeleteLoupe : @"حذف ذره‌بین",
+                    LIFEStringKey_DeleteBlur : @"حذف تارشدگی",
+                    LIFEStringKey_Report : @"بازخورد",
+                    LIFEStringKey_UserEmailInputFieldTitle : @"ایمیل",
+                    LIFEStringKey_UserEmailInputFieldPlaceholder : @"name@example.com",
+                    LIFEStringKey_SummaryInputFieldTitle : @"بازخورد",
+                    LIFEStringKey_SummaryInputFieldDetailedTitle : @"چه شد؟",
+                    LIFEStringKey_SummaryInputFieldPlaceholder : @"بازخوردتان را برای ما ارسال کنید.",
+                    LIFEStringKey_SummaryInputFieldDetailedPlaceholder : @"خلاصه‌ای از گزارشتان ارائه دهید.",
+                    LIFEStringKey_SummaryInputFieldAccessibilityHint : @"متنی که اینجا وارد می‌کنید همراه با بازخورزتان ثبت خواهد شد.",
+                    LIFEStringKey_SummaryInputFieldAccessibilityDetailedHint : @"متنی که اینجا وارد می‌کنید همراه با گزارش مشکل ثبت خواهد شد.",
+                    LIFEStringKey_StepsToReproduce : @"مراحل تولید مجدد",
+                    LIFEStringKey_ExpectedResults : @"اتفاقی که انتظار داشتید",
+                    LIFEStringKey_ExpectedResultsPlaceholder : @"توضیح دهید که انتظار داشتید چه شود.",
+                    LIFEStringKey_ActualResults : @"اتفاقی که افتاد",
+                    LIFEStringKey_ActualResultsPlaceholder : @"توضیح دهید که چه اتفاقی افتاد.",
+                    LIFEStringKey_PoweredByBuglife : @"قدرت گرفته از زندگی باگی",
+                    LIFEStringKey_HideUntilNextLaunch : @"مخفی‌سازی تا اجرای بعدی.",
+                    LIFEStringKey_DontAskUntilNextLaunch : @"تا اجرای بعدی سوال نکن",
+                    LIFEStringKey_HelpUsMakeXYZBetter : @"به ما کمک کنید که ‌%@ را بهتر کنیم!",
+                    LIFEStringKey_HelpUsMakeThisAppBetter : @"به ما کمک کنید که ‌این برنامه را بهتر کنیم!",
+                    LIFEStringKey_ReportABugWithScreenRecording : @"بازخورد را با ضبط فیلم از صفحه‌نمایش ارسال می‌کنید؟",
+                    LIFEStringKey_ThanksForFilingABug : @"از ارسال بازخورد متشکریم!",
+                    LIFEStringKey_Attachments : @"پیوست‌ها",
+                    LIFEStringKey_AttachPhoto : @"افزودن تصویر",
+                    LIFEStringKey_Arrow : @"اشاره‌گر",
+                    LIFEStringKey_ArrowAccessibilityValue : @"%.0f پیکسل از بالا و %.0f پیکسل از راست اشاره شده",
+                    LIFEStringKey_Blur : @"تار کردن",
+                    LIFEStringKey_Loupe : @"ذزه‌بین",
+                    LIFEStringKey_LoupeAccessibilityLabel : @"ذزه‌بین",
+                    LIFEStringKey_LoupeAccessibilityValue : @"مرکز در مختصات پیکسلی %.0f x %.0f منطبق شد و %0.f پیکسل عرض و %0.f پیکسل ارتفاع است.",
+                    LIFEStringKey_Component : @"اجزا",
+                    LIFEStringKey_DiscardReportAlertTitle : @"از این بازخورد صرف نظر می‌کنید؟",
+                    LIFEStringKey_DiscardReportAlertMessage : @"تمام اطلاعات مربوط به این گزارش حذف می‌شود. ولی همیشه میتوانید بازخورد دهید!",
+                    LIFEStringKey_DiscardReportAlertConfirm : @"صرف نظر",
+                    LIFEStringKey_DiscardReportAlertCancel : @"فراموشش کن",
+                    
+                    LIFEStringKey_GenericAlertTitle : @"اوه!",
+                    LIFEStringKey_InvalidEmailAlertMessage : @"\"%@\" آدرس درستی برای ایمل نیست.",
+                    LIFEStringKey_ReportSubmissionErrorAlertTitle : @"نمیتوانیم بازخوردتان را ثبت کنیم.",
+                    LIFEStringKey_ReportSubmissionErrorAlertMessage : @"ممکن است به خاطر اختلال شبکه و سرعت آن باشد. لطفا دوباره تلاش کنید.",
                     };
     });
     
