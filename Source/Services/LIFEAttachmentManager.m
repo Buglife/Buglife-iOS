@@ -342,6 +342,8 @@ LIFEAttachmentType *LIFEFineTuneAttachmentTypeUsingFilename(LIFEAttachmentType *
             return LIFEAttachmentTypeIdentifierJPEG;
         } else if ([lowercaseFilename hasSuffix:@"png"]) {
             return LIFEAttachmentTypeIdentifierPNG;
+        } else if ([lowercaseFilename hasSuffix:@"heic"]) {
+            return LIFEAttachmentTypeIdentifierHEIC;
         }
     }
 

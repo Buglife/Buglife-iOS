@@ -62,6 +62,7 @@ LIFEAttachmentType * const LIFEAttachmentTypeIdentifierSqlite = @"com.buglife.bu
 LIFEAttachmentType * const LIFEAttachmentTypeIdentifierImage  = @"public.image";
 LIFEAttachmentType * const LIFEAttachmentTypeIdentifierPNG    = @"public.png";
 LIFEAttachmentType * const LIFEAttachmentTypeIdentifierJPEG   = @"public.jpeg";
+LIFEAttachmentType * const LIFEAttachmentTypeIdentifierHEIC   = @"public.heic";
 
 NSString * const LIFENotificationWillPresentReporter    = @"LIFENotificationWillPresentReporter";
 NSString * const LIFENotificationUserCanceledReport     = @"LIFENotificationUserCanceledReport";

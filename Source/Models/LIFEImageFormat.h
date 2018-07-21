@@ -21,7 +21,8 @@
 typedef NS_ENUM(NSInteger, LIFEImageFormat) {
     LIFEImageFormatUnknown = 0,
     LIFEImageFormatPNG,
-    LIFEImageFormatJPEG
+    LIFEImageFormatJPEG,
+    LIFEImageFormatHEIC
 };
 
 #pragma mark - LIFEImageFormat / UTI conversions

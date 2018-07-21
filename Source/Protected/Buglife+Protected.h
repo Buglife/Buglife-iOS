@@ -10,6 +10,7 @@
 
 extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierPNG;
 extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierJPEG;
+extern LIFEAttachmentType * __nonnull const LIFEAttachmentTypeIdentifierHEIC;
 extern const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished;
 
 @class LIFEBugButtonWindow;

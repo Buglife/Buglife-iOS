@@ -41,6 +41,8 @@ LIFEImageFormat LIFEImageFormatInferredFromFilename(NSString *filename) {
         return LIFEImageFormatJPEG;
     } else if ([lowercasePathExtension isEqualToString:@"png"]) {
         return LIFEImageFormatPNG;
+    } else if ([lowercasePathExtension isEqualToString:@"heic"]) {
+        return LIFEImageFormatHEIC;
     } else {
         return LIFEImageFormatUnknown;
     }
@@ -53,6 +55,9 @@ NSString *LIFEImageFormatToImageUniformTypeIdentifier(LIFEImageFormat imageForma
             return LIFEAttachmentTypeIdentifierPNG;
         case LIFEImageFormatJPEG:
             return LIFEAttachmentTypeIdentifierJPEG;
+        case LIFEImageFormatHEIC:
+            // HACK - until the backend supports HEIC images, pretend it's a JPEG instead - (it has been converted to one)
+            return LIFEAttachmentTypeIdentifierJPEG;
         case LIFEImageFormatUnknown:
             return LIFEAttachmentTypeIdentifierImage;
     }
@@ -64,6 +69,9 @@ NSData *LIFEImageRepresentationWithImageFormat(LIFEImageFormat imageFormat, UIIm
         case LIFEImageFormatPNG:
             return UIImagePNGRepresentation(image);
         case LIFEImageFormatJPEG:
+            return UIImageJPEGRepresentation(image, compressionQuality);
+        case LIFEImageFormatHEIC:
+            //TODO: add backend support for HEIC images. Until then, send up a JPEG.
             return UIImageJPEGRepresentation(image, compressionQuality);
         case LIFEImageFormatUnknown:
             // Assert in debug, and in production just return a JPEG
@@ -78,6 +86,8 @@ NSData *LIFEImageRepresentationWithImageFormatAndMaximumSize(LIFEImageFormat ima
         case LIFEImageFormatPNG:
             return LIFEUIImagePNGRepresentationScaledForMaximumFilesize(image, maximumFilesize);
         case LIFEImageFormatJPEG:
+            return LIFEUIImageJPEGRepresentationScaledForMaximumFilesize(image, maximumFilesize, compressionQuality);
+        case LIFEImageFormatHEIC:
             return LIFEUIImageJPEGRepresentationScaledForMaximumFilesize(image, maximumFilesize, compressionQuality);
         case LIFEImageFormatUnknown:
             // Assert in debug, and in production just return a JPEG
