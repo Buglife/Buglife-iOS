@@ -53,7 +53,7 @@
 #import "LIFEToastController.h"
 #import "UIControl+LIFEAdditions.h"
 
-static NSString * const kSDKVersion = @"2.8.0";
+static NSString * const kSDKVersion = @"2.8.1";
 void life_dispatch_async_to_main_queue(dispatch_block_t block);
 
 LIFEAttachmentType * const LIFEAttachmentTypeIdentifierText   = @"public.plain-text";
