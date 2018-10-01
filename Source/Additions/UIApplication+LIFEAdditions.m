@@ -98,10 +98,9 @@ LIFE_CATEGORY_METHOD_IMPL(UIApplication)
         // Render the layer hierarchy to the current context
         if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)] && !doesWindowRequireRenderInContextWorkaround) {
             BOOL drawn = [window drawViewHierarchyInRect:[window bounds] afterScreenUpdates:afterScreenUpdates];
-            NSParameterAssert(drawn);
 
             if (drawn == NO) {
-                LIFELogExtError(@"Buglife error: Unable to render window %@ for screen capture.", LIFEDebugDescription(window));
+                LIFELogExtError(@"*** Buglife error: Unable to render window %@ for screen capture. Please report this to support@buglife.com ***", LIFEDebugDescription(window));
             }
         } else {
             [[window layer] renderInContext:context];
