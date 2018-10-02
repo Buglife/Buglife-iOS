@@ -190,6 +190,8 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(_cancelButtonTapped:)];
     self.navigationItem.rightBarButtonItem = self.doneButton;
     
+    self.tableView.cellLayoutMarginsFollowReadableWidth = NO;
+    
     [self.tableView registerClass:[LIFEAttachmentCell class] forCellReuseIdentifier:[LIFEAttachmentCell defaultIdentifier]];
     [self.tableView registerClass:[LIFETextFieldCell class] forCellReuseIdentifier:[LIFETextFieldCell defaultIdentifier]];
     [self.tableView registerClass:[LIFEWhatHappenedTableViewCell class] forCellReuseIdentifier:[LIFEWhatHappenedTableViewCell defaultIdentifier]];
