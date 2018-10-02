@@ -110,11 +110,11 @@ LIFE_CATEGORY_METHOD_IMPL(UIApplication)
         CGContextRestoreGState(context);
         
         UIImage *currentWindowImage = UIGraphicsGetImageFromCurrentImageContext();
-        NSArray<LIFEBlurrableView> *blurrableViews = [window life_blurrableViews];
+        NSArray<UIView <LIFEBlurrableView> *> *blurrableViews = [window life_blurrableViews];
         
-        for (id<LIFEBlurrableView> blurrableView in blurrableViews) {
+        for (UIView <LIFEBlurrableView> *blurrableView in blurrableViews) {
             CGRect bounds = blurrableView.bounds;
-            CGRect convertedRect = [blurrableView convertRect:bounds toCoordinateSpace:window.screen.fixedCoordinateSpace];
+            CGRect convertedRect = [blurrableView convertRect:bounds toCoordinateSpace:window.screen.coordinateSpace];
             
             UIImage *blurredWindowImage = [LIFEUIImage image:currentWindowImage pixelatedImageWithAmount:LIFEDefaultBlurAmount];
             UIImage *croppedBlurredImage = [LIFEUIImage image:blurredWindowImage croppedToRect:convertedRect];
