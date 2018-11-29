@@ -91,6 +91,13 @@ extern NSString * __nonnull const LIFENotificationUserCanceledReport;
 extern NSString * __nonnull const LIFENotificationUserSubmittedReport;
 
 /**
+ * Attribute key that maps to a Jira project key. This can be used within
+ * LIFEPickerInputField instances to allow users to select a Jira project,
+ * or in setStringValue:forAttribute:
+ */
+extern NSString * __nonnull const LIFEAttributeKeyJiraProjectKey;
+
+/**
  *  Buglife! Handles initialization and configuration of Buglife.
  */
 @interface Buglife : NSObject

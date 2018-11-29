@@ -17,6 +17,7 @@
 
 #import "LIFEPickerInputField.h"
 #import "LIFEInputField+Protected.h"
+#import "Buglife.h"
 
 @interface LIFEPickerInputField ()
 
@@ -33,6 +34,10 @@
     if (self) {
         _optionTitles = [[NSMutableArray alloc] init];
         _optionValues = [[NSMutableArray alloc] init];
+        
+        if ([attributeName isEqualToString:LIFEAttributeKeyJiraProjectKey]) {
+            self.title = @"Jira project";
+        }
     }
     return self;
 }

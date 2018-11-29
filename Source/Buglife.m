@@ -67,6 +67,7 @@ LIFEAttachmentType * const LIFEAttachmentTypeIdentifierHEIC   = @"public.heic";
 NSString * const LIFENotificationWillPresentReporter    = @"LIFENotificationWillPresentReporter";
 NSString * const LIFENotificationUserCanceledReport     = @"LIFENotificationUserCanceledReport";
 NSString * const LIFENotificationUserSubmittedReport    = @"LIFENotificationUserSubmittedReport";
+NSString * const LIFEAttributeKeyJiraProjectKey         = @"jira.project.key";
 
 /**
  UIScreenCapturedDidChangeNotification is only available on iOS 11, but
