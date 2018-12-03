@@ -30,6 +30,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BuglifeDelegate {
         Buglife.shared().invocationOptions = [.shake, .screenshot, .floatingButton]
         Buglife.shared().delegate = self
         Buglife.shared().inputFields = LIFETextInputField.bugDetailInputFields()
+        
+        let summary = LIFETextInputField.summary()
+        let jiraField = LIFEPickerInputField(attributeName: LIFEAttributeKeyJiraProjectKey)
+        jiraField.setOptions(["IOS", "FOO", "BAR"])
+        Buglife.shared().inputFields = [summary, jiraField]
+        
+        let coinbaseBlue = UIColor(red: 6.0/255.0, green: 103.0/255.0, blue: 208.0/255.0, alpha: 1)
+        let appearance = Buglife.shared().appearance
+        appearance.tintColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        appearance.barTintColor = coinbaseBlue
+        appearance.statusBarStyle = .lightContent
+        
+        if let font = UIFont(name: "Graphik-Medium", size: 18) {
+            appearance.titleTextAttributes = [NSAttributedStringKey.font.rawValue : font, NSAttributedStringKey.foregroundColor.rawValue : UIColor.white]
+        }
+        
         return true
     }
 

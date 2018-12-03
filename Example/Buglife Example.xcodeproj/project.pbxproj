@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		9A7E2060FD4CCB1130B0771A /* Pods_Buglife_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72F997A469E69F4146DF3864 /* Pods_Buglife_Example.framework */; };
+		B7AED23E21B4DFA5003DB611 /* DaxMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7AED23D21B4DF7C003DB611 /* DaxMedium.ttf */; };
+		B7AED24021B4E4E8003DB611 /* GraphikRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7AED23F21B4E4E8003DB611 /* GraphikRegular.ttf */; };
+		B7AED24221B4E5B6003DB611 /* GraphikBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7AED24121B4E5B6003DB611 /* GraphikBold.ttf */; };
+		B7AED24421B4E6A1003DB611 /* GraphikMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7AED24321B4E6A1003DB611 /* GraphikMedium.ttf */; };
+		B7AED24621B4E7FE003DB611 /* coinbase_screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = B7AED24521B4E7FE003DB611 /* coinbase_screenshot.png */; };
 		BCB796651FC62EF300305EF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB796641FC62EF300305EF7 /* AppDelegate.swift */; };
 		BCB796671FC62EF300305EF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB796661FC62EF300305EF7 /* ViewController.swift */; };
 		BCB7966A1FC62EF300305EF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCB796681FC62EF300305EF7 /* Main.storyboard */; };
@@ -20,6 +25,11 @@
 
 /* Begin PBXFileReference section */
 		72F997A469E69F4146DF3864 /* Pods_Buglife_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Buglife_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7AED23D21B4DF7C003DB611 /* DaxMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DaxMedium.ttf; sourceTree = "<group>"; };
+		B7AED23F21B4E4E8003DB611 /* GraphikRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GraphikRegular.ttf; sourceTree = "<group>"; };
+		B7AED24121B4E5B6003DB611 /* GraphikBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GraphikBold.ttf; sourceTree = "<group>"; };
+		B7AED24321B4E6A1003DB611 /* GraphikMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GraphikMedium.ttf; sourceTree = "<group>"; };
+		B7AED24521B4E7FE003DB611 /* coinbase_screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coinbase_screenshot.png; sourceTree = "<group>"; };
 		BCB796611FC62EF300305EF7 /* Buglife Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Buglife Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCB796641FC62EF300305EF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCB796661FC62EF300305EF7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +94,11 @@
 		BCB796631FC62EF300305EF7 /* Buglife Example */ = {
 			isa = PBXGroup;
 			children = (
+				B7AED24521B4E7FE003DB611 /* coinbase_screenshot.png */,
+				B7AED24321B4E6A1003DB611 /* GraphikMedium.ttf */,
+				B7AED24121B4E5B6003DB611 /* GraphikBold.ttf */,
+				B7AED23F21B4E4E8003DB611 /* GraphikRegular.ttf */,
+				B7AED23D21B4DF7C003DB611 /* DaxMedium.ttf */,
 				BCD236BF2016D38700056914 /* AwesomeLogger.swift */,
 				BCB796641FC62EF300305EF7 /* AppDelegate.swift */,
 				BCB796661FC62EF300305EF7 /* ViewController.swift */,
@@ -159,9 +174,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7AED23E21B4DFA5003DB611 /* DaxMedium.ttf in Resources */,
 				BCB7966F1FC62EF300305EF7 /* LaunchScreen.storyboard in Resources */,
+				B7AED24421B4E6A1003DB611 /* GraphikMedium.ttf in Resources */,
 				BCB7966C1FC62EF300305EF7 /* Assets.xcassets in Resources */,
+				B7AED24621B4E7FE003DB611 /* coinbase_screenshot.png in Resources */,
+				B7AED24221B4E5B6003DB611 /* GraphikBold.ttf in Resources */,
 				BCB796771FC62F3100305EF7 /* Podfile in Resources */,
+				B7AED24021B4E4E8003DB611 /* GraphikRegular.ttf in Resources */,
 				BCB7966A1FC62EF300305EF7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

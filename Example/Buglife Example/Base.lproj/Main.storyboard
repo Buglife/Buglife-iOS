@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qeh-pR-3TB">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coinbase_screenshot.png" translatesAutoresizingMaskIntoConstraints="NO" id="LNI-I1-oBk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qeh-pR-3TB">
                                 <rect key="frame" x="16" y="50" width="280" height="191"/>
                                 <string key="text">Welcome! This demo showcases 3 different ways to report a bug:
 
@@ -32,7 +34,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We'll use this label to demonstrate automatic blurring. (See AwesomeLabel.swift)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0g-3A-sAu" customClass="AwesomeLabel" customModule="Buglife_Example" customModuleProvider="target">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We'll use this label to demonstrate automatic blurring. (See AwesomeLabel.swift)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0g-3A-sAu" customClass="AwesomeLabel" customModule="Buglife_Example" customModuleProvider="target">
                                 <rect key="frame" x="16" y="286" width="280" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="y2S-iw-cDR"/>
@@ -41,8 +43,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaF-b0-GEY">
-                                <rect key="frame" x="97" y="369" width="180" height="30"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaF-b0-GEY">
+                                <rect key="frame" x="97.5" y="369" width="180" height="30"/>
                                 <state key="normal" title="This is a button for testing"/>
                                 <connections>
                                     <action selector="someAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="i6D-0d-Kuf"/>
@@ -51,14 +53,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LNI-I1-oBk" secondAttribute="trailing" id="3ZE-Bv-qUU"/>
                             <constraint firstItem="Z0g-3A-sAu" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="286" id="4E1-bW-rya"/>
                             <constraint firstItem="gaF-b0-GEY" firstAttribute="top" secondItem="Z0g-3A-sAu" secondAttribute="bottom" constant="8" id="AAY-eN-OSf"/>
                             <constraint firstItem="Z0g-3A-sAu" firstAttribute="trailing" secondItem="qeh-pR-3TB" secondAttribute="trailing" id="CNE-Yy-mZ2"/>
+                            <constraint firstItem="LNI-I1-oBk" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="KXd-5k-MAS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Z0g-3A-sAu" secondAttribute="trailing" constant="79" id="Nw4-Pj-1Xn"/>
                             <constraint firstItem="Z0g-3A-sAu" firstAttribute="top" secondItem="qeh-pR-3TB" secondAttribute="bottom" constant="45" id="O27-jy-nlr"/>
                             <constraint firstItem="Z0g-3A-sAu" firstAttribute="leading" secondItem="qeh-pR-3TB" secondAttribute="leading" id="SAl-0Z-tWW"/>
+                            <constraint firstAttribute="bottom" secondItem="LNI-I1-oBk" secondAttribute="bottom" id="jrT-MV-F6q"/>
                             <constraint firstItem="gaF-b0-GEY" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="lgT-HS-Uc9"/>
                             <constraint firstItem="Z0g-3A-sAu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="pSl-xw-ZjE"/>
+                            <constraint firstItem="LNI-I1-oBk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wLX-AM-2ZZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -70,4 +76,7 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="coinbase_screenshot.png" width="1242" height="2688"/>
+    </resources>
 </document>
