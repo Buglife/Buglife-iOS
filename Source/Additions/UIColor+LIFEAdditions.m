@@ -95,6 +95,23 @@ LIFE_CATEGORY_METHOD_IMPL(UIColor)
 #endif
 }
 
+- (BOOL)life_isLightColor
+{
+    CGColorRef originalColor = self.CGColor;
+    CGColorRef rgbColor = CGColorCreateCopyByMatchingToColorSpace(CGColorSpaceCreateDeviceRGB(), kCGRenderingIntentDefault, originalColor, nil);
+    const CGFloat *components = CGColorGetComponents(rgbColor);
+    
+    if (components == nil) {
+        return NO;
+    }
+    
+    CGFloat red = components[0];
+    CGFloat green = components[1];
+    CGFloat blue = components[2];
+    CGFloat brightness = ((red * 299) + (green * 587) + (blue * 114)) / 1000;
+    return (brightness > 0.5);
+}
+
 @end
 
 LIFE_CATEGORY_FUNCTION_IMPL(UIColor);

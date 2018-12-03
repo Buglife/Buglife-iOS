@@ -20,6 +20,7 @@
 #import "UIImage+LIFEAdditions.h"
 #import "LIFEMacros.h"
 #import "LIFEAppearanceImpl.h"
+#import "UIColor+LIFEAdditions.h"
 
 let kIntrinsicHeight = 44.0f;
 let kFontSize = 17.0f;
@@ -49,7 +50,17 @@ let kFontSize = 17.0f;
         if (style == UIAlertActionStyleDestructive) {
             _titleLabel.textColor = [UIColor redColor];
         } else {
-            _titleLabel.textColor = [LIFEAppearanceImpl sharedAppearance].tintColor;
+            UIColor *tintColor = [LIFEAppearanceImpl sharedAppearance].tintColor;
+            BOOL isTintColorDark = ![tintColor life_isLightColor];
+            UIColor *textColor;
+            
+            if (isTintColorDark) {
+                textColor = tintColor;
+            } else {
+                textColor = [LIFEAppearanceImpl sharedAppearance].barTintColor;
+            }
+            
+            _titleLabel.textColor = textColor;
         }
         
         [self addSubview:_titleLabel];

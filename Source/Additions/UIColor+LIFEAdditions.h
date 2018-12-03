@@ -34,6 +34,7 @@
 - (nonnull instancetype)life_grayscale;
 + (nonnull instancetype)life_colorWithHexValue:(NSUInteger)hexValue;
 + (nullable instancetype)life_debugColorWithAlpha:(CGFloat)alpha __deprecated_msg("This should only be used for debug builds!");;
+- (BOOL)life_isLightColor;
 
 @end
 
