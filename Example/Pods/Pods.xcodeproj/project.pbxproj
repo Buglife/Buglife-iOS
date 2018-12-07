@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -368,7 +368,7 @@
 		67B09D6DA553E22055FA82F7DD2416CD /* NSMutableDictionary+LIFEAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+LIFEAdditions.h"; sourceTree = "<group>"; };
 		683E0C61C3571AC97E7A8AE9D4AA8367 /* LIFENotificationLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LIFENotificationLogger.h; sourceTree = "<group>"; };
 		68FCD151D1E07CD9F6357D5A4488F01D /* LIFEAppearanceImpl.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LIFEAppearanceImpl.m; sourceTree = "<group>"; };
-		6BECF8ED1D0C9F8D6879D0D8A3124102 /* Buglife.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Buglife.framework; path = Buglife.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BECF8ED1D0C9F8D6879D0D8A3124102 /* Buglife.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Buglife.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C8FC3B696208CC0CFD4B2FE7367A07B /* LIFETitleCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LIFETitleCell.m; sourceTree = "<group>"; };
 		6D2521FDDD6F7B601B077F4E1A9373BE /* LIFETTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LIFETTYLogger.m; sourceTree = "<group>"; };
 		6E8AECB4435E3E20E8F4CA0A9C12337C /* LIFEUserFacingAttachment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LIFEUserFacingAttachment.h; sourceTree = "<group>"; };
@@ -418,7 +418,7 @@
 		9032318D9048FCAAE9DF1D52D43E7852 /* LIFEScreenshotContext.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LIFEScreenshotContext.m; sourceTree = "<group>"; };
 		92ED471BCDF2CD093441CAC9E887A8B4 /* LIFEContainerModalPresentAnimator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LIFEContainerModalPresentAnimator.h; sourceTree = "<group>"; };
 		93403C2E5D4467FDDC6752EBE6CDFD6D /* LIFEAwesomeLogger+Protected.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LIFEAwesomeLogger+Protected.h"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		944A6605DB2023E68B823E68AC0C9423 /* LIFETextInputField.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LIFETextInputField.m; path = Source/LIFETextInputField.m; sourceTree = "<group>"; };
 		94647DDF73E16B9410E6DBA490A492F5 /* LIFETextFieldCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LIFETextFieldCell.h; sourceTree = "<group>"; };
 		94A207E12040EB2813F74FDEECC2B30A /* LIFEAVPlayerViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LIFEAVPlayerViewController.h; sourceTree = "<group>"; };
@@ -433,7 +433,7 @@
 		9B7AEE757D216AA03EC5A7BD0AB43E98 /* UIImage+LIFEAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LIFEAdditions.m"; sourceTree = "<group>"; };
 		9C59B4BF2E3493D8FC7911599003A941 /* UIColor+LIFEAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor+LIFEAdditions.h"; sourceTree = "<group>"; };
 		9F5B94D2A2B6E367606E9A766B76E7D3 /* Pods-Buglife Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Buglife Example-umbrella.h"; sourceTree = "<group>"; };
-		A0C960EA9ED1092AC0F8C74F4F80B1C6 /* Pods_Buglife_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Buglife_Example.framework; path = "Pods-Buglife Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0C960EA9ED1092AC0F8C74F4F80B1C6 /* Pods_Buglife_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Buglife_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A178ACCDBB0A8DA798338C3216310699 /* LIFETextInputField.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LIFETextInputField.h; path = Source/LIFETextInputField.h; sourceTree = "<group>"; };
 		A32ACD222184330829E666BAEEB59958 /* LIFELogViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LIFELogViewController.h; sourceTree = "<group>"; };
 		A38ACB9BE193EA50C0DB85621FD16B94 /* UIView+LIFEAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIView+LIFEAdditions.m"; sourceTree = "<group>"; };
@@ -463,7 +463,7 @@
 		BB228A6C9ED5E74FD76E9C6A38A173D5 /* LIFEAVFoundation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LIFEAVFoundation.m; sourceTree = "<group>"; };
 		BB7F59AD8C55F879D3DAE80CE058FFD1 /* LIFEFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LIFEFileLogger.m; sourceTree = "<group>"; };
 		BCE2E2564F336876D7B8B3C168AEC2F6 /* UIView+LIFEAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIView+LIFEAdditions.h"; sourceTree = "<group>"; };
-		BE0AD61100353CABED4CBEE7710D5115 /* Pods-Buglife Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Buglife Example.modulemap"; sourceTree = "<group>"; };
+		BE0AD61100353CABED4CBEE7710D5115 /* Pods-Buglife Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Buglife Example.modulemap"; sourceTree = "<group>"; };
 		C277DCBA08227E78C1C9D0FD693409E7 /* LIFEUserDefaults.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LIFEUserDefaults.h; sourceTree = "<group>"; };
 		C416E48ED7EF1AB28434200C82B7C298 /* LIFEContainerViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LIFEContainerViewController.h; sourceTree = "<group>"; };
 		C5183B70C5FED4D09EDF2E1AF7A5F925 /* LIFELocalizedStringProvider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LIFELocalizedStringProvider.m; sourceTree = "<group>"; };
@@ -476,7 +476,7 @@
 		CE1AABF904F16D84229FBC4334D7764D /* LIFEAttachmentView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LIFEAttachmentView.m; sourceTree = "<group>"; };
 		D19D8269EB83B247B5170C701EB80325 /* LIFEBugButtonWindow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LIFEBugButtonWindow.h; sourceTree = "<group>"; };
 		D339F2C47E17E868D6A3EBF83C4A1E08 /* UIDevice+LIFEAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+LIFEAdditions.m"; sourceTree = "<group>"; };
-		D3BA3AE93EBE0139404853E5CB52DBE3 /* Buglife.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Buglife.modulemap; sourceTree = "<group>"; };
+		D3BA3AE93EBE0139404853E5CB52DBE3 /* Buglife.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Buglife.modulemap; sourceTree = "<group>"; };
 		D4031612D7502FEA87C6F8ADBDC73BE0 /* LIFETTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LIFETTYLogger.h; sourceTree = "<group>"; };
 		D47E93FA47356D1E4DA9EE5F2DDF9C3B /* LIFEComponentPickerViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LIFEComponentPickerViewController.m; sourceTree = "<group>"; };
 		D4C0D8961D48DD201D60931CB839E496 /* LIFEDeviceInfoProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LIFEDeviceInfoProvider.h; sourceTree = "<group>"; };
@@ -562,7 +562,6 @@
 				2F7D8AD26603F7E4845B08B40631F161 /* LIFEAlertView.h */,
 				DECD3DFDF974F3D2599D95A10F517153 /* LIFEAlertView.m */,
 			);
-			name = "Alert View";
 			path = "Alert View";
 			sourceTree = "<group>";
 		};
@@ -596,7 +595,6 @@
 				D63B4CA2155BCF31DA180BF21A070CC8 /* LIFELoupeAnnotationView.h */,
 				71B7E4188938597AE6E381E4F5266ECD /* LIFELoupeAnnotationView.m */,
 			);
-			name = AnnotationViews;
 			path = AnnotationViews;
 			sourceTree = "<group>";
 		};
@@ -730,7 +728,6 @@
 				7799AD3F5097FC2104956CA772AA5F94 /* LIFEJelloView.h */,
 				D70F00D16F655CC99AA2398462D489FA /* LIFEJelloView.m */,
 			);
-			name = "Jello View";
 			path = "Jello View";
 			sourceTree = "<group>";
 		};
@@ -756,7 +753,6 @@
 				00A08A99B7FB80A6D9C7B50E4E8119C8 /* LIFEToastView.h */,
 				501F6529B1CD7D4020A512AC8202405A /* LIFEToastView.m */,
 			);
-			name = Toast;
 			path = Toast;
 			sourceTree = "<group>";
 		};
@@ -789,7 +785,6 @@
 				A94C1918F9116634A2EC438769F55826 /* LIFEWindowBlindsAnimator.h */,
 				A5858ED6C9D8A62B41CBC4EF48E21525 /* LIFEWindowBlindsAnimator.m */,
 			);
-			name = "Container Window";
 			path = "Container Window";
 			sourceTree = "<group>";
 		};
@@ -805,7 +800,6 @@
 				2DA585DD4AE4275F908E9AD7DCEBFEF4 /* LIFEToolButton.h */,
 				327F47105D539D5601F0870A6D5F8DC3 /* LIFEToolButton.m */,
 			);
-			name = "Image Editor";
 			path = "Image Editor";
 			sourceTree = "<group>";
 		};
@@ -861,7 +855,6 @@
 				D4031612D7502FEA87C6F8ADBDC73BE0 /* LIFETTYLogger.h */,
 				6D2521FDDD6F7B601B077F4E1A9373BE /* LIFETTYLogger.m */,
 			);
-			name = Logging;
 			path = Logging;
 			sourceTree = "<group>";
 		};
@@ -922,7 +915,6 @@
 				7AD5A1D5E973EAB2F8AEAF5EF3A3AF58 /* LIFEPanGestureRecognizer.h */,
 				5ADCD3472BA064B6425009BFA03EF37E /* LIFEPanGestureRecognizer.m */,
 			);
-			name = GestureRecognizers;
 			path = GestureRecognizers;
 			sourceTree = "<group>";
 		};
@@ -1196,7 +1188,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 1010;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1407,6 +1399,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1414,6 +1407,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1555,6 +1549,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1562,6 +1557,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
