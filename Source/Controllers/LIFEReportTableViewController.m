@@ -161,13 +161,24 @@ static const NSInteger kNoCurrentEditingAnnotatedImage = NSNotFound;
 
 #pragma mark - Screen recording
 
+- (void)_showRecentVideoAttachmentAttemptErrorAlert
+{
+    let alert = [UIAlertController alertControllerWithTitle:@"Oops!" message:@"We were unable to automatically attach your recent screen recording. Please try to manually attach it." preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:LIFELocalizedString(LIFEStringKey_OK) style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (void)addLastVideoAsAttachment
 {
     [LIFEImagePickerController requestAuthorization:^(LIFE_PHAuthorizationStatus status) {
         if (status == LIFE_PHAuthorizationStatusAuthorized) {
-            [LIFEImagePickerController getLastVideoToQueue:dispatch_get_main_queue() WithCompletion:^(NSURL * _Nullable url, NSString * _Nullable filename, NSString * _Nullable uniformTypeIdentifier) {
-                LIFEVideoAttachment *video = [[LIFEVideoAttachment alloc] initWithFileURL:url uniformTypeIdentifier:uniformTypeIdentifier filename:filename isProcessing:YES];
-                [self.reportBuilder addVideoAttachment:video];
+            [LIFEImagePickerController getRecentVideoToQueue:dispatch_get_main_queue() withCompletion:^(NSURL * _Nullable url, NSString * _Nullable filename, NSString * _Nullable uniformTypeIdentifier) {
+                if (url != nil && uniformTypeIdentifier != nil) {
+                    LIFEVideoAttachment *video = [[LIFEVideoAttachment alloc] initWithFileURL:url uniformTypeIdentifier:uniformTypeIdentifier filename:filename isProcessing:YES];
+                    [self.reportBuilder addVideoAttachment:video];
+                } else {
+                    [self _showRecentVideoAttachmentAttemptErrorAlert];
+                }
             }];
         } else {
             let alert = [UIAlertController alertControllerWithTitle:@"Oops!" message:@"To attach screen recordings, we need permission to access your photos." preferredStyle:UIAlertControllerStyleAlert];

@@ -47,7 +47,7 @@ typedef void (^LIFE_PHAuthorizationStatusHandler)(LIFE_PHAuthorizationStatus);
 
 @property (nonatomic, weak, nullable) id<LIFEImagePickerControllerDelegate> delegate;
 
-+ (void)getLastVideoToQueue:(nonnull dispatch_queue_t)completionQueue WithCompletion:(void (^_Nonnull)(NSURL *__nullable url, NSString *__nullable filename, NSString *__nullable uniformTypeIdentifier))completionHandler;
++ (void)getRecentVideoToQueue:(nonnull dispatch_queue_t)completionQueue withCompletion:(void (^_Nonnull)(NSURL *__nullable url, NSString *__nullable filename, NSString *__nullable uniformTypeIdentifier))completionHandler;
 
 /**
  The didPresent handler lets the table view controller know if a view controller was presented,

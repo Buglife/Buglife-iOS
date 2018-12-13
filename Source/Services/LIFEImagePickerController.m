@@ -37,6 +37,7 @@ static let kLIFEUTTypeMovie = @"public.movie"; // Equivalent to kUTTypeMovie. We
 
 @protocol LIFEPHFetchOptions <NSObject>
 - (void)setSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors;
+- (void)setPredicate:(NSPredicate *)predicate;
 @end
 
 @protocol LIFEPHPhotoLibrary <NSObject>
@@ -61,6 +62,11 @@ static let kLIFEUTTypeMovie = @"public.movie"; // Equivalent to kUTTypeMovie. We
 
 @protocol LIFEPHAsset <NSObject>
 + (NSObject<LIFEPHFetchResult> *)fetchAssetsInAssetCollection:(NSObject<LIFEPHAssetCollection> *)assetCollection options:(NSObject<LIFEPHFetchOptions> *)options;
+// For newly recorded screen recording videos, the modificationDate is NOT equal to the creationDate;
+// rather, the creationDate is roughly when the video started recording, and the modificationDate is when
+// recording ended
+- (NSDate *)creationDate;
+- (NSDate *)modificationDate;
 @end
 
 @protocol LIFEPHImageManager <NSObject>
@@ -77,7 +83,47 @@ static let kLIFEUTTypeMovie = @"public.movie"; // Equivalent to kUTTypeMovie. We
 
 #pragma mark - Public methods
 
-+ (void)getLastVideoToQueue:(dispatch_queue_t)completionQueue WithCompletion:(void (^)(NSURL *__nullable url, NSString *__nullable filename, NSString *__nullable uniformTypeIdentifier))completionHandler
+static const NSInteger kLIFEImagePickerControllerRecentVideoSearchAttemptCount = 5;
+static const NSTimeInterval kLIFEImagePickerControllerRecentVideoSearchSinceSecondsAgo = 60.0;
+static const NSTimeInterval kLIFEImagePickerControllerRecentVideoRetryInterval = 1.0;
+
++ (void)getRecentVideoToQueue:(dispatch_queue_t)completionQueue withCompletion:(void (^)(NSURL *__nullable url, NSString *__nullable filename, NSString *__nullable uniformTypeIdentifier))completionHandler
+{
+    [self _getRecentVideoWithRemainingAttempts:kLIFEImagePickerControllerRecentVideoSearchAttemptCount toQueue:completionQueue withCompletion:completionHandler];
+}
+
+// Sometimes the screen recording notification is received, but the asset hasn't yet been saved to the
+// photos database. (This appears to be an iOS bug.)
+// To mitigate this, we need to retry a certain number of times just in case.
++ (void)_getRecentVideoWithRemainingAttempts:(NSInteger)remainingAttempts toQueue:(dispatch_queue_t)completionQueue withCompletion:(void (^)(NSURL *__nullable url, NSString *__nullable filename, NSString *__nullable uniformTypeIdentifier))completionHandler
+{
+    LIFELogIntDebug(@"LIFEImagePickerController remaining attempts: %ld", (long)remainingAttempts);
+    
+    if (remainingAttempts <= 0) {
+        LIFELogExtDebug(@"  LIFEImagePickerController was unable to find the recent screen recording. Note that Buglife only searches for videos created within the last %.0f seconds, so this may have occurred if you were paused in the debugger.", kLIFEImagePickerControllerRecentVideoSearchSinceSecondsAgo);
+        dispatch_async(completionQueue, ^{
+            completionHandler(nil, nil, nil);
+        });
+    } else {
+        NSDate *startDate = [NSDate dateWithTimeIntervalSinceNow:-kLIFEImagePickerControllerRecentVideoSearchSinceSecondsAgo];
+        [self _getLastVideoThatFinishedRecordingAfter:startDate toQueue:completionQueue withCompletion:^(NSURL * _Nullable url, NSString * _Nullable filename, NSString * _Nullable uniformTypeIdentifier) {
+            if (url != nil && filename != nil && uniformTypeIdentifier != nil) {
+                dispatch_async(completionQueue, ^{
+                    completionHandler(url, filename, uniformTypeIdentifier);
+                });
+            } else {
+                LIFELogIntDebug(@"  LIFEImagePickerController did not find video, retrying...");
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kLIFEImagePickerControllerRecentVideoRetryInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    NSInteger newRemainingAttempts = remainingAttempts - 1;
+                    [self _getRecentVideoWithRemainingAttempts:newRemainingAttempts toQueue:completionQueue withCompletion:completionHandler];
+                });
+            }
+        }];
+    }
+    
+}
+
++ (void)_getLastVideoThatFinishedRecordingAfter:(nonnull NSDate *)minimumFinishedRecordingDate toQueue:(dispatch_queue_t)completionQueue withCompletion:(void (^)(NSURL *__nullable url, NSString *__nullable filename, NSString *__nullable uniformTypeIdentifier))completionHandler
 {
     Class phAssetCollectionClass = NSClassFromString(@"PHAssetCollection");
     
@@ -91,6 +137,9 @@ static let kLIFEUTTypeMovie = @"public.movie"; // Equivalent to kUTTypeMovie. We
         
         if (phFetchOptionsClass) {
             NSObject<LIFEPHFetchOptions> *fetchOptions = [[phFetchOptionsClass alloc] init];
+            // For screen recordings, the modificationDate is when it actually finished recording
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"modificationDate > %@", minimumFinishedRecordingDate];
+            [fetchOptions setPredicate:predicate];
             [fetchOptions setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]]];
             
             Class phAssetClass = NSClassFromString(@"PHAsset");
@@ -105,59 +154,31 @@ static let kLIFEUTTypeMovie = @"public.movie"; // Equivalent to kUTTypeMovie. We
                     
                     if (phImageManagerClass) {
                         [[phImageManagerClass defaultManager] requestAVAssetForVideo:(NSObject<LIFEPHAsset> *)phAsset options:nil resultHandler:^(NSObject *asset, NSObject *audioMix, NSDictionary *info) {
+                            NSURL *assetUrl = nil;
+                            __block NSString *filename = nil;
+                            __block NSString *uniformTypeIdentifier = nil;
+                            
                             if ([asset respondsToSelector:@selector(URL)]) {
                                 NSObject<LIFEAVURLAsset> *urlAsset = (NSObject<LIFEAVURLAsset> *)asset;
-                                NSURL *assetUrl = urlAsset.URL;
-                                
-                                __block NSString *filename;
-                                __block NSString *uniformTypeIdentifier;
+                                assetUrl = urlAsset.URL;
                                 
                                 [self _syncGetMetadataForAssetURL:assetUrl resultBlock:^(NSString *fn, NSString *uti) {
                                     filename = fn;
                                     uniformTypeIdentifier = LIFEAVFileTypeMPEG4; // Force this because we can't get the UTI
                                 }];
-                                
-                                dispatch_async(completionQueue, ^{
-                                    completionHandler(assetUrl, filename, uniformTypeIdentifier);
-                                });
                             }
+                            
+                            dispatch_async(completionQueue, ^{
+                                completionHandler(assetUrl, filename, uniformTypeIdentifier);
+                            });
                         }];
                     }
+                } else {
+                    LIFELogExtError(@"LIFEImagePickerController received nil fetchResult");
                 }
             }
         }
     }
-    
-//    PHFetchResult<PHAssetCollection *> *collections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumVideos options:nil];
-//    PHAssetCollection *videos = collections.lastObject;
-//
-//    let fetchOptions = [[PHFetchOptions alloc] init];
-//    fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
-//    let fetchResult = [PHAsset fetchAssetsInAssetCollection:videos options:fetchOptions];
-//
-//    if (fetchResult) {
-//        let phAsset = fetchResult.firstObject;
-//        let videoRequestOptions = [[PHVideoRequestOptions alloc] init];
-//        videoRequestOptions.version = PHVideoRequestOptionsVersionOriginal;
-//        [[PHImageManager defaultManager] requestAVAssetForVideo:phAsset options:videoRequestOptions resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
-//            if ([asset isKindOfClass:[AVURLAsset class]]) {
-//                AVURLAsset *urlAsset = (AVURLAsset *)asset;
-//                let assetUrl = urlAsset.URL;
-//
-//                __block NSString *filename;
-//                __block NSString *uniformTypeIdentifier;
-//
-//                [self _syncGetMetadataForAssetURL:assetUrl resultBlock:^(NSString *fn, NSString *uti) {
-//                    filename = fn;
-//                    uniformTypeIdentifier = uti;
-//                }];
-//
-//                dispatch_async(completionQueue, ^{
-//                    completionHandler(assetUrl, filename, uniformTypeIdentifier);
-//                });
-//            }
-//        }];
-//    }
 }
 
 - (void)tryPresentImagePickerControllerAnimated:(BOOL)animated didPresentHandler:(void (^)(BOOL didPresent))didPresent
