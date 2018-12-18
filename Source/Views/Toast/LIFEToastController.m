@@ -21,7 +21,7 @@
 #import "LIFEToastView.h"
 #import "LIFEMacros.h"
 
-let kToastDisplayDuration = 2.0f;
+let kToastDisplayDuration = 3.0f;
 
 @interface LIFEToastController ()
 
