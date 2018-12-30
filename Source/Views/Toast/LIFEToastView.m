@@ -23,7 +23,6 @@
 #import "LIFELocalizedStringProvider.h"
 #import "LIFEAppearanceImpl.h"
 #import "LIFEMacros.h"
-#import "Buglife+Protected.h"
 
 static let kPaddingX = 30.0f;
 static let kPaddingY = 23.0f;
@@ -75,7 +74,7 @@ static let kIconTextSpacing = 23.0f;
         
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _titleLabel.text = Buglife.sharedBuglife.thankYouMessage;
+        _titleLabel.text = LIFELocalizedString(LIFEStringKey_ThanksForFilingABug);
         _titleLabel.textColor = contentColor;
         _titleLabel.numberOfLines = 0;
         _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;

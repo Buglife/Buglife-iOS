@@ -862,54 +862,10 @@ static const NSTimeInterval kAttachmentRequestTimerDuration = 3;
 - (NSString *)thankYouMessage
 {
     if (_thankYouMessage == nil) {
-        LIFEInvocationOptions optionsCopy = self.invocationOptions;
-        NSMutableString *howToBuilder = [NSMutableString string];
-        int count = 0;
-        while (optionsCopy != 0) {
-            count += optionsCopy & 1;
-            optionsCopy >>= 1;
-        }
-        int originalCount = count;
-
-        NSUInteger shakes = self.invocationOptions & LIFEInvocationOptionsShake;
-        NSUInteger screenshots = self.invocationOptions & LIFEInvocationOptionsScreenshot;
-        NSUInteger floatingButton = self.invocationOptions & LIFEInvocationOptionsFloatingButton;
-        NSUInteger recordings = self.invocationOptions & LIFEInvocationOptionsScreenRecordingFinished;
-        if (shakes > 0) {
-            [howToBuilder appendString:LIFELocalizedString(LIFEStringKey_ShakingTheDevice)];
-            [self _formatNextListItem:howToBuilder remaining:&count of:originalCount];
-        }
-        if (screenshots > 0) {
-            [howToBuilder appendString:LIFELocalizedString(LIFEStringKey_TakingAScreenshot)];
-            [self _formatNextListItem:howToBuilder remaining:&count of:originalCount];
-        }
-        if (floatingButton > 0) {
-            [howToBuilder appendString:LIFELocalizedString(LIFEStringKey_TappingTheFloatingBugButton)];
-            [self _formatNextListItem:howToBuilder remaining:&count of:originalCount];
-        }
-        if (recordings > 0) {
-            [howToBuilder appendString:LIFELocalizedString(LIFEStringKey_RecordingTheScreen)];
-        }
-        
-        //whew
-        [howToBuilder appendString:LIFELocalizedString(LIFEStringKey_SentenceTerminator)];
-        _thankYouMessage = [LIFELocalizedString(LIFEStringKey_ThanksForFilingABug) stringByAppendingFormat:@"%@", (howToBuilder.length > 0) ? [@"\n\n" stringByAppendingFormat:@"%@ %@", LIFELocalizedString(LIFEStringKey_FileAnytime), howToBuilder] : @""];
+        _thankYouMessage = LIFELocalizedString(LIFEStringKey_ThanksForFilingABug);
     }
     
     return _thankYouMessage;
-}
-
-- (void)_formatNextListItem:(NSMutableString *)string remaining:(inout int *)count of:(int)originalCount
-{
-    if (--*count > 1) {
-        [string appendString:LIFELocalizedString(LIFEStringKey_ListItemDivider)];
-    }
-    else if (*count == 1) {
-        // basically assume all locales have an Oxford comma. This is probably not true.
-        // Turns out localized list formatting is non-trivial,
-        // and TTTArrayFormatter doesn't have it necessarily right either
-        [string appendFormat:@"%@%@ ", originalCount > 2 ? LIFELocalizedString(LIFEStringKey_ListItemDivider) : @"", LIFELocalizedString(LIFEStringKey_Or)];
-    }
 }
 
 - (NSString *)titleForReportViewController
