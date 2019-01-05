@@ -26,6 +26,7 @@
 #import "LIFEReachability.h"
 #import "LIFEDeviceInfo.h"
 #import "LIFEAttribute.h"
+#import <CoreLocation/CoreLocation.h>
 
 NSNumber *life_mach_freeMemory(void);
 NSNumber *life_mach_usableMemory(void);
@@ -100,6 +101,21 @@ static NSString *LIFEContentSizeCategoryFromUIContentSizeCategory(UIContentSizeC
         }
         
         currentDevice.batteryMonitoringEnabled = wasBatteryMonitoringEnabled;
+        
+        CLLocation *lastLocation = [[[CLLocationManager alloc] init] location];
+        // this is a synchronous method, so no need to save the CLLocationManager... or is there? Does this even work
+        // without the original CLLocationManager, since it's not a singleton? TBD.
+        CLLocationDegrees latitude = 0.0;
+        CLLocationDegrees longitude = 0.0;
+        if (lastLocation != nil) {
+            if (CLLocationCoordinate2DIsValid(lastLocation.coordinate)) {
+                latitude = lastLocation.coordinate.latitude;
+                longitude = lastLocation.coordinate.longitude;
+                attributes[@"Device location"] = [LIFEAttribute attributeWithString:[NSString stringWithFormat:@"%f,%f", latitude, longitude] flags:LIFEAttributeFlagSystem];
+            }
+        }
+
+
         
         dispatch_async(completionQueue, ^{
             completionHandler(deviceInfo, attributes.copy);
