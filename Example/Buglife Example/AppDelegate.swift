@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BuglifeDelegate, CLLocati
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Buglife.shared().start(withEmail: "dan@observantai.com") // Replace with your email to send bug reports
+        Buglife.shared().start(withEmail: "<#Your_email_here#>") // Replace with your email to send bug reports
         Buglife.shared().invocationOptions = [.shake, .screenshot, .floatingButton]
         Buglife.shared().delegate = self
         Buglife.shared().inputFields = LIFETextInputField.bugDetailInputFields()
