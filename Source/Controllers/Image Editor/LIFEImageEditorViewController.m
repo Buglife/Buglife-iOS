@@ -107,6 +107,8 @@ LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolB
         self.navigationItem.leftBarButtonItem = self.cancelButton;
         self.navigationItem.rightBarButtonItem = self.nextButton;
     }
+    [self.imageEditorView.segmentedControl addTarget:self action:@selector(_segmentedControlChangedTool) forControlEvents:UIControlEventValueChanged];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -505,6 +507,9 @@ static const CGFloat kMaximumLoupeRadius = 150;
             endVector = LIFEVectorFromPointAndSize(endPoint, targetSize);
             
             return [[LIFEAnnotation alloc] initWithAnnotationType:annotationType startVector:startVector endVector:endVector];
+        }
+        case LIFEAnnotationTypeFreeform: {
+            return annotation;
         }
     }
 }

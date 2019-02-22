@@ -59,6 +59,8 @@
             return @"Loupe";
         case LIFEAnnotationTypeBlur:
             return @"Blur";
+        case LIFEAnnotationTypeFreeform:
+            return @"Freeform";
     }
 }
 

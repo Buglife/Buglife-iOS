@@ -109,7 +109,6 @@
 				BCB7965E1FC62EF300305EF7 /* Frameworks */,
 				BCB7965F1FC62EF300305EF7 /* Resources */,
 				EDC4B2446DBA9F8E6BF04FED /* [CP] Embed Pods Frameworks */,
-				1CFC22106951E9BA7B82F8BE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,21 +169,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1CFC22106951E9BA7B82F8BE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Buglife Example/Pods-Buglife Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		EDC4B2446DBA9F8E6BF04FED /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

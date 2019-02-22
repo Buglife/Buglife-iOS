@@ -21,6 +21,7 @@
 
 @class LIFEAnnotatedImage;
 @class LIFEScreenshotAnnotatorView;
+@class LIFEImageEditorSegmentedControl;
 
 @interface LIFEImageEditorView : UIView
 
@@ -35,6 +36,7 @@
 
 - (nonnull UIView *)backgroundView;
 
+@property (nonatomic, readonly) LIFEImageEditorSegmentedControl *segmentedControl;
 @property (nonatomic, readonly) LIFEToolButtonType selectedTool;
 
 + (CGFloat)imageBorderWidth;

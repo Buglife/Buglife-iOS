@@ -51,7 +51,11 @@
         blurButton.imageView.image = [LIFEUIImage life_pixelateIcon];
         blurButton.titleView.text = LIFELocalizedString(LIFEStringKey_BlurToolLabel);
         
-        _buttons = @[arrowButton, loupeButton, blurButton];
+        let freeformButton = [[LIFEToolButton alloc] init];
+        freeformButton.imageView.image = [LIFEUIImage life_arrowToolbarIcon];
+        freeformButton.titleView.text = LIFELocalizedString(LIFEStringKey_FreeformToolLabel);
+        
+        _buttons = @[arrowButton, loupeButton, blurButton, freeformButton];
         
         id<LIFEAppearance> appearance = [LIFEAppearanceImpl sharedAppearance];
         UIColor *tintColor = appearance.tintColor;

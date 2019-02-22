@@ -1,6 +1,6 @@
 //
-//  LIFEToolButton.h
-//  Copyright (C) 2018 Buglife, Inc.
+//  LIFEFreeformAnnotationView.h
+//  Copyright (C) 2019 Buglife, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -16,21 +16,14 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+#import "LIFEAnnotationView.h"
 
-typedef NS_ENUM(NSInteger, LIFEToolButtonType)
-{
-    LIFEToolButtonTypeArrow = 0,
-    LIFEToolButtonTypeLoupe = 1,
-    LIFEToolButtonTypeBlur = 2,
-    LIFEToolButtonTypeFreeform = 3
-};
+NS_ASSUME_NONNULL_BEGIN
 
-@interface LIFEToolButton : UIControl
-
-@property (nonnull, nonatomic) UIImageView *imageView;
-@property (nonnull, nonatomic) UILabel *titleView;
-
-- (void)setTintColor:(nonnull UIColor *)tintColor forState:(UIControlState)state;
+@interface LIFEFreeformAnnotationView : LIFEAnnotationView
 
 @end
+@interface LIFEFreeformAnnotationLayer : LIFEAnnotationLayer
+@end
+
+NS_ASSUME_NONNULL_END

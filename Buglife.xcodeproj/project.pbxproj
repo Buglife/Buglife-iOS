@@ -245,6 +245,12 @@
 		B7EAFA3E1FC8DBA900196024 /* LIFETitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF97C1FC8DBA900196024 /* LIFETitleCell.m */; };
 		B7EAFA3F1FC8DBA900196024 /* LIFEWhatHappenedTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EAF97D1FC8DBA900196024 /* LIFEWhatHappenedTextView.h */; };
 		B7EAFA401FC8DBA900196024 /* LIFEWhatHappenedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAF97E1FC8DBA900196024 /* LIFEWhatHappenedTextView.m */; };
+		BCB409D0221F896F006D1DD6 /* LIFEStroke.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB409CE221F896E006D1DD6 /* LIFEStroke.h */; };
+		BCB409D1221F896F006D1DD6 /* LIFEStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB409CF221F896F006D1DD6 /* LIFEStroke.m */; };
+		BCB409D4221F8996006D1DD6 /* LIFEFreeformAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB409D2221F8996006D1DD6 /* LIFEFreeformAnnotationView.h */; };
+		BCB409D5221F8996006D1DD6 /* LIFEFreeformAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB409D3221F8996006D1DD6 /* LIFEFreeformAnnotationView.m */; };
+		BCB409D8221F899F006D1DD6 /* LIFEStrokeGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB409D6221F899E006D1DD6 /* LIFEStrokeGestureRecognizer.m */; };
+		BCB409D9221F899F006D1DD6 /* LIFEStrokeGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB409D7221F899F006D1DD6 /* LIFEStrokeGestureRecognizer.h */; };
 		BCD236BD200FF2BF00056914 /* UIControl+LIFEAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD236BB200FF2BF00056914 /* UIControl+LIFEAdditions.h */; };
 		BCD236BE200FF2BF00056914 /* UIControl+LIFEAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD236BC200FF2BF00056914 /* UIControl+LIFEAdditions.m */; };
 /* End PBXBuildFile section */
@@ -490,6 +496,12 @@
 		B7EAF97C1FC8DBA900196024 /* LIFETitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFETitleCell.m; sourceTree = "<group>"; };
 		B7EAF97D1FC8DBA900196024 /* LIFEWhatHappenedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEWhatHappenedTextView.h; sourceTree = "<group>"; };
 		B7EAF97E1FC8DBA900196024 /* LIFEWhatHappenedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEWhatHappenedTextView.m; sourceTree = "<group>"; };
+		BCB409CE221F896E006D1DD6 /* LIFEStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEStroke.h; sourceTree = "<group>"; };
+		BCB409CF221F896F006D1DD6 /* LIFEStroke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEStroke.m; sourceTree = "<group>"; };
+		BCB409D2221F8996006D1DD6 /* LIFEFreeformAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEFreeformAnnotationView.h; sourceTree = "<group>"; };
+		BCB409D3221F8996006D1DD6 /* LIFEFreeformAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEFreeformAnnotationView.m; sourceTree = "<group>"; };
+		BCB409D6221F899E006D1DD6 /* LIFEStrokeGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFEStrokeGestureRecognizer.m; sourceTree = "<group>"; };
+		BCB409D7221F899F006D1DD6 /* LIFEStrokeGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFEStrokeGestureRecognizer.h; sourceTree = "<group>"; };
 		BCD236BB200FF2BF00056914 /* UIControl+LIFEAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIControl+LIFEAdditions.h"; sourceTree = "<group>"; };
 		BCD236BC200FF2BF00056914 /* UIControl+LIFEAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIControl+LIFEAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -727,6 +739,8 @@
 				B7EAF9101FC8DBA900196024 /* LIFEReproStep.m */,
 				B7EAF9111FC8DBA900196024 /* LIFEScreenshotContext.h */,
 				B7EAF9121FC8DBA900196024 /* LIFEScreenshotContext.m */,
+				BCB409CE221F896E006D1DD6 /* LIFEStroke.h */,
+				BCB409CF221F896F006D1DD6 /* LIFEStroke.m */,
 				B7EAF9131FC8DBA900196024 /* LIFEUserFacingAttachment.h */,
 				B7EAF9141FC8DBA900196024 /* LIFEVideoAttachment.h */,
 				B7EAF9151FC8DBA900196024 /* LIFEVideoAttachment.m */,
@@ -864,6 +878,8 @@
 				B7EAF9531FC8DBA900196024 /* LIFEArrowAnnotationView.m */,
 				B7EAF9541FC8DBA900196024 /* LIFEBlurAnnotationView.h */,
 				B7EAF9551FC8DBA900196024 /* LIFEBlurAnnotationView.m */,
+				BCB409D2221F8996006D1DD6 /* LIFEFreeformAnnotationView.h */,
+				BCB409D3221F8996006D1DD6 /* LIFEFreeformAnnotationView.m */,
 				B7EAF9561FC8DBA900196024 /* LIFELoupeAnnotationView.h */,
 				B7EAF9571FC8DBA900196024 /* LIFELoupeAnnotationView.m */,
 			);
@@ -877,6 +893,8 @@
 				B7EAF95A1FC8DBA900196024 /* LIFEContinuousForceTouchGestureRecognizer.m */,
 				B7EAF95B1FC8DBA900196024 /* LIFEPanGestureRecognizer.h */,
 				B7EAF95C1FC8DBA900196024 /* LIFEPanGestureRecognizer.m */,
+				BCB409D7221F899F006D1DD6 /* LIFEStrokeGestureRecognizer.h */,
+				BCB409D6221F899E006D1DD6 /* LIFEStrokeGestureRecognizer.m */,
 			);
 			path = GestureRecognizers;
 			sourceTree = "<group>";
@@ -950,9 +968,11 @@
 				B7EAF9CF1FC8DBA900196024 /* LIFEImageFormat.h in Headers */,
 				B7EAFA0A1FC8DBA900196024 /* LIFELog.h in Headers */,
 				B7EAF9B41FC8DBA900196024 /* LIFEReportViewControllerDelegate.h in Headers */,
+				BCB409D4221F8996006D1DD6 /* LIFEFreeformAnnotationView.h in Headers */,
 				B7EAF9F81FC8DBA900196024 /* LIFERecordingShrinker.h in Headers */,
 				B7EAF9C61FC8DBA900196024 /* LIFEAnnotation.h in Headers */,
 				B7EAF9BE1FC8DBA900196024 /* LIFEInputField.h in Headers */,
+				BCB409D9221F899F006D1DD6 /* LIFEStrokeGestureRecognizer.h in Headers */,
 				B7EAF9CC1FC8DBA900196024 /* LIFEDeviceBatteryState.h in Headers */,
 				B7EAF9FA1FC8DBA900196024 /* LIFEReportBuilder.h in Headers */,
 				B7EAF98A1FC8DBA900196024 /* NSError+LIFEAdditions.h in Headers */,
@@ -1002,6 +1022,7 @@
 				B7EAFA2D1FC8DBA900196024 /* LIFEMenuPopoverView.h in Headers */,
 				B7EAFA061FC8DBA900196024 /* LIFEFileLogger.h in Headers */,
 				B7EAF9C41FC8DBA900196024 /* LIFEAnnotatedImage.h in Headers */,
+				BCB409D0221F896F006D1DD6 /* LIFEStroke.h in Headers */,
 				B70926BB200FE7E700105417 /* LIFEAlertView.h in Headers */,
 				B70926E2200FE83C00105417 /* LIFEContainerTransitionContext.h in Headers */,
 				B7EAF9921FC8DBA900196024 /* UIApplication+LIFEAdditions.h in Headers */,
@@ -1087,6 +1108,7 @@
 				B7EAF9C51FC8DBA900196024 /* LIFEAnnotatedImage.m in Sources */,
 				B70926C1200FE7E700105417 /* LIFEAlertView.m in Sources */,
 				B7EAF9EB1FC8DBA900196024 /* LIFEDependencyLoader.m in Sources */,
+				BCB409D8221F899F006D1DD6 /* LIFEStrokeGestureRecognizer.m in Sources */,
 				B70926EE200FE87C00105417 /* UIViewController+LIFEAdditions.m in Sources */,
 				B7EAFA1C1FC8DBA900196024 /* LIFEContinuousForceTouchGestureRecognizer.m in Sources */,
 				B7EAFA161FC8DBA900196024 /* LIFEArrowAnnotationView.m in Sources */,
@@ -1095,6 +1117,7 @@
 				B7EAF98D1FC8DBA900196024 /* NSLayoutConstraint+LIFEAdditions.m in Sources */,
 				B70926E4200FE83C00105417 /* LIFEContainerWindow.m in Sources */,
 				B70926BC200FE7E700105417 /* LIFEAlertActionView.m in Sources */,
+				BCB409D1221F896F006D1DD6 /* LIFEStroke.m in Sources */,
 				B7EAF9B61FC8DBA900196024 /* LIFEScreenshotAnnotatorViewController.m in Sources */,
 				B7EAF9B31FC8DBA900196024 /* LIFEReportTableViewController.m in Sources */,
 				B7EAFA241FC8DBA900196024 /* LIFEAttachmentView.m in Sources */,
@@ -1165,6 +1188,7 @@
 				B7EAFA1A1FC8DBA900196024 /* LIFELoupeAnnotationView.m in Sources */,
 				B7EAF9931FC8DBA900196024 /* UIApplication+LIFEAdditions.m in Sources */,
 				B7EAF9B11FC8DBA900196024 /* LIFEPickerViewController.m in Sources */,
+				BCB409D5221F8996006D1DD6 /* LIFEFreeformAnnotationView.m in Sources */,
 				B7EAF9AF1FC8DBA900196024 /* LIFENavigationController.m in Sources */,
 				B7EAFA3C1FC8DBA900196024 /* LIFETextFieldCell.m in Sources */,
 				B7EAF9FD1FC8DBA900196024 /* LIFESwizzler.m in Sources */,
@@ -1256,7 +1280,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1310,7 +1334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

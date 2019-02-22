@@ -1,6 +1,6 @@
 {
   "name": "Buglife",
-  "version": "2.5.0",
+  "version": "2.9.0",
   "summary": "Awesome bug reporting 😎",
   "description": "Report bugs, annotate screenshots, and collect logs from within your iOS app!",
   "homepage": "https://www.buglife.com",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/Buglife/Buglife-iOS.git",
-    "tag": "2.5.0"
+    "tag": "2.9.0"
   },
   "platforms": {
     "ios": "9.0"

@@ -19,6 +19,7 @@ LIFEStringKey LIFEStringKey_Delete = @"Delete";
 LIFEStringKey LIFEStringKey_ArrowToolLabel = @"Point"; // Tool labels should be verbs
 LIFEStringKey LIFEStringKey_LoupeToolLabel = @"Zoom"; // Tool labels should be verbs
 LIFEStringKey LIFEStringKey_BlurToolLabel = @"Blur"; // Tool labels should be verbs
+LIFEStringKey LIFEStringKey_FreeformToolLabel = @"Draw";
 LIFEStringKey LIFEStringKey_DeleteArrow = @"Delete Arrow";
 LIFEStringKey LIFEStringKey_DeleteLoupe = @"Delete Loupe";
 LIFEStringKey LIFEStringKey_DeleteBlur = @"Delete Blur";
