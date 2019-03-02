@@ -31,9 +31,9 @@ typedef NS_ENUM(NSInteger, LIFEAnnotationType)
 @property (nonatomic, readonly) LIFEAnnotationType annotationType;
 @property (nonatomic, readonly) CGVector startVector;
 @property (nonatomic, readonly) CGVector endVector;
-@property (nonatomic, readonly) CGPathRef bezierPath;
+@property (nonatomic, readonly, nullable) UIBezierPath *bezierPath;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 - (nonnull instancetype)initWithAnnotationType:(LIFEAnnotationType)annotationType startVector:(CGVector)startVector endVector:(CGVector)endVector NS_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithAnnotationType:(LIFEAnnotationType)annotationType pathRef:(CGPathRef)pathRef NS_DESIGNATED_INITIALIZER;
++ (nonnull instancetype)freeformAnnotationWithBezierPath:(nonnull UIBezierPath *)bezierPath;
 @end

@@ -47,6 +47,8 @@ let kNavButtonTopConstraintConstant = 26.0f;
 
 @implementation LIFEImageEditorView
 
+@dynamic toolDidChangeHandler;
+
 - (instancetype)initWithAnnotatedImage:(nonnull LIFEAnnotatedImage *)annotatedImage
 {
     self = [super init];
@@ -92,7 +94,6 @@ let kNavButtonTopConstraintConstant = 26.0f;
         _segmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_segmentedControl];
         
-        
         _segmentedControlBottomConstraint = [_segmentedControl.bottomAnchor constraintEqualToAnchor:self.life_safeAreaLayoutGuideBottomAnchor];
         
         [NSLayoutConstraint activateConstraints:@[
@@ -114,6 +115,16 @@ let kNavButtonTopConstraintConstant = 26.0f;
 - (LIFEToolButtonType)selectedTool
 {
     return self.segmentedControl.selectedTool;
+}
+
+- (LIFEImageEditorSegmentedControlDidChange)toolDidChangeHandler
+{
+    return self.segmentedControl.didChangeHandler;
+}
+
+- (void)setToolDidChangeHandler:(LIFEImageEditorSegmentedControlDidChange)toolDidChangeHandler
+{
+    self.segmentedControl.didChangeHandler = toolDidChangeHandler;
 }
 
 #pragma mark - Transitions

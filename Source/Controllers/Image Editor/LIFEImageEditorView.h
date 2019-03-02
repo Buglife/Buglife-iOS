@@ -17,6 +17,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LIFEImageEditorSegmentedControl.h"
 #import "LIFEToolButton.h"
 
 @class LIFEAnnotatedImage;
@@ -36,8 +37,8 @@
 
 - (nonnull UIView *)backgroundView;
 
-@property (nonatomic, readonly) LIFEImageEditorSegmentedControl *segmentedControl;
 @property (nonatomic, readonly) LIFEToolButtonType selectedTool;
+@property (nonatomic) LIFEImageEditorSegmentedControlDidChange toolDidChangeHandler;
 
 + (CGFloat)imageBorderWidth;
 + (nonnull UIColor *)imageBorderColor;

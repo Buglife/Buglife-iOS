@@ -20,11 +20,13 @@
 
 @class LIFEAnnotatedImage;
 @class LIFEAnnotationView;
+@class LIFEAnnotatedImageView;
 
 @interface LIFEScreenshotAnnotatorView : UIView
 
 @property (nonatomic, readonly) LIFEAnnotationType selectedAnnotationType;
 @property (nonatomic, readonly) NSArray<LIFEAnnotationView *> *annotationViews;
+- (LIFEAnnotatedImageView *)annotatedImageView;
 - (UIImageView *)sourceImageView;
 
 - (instancetype)initWithAnnotatedImage:(LIFEAnnotatedImage *)annotatedImage;

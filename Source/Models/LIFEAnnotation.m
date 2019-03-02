@@ -18,6 +18,12 @@
 
 #import "LIFEAnnotation.h"
 
+@interface LIFEAnnotation ()
+
+@property (nonatomic) UIBezierPath *bezierPath;
+
+@end
+
 @implementation LIFEAnnotation
 
 #pragma mark - Lifecycle
@@ -31,6 +37,12 @@
         _endVector = endVector;
     }
     return self;
+}
++ (nonnull instancetype)freeformAnnotationWithBezierPath:(nonnull UIBezierPath *)bezierPath
+{
+    LIFEAnnotation *res = [[LIFEAnnotation alloc] initWithAnnotationType:LIFEAnnotationTypeFreeform startVector:CGVectorMake(0, 0) endVector:CGVectorMake(1, 1)];
+    res.bezierPath = bezierPath;
+    return res;
 }
 
 #pragma mark - NSCopying

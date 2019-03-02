@@ -17,10 +17,64 @@
 //
 
 #import "LIFEFreeformAnnotationView.h"
+#import "LIFEAnnotation.h"
 
 @implementation LIFEFreeformAnnotationView
 {
-    LIFEFreeformAnnotationLayer *_loupeAnnotationLayer;
+    LIFEFreeformAnnotationLayer *_freeformAnnotationLayer;
+}
+
+#pragma mark - Public methods
+
+- (instancetype)initWithAnnotation:(LIFEAnnotation *)annotation
+{
+    self = [super initWithAnnotation:annotation];
+    if (self) {
+        NSParameterAssert(_freeformAnnotationLayer);
+    }
+    return self;
+}
+
+- (LIFEAnnotationLayer *)annotationLayer
+{
+    if (_freeformAnnotationLayer == nil) {
+        _freeformAnnotationLayer = [LIFEFreeformAnnotationLayer layer];
+    }
+    
+    return _freeformAnnotationLayer;
+}
+
+@end
+
+
+@implementation LIFEFreeformAnnotationLayer
+
+- (void)display
+{
+    CGSize size = self.bounds.size;
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    
+    [self _drawStroke];
+    
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    self.contents = (id)result.CGImage;
+    UIGraphicsEndImageContext();
+}
+
+- (void)drawForFlattenedImageInContext:(CGContextRef)context
+{
+    [self _drawStroke];
+}
+
+- (void)_drawStroke
+{
+    CGSize size = self.bounds.size;
+    UIBezierPath *pathCopy = self.annotation.bezierPath.copy;
+    CGAffineTransform transform = CGAffineTransformMakeScale(size.width, size.height);
+    [pathCopy applyTransform:transform];
+    pathCopy.lineWidth = 3;
+    [[UIColor redColor] setStroke];
+    [pathCopy stroke];
 }
 
 @end

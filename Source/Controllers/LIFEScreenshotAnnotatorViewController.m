@@ -316,6 +316,10 @@ CGPoint LIFECGPointApplyScale(CGPoint pointToScale, CGPoint anchor, CGFloat scal
             }];
             break;
         }
+        case LIFEAnnotationTypeFreeform: {
+            NSAssert(NO, @"Freeform drawing type is handled elsewhere");
+            break;
+        }
     }
 
     [self.screenshotAnnotatorView addAnnotationView:annotationView];
@@ -680,6 +684,9 @@ static const CGFloat kMaximumLoupeRadius = 150;
             return [[LIFEAnnotation alloc] initWithAnnotationType:annotationType startVector:startVector endVector:endVector];
         }
     }
+    
+    NSParameterAssert(NO);
+    return nil;
 }
 
 // MARK: UIGestureRecognizerDelegate

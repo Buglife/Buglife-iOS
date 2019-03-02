@@ -90,6 +90,10 @@
     }
     
     [self sendActionsForControlEvents:UIControlEventValueChanged];
+    
+    if (_didChangeHandler) {
+        _didChangeHandler(self.selectedTool);
+    }
 }
 
 - (LIFEToolButtonType)selectedTool
