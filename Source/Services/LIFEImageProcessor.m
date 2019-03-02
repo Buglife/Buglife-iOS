@@ -22,6 +22,7 @@
 #import "LIFEBlurAnnotationView.h"
 #import "LIFELoupeAnnotationView.h"
 #import "LIFEArrowAnnotationView.h"
+#import "LIFEFreeformAnnotationView.h"
 #import "UIImage+LIFEAdditions.h"
 #import "LIFECompatibilityUtils.h"
 
@@ -247,10 +248,11 @@
         result = [self _loupeSourceScaledImageForAnnotatedImage:annotatedImage targetSize:targetSize];
         
         // Flatten using the other annotations
+        NSArray *freeformAnnotations = annotatedImage.freeformAnnotations;
         NSArray *arrowAnnotations = annotatedImage.arrowAnnotations;
         NSArray *loupeAnnotations = annotatedImage.loupeAnnotations;
         
-        result = [LIFEImageProcessor _flattenedImageWithLoupeSourceImage:result loupeAnnotations:loupeAnnotations arrowAnnotations:arrowAnnotations];
+        result = [LIFEImageProcessor _flattenedImageWithLoupeSourceImage:result loupeAnnotations:loupeAnnotations freeformAnnotations:freeformAnnotations arrowAnnotations:arrowAnnotations];
         
         [imageCache setObject:result forKey:cacheKey];
     }
@@ -340,16 +342,16 @@
     return image;
 }
 
-+ (UIImage *)_flattenedImageWithLoupeSourceImage:(UIImage *)sourceImage loupeAnnotations:(LIFEAnnotationArray *)loupeAnnotations arrowAnnotations:(LIFEAnnotationArray *)arrowAnnotations
++ (UIImage *)_flattenedImageWithLoupeSourceImage:(UIImage *)sourceImage loupeAnnotations:(LIFEAnnotationArray *)loupeAnnotations freeformAnnotations:(LIFEAnnotationArray *)freeformAnnotations arrowAnnotations:(LIFEAnnotationArray *)arrowAnnotations
 {
     if (@available(iOS 10.0, *)) {
-            return [self _flattenedImageNewWithLoupeSourceImage:sourceImage loupeAnnotations:loupeAnnotations arrowAnnotations:arrowAnnotations];
+        return [self _flattenedImageNewWithLoupeSourceImage:sourceImage loupeAnnotations:loupeAnnotations freeformAnnotations:freeformAnnotations arrowAnnotations:arrowAnnotations];
     } else {
-        return [self _flattenedImageOldWithLoupeSourceImage:sourceImage loupeAnnotations:loupeAnnotations arrowAnnotations:arrowAnnotations];
+        return [self _flattenedImageOldWithLoupeSourceImage:sourceImage loupeAnnotations:loupeAnnotations freeformAnnotations:freeformAnnotations arrowAnnotations:arrowAnnotations];
     }
 }
 
-+ (UIImage *)_flattenedImageNewWithLoupeSourceImage:(UIImage *)sourceImage loupeAnnotations:(LIFEAnnotationArray *)loupeAnnotations arrowAnnotations:(LIFEAnnotationArray *)arrowAnnotations API_AVAILABLE(ios(10.0))
++ (UIImage *)_flattenedImageNewWithLoupeSourceImage:(UIImage *)sourceImage loupeAnnotations:(LIFEAnnotationArray *)loupeAnnotations freeformAnnotations:(LIFEAnnotationArray *)freeformAnnotations arrowAnnotations:(LIFEAnnotationArray *)arrowAnnotations API_AVAILABLE(ios(10.0))
 {
     CGSize size = sourceImage.size;
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
@@ -361,6 +363,17 @@
             LIFEAnnotationLayer *annotationLayer = [LIFELoupeAnnotationLayer layer];
             annotationLayer.frame = rect;
             annotationLayer.annotation = loupeAnnotation;
+            annotationLayer.scaledSourceImage = sourceImage;
+            
+            CGContextSaveGState(context);
+            [annotationLayer drawForFlattenedImageInContext:context];
+            CGContextRestoreGState(context);
+        }
+        
+        for (LIFEAnnotation *freeformAnnotation in freeformAnnotations) {
+            LIFEAnnotationLayer *annotationLayer = [LIFEFreeformAnnotationLayer layer];
+            annotationLayer.frame = rect;
+            annotationLayer.annotation = freeformAnnotation;
             annotationLayer.scaledSourceImage = sourceImage;
             
             CGContextSaveGState(context);
@@ -381,7 +394,7 @@
     }];
 }
 
-+ (UIImage *)_flattenedImageOldWithLoupeSourceImage:(UIImage *)sourceImage loupeAnnotations:(LIFEAnnotationArray *)loupeAnnotations arrowAnnotations:(LIFEAnnotationArray *)arrowAnnotations
++ (UIImage *)_flattenedImageOldWithLoupeSourceImage:(UIImage *)sourceImage loupeAnnotations:(LIFEAnnotationArray *)loupeAnnotations freeformAnnotations:(LIFEAnnotationArray *)freeformAnnotations arrowAnnotations:(LIFEAnnotationArray *)arrowAnnotations
 {
     CGSize size = sourceImage.size;
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
@@ -395,6 +408,17 @@
         LIFEAnnotationLayer *annotationLayer = [LIFELoupeAnnotationLayer layer];
         annotationLayer.frame = rect;
         annotationLayer.annotation = loupeAnnotation;
+        annotationLayer.scaledSourceImage = sourceImage;
+        
+        CGContextSaveGState(context);
+        [annotationLayer drawForFlattenedImageInContext:context];
+        CGContextRestoreGState(context);
+    }
+    
+    for (LIFEAnnotation *freeformAnnotation in arrowAnnotations) {
+        LIFEAnnotationLayer *annotationLayer = [LIFEFreeformAnnotationLayer layer];
+        annotationLayer.frame = rect;
+        annotationLayer.annotation = freeformAnnotation;
         annotationLayer.scaledSourceImage = sourceImage;
         
         CGContextSaveGState(context);

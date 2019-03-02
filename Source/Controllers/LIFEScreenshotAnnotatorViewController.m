@@ -683,6 +683,10 @@ static const CGFloat kMaximumLoupeRadius = 150;
             
             return [[LIFEAnnotation alloc] initWithAnnotationType:annotationType startVector:startVector endVector:endVector];
         }
+            
+        case LIFEAnnotationTypeFreeform:
+            NSParameterAssert(NO); // This code path is deprecated, this file should be deleted
+            return nil;
     }
     
     NSParameterAssert(NO);

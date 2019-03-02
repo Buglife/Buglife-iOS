@@ -47,6 +47,7 @@ typedef NSString LIFEAnnotatedImageID;
 
 - (nonnull instancetype)initWithSourceImage:(nonnull UIImage *)sourceImage filename:(nonnull NSString *)filename annotations:(nonnull LIFEAnnotationArray *)annotations format:(LIFEImageFormat)format;
 
+- (nonnull LIFEAnnotationArray *)freeformAnnotations;
 - (nonnull LIFEAnnotationArray *)arrowAnnotations;
 - (nonnull LIFEAnnotationArray *)loupeAnnotations;
 - (nonnull LIFEAnnotationArray *)blurAnnotations;

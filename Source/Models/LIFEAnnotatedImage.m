@@ -73,6 +73,13 @@ static NSString * const LIFEScreenshotDefaultFilename = @"Screenshot.png";
     return self;
 }
 
+- (LIFEAnnotationArray *)freeformAnnotations
+{
+    return [self.annotations life_filteredArrayUsingBlock:^BOOL(LIFEAnnotation *obj) {
+        return obj.annotationType == LIFEAnnotationTypeFreeform;
+    }];
+}
+
 - (LIFEAnnotationArray *)arrowAnnotations
 {
     return [self.annotations life_filteredArrayUsingBlock:^BOOL(LIFEAnnotation *obj) {
