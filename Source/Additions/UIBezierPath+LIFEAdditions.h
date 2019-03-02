@@ -15,6 +15,10 @@
 + (UIBezierPath *)life_dragonFlyBezierPath;
 + (CGSize)life_dragonFlyBezierPathSize;
 
+#pragma mark - Pen
+
++ (UIBezierPath *)life_penBezierPathWithSize:(CGSize)size;
+
 #pragma mark - Everything else
 
 + (UIBezierPath *)life_bezierPathWithArrowFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint;

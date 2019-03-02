@@ -323,6 +323,25 @@ NSData * _LIFEUIImageRepresentationScaledForMaximumFilesize(LIFEImageFormat imag
 
 #pragma mark - Icons
 
++ (UIImage *)life_penToolbarIcon
+{
+    CGSize size = CGSizeMake(22, 22);
+    UIColor *strokeColor = [UIColor blackColor];
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    
+    UIBezierPath *path = [LIFEUIBezierPath life_penBezierPathWithSize:size];
+    path.lineWidth = 1;
+    [strokeColor setStroke];
+    [path stroke];
+    
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    result.accessibilityLabel = LIFELocalizedString(LIFEStringKey_Arrow);
+    
+    return [result imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+}
+
 + (UIImage *)life_arrowToolbarIcon
 {
     CGSize size = CGSizeMake(22, 22);

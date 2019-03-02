@@ -52,7 +52,7 @@
         blurButton.titleView.text = LIFELocalizedString(LIFEStringKey_BlurToolLabel);
         
         let freeformButton = [[LIFEToolButton alloc] init];
-        freeformButton.imageView.image = [LIFEUIImage life_arrowToolbarIcon];
+        freeformButton.imageView.image = [LIFEUIImage life_penToolbarIcon];
         freeformButton.titleView.text = LIFELocalizedString(LIFEStringKey_FreeformToolLabel);
         
         _buttons = @[arrowButton, loupeButton, blurButton, freeformButton];

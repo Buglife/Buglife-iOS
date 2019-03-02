@@ -44,6 +44,7 @@ void LIFELoadCategoryFor_UIImageLIFEAdditions(void);
 
 #pragma mark - Icons
 
++ (nonnull UIImage *)life_penToolbarIcon;
 + (nonnull UIImage *)life_arrowToolbarIcon;
 + (nonnull UIImage *)life_loupeIcon;
 + (nonnull UIImage *)life_pixelateIcon;
