@@ -1,16 +1,16 @@
 PODS:
-  - Buglife (2.9.0)
+  - Buglife (2.10.0)
 
 DEPENDENCIES:
   - Buglife (from `../`)
 
 EXTERNAL SOURCES:
   Buglife:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  Buglife: 6e6ab8b52b6a4346b24a6cc7cc476892b298137e
+  Buglife: dfcf0e8b1984c8c47780da41d1ecc5abc0511400
 
 PODFILE CHECKSUM: be35966410b92e26d1d43c41b484d54b051be15d
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.4.0
