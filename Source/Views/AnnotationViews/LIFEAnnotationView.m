@@ -152,6 +152,13 @@
     // override in subclasses
 }
 
+- (BOOL)containsLocation:(CGPoint)location
+{
+    // override in subclasses, if there is more specific touch handling
+    UIBezierPath *path = self.pathForPopoverMenu;
+    return [path containsPoint:location];
+}
+
 @end
 
 

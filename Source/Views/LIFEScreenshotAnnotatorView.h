@@ -38,6 +38,8 @@
 // You may want to call this when views underneath loupe annotations move/change
 - (void)updateLoupeAnnotationViewsWithSourceImage:(UIImage *)sourceImage;
 
+- (LIFEAnnotationView *)annotationViewAtLocation:(CGPoint)location;
+
 #pragma mark - Toolbars
 
 @property (nonatomic, readonly) BOOL toolbarsHidden;

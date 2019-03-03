@@ -214,6 +214,8 @@
         [_loupeAnnotationViews removeObject:(LIFELoupeAnnotationView *)annotationView];
     } else if ([annotationView isKindOfClass:[LIFEBlurAnnotationView class]]) {
         [_blurAnnotationViews removeObject:(LIFEBlurAnnotationView *)annotationView];
+    } else if ([annotationView isKindOfClass:[LIFEFreeformAnnotationView class]]) {
+        [_freeformAnnotationViews removeObject:(LIFEFreeformAnnotationView *)annotationView];
     } else {
         NSParameterAssert(NO); // not implemented
     }
@@ -241,6 +243,17 @@
     return [LIFEUIImage life_aspectRatio:self.sourceImageView.image];
 }
 
+- (nullable LIFEAnnotationView *)annotationViewAtLocation:(CGPoint)location
+{
+    for (LIFEAnnotationView *view in self._allAnnotationViews) {
+        if ([view containsLocation:location]) {
+            return view;
+        }
+    }
+    
+    return nil;
+}
+
 #pragma mark - Private methods
 
 - (NSArray *)_allAnnotationViews
@@ -248,8 +261,8 @@
     NSMutableArray *annotationViews = [NSMutableArray array];
     [annotationViews addObjectsFromArray:_blurAnnotationViews];
     [annotationViews addObjectsFromArray:_loupeAnnotationViews];
-    [annotationViews addObjectsFromArray:_arrowAnnotationViews];
     [annotationViews addObjectsFromArray:_freeformAnnotationViews];
+    [annotationViews addObjectsFromArray:_arrowAnnotationViews];
     return [NSArray arrayWithArray:annotationViews];
 }
 

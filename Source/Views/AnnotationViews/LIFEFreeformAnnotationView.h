@@ -22,8 +22,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LIFEFreeformAnnotationView : LIFEAnnotationView
 
+- (UIBezierPath *)scaledBezierPath;
+
 @end
+
 @interface LIFEFreeformAnnotationLayer : LIFEAnnotationLayer
+
 @end
 
 NS_ASSUME_NONNULL_END

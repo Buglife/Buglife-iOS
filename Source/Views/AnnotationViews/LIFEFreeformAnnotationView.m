@@ -19,6 +19,15 @@
 #import "LIFEFreeformAnnotationView.h"
 #import "LIFEAnnotation.h"
 
+static const CGFloat kLIFEFreeformAnnotationLineWidth = 3.0;
+static const CGFloat kLIFEFreeformAnnotationTouchWidth = 20.0;
+
+@interface LIFEFreeformAnnotationLayer ()
+
+- (UIBezierPath *)scaledBezierPath;
+
+@end
+
 @implementation LIFEFreeformAnnotationView
 {
     LIFEFreeformAnnotationLayer *_freeformAnnotationLayer;
@@ -44,8 +53,36 @@
     return _freeformAnnotationLayer;
 }
 
-@end
+- (UIBezierPath *)scaledBezierPath
+{
+    LIFEFreeformAnnotationLayer *layer = (LIFEFreeformAnnotationLayer *)self.annotationLayer;
+    return layer.scaledBezierPath;
+}
 
+- (BOOL)containsLocation:(CGPoint)location
+{
+    UIBezierPath *path = [self scaledBezierPath];
+    
+    // Expand the path, because it's way too hard to
+    // accurately tap the drawing itself
+    CGFloat width = kLIFEFreeformAnnotationTouchWidth;
+    CGPathRef strokedPath = CGPathCreateCopyByStrokingPath(path.CGPath, NULL, width, kCGLineCapRound, kCGLineJoinRound, 0);
+    UIBezierPath *expandedPath = [UIBezierPath bezierPathWithCGPath:strokedPath];
+    CGPathRelease(strokedPath);
+    
+    if ([expandedPath containsPoint:location]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (UIBezierPath *)pathForPopoverMenu
+{
+    return self.scaledBezierPath;
+}
+
+@end
 
 @implementation LIFEFreeformAnnotationLayer
 
@@ -68,13 +105,19 @@
 
 - (void)_drawStroke
 {
+    UIBezierPath *path = [self scaledBezierPath];
+    path.lineWidth = kLIFEFreeformAnnotationLineWidth;
+    [[UIColor redColor] setStroke];
+    [path stroke];
+}
+
+- (UIBezierPath *)scaledBezierPath
+{
     CGSize size = self.bounds.size;
     UIBezierPath *pathCopy = self.annotation.bezierPath.copy;
     CGAffineTransform transform = CGAffineTransformMakeScale(size.width, size.height);
     [pathCopy applyTransform:transform];
-    pathCopy.lineWidth = 3;
-    [[UIColor redColor] setStroke];
-    [pathCopy stroke];
+    return pathCopy;
 }
 
 @end

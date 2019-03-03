@@ -50,6 +50,7 @@ LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolB
 @property (nonatomic) BOOL statusBarHidden;
 @property (null_resettable, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 @property (null_resettable, nonatomic) LIFEFreeformGestureRecognizer *freeformGestureRecognizer;
+@property (null_resettable, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic) LIFEAnnotationView *annotationViewInProgress;
 @property (nonatomic) NSMutableArray<UIGestureRecognizer *> *activeEditingGestureRecognizers; // Move, rotate, etc
 @property (nonatomic) CGPoint previousStartPointForMovingAnnotation;
@@ -107,6 +108,7 @@ LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolB
     
     self.panGestureRecognizer.enabled = YES;
     self.freeformGestureRecognizer.enabled = NO;
+    self.tapGestureRecognizer.enabled = YES;
     
     if (self.isInitialViewController) {
         self.navigationItem.leftBarButtonItem = self.cancelButton;
@@ -268,13 +270,35 @@ LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolB
         }
         case UIGestureRecognizerStateEnded:
         {
+            [self _addGestureHandlersToAnnotationView:self.annotationViewInProgress];
             [self.annotationViewInProgress setSelected:NO animated:YES];
             self.annotationViewInProgress = nil;
-            
             break;
         }
         default:
             break;
+    }
+}
+
+- (UITapGestureRecognizer *)tapGestureRecognizer
+{
+    if (_tapGestureRecognizer == nil) {
+        _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_tapGestureRecognized:)];
+        _tapGestureRecognizer.delegate = self;
+        [self.screenshotAnnotatorView.annotatedImageView addGestureRecognizer:_tapGestureRecognizer];
+    }
+    
+    return _tapGestureRecognizer;
+}
+
+- (void)_tapGestureRecognized:(UITapGestureRecognizer *)recognizer
+{
+    LIFEScreenshotAnnotatorView *screenshotAnnotatorView = self.imageEditorView.screenshotAnnotatorView;
+    CGPoint location = [recognizer locationInView:screenshotAnnotatorView];
+    LIFEAnnotationView *annotationView = [screenshotAnnotatorView annotationViewAtLocation:location];
+    
+    if (annotationView) {
+        [self _presentPopoverForAnnotationView:annotationView];
     }
 }
 
@@ -335,7 +359,6 @@ LIFEAnnotationType LIFEAnnotationTypeFromToolButtonType(LIFEToolButtonType toolB
 - (void)_addGestureHandlersToAnnotationView:(LIFEAnnotationView *)annotationView
 {
     if ([annotationView isKindOfClass:[LIFEFreeformAnnotationView class]]) {
-        LIFELogExtDebug(@"Buglife Warning: editing freeform drawing annotations is currently unsupported... but keep an eye out for a future release ;)");
         return;
     }
     
@@ -643,8 +666,7 @@ static const CGFloat kMaximumLoupeRadius = 150;
     } else if ([annotationView isKindOfClass:[LIFELoupeAnnotationView class]]) {
         deleteString = LIFELocalizedString(LIFEStringKey_DeleteLoupe);
     } else if ([annotationView isKindOfClass:[LIFEFreeformAnnotationView class]]) {
-        LIFELogExtDebug(@"Buglife Warning: Tap-to-delete freeform drawing annotations is currently unsupported, but will arrive in a future release.");
-        return;
+        deleteString = LIFELocalizedString(LIFEStringKey_Delete);
     } else {
         NSAssert(NO, @"Unhandled annotation");
     }

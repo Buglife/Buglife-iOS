@@ -33,5 +33,6 @@
 - (void)removeAnnotationView:(nonnull LIFEAnnotationView *)annotationView;
 - (void)updateLoupeAnnotationViewsWithSourceImage:(nonnull UIImage *)sourceImage;
 - (CGFloat)aspectRatio;
+- (nullable LIFEAnnotationView *)annotationViewAtLocation:(CGPoint)location;
 
 @end

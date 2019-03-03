@@ -249,6 +249,11 @@ static const NSTimeInterval kToolbarTransitionDuration = 0.25;
     return kToolbarTransitionDuration;
 }
 
+- (nullable LIFEAnnotationView *)annotationViewAtLocation:(CGPoint)location
+{
+    return [self.annotatedImageView annotationViewAtLocation:location];
+}
+
 #pragma mark - Private methods
 
 @end

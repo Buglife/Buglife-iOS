@@ -51,6 +51,10 @@ typedef void (^LIFEAnnotationViewTrashCompletion)(void);
 - (void)animateToTrashCanRect:(CGRect)trashCanRect completion:(nonnull LIFEAnnotationViewTrashCompletion)completionHandler;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 - (nonnull LIFEAnnotationLayer *)annotationLayer;
+// Generally used to determine whether a touch location intersects
+// with an annotation. Note that an annotation view may be much larger
+// than the annotation itself.
+- (BOOL)containsLocation:(CGPoint)location;
 
 @end
 
