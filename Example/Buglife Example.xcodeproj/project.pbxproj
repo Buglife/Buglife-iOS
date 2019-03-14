@@ -109,7 +109,6 @@
 				BCB7965E1FC62EF300305EF7 /* Frameworks */,
 				BCB7965F1FC62EF300305EF7 /* Resources */,
 				EDC4B2446DBA9F8E6BF04FED /* [CP] Embed Pods Frameworks */,
-				44639489C7D04866C58B37F9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,28 +169,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		44639489C7D04866C58B37F9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Buglife Example/Pods-Buglife Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		EDC4B2446DBA9F8E6BF04FED /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Buglife Example/Pods-Buglife Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Buglife Example/Pods-Buglife Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Buglife/Buglife.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -200,7 +184,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Buglife Example/Pods-Buglife Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Buglife Example/Pods-Buglife Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FCD901CDEA2871CC2BEA5CA2 /* [CP] Check Pods Manifest.lock */ = {
