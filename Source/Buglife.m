@@ -120,6 +120,13 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
 
 @end
 
+#pragma mark Crashlife interop
+@protocol LIFECrashlife
++ (id<LIFECrashlife>)sharedCrashlife;
+- (void)startWithAPIKey:(NSString *)apiKey;
+- (BOOL)isStarted;
+@end
+
 @implementation Buglife
 
 #pragma mark - Public
@@ -165,6 +172,14 @@ const LIFEInvocationOptions LIFEInvocationOptionsScreenRecordingFinished = 1 << 
 
 - (void)startWithAPIKey:(NSString *)apiKey
 {
+    Class<LIFECrashlife> Crashlife = NSClassFromString(@"Crashlife");
+    if (Crashlife != Nil) {
+        
+        id<LIFECrashlife> cl = [Crashlife sharedCrashlife];
+        if (!cl.isStarted) {
+            [cl startWithAPIKey:apiKey];
+        }
+    }
     if ([self _isStarted]) {
         LIFELogErrorMultipleStartAttempts;
         return;
