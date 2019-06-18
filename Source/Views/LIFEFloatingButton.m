@@ -118,6 +118,11 @@ static const CGSize kIntrinsicButtonSize = { 22, 22 };
     [circlePath fill];
 }
 
+- (void)tintColorDidChange {
+    self.dragonflyImageView.image = [[self class] _dragonflyImageWithColor:self.foregroundColor];
+    [self setNeedsDisplay];
+}
+
 + (UIImage *)_dragonflyImageWithColor:(UIColor *)color
 {
     CGSize size = [LIFEUIBezierPath life_dragonFlyBezierPathSize];
@@ -139,12 +144,20 @@ static const CGSize kIntrinsicButtonSize = { 22, 22 };
 
 + (nonnull UIColor *)_defaultForegroundColor
 {
-    return [UIColor whiteColor];
+    if (@available(iOS 13.0, *)) {
+        return [UIColor secondarySystemBackgroundColor];
+    } else {
+        return [UIColor whiteColor];
+    }
 }
 
 + (nonnull UIColor *)_defaultBackgroundColor
 {
-    return [UIColor blackColor];
+    if (@available(iOS 13.0, *)) {
+        return [UIColor labelColor];
+    } else {
+        return [UIColor blackColor];
+    }
 }
 
 - (void)_panGestureRecognized:(UIPanGestureRecognizer *)panGestureRecognizer
