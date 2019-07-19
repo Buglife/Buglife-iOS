@@ -41,6 +41,8 @@ static NSString * const kBuglifeDirectory = @"com.buglife.buglife";
 static NSString * const kLegacyPendingReportsDirectory = @"cached_reports";
 static NSString * const kPendingReportsDirectory = @"pending_reports";
 static NSString * const kPlatform = @"ios";
+static NSString * const kApiClientEvents = @"api/v1/client_events.json";
+static NSString * const kApiReports = @"api/v1/reports.json";
 
 @interface LIFEDataProvider ()
 
@@ -119,8 +121,16 @@ static NSString * const kPlatform = @"ios";
 
         [params life_safeSetObject:appParams forKey:@"app"];
         [params life_safeSetObject:clientEventParams forKey:@"client_event"];
+
+        NSString *apiClientEvents = kApiClientEvents;
+
+        NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+        NSString *overridePath = environment[@"com.buglife.api.client_events"];
+        if (overridePath) {
+            apiClientEvents = overridePath;
+        }
         
-        [self.networkManager POST:@"api/v1/client_events.json" parameters:params callbackQueue:self.workQueue success:^(id responseObject) {
+        [self.networkManager POST:apiClientEvents parameters:params callbackQueue:self.workQueue success:^(id responseObject) {
             LIFELogIntDebug(@"Successfully posted event \"%@\"", eventName);
         } failure:^(NSError *error) {
             LIFELogIntError(@"Error posting event \"%@\"\n  Error: %@", eventName, error);
@@ -181,8 +191,16 @@ static NSString * const kPlatform = @"ios";
         // TODO: Need to remove & re-save so that submissionAttempts actually increments beyond 2
         [self _savePendingReport:report];
     }
+
+    NSString *apiReports = kApiReports;
+
+    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+    NSString *overridePath = environment[@"com.buglife.api.reports"];
+    if (overridePath) {
+        apiReports = overridePath;
+    }
     
-    [_networkManager POST:@"api/v1/reports.json" parameters:parameters callbackQueue:self.workQueue success:^(id responseObject) {
+    [_networkManager POST:apiReports parameters:parameters callbackQueue:self.workQueue success:^(id responseObject) {
 
         LIFELogIntInfo(@"Report submitted!");
         if (removeSuccessfulSubmissions) {
