@@ -114,6 +114,15 @@
     self.navigationBar.translucent = NO;
     [self.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
+    // See https://developer.apple.com/forums/thread/682420
+    if (@available(iOS 13.0, *)) {
+        UINavigationBarAppearance *nba = [[UINavigationBarAppearance alloc] init];
+        [nba configureWithOpaqueBackground];
+        nba.backgroundColor = appearance.barTintColor;
+        self.navigationBar.standardAppearance = nba;
+        self.navigationBar.scrollEdgeAppearance = self.navigationBar.standardAppearance;
+    }
+
     UIBarButtonItem *barButtonItemAppearance = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[LIFENavigationBar class]]];
     barButtonItemAppearance.tintColor = appearance.tintColor;
     [barButtonItemAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName : appearance.tintColor} forState:UIControlStateNormal];
